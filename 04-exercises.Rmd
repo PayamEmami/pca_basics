@@ -1,0 +1,46 @@
+# Exercises {#exer}
+
+Welcome to the exercises! We are going to do three exercises based on a dataset that is already available in you R environment. We are not providing answer to the exercises. You will have to find them yourself.
+
+
+## Data
+
+The dataset is called *iris*. It's coming default with R. According to R help page this is:
+
+    This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginic
+
+You can simply write iris in your R console to make sure you have the dataset. If you see an error, try
+
+    data(iris)
+
+The dataset contains `r ncol(iris)` columns corresponding to four variables and one grouping information. 
+
+PCA only works on the numberical data. You can extract the four numerical variables using 
+
+    iris[,1:4]
+    
+The grouping information can be extracted using 
+
+    iris[,5]
+
+Now you have all you need!
+
+## Exercise 1
+
+How does the data look? Do you see any pattern!? Any differences between groups?
+
+Produce a plot showing the differences between the groups. You will have to do a pca and make a plot of PCA scores (components)
+
+## Exercise 2
+
+What is the most important variable in component 4? What does it show? What is the meaning of it?
+
+## Exercise 3
+
+What is the most important variable affected by the species of lowers?
+
+## Exercise 4
+
+Remove the first component and reconstruct the data. Now repeat exercises 1 to 3!
+
+Goog luck! 
