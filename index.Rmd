@@ -26,6 +26,7 @@ The **bookdown** package can be installed from CRAN or Github:
 install.packages("bookdown")
 install.packages("scatterplot3d")
 install.packages("plotrix")
+install.packages("formatR")
 
 library(scatterplot3d)
 library(plotrix)
