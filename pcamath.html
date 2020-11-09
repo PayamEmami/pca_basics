@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 PCA (mathematical details) | Principal Component Analysis (PCA)</title>
+  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 PCA (mathematical details) | Principal Component Analysis (PCA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 PCA (mathematical details) | Principal Component Analysis (PCA)" />
+  
+  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  
+
+<meta name="author" content="Payam Emami" />
+
+
+<meta name="date" content="2020-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exer.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
+<li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
+<li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
+<li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="exer.html"><a href="exer.html#exercise-1"><i class="fa fa-check"></i><b>5.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="5.3" data-path="exer.html"><a href="exer.html#exercise-2"><i class="fa fa-check"></i><b>5.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="5.4" data-path="exer.html"><a href="exer.html#exercise-3"><i class="fa fa-check"></i><b>5.4</b> Exercise 3</a></li>
+<li class="chapter" data-level="5.5" data-path="exer.html"><a href="exer.html#exercise-4"><i class="fa fa-check"></i><b>5.5</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pcamath.html"><a href="pcamath.html"><i class="fa fa-check"></i><b>6</b> PCA (mathematical details)</a><ul>
+<li class="chapter" data-level="6.1" data-path="pcamath.html"><a href="pcamath.html#summary-of-the-previous-chapter-2"><i class="fa fa-check"></i><b>6.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="6.2" data-path="pcamath.html"><a href="pcamath.html#foundations"><i class="fa fa-check"></i><b>6.2</b> Foundations</a></li>
+<li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
+<li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Principal Component Analysis (PCA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pcamath" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> PCA (mathematical details)</h1>
+<p>Welcome to the last section of this chapter. We are going to talk a bit about the mathematical details of PCA. It’s important that, it’s not necessary to understand the mathematical details of PCA in order to effectively apply this amazing method on your data. One can easily skip this section without having any problems when it comes to the application. So feel free to skip this if you find difficult to follow!</p>
+<div id="summary-of-the-previous-chapter-2" class="section level2">
+<h2><span class="header-section-number">6.1</span> Summary of the previous chapter</h2>
+<p>Since the beginning of this chapter, we have been talking about variance as a measure of variability in our data. We also talked a bit about covariance as a measure of concordance or redundancy in our data (or even total variance). We saw that working with high dimensional data is challenging and PCA can help us summarize these dimensions (e.g. genes) into a set of new variables (scores/components) so that one we see the pattern of data spread. The new dimensions were promised to be orthogonal (no covariance) and sorted so that the variance of the first variable is always higher than the second one and so on. We are now ready to see how PCA does this amazing calculation.</p>
+</div>
+<div id="foundations" class="section level2">
+<h2><span class="header-section-number">6.2</span> Foundations</h2>
+<p>In order to understand the math behind PCA, we need to agree on a set of definitions.</p>
+
+<div class="definition">
+<span id="def:scalar" class="definition"><strong>Definition 6.1  (Scalar)  </strong></span>A scalar is a number. We work a lot with scalars. For example age,speed, temperature etc. Of course, scalars can have signs (positive and negative) and we can add them, subtract them, multiply etc.
+</div>
+
+
+<div class="definition">
+<span id="def:space" class="definition"><strong>Definition 6.2  (Space)  </strong></span>This might sound a bit tricky to understand. In fact the meaning of space can be very complicated.
+In our case, we define the space of a dataset to be the set of all variables defining the dimensions
+of the space and their <strong>possible</strong> values define the extend of the space. In math we define space
+by <span class="math inline">\({\rm I\!R}^n\)</span> or <span class="math inline">\({\rm I\!E}^n\)</span> where “n” means the number of dimentions.
+</div>
+
+<p>For example in our data, we have n=45101 that is equal to the number of genes we have measured, meaning that the space our data has 45101 dimensions. You can think about the extend of these dimensions to be all possible expression of each genes. For example, if we only have two genes in our data, we have <span class="math inline">\({\rm I\!R}^2\)</span> giving us a 2 dimensional space. The size of this space starts from the lowest possible value for the expression of the genes to the highest possible value. The exact measured expression of each gene gives us the location of our observation in the space.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pcamath.html#cb58-1"></a><span class="co"># Select variable</span></span>
+<span id="cb58-2"><a href="pcamath.html#cb58-2"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb58-3"><a href="pcamath.html#cb58-3"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb58-4"><a href="pcamath.html#cb58-4"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb58-5"><a href="pcamath.html#cb58-5"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Variable 2&quot;</span>,</span>
+<span id="cb58-6"><a href="pcamath.html#cb58-6"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">15</span>),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex1"></span>
+<img src="PCA_files/figure-html/spaceex1-1.png" alt="Plot of two genes showing the space defined by these two variables" width="672" />
+<p class="caption">
+Figure 6.1: Plot of two genes showing the space defined by these two variables
+</p>
+</div>
+<p>In Figure <a href="pcamath.html#fig:spaceex1">6.1</a> we show two variables. the value of <em>variable 1</em> start from 0 and go all the way to 20 whereas the value of <em>variable 2</em> starts from 0 and go to 15. So to put it in context, our space is defined by these variable and their possible values. Our observations (e.g. samples) are just some points or location in that space. However, for simplicity, we limit the extend of the values to the ones that we observed in our data and not all possible values of variable 1 and 2.</p>
+<p>Another way of thinking about the space is imagine <em>outer space</em> which more or less defines what exists in the universe and planets, stars and in general celestial bodies are located somewhere in the space.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pcamath.html#cb59-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&#39;https://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA22564-640x350.jpg&#39;</span>))</span></code></pre></div>
+<p><img src="https://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA22564-640x350.jpg" style="display: block; margin: auto;" /></p>
+
+<div class="definition">
+<span id="def:origin" class="definition"><strong>Definition 6.3  (Origin)  </strong></span>Let’s agree that the start of everything is from zero (0). Formally the location where axis of our space intersect is zero. Another way of thinking about this is if you multiple anything by zero the result will be zero! This is normally denoted by <span class="math inline">\((0,0)\)</span> or sometime just <span class="math inline">\(O\)</span>.
+</div>
+
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pcamath.html#cb60-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb60-2"><a href="pcamath.html#cb60-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb60-3"><a href="pcamath.html#cb60-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb60-4"><a href="pcamath.html#cb60-4"></a></span>
+<span id="cb60-5"><a href="pcamath.html#cb60-5"></a><span class="co"># plot the axis</span></span>
+<span id="cb60-6"><a href="pcamath.html#cb60-6"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb60-7"><a href="pcamath.html#cb60-7"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb60-8"><a href="pcamath.html#cb60-8"></a></span>
+<span id="cb60-9"><a href="pcamath.html#cb60-9"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb60-10"><a href="pcamath.html#cb60-10"></a><span class="kw">arrows</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb60-11"><a href="pcamath.html#cb60-11"></a><span class="kw">text</span>(<span class="kw">c</span>(<span class="fl">1.1</span>),<span class="dt">label =</span> <span class="st">&quot;Origin (0,0)&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex2"></span>
+<img src="PCA_files/figure-html/spaceex2-1.png" alt="Plot of the origin" width="672" />
+<p class="caption">
+Figure 6.2: Plot of the origin
+</p>
+</div>
+
+<div class="definition">
+<p><span id="def:vectors" class="definition"><strong>Definition 6.4  (Vector)  </strong></span>A vector is basically just a list of numbers, showing a location of a point in the space. We like to show the vectors by their name and a small arrow on top of them (<span class="math inline">\(\vec{a}\)</span>). For example, if we say <span class="math inline">\(\vec{a}=[5,13]\)</span>, it means we are refering to a point in space where the value for the first axis is 2 and the second axis is 13. It’s often nice to show the vector with an arrow starting from the origin and finishing exactly at that point.</p>
+</div>
+
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pcamath.html#cb61-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb61-2"><a href="pcamath.html#cb61-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb61-3"><a href="pcamath.html#cb61-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb61-4"><a href="pcamath.html#cb61-4"></a></span>
+<span id="cb61-5"><a href="pcamath.html#cb61-5"></a><span class="co"># plot the point</span></span>
+<span id="cb61-6"><a href="pcamath.html#cb61-6"></a><span class="kw">points</span>(<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb61-7"><a href="pcamath.html#cb61-7"></a><span class="co"># plot the axis</span></span>
+<span id="cb61-8"><a href="pcamath.html#cb61-8"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb61-9"><a href="pcamath.html#cb61-9"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb61-10"><a href="pcamath.html#cb61-10"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb61-11"><a href="pcamath.html#cb61-11"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">17</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb61-12"><a href="pcamath.html#cb61-12"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb61-13"><a href="pcamath.html#cb61-13"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex3"></span>
+<img src="PCA_files/figure-html/spaceex3-1.png" alt="Plotting a vector" width="672" />
+<p class="caption">
+Figure 6.3: Plotting a vector
+</p>
+</div>
+<p>As we said, we like to put our starting point at <span class="math inline">\((0,0)\)</span>. Given this, we can also think about a vector as magnitude (length the arrow starting from the origin or distance to the origin) and also the direction to which the arrow is pointing.
+So in <a href="#spaceex3">our case</a>, we have a vector that is defined by going to the right along the <span class="math inline">\(x\)</span> axis (red arrow in Figure <a href="pcamath.html#fig:spaceex4">6.4</a>) until reaching point 3 and the start going up along the <span class="math inline">\(y\)</span> axis (blue arrow in Figure <a href="pcamath.html#fig:spaceex4">6.4</a>) to reach the final point.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pcamath.html#cb62-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb62-2"><a href="pcamath.html#cb62-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb62-3"><a href="pcamath.html#cb62-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb62-4"><a href="pcamath.html#cb62-4"></a></span>
+<span id="cb62-5"><a href="pcamath.html#cb62-5"></a><span class="co"># plot the point</span></span>
+<span id="cb62-6"><a href="pcamath.html#cb62-6"></a><span class="kw">points</span>(<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb62-7"><a href="pcamath.html#cb62-7"></a><span class="co"># plot the axis</span></span>
+<span id="cb62-8"><a href="pcamath.html#cb62-8"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb62-9"><a href="pcamath.html#cb62-9"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb62-10"><a href="pcamath.html#cb62-10"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb62-11"><a href="pcamath.html#cb62-11"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb62-12"><a href="pcamath.html#cb62-12"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb62-13"><a href="pcamath.html#cb62-13"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb62-14"><a href="pcamath.html#cb62-14"></a></span>
+<span id="cb62-15"><a href="pcamath.html#cb62-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;Red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb62-16"><a href="pcamath.html#cb62-16"></a><span class="kw">arrows</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex4"></span>
+<img src="PCA_files/figure-html/spaceex4-1.png" alt="Plotting a vector and the steps" width="672" />
+<p class="caption">
+Figure 6.4: Plotting a vector and the steps
+</p>
+</div>
+<p>The magnitude of a vector is calculated by:</p>
+<p><span class="math display">\[\|\vec{a}\|=\sqrt{x^2+y^2}\]</span>
+Where <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are the first and the second elements of the vector. So in our case that is equal to <span class="math inline">\(\|\vec{a}\|=\sqrt{5^2+13^2}=13.93\)</span>.</p>
+<p>We normally like to measure the direction of the a vector based on the angle it makes with the <span class="math inline">\(x\)</span> axis.</p>
+<p><span class="math display">\[\theta=\tan^{-1}\frac{x}{y}\]</span>
+These thing can easily be calculate in R for example by</p>
+<pre><code>atan(y/x)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="pcamath.html#cb64-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb64-2"><a href="pcamath.html#cb64-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb64-3"><a href="pcamath.html#cb64-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb64-4"><a href="pcamath.html#cb64-4"></a></span>
+<span id="cb64-5"><a href="pcamath.html#cb64-5"></a><span class="co"># plot the point</span></span>
+<span id="cb64-6"><a href="pcamath.html#cb64-6"></a><span class="kw">points</span>(<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb64-7"><a href="pcamath.html#cb64-7"></a><span class="co"># plot the axis</span></span>
+<span id="cb64-8"><a href="pcamath.html#cb64-8"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb64-9"><a href="pcamath.html#cb64-9"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb64-10"><a href="pcamath.html#cb64-10"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb64-11"><a href="pcamath.html#cb64-11"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb64-12"><a href="pcamath.html#cb64-12"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb64-13"><a href="pcamath.html#cb64-13"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb64-14"><a href="pcamath.html#cb64-14"></a></span>
+<span id="cb64-15"><a href="pcamath.html#cb64-15"></a><span class="co"># draw arc</span></span>
+<span id="cb64-16"><a href="pcamath.html#cb64-16"></a>plotrix<span class="op">::</span><span class="kw">draw.arc</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">angle2=</span><span class="dv">1</span>)</span>
+<span id="cb64-17"><a href="pcamath.html#cb64-17"></a></span>
+<span id="cb64-18"><a href="pcamath.html#cb64-18"></a><span class="kw">text</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">&quot;1.2&quot;</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex5"></span>
+<img src="PCA_files/figure-html/spaceex5-1.png" alt="Plotting a vector and the steps" width="672" />
+<p class="caption">
+Figure 6.5: Plotting a vector and the steps
+</p>
+</div>
+<p>So by now we have the magnitude and direction of a vector. A vector also has a span. A span of a vector is a line resulted by stretching the vector from both ends to infinity.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="pcamath.html#cb65-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb65-2"><a href="pcamath.html#cb65-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb65-3"><a href="pcamath.html#cb65-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb65-4"><a href="pcamath.html#cb65-4"></a></span>
+<span id="cb65-5"><a href="pcamath.html#cb65-5"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">500</span>,<span class="op">-</span><span class="dv">1300</span>,<span class="dv">500</span>,<span class="dv">1300</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb65-6"><a href="pcamath.html#cb65-6"></a><span class="kw">text</span>(<span class="dv">13</span>,<span class="dv">20</span>,<span class="st">&quot;span of the vector&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb65-7"><a href="pcamath.html#cb65-7"></a><span class="co"># plot the point</span></span>
+<span id="cb65-8"><a href="pcamath.html#cb65-8"></a><span class="kw">points</span>(<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb65-9"><a href="pcamath.html#cb65-9"></a><span class="co"># plot the axis</span></span>
+<span id="cb65-10"><a href="pcamath.html#cb65-10"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb65-11"><a href="pcamath.html#cb65-11"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb65-12"><a href="pcamath.html#cb65-12"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb65-13"><a href="pcamath.html#cb65-13"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb65-14"><a href="pcamath.html#cb65-14"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb65-15"><a href="pcamath.html#cb65-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb65-16"><a href="pcamath.html#cb65-16"></a><span class="co"># draw circle</span></span>
+<span id="cb65-17"><a href="pcamath.html#cb65-17"></a><span class="kw">draw.arc</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">angle2=</span><span class="dv">1</span>)</span>
+<span id="cb65-18"><a href="pcamath.html#cb65-18"></a></span>
+<span id="cb65-19"><a href="pcamath.html#cb65-19"></a><span class="kw">text</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">&quot;1.2&quot;</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex6"></span>
+<img src="PCA_files/figure-html/spaceex6-1.png" alt="Plotting a vector and the steps" width="672" />
+<p class="caption">
+Figure 6.6: Plotting a vector and the steps
+</p>
+</div>
+<p>Now we can go ahead and define some preliminary operations on the vector.</p>
+</div>
+<div id="operations-on-vectors" class="section level2">
+<h2><span class="header-section-number">6.3</span> Operations on vectors</h2>
+
+<div class="definition">
+<p><span id="def:scalarv" class="definition"><strong>Definition 6.5  (Scalar multiplication)  </strong></span>If we multiply a vector by a scalar (a number) other than one (1), the resulting vector will change magnitunde by not direction. However, a vector might flip (pointing to opposite direction) but it will NEVER change the direction of its span.</p>
+<p>When we multiply a scalar to a vector, we take each element of the vector (e.g. <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>) and we multiply each of them by that scalar</p>
+<p><span class="math display">\[\vec{a} \times j=[x\times j,y\times j]\]</span></p>
+where <span class="math inline">\(\vec{a}\)</span> is a vector and <span class="math inline">\(j\)</span> is an scalar.
+</div>
+
+<p>For example if we take our vector <span class="math inline">\(\vec{a}=[5,13]\)</span> and multiply by <span class="math inline">\(1.5\)</span> the results will be <span class="math inline">\([5 \times 1.5, 13 \times 1.5]=[7.5,19.5]\)</span>:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="pcamath.html#cb66-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb66-2"><a href="pcamath.html#cb66-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb66-3"><a href="pcamath.html#cb66-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb66-4"><a href="pcamath.html#cb66-4"></a></span>
+<span id="cb66-5"><a href="pcamath.html#cb66-5"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">500</span>,<span class="op">-</span><span class="dv">1300</span>,<span class="dv">500</span>,<span class="dv">1300</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb66-6"><a href="pcamath.html#cb66-6"></a><span class="kw">text</span>(<span class="dv">13</span>,<span class="dv">20</span>,<span class="st">&quot;span of the vector&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb66-7"><a href="pcamath.html#cb66-7"></a></span>
+<span id="cb66-8"><a href="pcamath.html#cb66-8"></a><span class="co"># plot the axis</span></span>
+<span id="cb66-9"><a href="pcamath.html#cb66-9"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb66-10"><a href="pcamath.html#cb66-10"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb66-11"><a href="pcamath.html#cb66-11"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb66-12"><a href="pcamath.html#cb66-12"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb66-13"><a href="pcamath.html#cb66-13"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb66-14"><a href="pcamath.html#cb66-14"></a></span>
+<span id="cb66-15"><a href="pcamath.html#cb66-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span><span class="op">*</span><span class="fl">1.5</span>,<span class="dv">13</span><span class="op">*</span><span class="fl">1.5</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb66-16"><a href="pcamath.html#cb66-16"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb66-17"><a href="pcamath.html#cb66-17"></a></span>
+<span id="cb66-18"><a href="pcamath.html#cb66-18"></a><span class="co"># draw circle</span></span>
+<span id="cb66-19"><a href="pcamath.html#cb66-19"></a><span class="kw">draw.arc</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">angle2=</span><span class="dv">1</span>)</span>
+<span id="cb66-20"><a href="pcamath.html#cb66-20"></a></span>
+<span id="cb66-21"><a href="pcamath.html#cb66-21"></a><span class="kw">text</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">&quot;1.2&quot;</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex7"></span>
+<img src="PCA_files/figure-html/spaceex7-1.png" alt="Multiplying a vector by a scalar" width="672" />
+<p class="caption">
+Figure 6.7: Multiplying a vector by a scalar
+</p>
+</div>
+<p>As you see in Figure <a href="pcamath.html#fig:spaceex7">6.7</a>, the green vector is the result of the multiplication of the our vector by 1.5. The vector has changed magnitude (length) but not the direction. If we now multiply by <span class="math inline">\(-1.5\)</span></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="pcamath.html#cb67-1"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb67-2"><a href="pcamath.html#cb67-2"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb67-3"><a href="pcamath.html#cb67-3"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb67-4"><a href="pcamath.html#cb67-4"></a></span>
+<span id="cb67-5"><a href="pcamath.html#cb67-5"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">500</span>,<span class="op">-</span><span class="dv">1300</span>,<span class="dv">500</span>,<span class="dv">1300</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb67-6"><a href="pcamath.html#cb67-6"></a><span class="kw">text</span>(<span class="dv">13</span>,<span class="dv">20</span>,<span class="st">&quot;span of the vector&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb67-7"><a href="pcamath.html#cb67-7"></a></span>
+<span id="cb67-8"><a href="pcamath.html#cb67-8"></a></span>
+<span id="cb67-9"><a href="pcamath.html#cb67-9"></a><span class="co"># plot the axis</span></span>
+<span id="cb67-10"><a href="pcamath.html#cb67-10"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb67-11"><a href="pcamath.html#cb67-11"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb67-12"><a href="pcamath.html#cb67-12"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb67-13"><a href="pcamath.html#cb67-13"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb67-14"><a href="pcamath.html#cb67-14"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb67-15"><a href="pcamath.html#cb67-15"></a></span>
+<span id="cb67-16"><a href="pcamath.html#cb67-16"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span><span class="op">*-</span><span class="fl">1.5</span>,<span class="dv">13</span><span class="op">*-</span><span class="fl">1.5</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb67-17"><a href="pcamath.html#cb67-17"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>)</span>
+<span id="cb67-18"><a href="pcamath.html#cb67-18"></a></span>
+<span id="cb67-19"><a href="pcamath.html#cb67-19"></a><span class="co"># draw circle</span></span>
+<span id="cb67-20"><a href="pcamath.html#cb67-20"></a><span class="kw">draw.arc</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">angle2=</span><span class="dv">1</span>)</span>
+<span id="cb67-21"><a href="pcamath.html#cb67-21"></a></span>
+<span id="cb67-22"><a href="pcamath.html#cb67-22"></a><span class="kw">text</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">&quot;1.2&quot;</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex8"></span>
+<img src="PCA_files/figure-html/spaceex8-1.png" alt="Multiplying a vector by a negative scalar" width="672" />
+<p class="caption">
+Figure 6.8: Multiplying a vector by a negative scalar
+</p>
+</div>
+<p>You see that the green line now points to the negative direction but still stays on the same span (the red dashed line). Let’s move on to the addition. Obviously the same applies if we add a scalar to both element of the vector.</p>
+<p>Now let’s have a look at when we don’t have a scalar but have a vector. Let’s start with addition and subtraction</p>
+
+<div class="definition">
+<p><span id="def:vaddition" class="definition"><strong>Definition 6.6  (Vector addition and subtraction)  </strong></span>
+We can add or substract two vectors only and only if they have the same number of elements. If we have <span class="math inline">\(\vec{a}=[x,y]\)</span> and <span class="math inline">\(\vec{b}=[p,z]\)</span> and the addition and subtraction are defined:</p>
+<p><span class="math display">\[\vec{c}=\vec{a}+\vec{b}=[x+p, y+z]\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\vec{c}=\vec{a}-\vec{b}=[x-p, y-z]\]</span></p>
+<p>Obviously, we take similar element of the vector and add or subtract them resulting to a new vector.</p>
+</div>
+
+<p>Let’s have a look at what it means using an example. Suppose we have two vectors, <span class="math inline">\(\vec{a}=[5,13]\)</span> and <span class="math inline">\(\vec{b}=[3,4]\)</span> we add them together and the result will be</p>
+<p><span class="math display">\[\vec{c}=\vec{a}+\vec{b}=[5+3, 13+4]=[8,17]\]</span>
+Similarly for subtraction</p>
+<p><span class="math display">\[\vec{c}=\vec{a}+\vec{b}=[5-3, 13-4]=[2,9]\]</span></p>
+<p>Graphically and verbaly we can think about this, start with <span class="math inline">\(\vec{a}=[5,13]\)</span>, from the origin go 5 to the right and 13 up. Great! Stop here. Now let’s continue with <span class="math inline">\(\vec{b}=[3,4]\)</span>. Go 3 steps further to the right and then go 4 steps up! This is <span class="math inline">\(\vec{c}=\vec{a}+\vec{b}\)</span></p>
+<p>Let’s look at the graphics:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="pcamath.html#cb68-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb68-2"><a href="pcamath.html#cb68-2"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb68-3"><a href="pcamath.html#cb68-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb68-4"><a href="pcamath.html#cb68-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb68-5"><a href="pcamath.html#cb68-5"></a></span>
+<span id="cb68-6"><a href="pcamath.html#cb68-6"></a><span class="co"># plot the axis</span></span>
+<span id="cb68-7"><a href="pcamath.html#cb68-7"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb68-8"><a href="pcamath.html#cb68-8"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb68-9"><a href="pcamath.html#cb68-9"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb68-10"><a href="pcamath.html#cb68-10"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb68-11"><a href="pcamath.html#cb68-11"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb68-12"><a href="pcamath.html#cb68-12"></a></span>
+<span id="cb68-13"><a href="pcamath.html#cb68-13"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb68-14"><a href="pcamath.html#cb68-14"></a></span>
+<span id="cb68-15"><a href="pcamath.html#cb68-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb68-16"><a href="pcamath.html#cb68-16"></a><span class="kw">title</span>(<span class="st">&quot;Original vectors a and b&quot;</span>)</span>
+<span id="cb68-17"><a href="pcamath.html#cb68-17"></a></span>
+<span id="cb68-18"><a href="pcamath.html#cb68-18"></a></span>
+<span id="cb68-19"><a href="pcamath.html#cb68-19"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb68-20"><a href="pcamath.html#cb68-20"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb68-21"><a href="pcamath.html#cb68-21"></a></span>
+<span id="cb68-22"><a href="pcamath.html#cb68-22"></a></span>
+<span id="cb68-23"><a href="pcamath.html#cb68-23"></a></span>
+<span id="cb68-24"><a href="pcamath.html#cb68-24"></a><span class="co"># plot the axis</span></span>
+<span id="cb68-25"><a href="pcamath.html#cb68-25"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb68-26"><a href="pcamath.html#cb68-26"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb68-27"><a href="pcamath.html#cb68-27"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb68-28"><a href="pcamath.html#cb68-28"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb68-29"><a href="pcamath.html#cb68-29"></a><span class="co"># plot arrow and text</span></span>
+<span id="cb68-30"><a href="pcamath.html#cb68-30"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">13</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb68-31"><a href="pcamath.html#cb68-31"></a></span>
+<span id="cb68-32"><a href="pcamath.html#cb68-32"></a><span class="kw">arrows</span>(<span class="dv">5</span>,<span class="dv">13</span>,<span class="dv">8</span>,<span class="dv">17</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb68-33"><a href="pcamath.html#cb68-33"></a><span class="kw">title</span>(<span class="st">&quot;Addtion and a and b&quot;</span>)</span>
+<span id="cb68-34"><a href="pcamath.html#cb68-34"></a></span>
+<span id="cb68-35"><a href="pcamath.html#cb68-35"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">17</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb68-36"><a href="pcamath.html#cb68-36"></a></span>
+<span id="cb68-37"><a href="pcamath.html#cb68-37"></a></span>
+<span id="cb68-38"><a href="pcamath.html#cb68-38"></a><span class="co"># draw circle</span></span>
+<span id="cb68-39"><a href="pcamath.html#cb68-39"></a><span class="kw">draw.arc</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dt">angle2=</span><span class="dv">1</span>)</span>
+<span id="cb68-40"><a href="pcamath.html#cb68-40"></a></span>
+<span id="cb68-41"><a href="pcamath.html#cb68-41"></a><span class="kw">text</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="st">&quot;1.2&quot;</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex9"></span>
+<img src="PCA_files/figure-html/spaceex9-1.png" alt="Adding two vectors" width="672" />
+<p class="caption">
+Figure 6.9: Adding two vectors
+</p>
+</div>
+<p>We have two vectors, <span class="math inline">\(\vec{a}\)</span> is red, <span class="math inline">\(\vec{b}\)</span> is green and <span class="math inline">\(\vec{c}\)</span> is black. So the black one is the resulting vecotr. Has it changed span?</p>
+<p>Let’s look at the graphics:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="pcamath.html#cb69-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb69-2"><a href="pcamath.html#cb69-2"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb69-3"><a href="pcamath.html#cb69-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb69-4"><a href="pcamath.html#cb69-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb69-5"><a href="pcamath.html#cb69-5"></a></span>
+<span id="cb69-6"><a href="pcamath.html#cb69-6"></a><span class="co"># plot the axis</span></span>
+<span id="cb69-7"><a href="pcamath.html#cb69-7"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb69-8"><a href="pcamath.html#cb69-8"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb69-9"><a href="pcamath.html#cb69-9"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb69-10"><a href="pcamath.html#cb69-10"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb69-11"><a href="pcamath.html#cb69-11"></a><span class="co"># plot arrow </span></span>
+<span id="cb69-12"><a href="pcamath.html#cb69-12"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">17</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb69-13"><a href="pcamath.html#cb69-13"></a></span>
+<span id="cb69-14"><a href="pcamath.html#cb69-14"></a><span class="co"># plot span</span></span>
+<span id="cb69-15"><a href="pcamath.html#cb69-15"></a></span>
+<span id="cb69-16"><a href="pcamath.html#cb69-16"></a> <span class="kw">segments</span>(<span class="op">-</span><span class="dv">500</span>,<span class="op">-</span><span class="dv">1300</span>,<span class="dv">500</span>,<span class="dv">1300</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb69-17"><a href="pcamath.html#cb69-17"></a><span class="kw">text</span>(<span class="dv">13</span>,<span class="dv">20</span>,<span class="st">&quot;span of the vector a&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb69-18"><a href="pcamath.html#cb69-18"></a></span>
+<span id="cb69-19"><a href="pcamath.html#cb69-19"></a></span>
+<span id="cb69-20"><a href="pcamath.html#cb69-20"></a> <span class="kw">segments</span>(<span class="op">-</span><span class="dv">300</span>,<span class="op">-</span><span class="dv">400</span>,<span class="dv">300</span>,<span class="dv">400</span>,<span class="dt">col =</span> <span class="st">&quot;green&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb69-21"><a href="pcamath.html#cb69-21"></a><span class="kw">text</span>(<span class="dv">13</span>,<span class="dv">10</span>,<span class="st">&quot;span of the vector b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb69-22"><a href="pcamath.html#cb69-22"></a></span>
+<span id="cb69-23"><a href="pcamath.html#cb69-23"></a></span>
+<span id="cb69-24"><a href="pcamath.html#cb69-24"></a><span class="kw">segments</span>(<span class="op">-</span><span class="dv">800</span>,<span class="op">-</span><span class="dv">1700</span>,<span class="dv">800</span>,<span class="dv">1700</span>,<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex10"></span>
+<img src="PCA_files/figure-html/spaceex10-1.png" alt="Span of vector a, b and c" width="672" />
+<p class="caption">
+Figure 6.10: Span of vector a, b and c
+</p>
+</div>
+<p>You can obviously see that the span the <span class="math inline">\(\vec{c}\)</span> (the black dashed line) is not on either of <span class="math inline">\(\vec{a}\)</span> and $. We will later talk about why this is important. Perhaps by now you got the point that vectors are not just a list of numbers (like expression a gene for 10 samples) but rather a direction and magnitude.</p>
+<p>There are three more things to talk about before moving forward to the next section.</p>
+<p>First is that we can normalize a vector to have magnitude of 1 but keep its direction. This can be simply down by diving every element of the vector by its magnitude.</p>
+<p><span class="math display">\[\frac{\vec{a}}{\|\vec{a}\|}=[\frac{x}{\|\vec{a}\|},\frac{y}{\|\vec{a}\|}]\]</span></p>
+<p>This will give a normalized or unit vector which the same direction but magnitude of 1. This is handy because we have a vector irrespective of the magnitude but we can multiply it with a scalar to go back to the same vector as we had before.</p>
+<p>For example, if we have <span class="math inline">\(\vec{a}=[3,13]\)</span> we can calculate its magnitude as <span class="math inline">\(\sqrt{3^2+13^2}=13.3\)</span> giving us the unit vector of <span class="math inline">\(\hat{a}=[\frac{3}{13.3},\frac{13}{13.3}]=[0.22,0.97]\)</span>. This will come handy later when we do a PCA.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="pcamath.html#cb70-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb70-2"><a href="pcamath.html#cb70-2"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb70-3"><a href="pcamath.html#cb70-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">20</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb70-4"><a href="pcamath.html#cb70-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb70-5"><a href="pcamath.html#cb70-5"></a></span>
+<span id="cb70-6"><a href="pcamath.html#cb70-6"></a><span class="co"># plot the axis</span></span>
+<span id="cb70-7"><a href="pcamath.html#cb70-7"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb70-8"><a href="pcamath.html#cb70-8"></a><span class="kw">title</span>(<span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">10</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb70-9"><a href="pcamath.html#cb70-9"></a><span class="kw">axis</span>(<span class="dv">2</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>) )</span>
+<span id="cb70-10"><a href="pcamath.html#cb70-10"></a><span class="kw">title</span>(<span class="dt">ylab=</span><span class="st">&quot;y&quot;</span>, <span class="dt">line=</span><span class="op">-</span><span class="dv">16</span>, <span class="dt">cex.lab=</span><span class="fl">1.2</span>,<span class="dt">adj=</span><span class="dv">1</span>)</span>
+<span id="cb70-11"><a href="pcamath.html#cb70-11"></a><span class="co"># plot arrow </span></span>
+<span id="cb70-12"><a href="pcamath.html#cb70-12"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">13</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb70-13"><a href="pcamath.html#cb70-13"></a></span>
+<span id="cb70-14"><a href="pcamath.html#cb70-14"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">13</span>)<span class="op">^</span><span class="dv">2</span>)),<span class="dv">13</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">13</span>)<span class="op">^</span><span class="dv">2</span>)),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex11"></span>
+<img src="PCA_files/figure-html/spaceex11-1.png" alt="Unit vector of a has been depicted" width="672" />
+<p class="caption">
+Figure 6.11: Unit vector of a has been depicted
+</p>
+</div>
+<p>As you see in the Figure <a href="pcamath.html#fig:spaceex11">6.11</a>, the unit vector (red arrow) has the same direction as the original vector (black arrow) but it’s much smaller. In our example, we can multiple the unit vector to <span class="math inline">\(13.3\)</span> to get back to the original vector as we had.</p>
+<p>The second point is that, I guess you noted that we talked about subtraction and addition but we did not talk about multiplication of two vectors. There are two ways of multiply two vectors. One is called cross product that is written as <span class="math inline">\(\vec{a} \times \vec{b}\)</span> and the second one is called dot product that is written as <span class="math inline">\(\vec{a}\cdot\vec{b}\)</span>. Throughout this chapter, we will only talk about dot product not the cross product. But just to briefly mention it, cross product deals with finding an orthogonal to two other lines. That is if we say <span class="math inline">\(\vec{a}=\vec{a} \times \vec{b}\)</span>, it means that <span class="math inline">\(\vec{c}\)</span> is a line that is orthogonal to both <span class="math inline">\(\vec{a}\)</span> and <span class="math inline">\(\vec{b}\)</span>. But Let’s ignore it and talk about the dot product.</p>
+
+<div class="definition">
+<p><span id="def:dotprod" class="definition"><strong>Definition 6.7  (Dot product of two vectors)  </strong></span>
+The dot product of two vectors <span class="math inline">\(\vec{a}=[x,y]\)</span> and <span class="math inline">\(\vec{b}=[p,z]\)</span> is define as
+<span class="math display">\[d=\vec{a}\cdot\vec{b}=x \times p+y \times z\]</span></p>
+<p>It might look a bit fancy, but the concept is that we would like to project or mirror vector <span class="math inline">\(\vec{a}\)</span> onto the vector <span class="math inline">\(\vec{b}\)</span> (or perhaps the span of <span class="math inline">\(\vec{b}\)</span>). We take tip of the vector <span class="math inline">\(\vec{a}\)</span>, draw an orthogonal line from the time to the vector <span class="math inline">\(\vec{b}\)</span>, this gives us the location of vector <span class="math inline">\(\vec{a}\)</span> on <span class="math inline">\(\vec{b}\)</span>, let’s call this new location <span class="math inline">\(\vec{d}\)</span>, we now extend the vector <span class="math inline">\(\vec{d}\)</span> by the magnitude of <span class="math inline">\(\|\vec{b}\|\)</span>.</p>
+</div>
+
+<p>Ok! That was little bit too much. Let’s look at an example to make this clear.</p>
+<p>Let’s draw vector <span class="math inline">\(\vec{a}\)</span> and <span class="math inline">\(\vec{b}\)</span></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="pcamath.html#cb71-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb71-2"><a href="pcamath.html#cb71-2"></a><span class="co"># plot</span></span>
+<span id="cb71-3"><a href="pcamath.html#cb71-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">40</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb71-4"><a href="pcamath.html#cb71-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb71-5"><a href="pcamath.html#cb71-5"></a></span>
+<span id="cb71-6"><a href="pcamath.html#cb71-6"></a></span>
+<span id="cb71-7"><a href="pcamath.html#cb71-7"></a><span class="co"># plot arrow b</span></span>
+<span id="cb71-8"><a href="pcamath.html#cb71-8"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb71-9"><a href="pcamath.html#cb71-9"></a><span class="co"># write b</span></span>
+<span id="cb71-10"><a href="pcamath.html#cb71-10"></a><span class="kw">text</span>(<span class="dv">10</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dt">labels =</span> <span class="st">&quot;b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb71-11"><a href="pcamath.html#cb71-11"></a></span>
+<span id="cb71-12"><a href="pcamath.html#cb71-12"></a></span>
+<span id="cb71-13"><a href="pcamath.html#cb71-13"></a><span class="co"># plot arrow b</span></span>
+<span id="cb71-14"><a href="pcamath.html#cb71-14"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb71-15"><a href="pcamath.html#cb71-15"></a><span class="co"># write a</span></span>
+<span id="cb71-16"><a href="pcamath.html#cb71-16"></a><span class="kw">text</span>(<span class="dv">4</span>,<span class="dv">10</span>,<span class="dt">labels =</span> <span class="st">&quot;a&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb71-17"><a href="pcamath.html#cb71-17"></a></span>
+<span id="cb71-18"><a href="pcamath.html#cb71-18"></a><span class="kw">segments</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex12"></span>
+<img src="PCA_files/figure-html/spaceex12-1.png" alt="Two vectors a and b" width="672" />
+<p class="caption">
+Figure 6.12: Two vectors a and b
+</p>
+</div>
+<p>Great! Where does <span class="math inline">\(\vec{a}\)</span> land if it starts falling down? Now let’s take the tip of the <span class="math inline">\(\vec{a}\)</span> and draw a line perpendicular to <span class="math inline">\(\vec{b}\)</span>.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="pcamath.html#cb72-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb72-2"><a href="pcamath.html#cb72-2"></a><span class="co"># plot</span></span>
+<span id="cb72-3"><a href="pcamath.html#cb72-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">40</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb72-4"><a href="pcamath.html#cb72-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb72-5"><a href="pcamath.html#cb72-5"></a></span>
+<span id="cb72-6"><a href="pcamath.html#cb72-6"></a></span>
+<span id="cb72-7"><a href="pcamath.html#cb72-7"></a><span class="co"># plot arrow b</span></span>
+<span id="cb72-8"><a href="pcamath.html#cb72-8"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb72-9"><a href="pcamath.html#cb72-9"></a><span class="co"># write b</span></span>
+<span id="cb72-10"><a href="pcamath.html#cb72-10"></a><span class="kw">text</span>(<span class="dv">18</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dt">labels =</span> <span class="st">&quot;b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb72-11"><a href="pcamath.html#cb72-11"></a></span>
+<span id="cb72-12"><a href="pcamath.html#cb72-12"></a></span>
+<span id="cb72-13"><a href="pcamath.html#cb72-13"></a><span class="co"># plot arrow b</span></span>
+<span id="cb72-14"><a href="pcamath.html#cb72-14"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb72-15"><a href="pcamath.html#cb72-15"></a><span class="co"># write a</span></span>
+<span id="cb72-16"><a href="pcamath.html#cb72-16"></a><span class="kw">text</span>(<span class="dv">4</span>,<span class="dv">10</span>,<span class="dt">labels =</span> <span class="st">&quot;a&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb72-17"><a href="pcamath.html#cb72-17"></a></span>
+<span id="cb72-18"><a href="pcamath.html#cb72-18"></a><span class="kw">segments</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb72-19"><a href="pcamath.html#cb72-19"></a></span>
+<span id="cb72-20"><a href="pcamath.html#cb72-20"></a><span class="kw">text</span>(<span class="dv">20</span>,<span class="dv">6</span>,<span class="dt">labels =</span> <span class="st">&quot;perpendicular line (projection line)&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb72-21"><a href="pcamath.html#cb72-21"></a></span>
+<span id="cb72-22"><a href="pcamath.html#cb72-22"></a><span class="kw">arrows</span>(<span class="dv">4</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">8</span>, <span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb72-23"><a href="pcamath.html#cb72-23"></a></span>
+<span id="cb72-24"><a href="pcamath.html#cb72-24"></a><span class="kw">text</span>(<span class="dv">2</span>,<span class="op">-</span><span class="fl">1.5</span>,<span class="dt">labels =</span> <span class="st">&quot;projection location&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex13"></span>
+<img src="PCA_files/figure-html/spaceex13-1.png" alt="Two vectors a and b" width="672" />
+<p class="caption">
+Figure 6.13: Two vectors a and b
+</p>
+</div>
+<p>Now we know the location <span class="math inline">\(\vec{a}\)</span> on <span class="math inline">\(\vec{b}\)</span> this is exactly at 8 we can go ahead ahead and multiply this but the magnitude of <span class="math inline">\(\vec{b}\)</span> (20):</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pcamath.html#cb73-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb73-2"><a href="pcamath.html#cb73-2"></a><span class="co"># plot</span></span>
+<span id="cb73-3"><a href="pcamath.html#cb73-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">165</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb73-4"><a href="pcamath.html#cb73-4"></a> <span class="dt">axes =</span> F,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb73-5"><a href="pcamath.html#cb73-5"></a></span>
+<span id="cb73-6"><a href="pcamath.html#cb73-6"></a></span>
+<span id="cb73-7"><a href="pcamath.html#cb73-7"></a><span class="co"># plot arrow b</span></span>
+<span id="cb73-8"><a href="pcamath.html#cb73-8"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb73-9"><a href="pcamath.html#cb73-9"></a><span class="co"># write b</span></span>
+<span id="cb73-10"><a href="pcamath.html#cb73-10"></a><span class="kw">text</span>(<span class="dv">18</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dt">labels =</span> <span class="st">&quot;b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb73-11"><a href="pcamath.html#cb73-11"></a></span>
+<span id="cb73-12"><a href="pcamath.html#cb73-12"></a></span>
+<span id="cb73-13"><a href="pcamath.html#cb73-13"></a><span class="co"># plot arrow b</span></span>
+<span id="cb73-14"><a href="pcamath.html#cb73-14"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb73-15"><a href="pcamath.html#cb73-15"></a><span class="co"># write a</span></span>
+<span id="cb73-16"><a href="pcamath.html#cb73-16"></a><span class="kw">text</span>(<span class="dv">4</span>,<span class="dv">10</span>,<span class="dt">labels =</span> <span class="st">&quot;a&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb73-17"><a href="pcamath.html#cb73-17"></a></span>
+<span id="cb73-18"><a href="pcamath.html#cb73-18"></a><span class="kw">segments</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb73-19"><a href="pcamath.html#cb73-19"></a></span>
+<span id="cb73-20"><a href="pcamath.html#cb73-20"></a><span class="kw">text</span>(<span class="dv">50</span>,<span class="dv">6</span>,<span class="dt">labels =</span> <span class="st">&quot;perpendicular line (projection line)&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb73-21"><a href="pcamath.html#cb73-21"></a></span>
+<span id="cb73-22"><a href="pcamath.html#cb73-22"></a><span class="kw">arrows</span>(<span class="dv">4</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">8</span>, <span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb73-23"><a href="pcamath.html#cb73-23"></a></span>
+<span id="cb73-24"><a href="pcamath.html#cb73-24"></a><span class="kw">text</span>(<span class="dv">10</span>,<span class="op">-</span><span class="fl">1.5</span>,<span class="dt">labels =</span> <span class="st">&quot;projection location&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb73-25"><a href="pcamath.html#cb73-25"></a></span>
+<span id="cb73-26"><a href="pcamath.html#cb73-26"></a></span>
+<span id="cb73-27"><a href="pcamath.html#cb73-27"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">8</span><span class="op">*</span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">20</span>,<span class="dv">0</span>)<span class="op">^</span><span class="dv">2</span>)),<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb73-28"><a href="pcamath.html#cb73-28"></a></span>
+<span id="cb73-29"><a href="pcamath.html#cb73-29"></a><span class="kw">text</span>(<span class="dv">150</span>,<span class="op">-</span><span class="dv">2</span>,<span class="dt">labels =</span> <span class="st">&quot;dot product of a.b&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex14"></span>
+<img src="PCA_files/figure-html/spaceex14-1.png" alt="Two vectors a and b" width="672" />
+<p class="caption">
+Figure 6.14: Two vectors a and b
+</p>
+</div>
+<p>So the dot product of <span class="math inline">\(\vec{a}\)</span> on <span class="math inline">\(\vec{b}\)</span> will be that dashed red line. One way to think about the whole concept is that, we have two different cells with different growth rate. We take cell <em>a</em> with some growth apply <em>b</em> growth to it. So if <em>a</em> is already going 2x, and <em>b</em> is going <em>3</em> we take 2 and make it 3 times larger! You will see soon that when we work with unit vectors (magnitude of 1), everything becomes much clearer.</p>
+<p>The last thing we want to discuss about the vector gets to the definition of space (<a href="pcamath.html#def:space">6.2</a>). At that point we did not know much about the vectors. We now can re-define our space as a vector space. The vector space is the set of all possible vectors that we can draw for our dimensions. So far we have been working on two dimensions and we said that we can think about each dimension as a gene or any kind of measurement of interest. Let’s consider two genes that can be either silence (zero) or have positive expressions. In reality we barely know the extend of expression of one gene. It might go from zero to some unknown number. But let’s assume that it can go all the way to 20. Now we are given all the power in world to be able to induce gene expression to create a human (based on two genes only). Since we know some good deal of linear algebra by now, it’s not that difficult! I can go ahead and say i have a person and gene 1=15 and gene 2=5.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pcamath.html#cb74-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb74-2"><a href="pcamath.html#cb74-2"></a><span class="co"># plot</span></span>
+<span id="cb74-3"><a href="pcamath.html#cb74-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb74-4"><a href="pcamath.html#cb74-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb74-5"><a href="pcamath.html#cb74-5"></a><span class="co"># plot arrow b</span></span>
+<span id="cb74-6"><a href="pcamath.html#cb74-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb74-7"><a href="pcamath.html#cb74-7"></a><span class="co"># add point</span></span>
+<span id="cb74-8"><a href="pcamath.html#cb74-8"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>,<span class="dt">pch=</span><span class="st">&quot;👶&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex15"></span>
+<img src="PCA_files/figure-html/spaceex15-1.png" alt="Gene expression example" width="672" />
+<p class="caption">
+Figure 6.15: Gene expression example
+</p>
+</div>
+<p>If we think a bit, we see that we can create so many humans by these two genes.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pcamath.html#cb75-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb75-2"><a href="pcamath.html#cb75-2"></a><span class="co"># plot</span></span>
+<span id="cb75-3"><a href="pcamath.html#cb75-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb75-4"><a href="pcamath.html#cb75-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb75-5"><a href="pcamath.html#cb75-5"></a></span>
+<span id="cb75-6"><a href="pcamath.html#cb75-6"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>)</span>
+<span id="cb75-7"><a href="pcamath.html#cb75-7"></a>{</span>
+<span id="cb75-8"><a href="pcamath.html#cb75-8"></a>  <span class="kw">set.seed</span>(i)</span>
+<span id="cb75-9"><a href="pcamath.html#cb75-9"></a>  g1&lt;-<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">1</span>)</span>
+<span id="cb75-10"><a href="pcamath.html#cb75-10"></a>   <span class="kw">set.seed</span>(i<span class="op">*</span><span class="dv">100</span>)</span>
+<span id="cb75-11"><a href="pcamath.html#cb75-11"></a>  g2&lt;-<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,<span class="dv">1</span>)</span>
+<span id="cb75-12"><a href="pcamath.html#cb75-12"></a>  <span class="co"># plot arrow b</span></span>
+<span id="cb75-13"><a href="pcamath.html#cb75-13"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,g1,g2,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb75-14"><a href="pcamath.html#cb75-14"></a><span class="co"># add point</span></span>
+<span id="cb75-15"><a href="pcamath.html#cb75-15"></a><span class="kw">points</span>(g1,g2,<span class="dt">pch=</span><span class="st">&quot;👶&quot;</span>)</span>
+<span id="cb75-16"><a href="pcamath.html#cb75-16"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex16"></span>
+<img src="PCA_files/figure-html/spaceex16-1.png" alt="Gene expression example with more vectors" width="672" />
+<p class="caption">
+Figure 6.16: Gene expression example with more vectors
+</p>
+</div>
+<p>These possible values, are in fact part of your vector spaces. Essentially all the vectors that can be created are located in this space. The power we were given to work with such space and create what we want were already covered. Our tools are vector addition, subtraction, scalar multiplication and possible dot product. There is only one thing left. We need two buffers, each container the two genes that we can activate/deactivate (<strong>ONE at the time</strong>), induce the expression, mix the buffers and create a human! Our First buffer we call <em>b1</em> is contains both gene 1 and 2, but gene 2 is deactivated, giving us <span class="math inline">\(b1=[gene1,gene2]\)</span>. Let’s say we want to represent activated gene by 1 and deactivated gene by zero so b1 one becomes <span class="math inline">\(b1=[1,0]\)</span>. Let’s do the same thing for our second buffer, <span class="math inline">\(b2=[gene1,gene2]\)</span> and turn gene1 to off, <span class="math inline">\(b1=[0,1]\)</span>. Let’s again say that we want to create a human (<span class="math inline">\(h\)</span>) with gene1=15 and gene2=5 so our sample should <span class="math inline">\(h=[15,5]\)</span>. With the tools that we are given and two buffers <span class="math inline">\(b1=[1,0]\)</span> and <span class="math inline">\(b2=[0,1]\)</span> how can we reach to <span class="math inline">\(h=[15,5]\)</span>?</p>
+<p>Well, that is not that difficult.</p>
+<p>Let’s induce gene 1 and call it <span class="math inline">\(b1i\)</span>: <span class="math inline">\(b1i=15 \times b1=[15 \times 1, 15 \times 0]=[15,0]\)</span>. Perfect. We induced the first gene but scalar multiplication.
+Now we do this for the second gene and call it <span class="math inline">\(b2i\)</span>: <span class="math inline">\(b2i=5 \times b2=[5 \times 0, 5 \times 1]=[0,5]\)</span>. We now have gene 2 again with scalar multiplication.
+How can we mix these two genes and make our first human: <span class="math inline">\(h=b1i+b2i=[15+0,5+0]=[15,5]\)</span>. Yess! We made it!</p>
+<p>These small raw vectors (<span class="math inline">\(\vec{b1}\)</span> and <span class="math inline">\(vec{b2}\)</span>) together with our operations (addition, multiplication etc) help us to create any possible vector in our space. These are basis vectors.</p>
+
+<div class="definition">
+<p><span id="def:bvectors" class="definition"><strong>Definition 6.8  (Basis vectors)  </strong></span>
+The basis vectors are a set of vectors that when used in weighted combinition can create any vector in our space. In fact our space itself is defined by the basis vectors. To be called basis vector, these should be pointing to different directions. To be more concrete, the basis vectors should be linearly independent, meaning that they cannot be created by combination of other vectors.</p>
+<p>Our “default” basis vectors are x=[1,0] and y=[0,1]. That is the only reason that when we plot any data in for examle R, the values of our measurements will be plotted exactly as they are. If we assume anything else than x=[1,0] and y=[0,1], our plot will end up being something else. So in short, the default basis vector, let us moving around our space to any point and also show us the original angle of our data. We will see later that we can change these basis vectors in order ot rotate our data and see another angle of them. So far let’s agree that our basis are [0,1] and [1,0] and they are used to construct our data vectors. We can think about this, We with the help of our data change direction, and magnitude of the basis vectors in order to represent our data in the space defined by the basis vectors.</p>
+</div>
+
+<p>Let’s have a look at the previous example. We start with two basis vectors <span class="math inline">\(\vec{b1}=[1,0]\)</span> (blue arrow) and <span class="math inline">\(\vec{b2}=[0,1] (green arrow)\)</span>. Our aim was to reach the vector <span class="math inline">\(\vec{h}=[15,5]\)</span> (black point):</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pcamath.html#cb76-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb76-2"><a href="pcamath.html#cb76-2"></a><span class="co"># plot</span></span>
+<span id="cb76-3"><a href="pcamath.html#cb76-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb76-4"><a href="pcamath.html#cb76-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb76-5"><a href="pcamath.html#cb76-5"></a></span>
+<span id="cb76-6"><a href="pcamath.html#cb76-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb76-7"><a href="pcamath.html#cb76-7"></a><span class="kw">text</span>(<span class="fl">0.5</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="st">&quot;b1&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb76-8"><a href="pcamath.html#cb76-8"></a></span>
+<span id="cb76-9"><a href="pcamath.html#cb76-9"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb76-10"><a href="pcamath.html#cb76-10"></a><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;b2&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb76-11"><a href="pcamath.html#cb76-11"></a></span>
+<span id="cb76-12"><a href="pcamath.html#cb76-12"></a></span>
+<span id="cb76-13"><a href="pcamath.html#cb76-13"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex17"></span>
+<img src="PCA_files/figure-html/spaceex17-1.png" alt="Example of basis vectors" width="672" />
+<p class="caption">
+Figure 6.17: Example of basis vectors
+</p>
+</div>
+<p>We first calculate this: <span class="math inline">\(b1i\)</span>: <span class="math inline">\(b1i=15 \times b1=[15 \times 1, 15 \times 0]=[15,0]\)</span>, giving us the dashed arrow:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pcamath.html#cb77-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb77-2"><a href="pcamath.html#cb77-2"></a><span class="co"># plot</span></span>
+<span id="cb77-3"><a href="pcamath.html#cb77-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb77-4"><a href="pcamath.html#cb77-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb77-5"><a href="pcamath.html#cb77-5"></a></span>
+<span id="cb77-6"><a href="pcamath.html#cb77-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb77-7"><a href="pcamath.html#cb77-7"></a><span class="kw">text</span>(<span class="dv">7</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="st">&quot;b1i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb77-8"><a href="pcamath.html#cb77-8"></a></span>
+<span id="cb77-9"><a href="pcamath.html#cb77-9"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb77-10"><a href="pcamath.html#cb77-10"></a><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="st">&quot;y&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb77-11"><a href="pcamath.html#cb77-11"></a></span>
+<span id="cb77-12"><a href="pcamath.html#cb77-12"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex18"></span>
+<img src="PCA_files/figure-html/spaceex18-1.png" alt="Example of basis vectors (scale b1)" width="672" />
+<p class="caption">
+Figure 6.18: Example of basis vectors (scale b1)
+</p>
+</div>
+<p>We then calculate <span class="math inline">\(b2i\)</span>: <span class="math inline">\(b2i=5 \times b2=[5 \times 0, 5 \times 1]=[0,5]\)</span>:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pcamath.html#cb78-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb78-2"><a href="pcamath.html#cb78-2"></a><span class="co"># plot</span></span>
+<span id="cb78-3"><a href="pcamath.html#cb78-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb78-4"><a href="pcamath.html#cb78-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb78-5"><a href="pcamath.html#cb78-5"></a></span>
+<span id="cb78-6"><a href="pcamath.html#cb78-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb78-7"><a href="pcamath.html#cb78-7"></a><span class="kw">text</span>(<span class="dv">7</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="st">&quot;b1i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb78-8"><a href="pcamath.html#cb78-8"></a></span>
+<span id="cb78-9"><a href="pcamath.html#cb78-9"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb78-10"><a href="pcamath.html#cb78-10"></a><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.5</span>,<span class="fl">2.5</span>,<span class="st">&quot;b2i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb78-11"><a href="pcamath.html#cb78-11"></a></span>
+<span id="cb78-12"><a href="pcamath.html#cb78-12"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex19"></span>
+<img src="PCA_files/figure-html/spaceex19-1.png" alt="Example of basis vectors (scale b2)" width="672" />
+<p class="caption">
+Figure 6.19: Example of basis vectors (scale b2)
+</p>
+</div>
+<p>We can now calculate <span class="math inline">\(h=b1i+b2i=[15+0,5+0]=[15,5]\)</span>:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="pcamath.html#cb79-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb79-2"><a href="pcamath.html#cb79-2"></a><span class="co"># plot</span></span>
+<span id="cb79-3"><a href="pcamath.html#cb79-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb79-4"><a href="pcamath.html#cb79-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb79-5"><a href="pcamath.html#cb79-5"></a></span>
+<span id="cb79-6"><a href="pcamath.html#cb79-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb79-7"><a href="pcamath.html#cb79-7"></a><span class="kw">text</span>(<span class="dv">7</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="st">&quot;b1i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb79-8"><a href="pcamath.html#cb79-8"></a></span>
+<span id="cb79-9"><a href="pcamath.html#cb79-9"></a><span class="kw">arrows</span>(<span class="dv">15</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb79-10"><a href="pcamath.html#cb79-10"></a><span class="kw">text</span>(<span class="fl">14.5</span>,<span class="fl">2.5</span>,<span class="st">&quot;b2i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb79-11"><a href="pcamath.html#cb79-11"></a></span>
+<span id="cb79-12"><a href="pcamath.html#cb79-12"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex20"></span>
+<img src="PCA_files/figure-html/spaceex20-1.png" alt="Example of basis vectors (b1i+b2i)" width="672" />
+<p class="caption">
+Figure 6.20: Example of basis vectors (b1i+b2i)
+</p>
+</div>
+<p>We can now draw a line from the origin to the tip of <span class="math inline">\(b1i+b2i\)</span>:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="pcamath.html#cb80-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb80-2"><a href="pcamath.html#cb80-2"></a><span class="co"># plot</span></span>
+<span id="cb80-3"><a href="pcamath.html#cb80-3"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">15</span>),<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;Gene 1&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;Gene 2&quot;</span>,</span>
+<span id="cb80-4"><a href="pcamath.html#cb80-4"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb80-5"><a href="pcamath.html#cb80-5"></a></span>
+<span id="cb80-6"><a href="pcamath.html#cb80-6"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb80-7"><a href="pcamath.html#cb80-7"></a><span class="kw">text</span>(<span class="dv">7</span>,<span class="op">-</span><span class="fl">0.5</span>,<span class="st">&quot;b1i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb80-8"><a href="pcamath.html#cb80-8"></a></span>
+<span id="cb80-9"><a href="pcamath.html#cb80-9"></a><span class="kw">arrows</span>(<span class="dv">15</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb80-10"><a href="pcamath.html#cb80-10"></a><span class="kw">text</span>(<span class="fl">14.5</span>,<span class="fl">2.5</span>,<span class="st">&quot;b2i&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb80-11"><a href="pcamath.html#cb80-11"></a></span>
+<span id="cb80-12"><a href="pcamath.html#cb80-12"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb80-13"><a href="pcamath.html#cb80-13"></a><span class="kw">text</span>(<span class="dv">8</span>,<span class="fl">3.5</span>,<span class="st">&quot;h&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb80-14"><a href="pcamath.html#cb80-14"></a></span>
+<span id="cb80-15"><a href="pcamath.html#cb80-15"></a><span class="kw">points</span>(<span class="dv">15</span>,<span class="dv">5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:spaceex21"></span>
+<img src="PCA_files/figure-html/spaceex21-1.png" alt="Example of basis vectors (calculating h)" width="672" />
+<p class="caption">
+Figure 6.21: Example of basis vectors (calculating h)
+</p>
+</div>
+<p>I hope that you got the point by now. We can use the basis vectors to construct any vector in our space. In fact, our observations vectors (e.g. samples) are basis vectors that have been scaled and added.</p>
+<p>We come to the end of the vector section. The important point here is that we have been working on two dimensions, all the operations and concept discussed so far can be extend to work in high dimension. Remember our dataset had 45101 dimensions. We have only worked on two of them so far :)</p>
+</div>
+<div id="matrices" class="section level2">
+<h2><span class="header-section-number">6.4</span> Matrices</h2>
+<p>Matrices can be thought as generalization of vectors where we put multiple vectors together to form a “table”. You can think about an Excel sheet where each row or each column is vector but the complete sheet is a matrix. We normally store our data in matrices as we showed in Table <a href="pcaapplications.html#tab:tablesample">4.1</a>. As you noticed, matrices have can have columns and rows. These are dimensions of a matrix. In our test data, we dimension is</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="pcamath.html#cb81-1"></a><span class="co"># show dimensions of the data</span></span>
+<span id="cb81-2"><a href="pcamath.html#cb81-2"></a><span class="kw">dim</span>(data)</span></code></pre></div>
+<pre><code>## [1]    23 45101</code></pre>
+<p>Throughout this section, we show matrices with capital letters as opposed to vectors that are shown using small letters.
+<span class="math display">\[
+A=\begin{bmatrix}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6
+\end{bmatrix}
+\]</span>
+As you see, we have two rows and three columns. When we want to refer to a specific location (<strong>called entry</strong>) in the matrix, we use <em>i</em> for the row index and <em>j</em> for the column index.</p>
+<p>For example <span class="math inline">\(A_{1,2}\)</span> refers to an entry sitting in the <strong>first</strong> frow and the **second column of the matrix, giving us <span class="math inline">\(2\)</span>.</p>
+<p>We refer to the entire row of the matrix by <em>i,*</em>. For example, <span class="math inline">\(A_{2,*}\)</span> will give us <span class="math inline">\([4,5,6]\)</span>. The same way, we can refer to the entire column <span class="math inline">\(A_{*,2}\)</span>, giving us <span class="math inline">\([2,5]\)</span>.</p>
+<p>Many of the operations defined for the vectors are also applied on the matrices. We can add or subtract them but the important thing is that the matrices <strong>MUST</strong> be the same size (same dimensions) to be able to perform addition and subtraction. In the case of addition and subtraction, each entry of the first matrix will be added or substracted to the same entry (same location) in the second matrix:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6
+\end{bmatrix}+
+\begin{bmatrix}
+7 &amp; 8 &amp; 9\\
+10 &amp; 11 &amp; 12
+\end{bmatrix}=
+\begin{bmatrix}
+1+7 &amp; 2+8 &amp; 3+9\\
+4+10 &amp; 5+11 &amp; 6+12
+\end{bmatrix}
+\]</span>
+The same applies in scalar multiplication:</p>
+<p><span class="math display">\[
+5 \times \begin{bmatrix}
+1 &amp; 2 &amp; 3\\
+4 &amp; 5 &amp; 6
+\end{bmatrix}=
+\begin{bmatrix}
+5 \times 1 &amp; 5 \times 2 &amp; 5 \times 3\\
+5 \times 4 &amp; 5 \times 5 &amp; 5 \times 6
+\end{bmatrix}
+\]</span>
+We can think about addition, subtraction and scalar multiplication the same way as the vectors. However, instead of having one vector, we have multiple ones.</p>
+<p>For example, if we add <span class="math inline">\(A=\begin{bmatrix}2&amp;4\\5&amp;3\end{bmatrix}\)</span> and <span class="math inline">\(B=\begin{bmatrix}4&amp;5\\2&amp;2\end{bmatrix}\)</span> we will get <span class="math inline">\(C=\begin{bmatrix}6&amp;9\\7&amp;5\end{bmatrix}\)</span>. We can think about we have two genes (number of columns) and we have two patients (number of rows) in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. Each patient will give us an arrow.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="pcamath.html#cb83-1"></a><span class="co"># </span></span>
+<span id="cb83-2"><a href="pcamath.html#cb83-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb83-3"><a href="pcamath.html#cb83-3"></a><span class="co"># define matrices</span></span>
+<span id="cb83-4"><a href="pcamath.html#cb83-4"></a>A&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>),<span class="dt">nrow =</span> <span class="dv">2</span>,<span class="dt">ncol =</span> <span class="dv">2</span>,<span class="dt">byrow =</span> T)</span>
+<span id="cb83-5"><a href="pcamath.html#cb83-5"></a></span>
+<span id="cb83-6"><a href="pcamath.html#cb83-6"></a>B&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">2</span>),<span class="dt">nrow =</span> <span class="dv">2</span>,<span class="dt">ncol =</span> <span class="dv">2</span>,<span class="dt">byrow =</span> T)</span>
+<span id="cb83-7"><a href="pcamath.html#cb83-7"></a></span>
+<span id="cb83-8"><a href="pcamath.html#cb83-8"></a>C=A<span class="op">+</span>B</span>
+<span id="cb83-9"><a href="pcamath.html#cb83-9"></a></span>
+<span id="cb83-10"><a href="pcamath.html#cb83-10"></a><span class="co"># Plot arrows in A</span></span>
+<span id="cb83-11"><a href="pcamath.html#cb83-11"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb83-12"><a href="pcamath.html#cb83-12"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb83-13"><a href="pcamath.html#cb83-13"></a><span class="kw">title</span>(<span class="st">&quot;Matrix A&quot;</span>)</span>
+<span id="cb83-14"><a href="pcamath.html#cb83-14"></a></span>
+<span id="cb83-15"><a href="pcamath.html#cb83-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,A[<span class="dv">1</span>,<span class="dv">1</span>],A[<span class="dv">1</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-16"><a href="pcamath.html#cb83-16"></a><span class="kw">text</span>(A[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,A[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;A&#39;</span>[<span class="st">&quot;1,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-17"><a href="pcamath.html#cb83-17"></a></span>
+<span id="cb83-18"><a href="pcamath.html#cb83-18"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,A[<span class="dv">2</span>,<span class="dv">1</span>],A[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-19"><a href="pcamath.html#cb83-19"></a><span class="kw">text</span>(A[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,A[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;A&#39;</span>[<span class="st">&quot;2,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-20"><a href="pcamath.html#cb83-20"></a></span>
+<span id="cb83-21"><a href="pcamath.html#cb83-21"></a><span class="co"># Plot arrows in B</span></span>
+<span id="cb83-22"><a href="pcamath.html#cb83-22"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb83-23"><a href="pcamath.html#cb83-23"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb83-24"><a href="pcamath.html#cb83-24"></a><span class="kw">title</span>(<span class="st">&quot;Matrix B&quot;</span>)</span>
+<span id="cb83-25"><a href="pcamath.html#cb83-25"></a></span>
+<span id="cb83-26"><a href="pcamath.html#cb83-26"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,B[<span class="dv">1</span>,<span class="dv">1</span>],B[<span class="dv">1</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;green&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-27"><a href="pcamath.html#cb83-27"></a><span class="kw">text</span>(B[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,B[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;B&#39;</span>[<span class="st">&quot;1,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;green&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-28"><a href="pcamath.html#cb83-28"></a></span>
+<span id="cb83-29"><a href="pcamath.html#cb83-29"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,B[<span class="dv">2</span>,<span class="dv">1</span>],B[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-30"><a href="pcamath.html#cb83-30"></a><span class="kw">text</span>(B[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,B[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;B&#39;</span>[<span class="st">&quot;2,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-31"><a href="pcamath.html#cb83-31"></a></span>
+<span id="cb83-32"><a href="pcamath.html#cb83-32"></a><span class="co"># Plot arrows in A+b</span></span>
+<span id="cb83-33"><a href="pcamath.html#cb83-33"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb83-34"><a href="pcamath.html#cb83-34"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb83-35"><a href="pcamath.html#cb83-35"></a><span class="kw">title</span>(<span class="st">&quot;Matrix A+B&quot;</span>)</span>
+<span id="cb83-36"><a href="pcamath.html#cb83-36"></a></span>
+<span id="cb83-37"><a href="pcamath.html#cb83-37"></a></span>
+<span id="cb83-38"><a href="pcamath.html#cb83-38"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,A[<span class="dv">1</span>,<span class="dv">1</span>],A[<span class="dv">1</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-39"><a href="pcamath.html#cb83-39"></a><span class="kw">text</span>(A[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,A[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;A&#39;</span>[<span class="st">&quot;1,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-40"><a href="pcamath.html#cb83-40"></a></span>
+<span id="cb83-41"><a href="pcamath.html#cb83-41"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,A[<span class="dv">2</span>,<span class="dv">1</span>],A[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-42"><a href="pcamath.html#cb83-42"></a><span class="kw">text</span>(A[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,A[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;A&#39;</span>[<span class="st">&quot;2,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-43"><a href="pcamath.html#cb83-43"></a></span>
+<span id="cb83-44"><a href="pcamath.html#cb83-44"></a></span>
+<span id="cb83-45"><a href="pcamath.html#cb83-45"></a><span class="kw">arrows</span>(A[<span class="dv">1</span>,<span class="dv">1</span>],A[<span class="dv">1</span>,<span class="dv">2</span>],C[<span class="dv">1</span>,<span class="dv">1</span>],C[<span class="dv">1</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;green&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb83-46"><a href="pcamath.html#cb83-46"></a><span class="kw">text</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,(<span class="kw">expression</span>(<span class="st">&#39;B&#39;</span>[<span class="st">&quot;1,*&quot;</span>])),<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb83-47"><a href="pcamath.html#cb83-47"></a></span>
+<span id="cb83-48"><a href="pcamath.html#cb83-48"></a><span class="kw">arrows</span>(A[<span class="dv">2</span>,<span class="dv">1</span>],A[<span class="dv">2</span>,<span class="dv">2</span>],C[<span class="dv">2</span>,<span class="dv">1</span>],C[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,<span class="dt">lty =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb83-49"><a href="pcamath.html#cb83-49"></a><span class="kw">text</span>(C[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,(<span class="kw">expression</span>(<span class="st">&#39;B&#39;</span>[<span class="st">&quot;2,*&quot;</span>])),<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">adj =</span> <span class="dv">-2</span>)</span>
+<span id="cb83-50"><a href="pcamath.html#cb83-50"></a></span>
+<span id="cb83-51"><a href="pcamath.html#cb83-51"></a></span>
+<span id="cb83-52"><a href="pcamath.html#cb83-52"></a><span class="co">## plot C</span></span>
+<span id="cb83-53"><a href="pcamath.html#cb83-53"></a><span class="kw">plot</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb83-54"><a href="pcamath.html#cb83-54"></a> <span class="dt">axes =</span> T,<span class="dt">type =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb83-55"><a href="pcamath.html#cb83-55"></a><span class="kw">title</span>(<span class="st">&quot;Matrix C&quot;</span>)</span>
+<span id="cb83-56"><a href="pcamath.html#cb83-56"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,C[<span class="dv">1</span>,<span class="dv">1</span>],C[<span class="dv">1</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-57"><a href="pcamath.html#cb83-57"></a><span class="kw">text</span>(C[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,C[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;C&#39;</span>[<span class="st">&quot;1,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span>
+<span id="cb83-58"><a href="pcamath.html#cb83-58"></a></span>
+<span id="cb83-59"><a href="pcamath.html#cb83-59"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,C[<span class="dv">2</span>,<span class="dv">1</span>],C[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length =</span> <span class="fl">0.1</span>)</span>
+<span id="cb83-60"><a href="pcamath.html#cb83-60"></a><span class="kw">text</span>(C[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">/</span><span class="dv">2</span>,C[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">/</span><span class="dv">2</span>,<span class="kw">expression</span>(<span class="st">&#39;C&#39;</span>[<span class="st">&quot;2,*&quot;</span>]),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">adj =</span> <span class="fl">-0.5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix1"></span>
+<img src="PCA_files/figure-html/matrix1-1.png" alt="Example of matrix addition" width="672" />
+<p class="caption">
+Figure 6.22: Example of matrix addition
+</p>
+</div>
+<p>So what we see in Figure <a href="pcamath.html#fig:matrix1">6.22</a> is that, we have two matrices A and B, we take the vectors in B and put them at the tip of the vectors in A, we then draw two lines from the origin to the new tips of B. So as it’s obvious now, this is the same and vector addition we just do it for more vectors.</p>
+<div id="matrix-multiplication" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Matrix multiplication</h3>
+<p>In order to understand matrix multiplication, we have to think about the space again. <a href="#bvectors">If you remember</a>, we said the we can represent our space by the basis vector <span class="math inline">\(\vec{x}=[1,0]\)</span> and <span class="math inline">\(\vec{y}=[0,1]\)</span>. We can think about this as directions or our guide to move to any points in the space. We said that we can scale them, we can add/subtract them to represent any vectors in the space. Our space is an empty huge place wherein we just put our vectors! The way that we navigate in space, is just by scaling and adding and subtracting the basis vectors. I keep repeating this because it’s important to understand it thoroughly. So let’s have a look at our empty space (well, i just put the grid so we have feeling of it)</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="pcamath.html#cb84-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb84-2"><a href="pcamath.html#cb84-2"></a></span>
+<span id="cb84-3"><a href="pcamath.html#cb84-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb84-4"><a href="pcamath.html#cb84-4"></a></span>
+<span id="cb84-5"><a href="pcamath.html#cb84-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb84-6"><a href="pcamath.html#cb84-6"></a></span>
+<span id="cb84-7"><a href="pcamath.html#cb84-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb84-8"><a href="pcamath.html#cb84-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb84-9"><a href="pcamath.html#cb84-9"></a></span>
+<span id="cb84-10"><a href="pcamath.html#cb84-10"></a></span>
+<span id="cb84-11"><a href="pcamath.html#cb84-11"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb84-12"><a href="pcamath.html#cb84-12"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb84-13"><a href="pcamath.html#cb84-13"></a></span>
+<span id="cb84-14"><a href="pcamath.html#cb84-14"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb84-15"><a href="pcamath.html#cb84-15"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb84-16"><a href="pcamath.html#cb84-16"></a></span>
+<span id="cb84-17"><a href="pcamath.html#cb84-17"></a></span>
+<span id="cb84-18"><a href="pcamath.html#cb84-18"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb84-19"><a href="pcamath.html#cb84-19"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix2"></span>
+<img src="PCA_files/figure-html/matrix2-1.png" alt="Empty space" width="672" />
+<p class="caption">
+Figure 6.23: Empty space
+</p>
+</div>
+<p>We can go to any point on this grid, simply using our basis vectors.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="pcamath.html#cb85-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb85-2"><a href="pcamath.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="pcamath.html#cb85-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb85-4"><a href="pcamath.html#cb85-4"></a></span>
+<span id="cb85-5"><a href="pcamath.html#cb85-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb85-6"><a href="pcamath.html#cb85-6"></a></span>
+<span id="cb85-7"><a href="pcamath.html#cb85-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb85-8"><a href="pcamath.html#cb85-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb85-9"><a href="pcamath.html#cb85-9"></a></span>
+<span id="cb85-10"><a href="pcamath.html#cb85-10"></a></span>
+<span id="cb85-11"><a href="pcamath.html#cb85-11"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb85-12"><a href="pcamath.html#cb85-12"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb85-13"><a href="pcamath.html#cb85-13"></a></span>
+<span id="cb85-14"><a href="pcamath.html#cb85-14"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb85-15"><a href="pcamath.html#cb85-15"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb85-16"><a href="pcamath.html#cb85-16"></a></span>
+<span id="cb85-17"><a href="pcamath.html#cb85-17"></a></span>
+<span id="cb85-18"><a href="pcamath.html#cb85-18"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb85-19"><a href="pcamath.html#cb85-19"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb85-20"><a href="pcamath.html#cb85-20"></a></span>
+<span id="cb85-21"><a href="pcamath.html#cb85-21"></a><span class="kw">points</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">pch=</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix3"></span>
+<img src="PCA_files/figure-html/matrix3-1.png" alt="Empty space and a target point" width="672" />
+<p class="caption">
+Figure 6.24: Empty space and a target point
+</p>
+</div>
+<p>Remember now, this target point can be an observation (e.g. sample etc). We can move to this point simply by multiplying <span class="math inline">\(\vec{x}\)</span> to 4 and <span class="math inline">\(\vec{y}\)</span> to 3 and then add the resulting vectors, giving us the location of the purple point <span class="math inline">\([4,3]\)</span>.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="pcamath.html#cb86-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb86-2"><a href="pcamath.html#cb86-2"></a></span>
+<span id="cb86-3"><a href="pcamath.html#cb86-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb86-4"><a href="pcamath.html#cb86-4"></a></span>
+<span id="cb86-5"><a href="pcamath.html#cb86-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb86-6"><a href="pcamath.html#cb86-6"></a></span>
+<span id="cb86-7"><a href="pcamath.html#cb86-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb86-8"><a href="pcamath.html#cb86-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb86-9"><a href="pcamath.html#cb86-9"></a></span>
+<span id="cb86-10"><a href="pcamath.html#cb86-10"></a></span>
+<span id="cb86-11"><a href="pcamath.html#cb86-11"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb86-12"><a href="pcamath.html#cb86-12"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb86-13"><a href="pcamath.html#cb86-13"></a></span>
+<span id="cb86-14"><a href="pcamath.html#cb86-14"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb86-15"><a href="pcamath.html#cb86-15"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb86-16"><a href="pcamath.html#cb86-16"></a></span>
+<span id="cb86-17"><a href="pcamath.html#cb86-17"></a></span>
+<span id="cb86-18"><a href="pcamath.html#cb86-18"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>,)</span>
+<span id="cb86-19"><a href="pcamath.html#cb86-19"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb86-20"><a href="pcamath.html#cb86-20"></a></span>
+<span id="cb86-21"><a href="pcamath.html#cb86-21"></a><span class="kw">points</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">pch=</span><span class="dv">7</span>)</span>
+<span id="cb86-22"><a href="pcamath.html#cb86-22"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix4"></span>
+<img src="PCA_files/figure-html/matrix4-1.png" alt="Empty space and a target point" width="672" />
+<p class="caption">
+Figure 6.25: Empty space and a target point
+</p>
+</div>
+<p>So far we have only changed the vectors. But we can also change the space itself. If we multiply a matrix to the space itself, we change the space. You can think about this like stretching, squeezing etc applied on the whole grid and ALL the things on that grid. It might not be very understandable in the beginning. Let’s have a look an example.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="pcamath.html#cb87-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb87-2"><a href="pcamath.html#cb87-2"></a></span>
+<span id="cb87-3"><a href="pcamath.html#cb87-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb87-4"><a href="pcamath.html#cb87-4"></a></span>
+<span id="cb87-5"><a href="pcamath.html#cb87-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb87-6"><a href="pcamath.html#cb87-6"></a></span>
+<span id="cb87-7"><a href="pcamath.html#cb87-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb87-8"><a href="pcamath.html#cb87-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb87-9"><a href="pcamath.html#cb87-9"></a></span>
+<span id="cb87-10"><a href="pcamath.html#cb87-10"></a></span>
+<span id="cb87-11"><a href="pcamath.html#cb87-11"></a>b&lt;-<span class="kw">as.matrix</span>(<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="dt">b=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span>
+<span id="cb87-12"><a href="pcamath.html#cb87-12"></a></span>
+<span id="cb87-13"><a href="pcamath.html#cb87-13"></a>mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb87-14"><a href="pcamath.html#cb87-14"></a>mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb87-15"><a href="pcamath.html#cb87-15"></a></span>
+<span id="cb87-16"><a href="pcamath.html#cb87-16"></a>mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb87-17"><a href="pcamath.html#cb87-17"></a>mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb87-18"><a href="pcamath.html#cb87-18"></a></span>
+<span id="cb87-19"><a href="pcamath.html#cb87-19"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb87-20"><a href="pcamath.html#cb87-20"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb87-21"><a href="pcamath.html#cb87-21"></a></span>
+<span id="cb87-22"><a href="pcamath.html#cb87-22"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb87-23"><a href="pcamath.html#cb87-23"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix5"></span>
+<img src="PCA_files/figure-html/matrix5-1.png" alt="Multiply a matrix to space" width="672" />
+<p class="caption">
+Figure 6.26: Multiply a matrix to space
+</p>
+</div>
+<p>In figure <a href="pcamath.html#fig:matrix5">6.26</a>, we multiply <span class="math inline">\(\begin{bmatrix}1&amp;1\\0&amp;2\end{bmatrix}\)</span> to our space. Please remember, we agreed before that our space was defined by <span class="math inline">\(\vec{x}=[1,0]\)</span> and <span class="math inline">\(\vec{y}=[0,1]\)</span> and for clarification, we plotted all the parallel lines (grid) to <span class="math inline">\(\vec{x}=[1,0]\)</span> and <span class="math inline">\(\vec{y}=[0,1]\)</span>. Isn’t this awesome?! We can transform the space itself. We are in a transformed world! How do we find the new address (location) of the previous point (the purple one) in this new world? Well, the only thing we need, is our guides. The new location of the basis vectors. Once we get them, we can use them to find the new address. Let’s find them:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="pcamath.html#cb88-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb88-2"><a href="pcamath.html#cb88-2"></a></span>
+<span id="cb88-3"><a href="pcamath.html#cb88-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb88-4"><a href="pcamath.html#cb88-4"></a></span>
+<span id="cb88-5"><a href="pcamath.html#cb88-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb88-6"><a href="pcamath.html#cb88-6"></a></span>
+<span id="cb88-7"><a href="pcamath.html#cb88-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb88-8"><a href="pcamath.html#cb88-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb88-9"><a href="pcamath.html#cb88-9"></a></span>
+<span id="cb88-10"><a href="pcamath.html#cb88-10"></a></span>
+<span id="cb88-11"><a href="pcamath.html#cb88-11"></a>b&lt;-<span class="kw">as.matrix</span>(<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="dt">b=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span>
+<span id="cb88-12"><a href="pcamath.html#cb88-12"></a></span>
+<span id="cb88-13"><a href="pcamath.html#cb88-13"></a>mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb88-14"><a href="pcamath.html#cb88-14"></a>mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb88-15"><a href="pcamath.html#cb88-15"></a></span>
+<span id="cb88-16"><a href="pcamath.html#cb88-16"></a>mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb88-17"><a href="pcamath.html#cb88-17"></a>mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb88-18"><a href="pcamath.html#cb88-18"></a></span>
+<span id="cb88-19"><a href="pcamath.html#cb88-19"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb88-20"><a href="pcamath.html#cb88-20"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb88-21"><a href="pcamath.html#cb88-21"></a></span>
+<span id="cb88-22"><a href="pcamath.html#cb88-22"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb88-23"><a href="pcamath.html#cb88-23"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb88-24"><a href="pcamath.html#cb88-24"></a></span>
+<span id="cb88-25"><a href="pcamath.html#cb88-25"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>,)</span>
+<span id="cb88-26"><a href="pcamath.html#cb88-26"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix6"></span>
+<img src="PCA_files/figure-html/matrix6-1.png" alt="Multiply a matrix to space, including the basis vectors" width="672" />
+<p class="caption">
+Figure 6.27: Multiply a matrix to space, including the basis vectors
+</p>
+</div>
+<p>Now we have them. Great. In this new world, <span class="math inline">\(\vec{x}=[1,0]\)</span> so unchanged but <span class="math inline">\(\vec{y}=[1,2]\)</span>. Now we use the same address as before. We said that we multiple <span class="math inline">\(\vec{x}\)</span> to 4, so it becomes, <span class="math inline">\(\vec{x}=[4,0]\)</span> and we multiply <span class="math inline">\(\vec{y}\)</span> to 3 so it becomes <span class="math inline">\(\vec{y}=[3,6]\)</span>. Now we add them <span class="math inline">\(\vec{x}+\vec{y}=[7,6]\)</span>. This is the address of the same point in the new world!</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="pcamath.html#cb89-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb89-2"><a href="pcamath.html#cb89-2"></a></span>
+<span id="cb89-3"><a href="pcamath.html#cb89-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb89-4"><a href="pcamath.html#cb89-4"></a></span>
+<span id="cb89-5"><a href="pcamath.html#cb89-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb89-6"><a href="pcamath.html#cb89-6"></a></span>
+<span id="cb89-7"><a href="pcamath.html#cb89-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb89-8"><a href="pcamath.html#cb89-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb89-9"><a href="pcamath.html#cb89-9"></a></span>
+<span id="cb89-10"><a href="pcamath.html#cb89-10"></a></span>
+<span id="cb89-11"><a href="pcamath.html#cb89-11"></a>b&lt;-<span class="kw">as.matrix</span>(<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>),<span class="dt">b=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)))</span>
+<span id="cb89-12"><a href="pcamath.html#cb89-12"></a></span>
+<span id="cb89-13"><a href="pcamath.html#cb89-13"></a>mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb89-14"><a href="pcamath.html#cb89-14"></a>mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb89-15"><a href="pcamath.html#cb89-15"></a></span>
+<span id="cb89-16"><a href="pcamath.html#cb89-16"></a>mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb89-17"><a href="pcamath.html#cb89-17"></a>mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb89-18"><a href="pcamath.html#cb89-18"></a></span>
+<span id="cb89-19"><a href="pcamath.html#cb89-19"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb89-20"><a href="pcamath.html#cb89-20"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb89-21"><a href="pcamath.html#cb89-21"></a></span>
+<span id="cb89-22"><a href="pcamath.html#cb89-22"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb89-23"><a href="pcamath.html#cb89-23"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb89-24"><a href="pcamath.html#cb89-24"></a></span>
+<span id="cb89-25"><a href="pcamath.html#cb89-25"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>,)</span>
+<span id="cb89-26"><a href="pcamath.html#cb89-26"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb89-27"><a href="pcamath.html#cb89-27"></a></span>
+<span id="cb89-28"><a href="pcamath.html#cb89-28"></a><span class="kw">points</span>((b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">pch=</span><span class="dv">7</span>)</span>
+<span id="cb89-29"><a href="pcamath.html#cb89-29"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix7"></span>
+<img src="PCA_files/figure-html/matrix7-1.png" alt="Location of the target point" width="672" />
+<p class="caption">
+Figure 6.28: Location of the target point
+</p>
+</div>
+<p>So to put it simple, we just changed our coordinate system. The way the we use to move around space has changed. The only way to find the location of the previous point, is to know what transformation has been done to the space and what happened to our basis.</p>
+<p>Let’s have a look at another transformation.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="pcamath.html#cb90-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb90-2"><a href="pcamath.html#cb90-2"></a></span>
+<span id="cb90-3"><a href="pcamath.html#cb90-3"></a>mydata&lt;-<span class="kw">cbind</span>(<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>))</span>
+<span id="cb90-4"><a href="pcamath.html#cb90-4"></a></span>
+<span id="cb90-5"><a href="pcamath.html#cb90-5"></a>mydata2&lt;-<span class="kw">cbind</span>(<span class="kw">rep</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>,<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">11</span>),<span class="op">-</span><span class="dv">5</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb90-6"><a href="pcamath.html#cb90-6"></a></span>
+<span id="cb90-7"><a href="pcamath.html#cb90-7"></a><span class="kw">plot</span>(<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">1</span>],mydata[,<span class="dv">3</span>])),<span class="kw">range</span>(<span class="kw">rbind</span>(mydata[,<span class="dv">2</span>],mydata[,<span class="dv">4</span>])),</span>
+<span id="cb90-8"><a href="pcamath.html#cb90-8"></a>     <span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">8</span>,<span class="dv">8</span>),<span class="dt">axes =</span> F,<span class="dt">bg=</span><span class="st">&quot;black&quot;</span>)</span>
+<span id="cb90-9"><a href="pcamath.html#cb90-9"></a></span>
+<span id="cb90-10"><a href="pcamath.html#cb90-10"></a></span>
+<span id="cb90-11"><a href="pcamath.html#cb90-11"></a>tet&lt;-<span class="dv">2</span></span>
+<span id="cb90-12"><a href="pcamath.html#cb90-12"></a>b&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="kw">cos</span>(tet),<span class="kw">sin</span>(tet),<span class="op">-</span><span class="kw">sin</span>(tet),<span class="kw">cos</span>(tet)),<span class="dt">nrow =</span> <span class="dv">2</span>,<span class="dt">byrow =</span> T)</span>
+<span id="cb90-13"><a href="pcamath.html#cb90-13"></a></span>
+<span id="cb90-14"><a href="pcamath.html#cb90-14"></a>mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb90-15"><a href="pcamath.html#cb90-15"></a>mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb90-16"><a href="pcamath.html#cb90-16"></a></span>
+<span id="cb90-17"><a href="pcamath.html#cb90-17"></a>mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb90-18"><a href="pcamath.html#cb90-18"></a>mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]&lt;-<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(mydata2[,<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]))</span>
+<span id="cb90-19"><a href="pcamath.html#cb90-19"></a></span>
+<span id="cb90-20"><a href="pcamath.html#cb90-20"></a>nl&lt;-<span class="kw">apply</span>(mydata,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb90-21"><a href="pcamath.html#cb90-21"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb90-22"><a href="pcamath.html#cb90-22"></a></span>
+<span id="cb90-23"><a href="pcamath.html#cb90-23"></a>nl&lt;-<span class="kw">apply</span>(mydata2,<span class="dt">MARGIN =</span> <span class="dv">1</span>,<span class="cf">function</span>(x){</span>
+<span id="cb90-24"><a href="pcamath.html#cb90-24"></a>  <span class="kw">segments</span>(x[<span class="dv">1</span>],x[<span class="dv">2</span>],x[<span class="dv">3</span>],x[<span class="dv">4</span>])})</span>
+<span id="cb90-25"><a href="pcamath.html#cb90-25"></a></span>
+<span id="cb90-26"><a href="pcamath.html#cb90-26"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>,)</span>
+<span id="cb90-27"><a href="pcamath.html#cb90-27"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb90-28"><a href="pcamath.html#cb90-28"></a></span>
+<span id="cb90-29"><a href="pcamath.html#cb90-29"></a><span class="kw">points</span>((b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">pch=</span><span class="dv">7</span>)</span>
+<span id="cb90-30"><a href="pcamath.html#cb90-30"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">1</span>],(b<span class="op">%*%</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>))[<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix8"></span>
+<img src="PCA_files/figure-html/matrix8-1.png" alt="Location of the target point in rotation" width="672" />
+<p class="caption">
+Figure 6.29: Location of the target point in rotation
+</p>
+</div>
+<p>Exactly! This transformation has rotated our space. It’s really cool. The next time you use a software to rotate your picture, you know there is math behind it!!
+So, We can change our empty base space to “any space” and still find the location any point in that space.</p>
+
+<div class="definition">
+<p><span id="def:matrixm" class="definition"><strong>Definition 6.9  (Matrix multiplication)  </strong></span>
+Matrix multiplication is used to trasform the space into another shape. This multiplication is define between two matrices and will produce another matrix as the result. In order to be able to multiple two matrices, the number of columns of the first matrix (left hand side) <strong>MUST</strong> match the number of rows the second matrix. If the dimensions of the first matrix is <span class="math inline">\(l \times m\)</span> and the dimensions of the second matrix is <span class="math inline">\(m \times n\)</span>, the result of the multiplication will be a matrix with dimensions of <span class="math inline">\(l \times n\)</span>.</p>
+<p>To multiply two matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, giving <span class="math inline">\(C\)</span>, we take the first <strong>row</strong> of <span class="math inline">\(A\)</span> and the first <strong>column</strong> of <span class="math inline">\(B\)</span>, multiple the corresponding elements and sum the results. This result will be the first element in <span class="math inline">\(C\)</span> with location <span class="math inline">\([1,1]\)</span>. We then proceed with the second column of <span class="math inline">\(B\)</span> matrix and calculate its multiplication with the first row of <span class="math inline">\(A\)</span>, sum the results in <span class="math inline">\(C\)</span> at the first row and second column [1,2]. We repeat this until all columns of the second matrix have covered. We then move to the second row of <span class="math inline">\(A\)</span>, we repeat this process but put the results in the second row of <span class="math inline">\(C\)</span>. We keep doing this until we multiply all rows of <span class="math inline">\(A\)</span> by all columns of <span class="math inline">\(B\)</span>.</p>
+<p>Example:</p>
+<span class="math display">\[\begin{bmatrix}
+1 &amp; 2 \\
+4 &amp; 5 
+\end{bmatrix} \cdot
+\begin{bmatrix}
+7 &amp; 8 &amp; 9\\
+10 &amp; 11 &amp; 12
+\end{bmatrix}\]</span>
+=
+<span class="math display">\[\begin{bmatrix}
+1 \times 7 +  2 \times 10&amp;
+1 \times 8 +  2 \times 11 &amp; 
+1 \times 9 +  2 \times 12\\
+4 \times 7 +  5 \times 10&amp;
+4 \times 8 +  5 \times 11 &amp; 
+4 \times 9 +  5 \times 12
+\end{bmatrix}\]</span>
+=
+<span class="math display">\[\begin{bmatrix}
+27 &amp; 30 &amp; 33\\
+78 &amp; 87 &amp; 96
+\end{bmatrix}\]</span>
+</div>
+
+<p>Don’t worry if it’s too much of work. You can calculate this with pretty much any statistical software. There are even websites that can help you understand and do this multiplication. But for now, let’s discuss what this matrix multiplication mean, in the context of our gene expression dataset.</p>
+<p>Considering what we have been saying, do you think our gene expression dataset changes the space?</p>
+<p>From the linear algebra perspective, yes it does! It might not be that intuitive in the beginning, but if we assume a stem cell as our basis, we then change this stem cell in a way that it represent the exact expression pattern found in a sample. We do pretty much the same thing with our spaces/vectors etc. We start with some basis vectors, a raw “meaningless” space (well, maybe biologically), we then change these to show our gene expression space.</p>
+<p>So to summarize, we have a raw space (n dimensions) that is defined by a set of unit vectors (e.g. for two dimensions: <span class="math inline">\(\vec{x}=[1,0]\)</span> and <span class="math inline">\(\vec{y}={0,1}\)</span>), we then transform this space using our dataset so we are now in our gene expression space.</p>
+<p>We do this simply and naively by</p>
+<pre><code>data%*%diag(ncol(data))</code></pre>
+<p>This funny operation <em>(%</em>%)* will do matrix multiplication. Read verbally, take a raw space with the dimensions of my data <em>ncol(data)</em> and transform it into my gene expression space. What is the results of this operation if you do it in R? Well, it’s going to be exact gene expression data that you started with. So we actually don’t need to do that, mathematically, we almost always assume that our starting basis vectors are <span class="math inline">\(\vec{x}=[1,0]\)</span> and <span class="math inline">\(\vec{y}={0,1}\)</span> etc. So we are in the gene expression space already from the start. Any location/observation/vectors can be found using the combination of genes.</p>
+<p>There are a few important things to know before moving forward:</p>
+<ul>
+<li>Each matrix has two spaces: column space and row space</li>
+</ul>
+<p>I guess by now, you realized that matrices are very powerful, we can do a lot with them. The question is that what can we say about the transformation a matrix does to our space?
+If we have thousands of variables (thousands of dimensions),defining our space transformation, it’s difficult to every time plot and see what it does. We need to be able to at least say something about the transformation without plotting so many arrows and other stuff!</p>
+<p>Almost all the operations that we will be talking about in the rest of the chapter is around square matrices. Let’s quickly define them and go forward with the rest of the chapter.</p>
+<div id="square-matrices" class="section level4">
+<h4><span class="header-section-number">6.4.1.1</span> Square matrices</h4>
+<p>A Square matrix is a matrix with the same number of rows and columns. Square matrices are used in linear algebra quite a lot and are easier to work with. There are several reasons to why we want to use square matrices but to summarize all:
+When we multiply a matrix with <span class="math inline">\(n\)</span> number of rows and <span class="math inline">\(m\)</span> number columns by by another matrix with <span class="math inline">\(m\)</span> rows and <span class="math inline">\(l\)</span> columns, we are mapping the space from <span class="math inline">\(m\)</span> to <span class="math inline">\(n\)</span> which is essentially another space which might change the definitions of certain things. In many cases, we would like to stay in the same dimensions (not going to a totally different space). In these cases, square matrices are used to map from <span class="math inline">\(n\)</span> to <span class="math inline">\(n\)</span>, meaning that it maps from a space to itself. Please note that, we are still doing the transformation to the vectors and everything else in that space, but we are in the same dimensions. Let’s look at an example.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="pcamath.html#cb92-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb92-2"><a href="pcamath.html#cb92-2"></a></span>
+<span id="cb92-3"><a href="pcamath.html#cb92-3"></a></span>
+<span id="cb92-4"><a href="pcamath.html#cb92-4"></a>cat_data&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/cat.tsv&quot;</span>)</span>
+<span id="cb92-5"><a href="pcamath.html#cb92-5"></a>scatterplot3d<span class="op">::</span><span class="kw">scatterplot3d</span>(cat_data,<span class="dt">angle =</span> <span class="dv">150</span>,<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">zlab =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb92-6"><a href="pcamath.html#cb92-6"></a><span class="kw">title</span>(<span class="st">&quot;Original data&quot;</span>)</span>
+<span id="cb92-7"><a href="pcamath.html#cb92-7"></a></span>
+<span id="cb92-8"><a href="pcamath.html#cb92-8"></a></span>
+<span id="cb92-9"><a href="pcamath.html#cb92-9"></a>tet&lt;-<span class="fl">3.2</span></span>
+<span id="cb92-10"><a href="pcamath.html#cb92-10"></a>b&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="kw">cos</span>(tet),<span class="kw">sin</span>(tet),<span class="dv">0</span>,<span class="op">-</span><span class="kw">sin</span>(tet),<span class="kw">cos</span>(tet)),<span class="dt">nrow =</span> <span class="dv">3</span>,<span class="dt">byrow =</span> T)</span>
+<span id="cb92-11"><a href="pcamath.html#cb92-11"></a>scatterplot3d<span class="op">::</span><span class="kw">scatterplot3d</span>(<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">zlab =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb92-12"><a href="pcamath.html#cb92-12"></a><span class="kw">title</span>(<span class="st">&quot;Square matrix (rotation)&quot;</span>)</span>
+<span id="cb92-13"><a href="pcamath.html#cb92-13"></a></span>
+<span id="cb92-14"><a href="pcamath.html#cb92-14"></a><span class="kw">plot</span>(<span class="kw">t</span>(b[<span class="op">-</span><span class="dv">1</span>,]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb92-15"><a href="pcamath.html#cb92-15"></a><span class="kw">title</span>(<span class="st">&quot;2d matrix transformation&quot;</span>)</span>
+<span id="cb92-16"><a href="pcamath.html#cb92-16"></a></span>
+<span id="cb92-17"><a href="pcamath.html#cb92-17"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">t</span>(b[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(cat_data)),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb92-18"><a href="pcamath.html#cb92-18"></a><span class="kw">title</span>(<span class="st">&quot;1d matrix transformation&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:matrix9"></span>
+<img src="PCA_files/figure-html/matrix9-1.png" alt="Cat example" width="672" />
+<p class="caption">
+Figure 6.30: Cat example
+</p>
+</div>
+<p>You see in Figure <a href="pcamath.html#fig:matrix9">6.30</a> that at some point the meaning of things starts vanishing. We have volume in both of top panel but no volume in the bottom ones. Obviously, the 1d transformation totally distort our view. Can we say the cat’s tail is located in the middle of the body or the legs are almost parallel? Probably not in the 2d and 1d transformation. In any transformation, it’s nice to have the same geometric meaning of the concepts before and after performing such transformation.</p>
+<p>In addition, working on square matrices gives us some extra tools that are handy for describing the space and the transformation itself.</p>
+<div id="inverse-of-a-matrix" class="section level5">
+<h5><span class="header-section-number">6.4.1.1.1</span> Inverse of a matrix</h5>
+</div>
+</div>
+<div id="rank-of-a-matrix" class="section level4">
+<h4><span class="header-section-number">6.4.1.2</span> Rank of a matrix</h4>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exer.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PCA.pdf", "PCA.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

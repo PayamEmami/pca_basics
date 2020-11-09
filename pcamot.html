@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 PCA (motivation) | Principal Component Analysis (PCA)</title>
+  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 PCA (motivation) | Principal Component Analysis (PCA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 PCA (motivation) | Principal Component Analysis (PCA)" />
+  
+  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  
+
+<meta name="author" content="Payam Emami" />
+
+
+<meta name="date" content="2020-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="pcaapplications.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
+<li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
+<li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
+<li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="exer.html"><a href="exer.html#exercise-1"><i class="fa fa-check"></i><b>5.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="5.3" data-path="exer.html"><a href="exer.html#exercise-2"><i class="fa fa-check"></i><b>5.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="5.4" data-path="exer.html"><a href="exer.html#exercise-3"><i class="fa fa-check"></i><b>5.4</b> Exercise 3</a></li>
+<li class="chapter" data-level="5.5" data-path="exer.html"><a href="exer.html#exercise-4"><i class="fa fa-check"></i><b>5.5</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pcamath.html"><a href="pcamath.html"><i class="fa fa-check"></i><b>6</b> PCA (mathematical details)</a><ul>
+<li class="chapter" data-level="6.1" data-path="pcamath.html"><a href="pcamath.html#summary-of-the-previous-chapter-2"><i class="fa fa-check"></i><b>6.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="6.2" data-path="pcamath.html"><a href="pcamath.html#foundations"><i class="fa fa-check"></i><b>6.2</b> Foundations</a></li>
+<li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
+<li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Principal Component Analysis (PCA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pcamot" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> PCA (motivation)</h1>
+<div id="summary-of-the-previous-chapter" class="section level2">
+<h2><span class="header-section-number">3.1</span> Summary of the previous chapter</h2>
+<p>In the <a href="intro.html#intro">previous chapter</a>, we talked about two measures for summarizing our data, variation and covariation. Variation was used to measure the spread of a single variable whereas the covariation was between two variables measuring how much they agree with each other, thus showing the redundancy. We also emphasized that it is nice to have variables showing complimentary information rather than overlapping one! We also decided that, we want the variation of signal to be higher than the variation of noise. That is, probably the variables with higher variation are more interesting to us. We also show that the combination of two variables can give us more information about the data pattern, meaning that each of the variable contribute to the overall pattern. So to summarize:</p>
+<ul>
+<li>We agree that, we are interested in variation</li>
+<li>We hope that the variation of signal is higher noise</li>
+<li>By combining more variables together, we can probably get more information</li>
+<li>There are redundancies between the different variables but we are mostly interested in the complimentary information they provide and to a lesser extend to the redundant information</li>
+<li>We cannot manually handle a huge number of variable at the same time</li>
+</ul>
+</div>
+<div id="variation-and-covariation" class="section level2">
+<h2><span class="header-section-number">3.2</span> Variation and covariation</h2>
+<p>This is a small point but so important that we put it under a separate heading. <strong>Please note that variation and covariation are unbiased estimates.</strong> This means that, they do not take into account the groupings/phenotype/meta data/other information about observations (samples). And we are going to agree that if <strong>variable A</strong> (a gene) has a variation of 2 and another <strong>variable B</strong> has a variation 1. We want to remain unbiased and give higher value to variable A compared to variable B EVEN if B shows us more “true” information about our experiment. So the higher the variation, the better, no matter what it shows. This might sound counterintuitive, but we will show that, remaining unbiased, will show us the data pattern that otherwise could not have been found.</p>
+<ul>
+<li><strong>So as of now, we are not going to show you labels of samples until when we want to interpret the data pattern</strong></li>
+<li><strong>Remember: the higher the variation, the better</strong></li>
+<li><strong>Variation of the data is how the data is spread, the bigger the spread the larger the variation</strong></li>
+</ul>
+</div>
+<div id="pcavar" class="section level2">
+<h2><span class="header-section-number">3.3</span> Finding the largest variation</h2>
+<p>Let’s start working on the same dataset. In the <a href="intro.html#intro">previous chapter</a>, we worked on maximum of three variables at the time (three axis: variable 1, 2, and 3). Twos variables showed high covariance. Let’s plot them again. This time, without any colors!</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="pcamot.html#cb22-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb22-2"><a href="pcamot.html#cb22-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb22-3"><a href="pcamot.html#cb22-3"></a><span class="co"># define variables</span></span>
+<span id="cb22-4"><a href="pcamot.html#cb22-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb22-5"><a href="pcamot.html#cb22-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb22-6"><a href="pcamot.html#cb22-6"></a><span class="co"># plot the data</span></span>
+<span id="cb22-7"><a href="pcamot.html#cb22-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-cov4"></span>
+<img src="PCA_files/figure-html/fig-simple-cov4-1.png" alt="Here, we select two variables and show how the data is spread according to the variables." width="672" />
+<p class="caption">
+Figure 3.1: Here, we select two variables and show how the data is spread according to the variables.
+</p>
+</div>
+<p>In <a href="#fig-simple-cov4">this figure</a>, we have two axis, x: variable 1 and y: variable 3. These two variables have high covariance (they change together). Each axis is obviously a line in which each of our observations has a location (or projection). For example for axis x:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="pcamot.html#cb23-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb23-2"><a href="pcamot.html#cb23-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb23-3"><a href="pcamot.html#cb23-3"></a><span class="co"># define variables</span></span>
+<span id="cb23-4"><a href="pcamot.html#cb23-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb23-5"><a href="pcamot.html#cb23-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb23-6"><a href="pcamot.html#cb23-6"></a><span class="co"># plot the data</span></span>
+<span id="cb23-7"><a href="pcamot.html#cb23-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">axes =</span> F)</span>
+<span id="cb23-8"><a href="pcamot.html#cb23-8"></a><span class="co"># draw the box</span></span>
+<span id="cb23-9"><a href="pcamot.html#cb23-9"></a><span class="kw">box</span>(<span class="dt">col =</span> <span class="st">&#39;black&#39;</span>)</span>
+<span id="cb23-10"><a href="pcamot.html#cb23-10"></a><span class="co"># draw x axis</span></span>
+<span id="cb23-11"><a href="pcamot.html#cb23-11"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>)</span>
+<span id="cb23-12"><a href="pcamot.html#cb23-12"></a><span class="co"># draw y axis</span></span>
+<span id="cb23-13"><a href="pcamot.html#cb23-13"></a><span class="kw">axis</span>(<span class="dv">2</span>)</span>
+<span id="cb23-14"><a href="pcamot.html#cb23-14"></a></span>
+<span id="cb23-15"><a href="pcamot.html#cb23-15"></a><span class="co"># plot the arrows</span></span>
+<span id="cb23-16"><a href="pcamot.html#cb23-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb23-17"><a href="pcamot.html#cb23-17"></a>{</span>
+<span id="cb23-18"><a href="pcamot.html#cb23-18"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span><span class="kw">as.numeric</span>( data[i,var1]),<span class="dt">x1 =</span>  data[i,var1],</span>
+<span id="cb23-19"><a href="pcamot.html#cb23-19"></a>           <span class="dt">y0 =</span> data[i,var3],<span class="dt">y1 =</span><span class="fl">2.85</span>,<span class="dt">length=</span><span class="fl">0.05</span>,<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb23-20"><a href="pcamot.html#cb23-20"></a>}</span>
+<span id="cb23-21"><a href="pcamot.html#cb23-21"></a></span>
+<span id="cb23-22"><a href="pcamot.html#cb23-22"></a><span class="co"># plot the data</span></span>
+<span id="cb23-23"><a href="pcamot.html#cb23-23"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1)],<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(data)),<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">axes =</span> F)</span>
+<span id="cb23-24"><a href="pcamot.html#cb23-24"></a><span class="co"># plot the axis</span></span>
+<span id="cb23-25"><a href="pcamot.html#cb23-25"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(data[,<span class="kw">c</span>(var1)]),<span class="kw">ceiling</span>(data[,<span class="kw">c</span>(var1)]))) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-location1"></span>
+<img src="PCA_files/figure-html/fig-simple-location1-1.png" alt="Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the fist axis" width="960" />
+<p class="caption">
+Figure 3.2: Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the fist axis
+</p>
+</div>
+<p>We can see in Figure <a href="pcamot.html#fig:fig-simple-location1">3.2</a> (left panel), all of our observations have been mapped (projected) to the axis x (variable 1). The result is shown on the right plot. Obviously, it gives us the original values of observations in variable 1 with variation of 3.2822776. We could do the same thing for variable 3.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="pcamot.html#cb24-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb24-2"><a href="pcamot.html#cb24-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb24-3"><a href="pcamot.html#cb24-3"></a><span class="co"># define variables</span></span>
+<span id="cb24-4"><a href="pcamot.html#cb24-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb24-5"><a href="pcamot.html#cb24-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb24-6"><a href="pcamot.html#cb24-6"></a><span class="co"># plot the data</span></span>
+<span id="cb24-7"><a href="pcamot.html#cb24-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">axes =</span> F)</span>
+<span id="cb24-8"><a href="pcamot.html#cb24-8"></a><span class="co"># draw the box</span></span>
+<span id="cb24-9"><a href="pcamot.html#cb24-9"></a><span class="kw">box</span>(<span class="dt">col =</span> <span class="st">&#39;black&#39;</span>)</span>
+<span id="cb24-10"><a href="pcamot.html#cb24-10"></a><span class="co"># draw y axis</span></span>
+<span id="cb24-11"><a href="pcamot.html#cb24-11"></a><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>)</span>
+<span id="cb24-12"><a href="pcamot.html#cb24-12"></a><span class="co"># draw x axis</span></span>
+<span id="cb24-13"><a href="pcamot.html#cb24-13"></a><span class="kw">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb24-14"><a href="pcamot.html#cb24-14"></a></span>
+<span id="cb24-15"><a href="pcamot.html#cb24-15"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb24-16"><a href="pcamot.html#cb24-16"></a>{</span>
+<span id="cb24-17"><a href="pcamot.html#cb24-17"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span><span class="kw">as.numeric</span>( data[i,var1]),<span class="dt">x1 =</span>  <span class="fl">3.5</span>,</span>
+<span id="cb24-18"><a href="pcamot.html#cb24-18"></a>           <span class="dt">y0 =</span> data[i,var3],<span class="dt">y1 =</span>data[i,var3],<span class="dt">length=</span><span class="fl">0.05</span>,<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb24-19"><a href="pcamot.html#cb24-19"></a>}</span>
+<span id="cb24-20"><a href="pcamot.html#cb24-20"></a></span>
+<span id="cb24-21"><a href="pcamot.html#cb24-21"></a><span class="co"># plot the data</span></span>
+<span id="cb24-22"><a href="pcamot.html#cb24-22"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(data)),<span class="dt">y=</span>data[,<span class="kw">c</span>(var1)],<span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">axes =</span> F)</span>
+<span id="cb24-23"><a href="pcamot.html#cb24-23"></a><span class="co">#plot the axis</span></span>
+<span id="cb24-24"><a href="pcamot.html#cb24-24"></a><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(data[,<span class="kw">c</span>(var3)]),<span class="kw">ceiling</span>(data[,<span class="kw">c</span>(var3)]))) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-location2"></span>
+<img src="PCA_files/figure-html/fig-simple-location2-1.png" alt="Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the second axis" width="960" />
+<p class="caption">
+Figure 3.3: Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the second axis
+</p>
+</div>
+<p>This axis in Figure <a href="pcamot.html#fig:fig-simple-location2">3.3</a> gave us variation of 6.3821145. The covariance of these two axis is 3.4341536.</p>
+<p><strong>So to summarize, we draw two lines (axis) and mapped (projected the data points to these lines and measured the variance and covariance of the mapped data.</strong></p>
+<p>Well, we are not limited to these lines! We can draw other lines. The idea is to come up with a line drawn through the data in a way that the projected data (orthogonal projection) has maximum variation. Let’s try to see what it means in action by randomly draw a line</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="pcamot.html#cb25-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb25-2"><a href="pcamot.html#cb25-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb25-3"><a href="pcamot.html#cb25-3"></a><span class="co"># define variables</span></span>
+<span id="cb25-4"><a href="pcamot.html#cb25-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb25-5"><a href="pcamot.html#cb25-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb25-6"><a href="pcamot.html#cb25-6"></a><span class="co"># plot the data</span></span>
+<span id="cb25-7"><a href="pcamot.html#cb25-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>),<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>))</span>
+<span id="cb25-8"><a href="pcamot.html#cb25-8"></a><span class="co"># draw a line</span></span>
+<span id="cb25-9"><a href="pcamot.html#cb25-9"></a><span class="co"># intercept</span></span>
+<span id="cb25-10"><a href="pcamot.html#cb25-10"></a>b&lt;-<span class="fl">2.5</span></span>
+<span id="cb25-11"><a href="pcamot.html#cb25-11"></a><span class="co"># slope</span></span>
+<span id="cb25-12"><a href="pcamot.html#cb25-12"></a>m&lt;-<span class="fl">0.5</span></span>
+<span id="cb25-13"><a href="pcamot.html#cb25-13"></a><span class="co"># draw the line</span></span>
+<span id="cb25-14"><a href="pcamot.html#cb25-14"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb25-15"><a href="pcamot.html#cb25-15"></a></span>
+<span id="cb25-16"><a href="pcamot.html#cb25-16"></a><span class="co">#</span></span>
+<span id="cb25-17"><a href="pcamot.html#cb25-17"></a>projected_variables&lt;-<span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow =</span> <span class="kw">nrow</span>(data),<span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb25-18"><a href="pcamot.html#cb25-18"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb25-19"><a href="pcamot.html#cb25-19"></a>{</span>
+<span id="cb25-20"><a href="pcamot.html#cb25-20"></a></span>
+<span id="cb25-21"><a href="pcamot.html#cb25-21"></a><span class="co"># calculate the projection</span></span>
+<span id="cb25-22"><a href="pcamot.html#cb25-22"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, m <span class="op">+</span><span class="st"> </span>b)</span>
+<span id="cb25-23"><a href="pcamot.html#cb25-23"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, b)</span>
+<span id="cb25-24"><a href="pcamot.html#cb25-24"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(l1, <span class="dv">0</span>)</span>
+<span id="cb25-25"><a href="pcamot.html#cb25-25"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(l2, <span class="dv">0</span>)</span>
+<span id="cb25-26"><a href="pcamot.html#cb25-26"></a>u &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">c</span>(data[i,<span class="kw">c</span>(var1,var3)],<span class="dv">0</span>) <span class="op">-</span><span class="st"> </span>l1)<span class="op">*</span>(l2 <span class="op">-</span><span class="st"> </span>l1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((l2 <span class="op">-</span><span class="st"> </span>l1)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb25-27"><a href="pcamot.html#cb25-27"></a>r&lt;-l1 <span class="op">+</span><span class="st"> </span>u <span class="op">*</span><span class="st"> </span>(l2 <span class="op">-</span><span class="st"> </span>l1)</span>
+<span id="cb25-28"><a href="pcamot.html#cb25-28"></a><span class="co"># end projection</span></span>
+<span id="cb25-29"><a href="pcamot.html#cb25-29"></a></span>
+<span id="cb25-30"><a href="pcamot.html#cb25-30"></a><span class="co"># draw arrow</span></span>
+<span id="cb25-31"><a href="pcamot.html#cb25-31"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span> data[i,var1],<span class="dt">x1 =</span> r[<span class="dv">1</span>],</span>
+<span id="cb25-32"><a href="pcamot.html#cb25-32"></a>           <span class="dt">y0 =</span> data[i,var3],<span class="dt">y1 =</span>r[<span class="dv">2</span>],<span class="dt">length=</span><span class="fl">0.05</span>,<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb25-33"><a href="pcamot.html#cb25-33"></a></span>
+<span id="cb25-34"><a href="pcamot.html#cb25-34"></a></span>
+<span id="cb25-35"><a href="pcamot.html#cb25-35"></a><span class="co"># save the projections</span></span>
+<span id="cb25-36"><a href="pcamot.html#cb25-36"></a>projected_variables[i,<span class="dv">1</span>]&lt;-r[<span class="dv">1</span>]</span>
+<span id="cb25-37"><a href="pcamot.html#cb25-37"></a>projected_variables[i,<span class="dv">2</span>]&lt;-r[<span class="dv">2</span>]</span>
+<span id="cb25-38"><a href="pcamot.html#cb25-38"></a></span>
+<span id="cb25-39"><a href="pcamot.html#cb25-39"></a>}</span>
+<span id="cb25-40"><a href="pcamot.html#cb25-40"></a></span>
+<span id="cb25-41"><a href="pcamot.html#cb25-41"></a></span>
+<span id="cb25-42"><a href="pcamot.html#cb25-42"></a></span>
+<span id="cb25-43"><a href="pcamot.html#cb25-43"></a><span class="kw">plot</span>(projected_variables,<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>),<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>))</span>
+<span id="cb25-44"><a href="pcamot.html#cb25-44"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line1"></span>
+<img src="PCA_files/figure-html/fig-simple-line1-1.png" alt="Here, we select two variables and show how the data is spread according to the variables. We draw a line through the data and project the data on that line and then measure the variance." width="960" />
+<p class="caption">
+Figure 3.4: Here, we select two variables and show how the data is spread according to the variables. We draw a line through the data and project the data on that line and then measure the variance.
+</p>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="pcamot.html#cb26-1"></a><span class="co">#plot(x=apply(projected_variables,1,mean),y=rep(0,nrow(data)))</span></span></code></pre></div>
+<p>So in Figure <a href="pcamot.html#fig:fig-simple-line1">3.4</a> we have drawn an arbitrary line (left panel) and put everything on that line (right panel). It might be a bit confusing. But let’s rotate that red line so it becomes horizontal exactly line x axis.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="pcamot.html#cb27-1"></a><span class="co"># set number of figures in a plot</span></span>
+<span id="cb27-2"><a href="pcamot.html#cb27-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb27-3"><a href="pcamot.html#cb27-3"></a></span>
+<span id="cb27-4"><a href="pcamot.html#cb27-4"></a></span>
+<span id="cb27-5"><a href="pcamot.html#cb27-5"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">apply</span>(projected_variables,<span class="dv">1</span>,mean),<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="st">&quot;Combined variable 1 and 3&quot;</span>)</span>
+<span id="cb27-6"><a href="pcamot.html#cb27-6"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(<span class="kw">apply</span>(projected_variables,<span class="dv">1</span>,mean)),<span class="kw">ceiling</span>(<span class="kw">apply</span>(projected_variables,<span class="dv">1</span>,mean)))) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line2"></span>
+<img src="PCA_files/figure-html/fig-simple-line2-1.png" alt="Simple rotation of the projected points on the line" width="960" />
+<p class="caption">
+Figure 3.5: Simple rotation of the projected points on the line
+</p>
+</div>
+<p>Figure <a href="pcamot.html#fig:fig-simple-line2">3.5</a> shows our new x axis. If fact, this is a new variable! It’s not quite variable 1, it’s not variable 3, but a combination of these two. What is the variation of this new variable?! The variation is: 2.9923055. Well, that is great! But the question is, we can draw as many lines as we want, what should we do? Let’s, imagine that we can try infinite possibilities. Which line would you select?</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="pcamot.html#cb28-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb28-2"><a href="pcamot.html#cb28-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb28-3"><a href="pcamot.html#cb28-3"></a><span class="co"># define variables</span></span>
+<span id="cb28-4"><a href="pcamot.html#cb28-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb28-5"><a href="pcamot.html#cb28-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb28-6"><a href="pcamot.html#cb28-6"></a><span class="co"># plot the data</span></span>
+<span id="cb28-7"><a href="pcamot.html#cb28-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>),<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>))</span>
+<span id="cb28-8"><a href="pcamot.html#cb28-8"></a><span class="co"># draw a line</span></span>
+<span id="cb28-9"><a href="pcamot.html#cb28-9"></a><span class="co"># intercept</span></span>
+<span id="cb28-10"><a href="pcamot.html#cb28-10"></a>b&lt;-<span class="fl">2.5</span></span>
+<span id="cb28-11"><a href="pcamot.html#cb28-11"></a><span class="co"># slope</span></span>
+<span id="cb28-12"><a href="pcamot.html#cb28-12"></a>m&lt;-<span class="fl">0.5</span></span>
+<span id="cb28-13"><a href="pcamot.html#cb28-13"></a></span>
+<span id="cb28-14"><a href="pcamot.html#cb28-14"></a><span class="co"># draw many lines using different slope and intercept</span></span>
+<span id="cb28-15"><a href="pcamot.html#cb28-15"></a><span class="cf">for</span>(b <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</span>
+<span id="cb28-16"><a href="pcamot.html#cb28-16"></a>{</span>
+<span id="cb28-17"><a href="pcamot.html#cb28-17"></a>  <span class="cf">for</span>(m <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.1</span>))</span>
+<span id="cb28-18"><a href="pcamot.html#cb28-18"></a>  {</span>
+<span id="cb28-19"><a href="pcamot.html#cb28-19"></a>    <span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb28-20"><a href="pcamot.html#cb28-20"></a>  }</span>
+<span id="cb28-21"><a href="pcamot.html#cb28-21"></a>}</span>
+<span id="cb28-22"><a href="pcamot.html#cb28-22"></a></span>
+<span id="cb28-23"><a href="pcamot.html#cb28-23"></a><span class="co"># intercept</span></span>
+<span id="cb28-24"><a href="pcamot.html#cb28-24"></a>b&lt;-<span class="op">-</span><span class="fl">5.172751</span></span>
+<span id="cb28-25"><a href="pcamot.html#cb28-25"></a><span class="co"># slope</span></span>
+<span id="cb28-26"><a href="pcamot.html#cb28-26"></a>m&lt;-<span class="fl">1.548455</span></span>
+<span id="cb28-27"><a href="pcamot.html#cb28-27"></a><span class="co"># draw the line</span></span>
+<span id="cb28-28"><a href="pcamot.html#cb28-28"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb28-29"><a href="pcamot.html#cb28-29"></a></span>
+<span id="cb28-30"><a href="pcamot.html#cb28-30"></a></span>
+<span id="cb28-31"><a href="pcamot.html#cb28-31"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>),<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>))</span>
+<span id="cb28-32"><a href="pcamot.html#cb28-32"></a></span>
+<span id="cb28-33"><a href="pcamot.html#cb28-33"></a><span class="co"># draw the line</span></span>
+<span id="cb28-34"><a href="pcamot.html#cb28-34"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb28-35"><a href="pcamot.html#cb28-35"></a></span>
+<span id="cb28-36"><a href="pcamot.html#cb28-36"></a></span>
+<span id="cb28-37"><a href="pcamot.html#cb28-37"></a><span class="co">#</span></span>
+<span id="cb28-38"><a href="pcamot.html#cb28-38"></a>projected_variables&lt;-<span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow =</span> <span class="kw">nrow</span>(data),<span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb28-39"><a href="pcamot.html#cb28-39"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb28-40"><a href="pcamot.html#cb28-40"></a>{</span>
+<span id="cb28-41"><a href="pcamot.html#cb28-41"></a></span>
+<span id="cb28-42"><a href="pcamot.html#cb28-42"></a><span class="co"># calculate the projection</span></span>
+<span id="cb28-43"><a href="pcamot.html#cb28-43"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, m <span class="op">+</span><span class="st"> </span>b)</span>
+<span id="cb28-44"><a href="pcamot.html#cb28-44"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, b)</span>
+<span id="cb28-45"><a href="pcamot.html#cb28-45"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(l1, <span class="dv">0</span>)</span>
+<span id="cb28-46"><a href="pcamot.html#cb28-46"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(l2, <span class="dv">0</span>)</span>
+<span id="cb28-47"><a href="pcamot.html#cb28-47"></a>u &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">c</span>(data[i,<span class="kw">c</span>(var1,var3)],<span class="dv">0</span>) <span class="op">-</span><span class="st"> </span>l1)<span class="op">*</span>(l2 <span class="op">-</span><span class="st"> </span>l1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((l2 <span class="op">-</span><span class="st"> </span>l1)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb28-48"><a href="pcamot.html#cb28-48"></a>r&lt;-l1 <span class="op">+</span><span class="st"> </span>u <span class="op">*</span><span class="st"> </span>(l2 <span class="op">-</span><span class="st"> </span>l1)</span>
+<span id="cb28-49"><a href="pcamot.html#cb28-49"></a><span class="co"># end projection</span></span>
+<span id="cb28-50"><a href="pcamot.html#cb28-50"></a></span>
+<span id="cb28-51"><a href="pcamot.html#cb28-51"></a><span class="co"># draw arrow</span></span>
+<span id="cb28-52"><a href="pcamot.html#cb28-52"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span> data[i,var1],<span class="dt">x1 =</span> r[<span class="dv">1</span>],</span>
+<span id="cb28-53"><a href="pcamot.html#cb28-53"></a>           <span class="dt">y0 =</span> data[i,var3],<span class="dt">y1 =</span>r[<span class="dv">2</span>],<span class="dt">length=</span><span class="fl">0.05</span>,<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb28-54"><a href="pcamot.html#cb28-54"></a></span>
+<span id="cb28-55"><a href="pcamot.html#cb28-55"></a></span>
+<span id="cb28-56"><a href="pcamot.html#cb28-56"></a><span class="co"># save the projections</span></span>
+<span id="cb28-57"><a href="pcamot.html#cb28-57"></a>projected_variables[i,<span class="dv">1</span>]&lt;-r[<span class="dv">1</span>]</span>
+<span id="cb28-58"><a href="pcamot.html#cb28-58"></a>projected_variables[i,<span class="dv">2</span>]&lt;-r[<span class="dv">2</span>]</span>
+<span id="cb28-59"><a href="pcamot.html#cb28-59"></a></span>
+<span id="cb28-60"><a href="pcamot.html#cb28-60"></a>}</span>
+<span id="cb28-61"><a href="pcamot.html#cb28-61"></a></span>
+<span id="cb28-62"><a href="pcamot.html#cb28-62"></a><span class="co"># save projection direction (came from svd)</span></span>
+<span id="cb28-63"><a href="pcamot.html#cb28-63"></a>projection_directions&lt;-<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5425087359</span> ,<span class="op">-</span><span class="fl">0.8400501601</span>,<span class="op">-</span><span class="fl">0.8400501601</span>,<span class="fl">0.5425087359</span>),<span class="dt">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb28-64"><a href="pcamot.html#cb28-64"></a></span>
+<span id="cb28-65"><a href="pcamot.html#cb28-65"></a> </span>
+<span id="cb28-66"><a href="pcamot.html#cb28-66"></a></span>
+<span id="cb28-67"><a href="pcamot.html#cb28-67"></a><span class="co"># decenter data</span></span>
+<span id="cb28-68"><a href="pcamot.html#cb28-68"></a>decenter_data&lt;-<span class="kw">scale</span>((<span class="kw">scale</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">scale =</span> F))<span class="op">%*%</span>projection_directions, <span class="dt">scale =</span> <span class="ot">FALSE</span>, <span class="dt">center =</span> <span class="dv">-1</span> <span class="op">*</span><span class="st"> </span><span class="kw">c</span>(<span class="fl">7.767432</span>,<span class="fl">6.854765</span>))</span>
+<span id="cb28-69"><a href="pcamot.html#cb28-69"></a></span>
+<span id="cb28-70"><a href="pcamot.html#cb28-70"></a></span>
+<span id="cb28-71"><a href="pcamot.html#cb28-71"></a><span class="co"># plot the data</span></span>
+<span id="cb28-72"><a href="pcamot.html#cb28-72"></a><span class="kw">plot</span>(<span class="dt">x=</span>decenter_data[,<span class="dv">1</span>],<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="st">&quot;Combined variable 1 and 3&quot;</span>)</span>
+<span id="cb28-73"><a href="pcamot.html#cb28-73"></a></span>
+<span id="cb28-74"><a href="pcamot.html#cb28-74"></a></span>
+<span id="cb28-75"><a href="pcamot.html#cb28-75"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(decenter_data[,<span class="dv">1</span>]),<span class="kw">ceiling</span>(decenter_data[,<span class="dv">1</span>]))) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line3"></span>
+<img src="PCA_files/figure-html/fig-simple-line3-1.png" alt="We try to fit many lines through the data but there is only one of the lines that capture most of the variance" width="960" />
+<p class="caption">
+Figure 3.6: We try to fit many lines through the data but there is only one of the lines that capture most of the variance
+</p>
+</div>
+<p>Intuitively, one would select a line that has the maximum variation. That is the blue line. Variation of this line is 8.5999087 that is the highest amount all other lines that can be drawn. By now, we have a new variable that is a combination the original two variables and has captured most of the variation. But how about the remaining variation? What should we do about the redundancy?</p>
+<p>So ideally what we want to do is to come up with another line that when we mapped the data on it, it captures the remaining variation but also <strong>avoid redundancy</strong>. Last point means that the covariance between the observations that we have already mapped to the first line (the blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>) and the observations that we mapped on this new line should be <strong>zero</strong> or <strong>very close to zero</strong>.</p>
+<p>It turns out that the only way of finding such a line is to find the line that is orthogonal to the first line (the blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>). Orthogonal means that the angle of this new line to the blue on should be exactly 90 degree:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="pcamot.html#cb29-1"></a><span class="co"># set number of plots to 1</span></span>
+<span id="cb29-2"><a href="pcamot.html#cb29-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb29-3"><a href="pcamot.html#cb29-3"></a><span class="co"># plot an empty plot</span></span>
+<span id="cb29-4"><a href="pcamot.html#cb29-4"></a><span class="kw">plot</span>(<span class="dv">1</span>,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>,<span class="dt">axes=</span>F,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.1</span>,<span class="fl">1.2</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="fl">0.1</span>,<span class="fl">1.2</span>),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb29-5"><a href="pcamot.html#cb29-5"></a></span>
+<span id="cb29-6"><a href="pcamot.html#cb29-6"></a><span class="co"># define axis</span></span>
+<span id="cb29-7"><a href="pcamot.html#cb29-7"></a>x1 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb29-8"><a href="pcamot.html#cb29-8"></a>x2 =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb29-9"><a href="pcamot.html#cb29-9"></a></span>
+<span id="cb29-10"><a href="pcamot.html#cb29-10"></a><span class="co"># plot x arrow</span></span>
+<span id="cb29-11"><a href="pcamot.html#cb29-11"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,x1[<span class="dv">1</span>],x1[<span class="dv">2</span>])</span>
+<span id="cb29-12"><a href="pcamot.html#cb29-12"></a></span>
+<span id="cb29-13"><a href="pcamot.html#cb29-13"></a></span>
+<span id="cb29-14"><a href="pcamot.html#cb29-14"></a><span class="co"># plot y arrow</span></span>
+<span id="cb29-15"><a href="pcamot.html#cb29-15"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,x2[<span class="dv">1</span>],x2[<span class="dv">2</span>])</span>
+<span id="cb29-16"><a href="pcamot.html#cb29-16"></a></span>
+<span id="cb29-17"><a href="pcamot.html#cb29-17"></a><span class="co"># draw angle </span></span>
+<span id="cb29-18"><a href="pcamot.html#cb29-18"></a><span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="fl">0.1</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dt">x1 =</span> <span class="fl">0.1</span>,<span class="dt">y1 =</span> <span class="fl">0.1</span>)</span>
+<span id="cb29-19"><a href="pcamot.html#cb29-19"></a><span class="kw">segments</span>(<span class="dt">x0 =</span> <span class="dv">0</span>,<span class="dt">y0 =</span> <span class="fl">0.1</span>,<span class="dt">x1 =</span> <span class="fl">0.1</span>,<span class="dt">y1 =</span> <span class="fl">0.1</span>)</span>
+<span id="cb29-20"><a href="pcamot.html#cb29-20"></a></span>
+<span id="cb29-21"><a href="pcamot.html#cb29-21"></a><span class="co"># draw arrow to the text</span></span>
+<span id="cb29-22"><a href="pcamot.html#cb29-22"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.17</span>,<span class="fl">0.17</span>)</span>
+<span id="cb29-23"><a href="pcamot.html#cb29-23"></a></span>
+<span id="cb29-24"><a href="pcamot.html#cb29-24"></a><span class="co"># write text</span></span>
+<span id="cb29-25"><a href="pcamot.html#cb29-25"></a><span class="kw">text</span>(<span class="fl">0.4</span>,<span class="fl">0.2</span>,<span class="st">&quot;This angle is 90 degree&quot;</span>,<span class="dt">cex=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line4"></span>
+<img src="PCA_files/figure-html/fig-simple-line4-1.png" alt="We try to fit many lines through the data" width="960" />
+<p class="caption">
+Figure 3.7: We try to fit many lines through the data
+</p>
+</div>
+<p>Figure <a href="pcamot.html#fig:fig-simple-line4">3.7</a> shows two arbitrary lines, the lines are called orthogonal/perpendicular to each other.</p>
+<p>So now that we know what orthogonal means, we will find a line to be orthogonal to our blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>):</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="pcamot.html#cb30-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb30-2"><a href="pcamot.html#cb30-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb30-3"><a href="pcamot.html#cb30-3"></a><span class="co"># define variables</span></span>
+<span id="cb30-4"><a href="pcamot.html#cb30-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb30-5"><a href="pcamot.html#cb30-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb30-6"><a href="pcamot.html#cb30-6"></a><span class="co"># plot the data</span></span>
+<span id="cb30-7"><a href="pcamot.html#cb30-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>),<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">15</span>))</span>
+<span id="cb30-8"><a href="pcamot.html#cb30-8"></a><span class="co"># draw a line</span></span>
+<span id="cb30-9"><a href="pcamot.html#cb30-9"></a></span>
+<span id="cb30-10"><a href="pcamot.html#cb30-10"></a><span class="co"># intercept</span></span>
+<span id="cb30-11"><a href="pcamot.html#cb30-11"></a>b&lt;-<span class="op">-</span><span class="fl">5.172751</span></span>
+<span id="cb30-12"><a href="pcamot.html#cb30-12"></a><span class="co"># slope</span></span>
+<span id="cb30-13"><a href="pcamot.html#cb30-13"></a>m&lt;-<span class="fl">1.548455</span></span>
+<span id="cb30-14"><a href="pcamot.html#cb30-14"></a><span class="co"># draw the line</span></span>
+<span id="cb30-15"><a href="pcamot.html#cb30-15"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb30-16"><a href="pcamot.html#cb30-16"></a></span>
+<span id="cb30-17"><a href="pcamot.html#cb30-17"></a><span class="co"># intercept</span></span>
+<span id="cb30-18"><a href="pcamot.html#cb30-18"></a>b&lt;-<span class="fl">11.8710127</span> </span>
+<span id="cb30-19"><a href="pcamot.html#cb30-19"></a><span class="co"># slope</span></span>
+<span id="cb30-20"><a href="pcamot.html#cb30-20"></a>m&lt;-<span class="op">-</span><span class="fl">0.6458052</span></span>
+<span id="cb30-21"><a href="pcamot.html#cb30-21"></a><span class="co"># draw the line</span></span>
+<span id="cb30-22"><a href="pcamot.html#cb30-22"></a><span class="kw">abline</span>(<span class="dt">a =</span> b,<span class="dt">b =</span> m,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>,<span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb30-23"><a href="pcamot.html#cb30-23"></a></span>
+<span id="cb30-24"><a href="pcamot.html#cb30-24"></a></span>
+<span id="cb30-25"><a href="pcamot.html#cb30-25"></a></span>
+<span id="cb30-26"><a href="pcamot.html#cb30-26"></a><span class="co">#</span></span>
+<span id="cb30-27"><a href="pcamot.html#cb30-27"></a>projected_variables&lt;-<span class="kw">matrix</span>(<span class="ot">NA</span>,<span class="dt">nrow =</span> <span class="kw">nrow</span>(data),<span class="dt">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb30-28"><a href="pcamot.html#cb30-28"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb30-29"><a href="pcamot.html#cb30-29"></a>{</span>
+<span id="cb30-30"><a href="pcamot.html#cb30-30"></a></span>
+<span id="cb30-31"><a href="pcamot.html#cb30-31"></a><span class="co"># calculate the projection</span></span>
+<span id="cb30-32"><a href="pcamot.html#cb30-32"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, m <span class="op">+</span><span class="st"> </span>b)</span>
+<span id="cb30-33"><a href="pcamot.html#cb30-33"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, b)</span>
+<span id="cb30-34"><a href="pcamot.html#cb30-34"></a>l1 &lt;-<span class="st"> </span><span class="kw">c</span>(l1, <span class="dv">0</span>)</span>
+<span id="cb30-35"><a href="pcamot.html#cb30-35"></a>l2 &lt;-<span class="st"> </span><span class="kw">c</span>(l2, <span class="dv">0</span>)</span>
+<span id="cb30-36"><a href="pcamot.html#cb30-36"></a>u &lt;-<span class="st"> </span><span class="kw">sum</span>((<span class="kw">c</span>(data[i,<span class="kw">c</span>(var1,var3)],<span class="dv">0</span>) <span class="op">-</span><span class="st"> </span>l1)<span class="op">*</span>(l2 <span class="op">-</span><span class="st"> </span>l1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>((l2 <span class="op">-</span><span class="st"> </span>l1)<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb30-37"><a href="pcamot.html#cb30-37"></a>r&lt;-l1 <span class="op">+</span><span class="st"> </span>u <span class="op">*</span><span class="st"> </span>(l2 <span class="op">-</span><span class="st"> </span>l1)</span>
+<span id="cb30-38"><a href="pcamot.html#cb30-38"></a><span class="co"># end projection</span></span>
+<span id="cb30-39"><a href="pcamot.html#cb30-39"></a></span>
+<span id="cb30-40"><a href="pcamot.html#cb30-40"></a><span class="co"># draw arrow</span></span>
+<span id="cb30-41"><a href="pcamot.html#cb30-41"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span> data[i,var1],<span class="dt">x1 =</span> r[<span class="dv">1</span>],</span>
+<span id="cb30-42"><a href="pcamot.html#cb30-42"></a>           <span class="dt">y0 =</span> data[i,var3],<span class="dt">y1 =</span>r[<span class="dv">2</span>],<span class="dt">length=</span><span class="fl">0.05</span>,<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb30-43"><a href="pcamot.html#cb30-43"></a></span>
+<span id="cb30-44"><a href="pcamot.html#cb30-44"></a></span>
+<span id="cb30-45"><a href="pcamot.html#cb30-45"></a><span class="co"># save the projections</span></span>
+<span id="cb30-46"><a href="pcamot.html#cb30-46"></a>projected_variables[i,<span class="dv">1</span>]&lt;-r[<span class="dv">1</span>]</span>
+<span id="cb30-47"><a href="pcamot.html#cb30-47"></a>projected_variables[i,<span class="dv">2</span>]&lt;-r[<span class="dv">2</span>]</span>
+<span id="cb30-48"><a href="pcamot.html#cb30-48"></a></span>
+<span id="cb30-49"><a href="pcamot.html#cb30-49"></a>}</span>
+<span id="cb30-50"><a href="pcamot.html#cb30-50"></a></span>
+<span id="cb30-51"><a href="pcamot.html#cb30-51"></a></span>
+<span id="cb30-52"><a href="pcamot.html#cb30-52"></a><span class="co"># plot the data</span></span>
+<span id="cb30-53"><a href="pcamot.html#cb30-53"></a><span class="kw">plot</span>(<span class="dt">x=</span>decenter_data[,<span class="dv">2</span>],<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="st">&quot;Combined variable 1 and 3&quot;</span>)</span>
+<span id="cb30-54"><a href="pcamot.html#cb30-54"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(decenter_data[,<span class="dv">2</span>]),<span class="kw">ceiling</span>(decenter_data[,<span class="dv">2</span>]))) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line5"></span>
+<img src="PCA_files/figure-html/fig-simple-line5-1.png" alt="We try to fit the second best line through the data" width="960" />
+<p class="caption">
+Figure 3.8: We try to fit the second best line through the data
+</p>
+</div>
+<p>Great! Now we have two new axis. The variance of the first one (blue) was 8.5999087 and the second one was 1.0644835. And most importantly, the covariance (redndancy) betweem these two new axis is 3.556493910^{-10}. That is almost zero. Perfect! We have two new variables that are showing complementary variation and no redundancy. Please also note that, our small two variable dataset had a total variation of 9.6643921 and our new variables also have 9.6643921. So we did not remove anything! We just rotate the data along two new axis (blue and green) such that our first axis (blue) show us most of the variation and does not have covariance with our second variable. Now it’s time to plot both the new variables and see what they show us:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="pcamot.html#cb31-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb31-2"><a href="pcamot.html#cb31-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb31-3"><a href="pcamot.html#cb31-3"></a><span class="co"># define variables</span></span>
+<span id="cb31-4"><a href="pcamot.html#cb31-4"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb31-5"><a href="pcamot.html#cb31-5"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb31-6"><a href="pcamot.html#cb31-6"></a><span class="co"># plot the data</span></span>
+<span id="cb31-7"><a href="pcamot.html#cb31-7"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">14</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">12</span>))</span>
+<span id="cb31-8"><a href="pcamot.html#cb31-8"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span>
+<span id="cb31-9"><a href="pcamot.html#cb31-9"></a></span>
+<span id="cb31-10"><a href="pcamot.html#cb31-10"></a><span class="co"># add legend</span></span>
+<span id="cb31-11"><a href="pcamot.html#cb31-11"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb31-12"><a href="pcamot.html#cb31-12"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb31-13"><a href="pcamot.html#cb31-13"></a></span>
+<span id="cb31-14"><a href="pcamot.html#cb31-14"></a><span class="kw">plot</span>(decenter_data,<span class="dt">xlab =</span> <span class="st">&quot;New variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;New variable 2&quot;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">14</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">12</span>),<span class="dt">axes =</span> F)</span>
+<span id="cb31-15"><a href="pcamot.html#cb31-15"></a><span class="kw">box</span>()</span>
+<span id="cb31-16"><a href="pcamot.html#cb31-16"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span> )</span>
+<span id="cb31-17"><a href="pcamot.html#cb31-17"></a><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span> )</span>
+<span id="cb31-18"><a href="pcamot.html#cb31-18"></a></span>
+<span id="cb31-19"><a href="pcamot.html#cb31-19"></a><span class="kw">title</span>(<span class="st">&quot;New variables&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-line6"></span>
+<img src="PCA_files/figure-html/fig-simple-line6-1.png" alt="Plot of the original variables together with the new axis" width="960" />
+<p class="caption">
+Figure 3.9: Plot of the original variables together with the new axis
+</p>
+</div>
+<p>It should be clear by now that we just rotated the data. But there is one more thing to this <a href="#fig-simple-line6">plot</a>, in the left, the differences between groups are demonstrated by the values of two variables together (variable 1 and variable 3). However, in the panel on the right, the differences between the groups are mostly visible in just one variable (New variable 1, the blue line). So if we see the variation of interest in one variable, what is the reason to keep the other one? We can simply remove the New variable 2 and represent our data with only one variable.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="pcamot.html#cb32-1"></a><span class="co"># fix number of columns in the plot</span></span>
+<span id="cb32-2"><a href="pcamot.html#cb32-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb32-3"><a href="pcamot.html#cb32-3"></a><span class="co"># plot the data</span></span>
+<span id="cb32-4"><a href="pcamot.html#cb32-4"></a><span class="kw">plot</span>(<span class="dt">x=</span>decenter_data[,<span class="dv">1</span>],<span class="dt">y=</span><span class="kw">rep</span>(<span class="fl">1.2</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="st">&quot;New variable 1&quot;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb32-5"><a href="pcamot.html#cb32-5"></a><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">at =</span><span class="kw">unique</span>(<span class="kw">c</span>(<span class="kw">floor</span>(decenter_data[,<span class="dv">1</span>]),<span class="kw">ceiling</span>(decenter_data[,<span class="dv">1</span>]))) )</span>
+<span id="cb32-6"><a href="pcamot.html#cb32-6"></a></span>
+<span id="cb32-7"><a href="pcamot.html#cb32-7"></a><span class="co"># add legend</span></span>
+<span id="cb32-8"><a href="pcamot.html#cb32-8"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb32-9"><a href="pcamot.html#cb32-9"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-remove1"></span>
+<img src="PCA_files/figure-html/fig-remove1-1.png" alt="Plot of the data with one of the variables removed" width="960" />
+<p class="caption">
+Figure 3.10: Plot of the data with one of the variables removed
+</p>
+</div>
+<p>We can see in Figure <a href="pcamot.html#fig:fig-remove1">3.10</a> that the differences are represented in one variable what is the combined effect of the two original variables. This might not sound such a big deal as one of our original variables (Variable 1) already represented the data very well. In addition, when removing the new variable 2, in fact we only remove 11 percent of the variation. Whereas if we remove either of the original variable 1 or 2, we will remove 34 or 66 percent respectively. Meaning that using the aforementioned method, we concentrated the variation in a limited number of variables. So removing the variable with little variation should not harm the overal data pattern. Reducing from two variables to one is not such a big deal! But how about reducing from 45101 variables to just a few ones? This is exactly what PCA does!</p>
+</div>
+<div id="pcafri" class="section level2">
+<h2><span class="header-section-number">3.4</span> PCA (freindly definition)</h2>
+<p>PCA does exactly what we have been doing so far but it can do it for much much more complex data with thousands of variables (e.g. genes)! Its job is to find new variables from the combination of original variables and then sort them. It does that in a way that, after sorting, the first variable has the most variation (e.g. information), the second one has the second most and so forth. And all this amazing thing comes with the luxury of not having redundant variation between the new variables.</p>
+<p>All these words mean that PCA will take your data, and rotate them and show you the angle of the data that you will see most of the differences between your observations (e.g. samples/patients/data points etc). It does this unbiased, without knowing what you are interested in. It simply does not care! For PCA higher variation is better, it will simply show it first. That is exactly the reason why it’s a fantastic method for finding hidden pattern in the data. We will go through a few examples in <a href="pcaapplications.html#pcaapplications">the next chapter</a>.</p>
+<p>In short, you can do the following with PCA:</p>
+<ul>
+<li><a href="pcaapplications.html#pcavisdimreduct">Visualization of high dimensional data</a>: dimensions are normally the number of variables (e.g. genes) that are in the dataset</li>
+<li><a href="pcaapplications.html#pcavisdimreduct">Dimentionality reduction</a>: exactly like we did here for removing variables</li>
+<li><a href="pcaapplications.html#pcavarselect">Variable selection</a>: selecting which of the variables (e.g. genes) has most influence on the overal data pattern</li>
+<li><a href="pcaapplications.html#pcabtrm">Batch removing</a>: Batch effect or other experimental biases can be removed by PCA</li>
+</ul>
+<p>We are going to go through all the abovementinoed points in the next chapter.</p>
+<p>See you!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pcaapplications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PCA.pdf", "PCA.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

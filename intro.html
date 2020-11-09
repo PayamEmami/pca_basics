@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction | Principal Component Analysis (PCA)</title>
+  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction | Principal Component Analysis (PCA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction | Principal Component Analysis (PCA)" />
+  
+  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  
+
+<meta name="author" content="Payam Emami" />
+
+
+<meta name="date" content="2020-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="pcamot.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
+<li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
+<li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
+<li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="exer.html"><a href="exer.html#exercise-1"><i class="fa fa-check"></i><b>5.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="5.3" data-path="exer.html"><a href="exer.html#exercise-2"><i class="fa fa-check"></i><b>5.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="5.4" data-path="exer.html"><a href="exer.html#exercise-3"><i class="fa fa-check"></i><b>5.4</b> Exercise 3</a></li>
+<li class="chapter" data-level="5.5" data-path="exer.html"><a href="exer.html#exercise-4"><i class="fa fa-check"></i><b>5.5</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pcamath.html"><a href="pcamath.html"><i class="fa fa-check"></i><b>6</b> PCA (mathematical details)</a><ul>
+<li class="chapter" data-level="6.1" data-path="pcamath.html"><a href="pcamath.html#summary-of-the-previous-chapter-2"><i class="fa fa-check"></i><b>6.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="6.2" data-path="pcamath.html"><a href="pcamath.html#foundations"><i class="fa fa-check"></i><b>6.2</b> Foundations</a></li>
+<li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
+<li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Principal Component Analysis (PCA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
+<p>Biology has become data-intensive as high throughput experiments in genomics or metabolomics have produced datasets of massive volume and complexity. These datasets often contain a huge number of measurements such as genes, transcripts, metabolites, or proteins, measured on some number of samples. Despite that, the scientific questions vary a lot between different studies, but a common question to ask is “what does my data show?”. Obviously, this general question only makes sense in the context of narrower scientific questions. Examples could be: Does my data show any difference between the study groups? Do we have any experimental problems (e.g. batch effect)? Do we have any outliers (e.g. samples that are particularly different from the rest of the cohort)? Do any of the measurements influence the pattern of the data more than others (pattern of the data is generally defined as what data shows! E.g. differences between groups of interest)? Throughout the rest of this chapter, we refer to samples as observations (e.g patients) and measurements as variables (e.g. genes).</p>
+<p>If we want to summarize the abovementioned questions, we can carefully say that the interest is in variation or simply how the observations are spread. Let’s take one of the variables and see how the data is spread based on this variable:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="intro.html#cb11-1"></a><span class="co"># Select variable</span></span>
+<span id="cb11-2"><a href="intro.html#cb11-2"></a>variableIndex&lt;-<span class="dv">1</span></span>
+<span id="cb11-3"><a href="intro.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="intro.html#cb11-4"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb11-5"><a href="intro.html#cb11-5"></a><span class="kw">plot</span>(data[,variableIndex],<span class="dt">xlab =</span> <span class="st">&quot;Sample index&quot;</span>,<span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,variableIndex),</span>
+<span id="cb11-6"><a href="intro.html#cb11-6"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(data[,variableIndex])<span class="op">-</span><span class="fl">0.1</span>,<span class="kw">max</span>(data[,variableIndex])<span class="op">+</span><span class="fl">0.1</span>),<span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</span>
+<span id="cb11-7"><a href="intro.html#cb11-7"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="dt">labels =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb11-8"><a href="intro.html#cb11-8"></a></span>
+<span id="cb11-9"><a href="intro.html#cb11-9"></a><span class="co"># fig position of labels</span></span>
+<span id="cb11-10"><a href="intro.html#cb11-10"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(data[,variableIndex]<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb11-11"><a href="intro.html#cb11-11"></a><span class="co"># Draw sample index</span></span>
+<span id="cb11-12"><a href="intro.html#cb11-12"></a><span class="kw">text</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), data[,variableIndex],  <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data),</span>
+<span id="cb11-13"><a href="intro.html#cb11-13"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb11-14"><a href="intro.html#cb11-14"></a></span>
+<span id="cb11-15"><a href="intro.html#cb11-15"></a><span class="co"># draw the mean line</span></span>
+<span id="cb11-16"><a href="intro.html#cb11-16"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,variableIndex],),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb11-17"><a href="intro.html#cb11-17"></a></span>
+<span id="cb11-18"><a href="intro.html#cb11-18"></a><span class="co"># for each observation draw a line from that point to the mean</span></span>
+<span id="cb11-19"><a href="intro.html#cb11-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb11-20"><a href="intro.html#cb11-20"></a>{</span>
+<span id="cb11-21"><a href="intro.html#cb11-21"></a>  <span class="kw">segments</span>(<span class="dt">x0 =</span> i,<span class="dt">x1 =</span> i,<span class="dt">y0 =</span> data[i,variableIndex],<span class="dt">y1 =</span> <span class="kw">mean</span>(data[,variableIndex]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb11-22"><a href="intro.html#cb11-22"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-variation"></span>
+<img src="PCA_files/figure-html/fig-simple-variation-1.png" alt="Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean" width="672" />
+<p class="caption">
+Figure 2.1: Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean
+</p>
+</div>
+<p>In Figure <a href="intro.html#fig:fig-simple-variation">2.1</a>, we have plotted the sample number (just a simple index) on the x axis and the expression of variable 1 on the y axis. The red line shows the mean (average) of the variable one and the dashed lines show the distance between each observation (sample) to the mean. The variation is simply the average of squared of these distances to the mean. However, we are still not sure whether the variation we are seen is of any interest for us. Let’s reorder the samples based on the expression.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="intro.html#cb12-1"></a><span class="co"># Select variable</span></span>
+<span id="cb12-2"><a href="intro.html#cb12-2"></a>variableIndex&lt;-<span class="dv">18924</span></span>
+<span id="cb12-3"><a href="intro.html#cb12-3"></a></span>
+<span id="cb12-4"><a href="intro.html#cb12-4"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb12-5"><a href="intro.html#cb12-5"></a><span class="co"># create x axis</span></span>
+<span id="cb12-6"><a href="intro.html#cb12-6"></a>x_axis&lt;-<span class="kw">factor</span>(<span class="kw">order</span>(data[,variableIndex]),<span class="dt">levels =</span> <span class="kw">order</span>(data[,variableIndex]))</span>
+<span id="cb12-7"><a href="intro.html#cb12-7"></a><span class="kw">plot.default</span>(<span class="dt">x=</span>x_axis,</span>
+<span id="cb12-8"><a href="intro.html#cb12-8"></a>     <span class="dt">y=</span>(<span class="kw">sort</span>(data[,variableIndex])),<span class="dt">xlab =</span> <span class="st">&quot;Sample index&quot;</span>,<span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,variableIndex),</span>
+<span id="cb12-9"><a href="intro.html#cb12-9"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(data[,variableIndex])<span class="op">-</span><span class="fl">0.1</span>,<span class="kw">max</span>(data[,variableIndex])<span class="op">+</span><span class="fl">0.1</span>),<span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])])</span>
+<span id="cb12-10"><a href="intro.html#cb12-10"></a><span class="co"># add x axis</span></span>
+<span id="cb12-11"><a href="intro.html#cb12-11"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="dt">labels =</span> x_axis)</span>
+<span id="cb12-12"><a href="intro.html#cb12-12"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb12-13"><a href="intro.html#cb12-13"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb12-14"><a href="intro.html#cb12-14"></a><span class="co"># fig position of labels</span></span>
+<span id="cb12-15"><a href="intro.html#cb12-15"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb12-16"><a href="intro.html#cb12-16"></a><span class="co"># Draw sample index</span></span>
+<span id="cb12-17"><a href="intro.html#cb12-17"></a><span class="kw">text</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="kw">sort</span>(data[,variableIndex]),  x_axis,</span>
+<span id="cb12-18"><a href="intro.html#cb12-18"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])]),<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb12-19"><a href="intro.html#cb12-19"></a></span>
+<span id="cb12-20"><a href="intro.html#cb12-20"></a><span class="co"># draw the mean line</span></span>
+<span id="cb12-21"><a href="intro.html#cb12-21"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,variableIndex],),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb12-22"><a href="intro.html#cb12-22"></a></span>
+<span id="cb12-23"><a href="intro.html#cb12-23"></a><span class="co"># for each observation draw a line from that point to the mean</span></span>
+<span id="cb12-24"><a href="intro.html#cb12-24"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb12-25"><a href="intro.html#cb12-25"></a>{</span>
+<span id="cb12-26"><a href="intro.html#cb12-26"></a>  <span class="kw">segments</span>(<span class="dt">x0 =</span> i,<span class="dt">x1 =</span> i,<span class="dt">y0 =</span> <span class="kw">sort</span>(data[,variableIndex])[i],<span class="dt">y1 =</span> <span class="kw">mean</span>(data[,variableIndex]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,<span class="dt">col=</span></span>
+<span id="cb12-27"><a href="intro.html#cb12-27"></a>             <span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])][i])</span>
+<span id="cb12-28"><a href="intro.html#cb12-28"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-variation-reorder"></span>
+<img src="PCA_files/figure-html/fig-simple-variation-reorder-1.png" alt="Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples" width="672" />
+<p class="caption">
+Figure 2.2: Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples
+</p>
+</div>
+<p>Figure <a href="intro.html#fig:fig-simple-variation">2.1</a> shows the same variable as Figure <a href="intro.html#fig:fig-simple-variation-reorder">2.2</a> but we have reorder the observations so that the ones with lower expression come first. We have also added color so that we can see where there is a difference between the groups in this experiment. What is clear now is that, the variation in this variable alone does not provide us with much useful information about all the groups. However, the second group appears to have lower expression compared to the rest of the groups. In addition, The First and the third group show higher expression compared to the rest.</p>
+<p>That’s great Let’s pick another variable and plot the same thing:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="intro.html#cb13-1"></a><span class="co"># Select variable</span></span>
+<span id="cb13-2"><a href="intro.html#cb13-2"></a>variableIndex&lt;-<span class="dv">20355</span></span>
+<span id="cb13-3"><a href="intro.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="intro.html#cb13-4"></a><span class="co"># plot the data for variable 2</span></span>
+<span id="cb13-5"><a href="intro.html#cb13-5"></a><span class="co"># create x axis</span></span>
+<span id="cb13-6"><a href="intro.html#cb13-6"></a>x_axis&lt;-<span class="kw">factor</span>(<span class="kw">order</span>(data[,variableIndex]),<span class="dt">levels =</span> <span class="kw">order</span>(data[,variableIndex]))</span>
+<span id="cb13-7"><a href="intro.html#cb13-7"></a><span class="kw">plot.default</span>(<span class="dt">x=</span>x_axis,</span>
+<span id="cb13-8"><a href="intro.html#cb13-8"></a>     <span class="dt">y=</span>(<span class="kw">sort</span>(data[,variableIndex])),<span class="dt">xlab =</span> <span class="st">&quot;Sample index&quot;</span>,<span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,variableIndex),</span>
+<span id="cb13-9"><a href="intro.html#cb13-9"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(data[,variableIndex])<span class="op">-</span><span class="fl">0.1</span>,<span class="kw">max</span>(data[,variableIndex])<span class="op">+</span><span class="fl">0.1</span>),<span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])])</span>
+<span id="cb13-10"><a href="intro.html#cb13-10"></a><span class="co"># add x axis</span></span>
+<span id="cb13-11"><a href="intro.html#cb13-11"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="dt">labels =</span> x_axis)</span>
+<span id="cb13-12"><a href="intro.html#cb13-12"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb13-13"><a href="intro.html#cb13-13"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb13-14"><a href="intro.html#cb13-14"></a><span class="co"># fig position of labels</span></span>
+<span id="cb13-15"><a href="intro.html#cb13-15"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb13-16"><a href="intro.html#cb13-16"></a><span class="co"># Draw sample index</span></span>
+<span id="cb13-17"><a href="intro.html#cb13-17"></a><span class="kw">text</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="kw">sort</span>(data[,variableIndex]),  x_axis,</span>
+<span id="cb13-18"><a href="intro.html#cb13-18"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])]),<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb13-19"><a href="intro.html#cb13-19"></a></span>
+<span id="cb13-20"><a href="intro.html#cb13-20"></a><span class="co"># draw the mean line</span></span>
+<span id="cb13-21"><a href="intro.html#cb13-21"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,variableIndex],),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb13-22"><a href="intro.html#cb13-22"></a></span>
+<span id="cb13-23"><a href="intro.html#cb13-23"></a><span class="co"># for each observation draw a line from that point to the mean</span></span>
+<span id="cb13-24"><a href="intro.html#cb13-24"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb13-25"><a href="intro.html#cb13-25"></a>{</span>
+<span id="cb13-26"><a href="intro.html#cb13-26"></a>  <span class="kw">segments</span>(<span class="dt">x0 =</span> i,<span class="dt">x1 =</span> i,<span class="dt">y0 =</span> <span class="kw">sort</span>(data[,variableIndex])[i],<span class="dt">y1 =</span> <span class="kw">mean</span>(data[,variableIndex]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,<span class="dt">col=</span></span>
+<span id="cb13-27"><a href="intro.html#cb13-27"></a>             <span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])][i])</span>
+<span id="cb13-28"><a href="intro.html#cb13-28"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-variation-reorder-v2"></span>
+<img src="PCA_files/figure-html/fig-simple-variation-reorder-v2-1.png" alt="Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples" width="672" />
+<p class="caption">
+Figure 2.3: Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples
+</p>
+</div>
+<p>As it’s evident in Figure <a href="intro.html#fig:fig-simple-variation-reorder-v2">2.3</a>, the variation in this variable shows us the difference between the fourth group and the rest but it does not provide much information about the the rest of the groups. Let’s have a look at what information both of these variable give. We simply put both figures Figure <a href="intro.html#fig:fig-simple-variation-reorder">2.2</a> and Figure <a href="intro.html#fig:fig-simple-variation-reorder-v2">2.3</a> together:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="intro.html#cb14-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb14-2"><a href="intro.html#cb14-2"></a><span class="co"># Select variable</span></span>
+<span id="cb14-3"><a href="intro.html#cb14-3"></a>variableIndex&lt;-<span class="dv">18924</span></span>
+<span id="cb14-4"><a href="intro.html#cb14-4"></a></span>
+<span id="cb14-5"><a href="intro.html#cb14-5"></a><span class="co"># plot the data for variable 1</span></span>
+<span id="cb14-6"><a href="intro.html#cb14-6"></a><span class="co"># create x axis</span></span>
+<span id="cb14-7"><a href="intro.html#cb14-7"></a>x_axis&lt;-<span class="kw">factor</span>(<span class="kw">order</span>(data[,variableIndex]),<span class="dt">levels =</span> <span class="kw">order</span>(data[,variableIndex]))</span>
+<span id="cb14-8"><a href="intro.html#cb14-8"></a><span class="kw">plot.default</span>(<span class="dt">x=</span>x_axis,</span>
+<span id="cb14-9"><a href="intro.html#cb14-9"></a>     <span class="dt">y=</span>(<span class="kw">sort</span>(data[,variableIndex])),<span class="dt">xlab =</span> <span class="st">&quot;Sample index&quot;</span>,<span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,variableIndex),</span>
+<span id="cb14-10"><a href="intro.html#cb14-10"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(data[,variableIndex])<span class="op">-</span><span class="fl">0.1</span>,<span class="kw">max</span>(data[,variableIndex])<span class="op">+</span><span class="fl">0.1</span>),<span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb14-11"><a href="intro.html#cb14-11"></a>     <span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])])</span>
+<span id="cb14-12"><a href="intro.html#cb14-12"></a><span class="co"># add x axis</span></span>
+<span id="cb14-13"><a href="intro.html#cb14-13"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="dt">labels =</span> x_axis)</span>
+<span id="cb14-14"><a href="intro.html#cb14-14"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb14-15"><a href="intro.html#cb14-15"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb14-16"><a href="intro.html#cb14-16"></a><span class="co"># fig position of labels</span></span>
+<span id="cb14-17"><a href="intro.html#cb14-17"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb14-18"><a href="intro.html#cb14-18"></a><span class="co"># Draw sample index</span></span>
+<span id="cb14-19"><a href="intro.html#cb14-19"></a><span class="kw">text</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="kw">sort</span>(data[,variableIndex]),  x_axis,</span>
+<span id="cb14-20"><a href="intro.html#cb14-20"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])]),<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb14-21"><a href="intro.html#cb14-21"></a></span>
+<span id="cb14-22"><a href="intro.html#cb14-22"></a><span class="co"># draw the mean line</span></span>
+<span id="cb14-23"><a href="intro.html#cb14-23"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,variableIndex],),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb14-24"><a href="intro.html#cb14-24"></a></span>
+<span id="cb14-25"><a href="intro.html#cb14-25"></a><span class="co"># for each observation draw a line from that point to the mean</span></span>
+<span id="cb14-26"><a href="intro.html#cb14-26"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb14-27"><a href="intro.html#cb14-27"></a>{</span>
+<span id="cb14-28"><a href="intro.html#cb14-28"></a>  <span class="kw">segments</span>(<span class="dt">x0 =</span> i,<span class="dt">x1 =</span> i,<span class="dt">y0 =</span> <span class="kw">sort</span>(data[,variableIndex])[i],<span class="dt">y1 =</span> <span class="kw">mean</span>(data[,variableIndex]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,<span class="dt">col=</span></span>
+<span id="cb14-29"><a href="intro.html#cb14-29"></a>             <span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])][i])</span>
+<span id="cb14-30"><a href="intro.html#cb14-30"></a>}</span>
+<span id="cb14-31"><a href="intro.html#cb14-31"></a></span>
+<span id="cb14-32"><a href="intro.html#cb14-32"></a><span class="co"># Select variable</span></span>
+<span id="cb14-33"><a href="intro.html#cb14-33"></a>variableIndex&lt;-<span class="dv">20355</span></span>
+<span id="cb14-34"><a href="intro.html#cb14-34"></a></span>
+<span id="cb14-35"><a href="intro.html#cb14-35"></a><span class="co"># plot the data for variable 2</span></span>
+<span id="cb14-36"><a href="intro.html#cb14-36"></a><span class="co"># create x axis</span></span>
+<span id="cb14-37"><a href="intro.html#cb14-37"></a>x_axis&lt;-<span class="kw">factor</span>(<span class="kw">order</span>(data[,variableIndex]),<span class="dt">levels =</span> <span class="kw">order</span>(data[,variableIndex]))</span>
+<span id="cb14-38"><a href="intro.html#cb14-38"></a><span class="kw">plot.default</span>(<span class="dt">x=</span>x_axis,</span>
+<span id="cb14-39"><a href="intro.html#cb14-39"></a>     <span class="dt">y=</span>(<span class="kw">sort</span>(data[,variableIndex])),<span class="dt">xlab =</span> <span class="st">&quot;Sample index&quot;</span>,<span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,variableIndex),</span>
+<span id="cb14-40"><a href="intro.html#cb14-40"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(data[,variableIndex])<span class="op">-</span><span class="fl">0.1</span>,<span class="kw">max</span>(data[,variableIndex])<span class="op">+</span><span class="fl">0.1</span>),<span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb14-41"><a href="intro.html#cb14-41"></a>     <span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])])</span>
+<span id="cb14-42"><a href="intro.html#cb14-42"></a><span class="co"># add x axis</span></span>
+<span id="cb14-43"><a href="intro.html#cb14-43"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="dt">labels =</span> x_axis)</span>
+<span id="cb14-44"><a href="intro.html#cb14-44"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb14-45"><a href="intro.html#cb14-45"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb14-46"><a href="intro.html#cb14-46"></a><span class="co"># fig position of labels</span></span>
+<span id="cb14-47"><a href="intro.html#cb14-47"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb14-48"><a href="intro.html#cb14-48"></a><span class="co"># Draw sample index</span></span>
+<span id="cb14-49"><a href="intro.html#cb14-49"></a><span class="kw">text</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data), <span class="kw">sort</span>(data[,variableIndex]),  x_axis,</span>
+<span id="cb14-50"><a href="intro.html#cb14-50"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])]),<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb14-51"><a href="intro.html#cb14-51"></a></span>
+<span id="cb14-52"><a href="intro.html#cb14-52"></a><span class="co"># draw the mean line</span></span>
+<span id="cb14-53"><a href="intro.html#cb14-53"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,variableIndex],),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb14-54"><a href="intro.html#cb14-54"></a></span>
+<span id="cb14-55"><a href="intro.html#cb14-55"></a><span class="co"># for each observation draw a line from that point to the mean</span></span>
+<span id="cb14-56"><a href="intro.html#cb14-56"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb14-57"><a href="intro.html#cb14-57"></a>{</span>
+<span id="cb14-58"><a href="intro.html#cb14-58"></a>  <span class="kw">segments</span>(<span class="dt">x0 =</span> i,<span class="dt">x1 =</span> i,<span class="dt">y0 =</span> <span class="kw">sort</span>(data[,variableIndex])[i],<span class="dt">y1 =</span> <span class="kw">mean</span>(data[,variableIndex]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,<span class="dt">col=</span></span>
+<span id="cb14-59"><a href="intro.html#cb14-59"></a>             <span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)[<span class="kw">order</span>(data[,variableIndex])][i])</span>
+<span id="cb14-60"><a href="intro.html#cb14-60"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-variation-reorder-v3"></span>
+<img src="PCA_files/figure-html/fig-simple-variation-reorder-v3-1.png" alt="Here, we select two previous variables and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples" width="672" />
+<p class="caption">
+Figure 2.4: Here, we select two previous variables and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples
+</p>
+</div>
+<p>We can see in Figure <a href="intro.html#fig:fig-simple-variation-reorder-v3">2.4</a>, there is obviously some information that is almost only explained by individual variables. For example the differences between group 2 and group 4 is mostly explained by variable 20355. But there is also some small information that seems to be redundant. For example the differences between combined groups 1 and 3 vs group 4. We can have a look at variation and redundancy together by plotting the expressions of both variables against each other.</p>
+<p>plot(data[,c(18924,20355)],col=factor(metadata$Covariate))</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="intro.html#cb15-1"></a><span class="co"># define variables</span></span>
+<span id="cb15-2"><a href="intro.html#cb15-2"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb15-3"><a href="intro.html#cb15-3"></a>var2&lt;-<span class="dv">20355</span></span>
+<span id="cb15-4"><a href="intro.html#cb15-4"></a><span class="co"># plot the data</span></span>
+<span id="cb15-5"><a href="intro.html#cb15-5"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var2)],<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 2&quot;</span>)</span>
+<span id="cb15-6"><a href="intro.html#cb15-6"></a><span class="co"># create legend</span></span>
+<span id="cb15-7"><a href="intro.html#cb15-7"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb15-8"><a href="intro.html#cb15-8"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="intro.html#cb15-9"></a><span class="co"># fig position of labels</span></span>
+<span id="cb15-10"><a href="intro.html#cb15-10"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb15-11"><a href="intro.html#cb15-11"></a><span class="co"># Draw sample index</span></span>
+<span id="cb15-12"><a href="intro.html#cb15-12"></a><span class="kw">text</span>((data[,var1]), (data[,var2]),  <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data),</span>
+<span id="cb15-13"><a href="intro.html#cb15-13"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">col=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)),<span class="dt">pos=</span>pos_plot)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-cov"></span>
+<img src="PCA_files/figure-html/fig-simple-cov-1.png" alt="Here, we select two variables and show how the data is spread according to both of the variables." width="672" />
+<p class="caption">
+Figure 2.5: Here, we select two variables and show how the data is spread according to both of the variables.
+</p>
+</div>
+<p>Figure <a href="intro.html#fig:fig-simple-cov">2.5</a> is called 2d scatter plot that is used to show the relationships between two variables. It’s now more evident that we can separate group 2 and 4 more easily. This means the combination of two variables gave us more information than a single variable at the time. At this time we can more formally say that we have two axis x and y (Variable 1 and 2) which define our data. Each axis has some information. To quantify that information, let’s agree that the amount of information in each axis is measured by variation of the observations in that axis.
+As said before, the variation is define as the the average squared distances from the mean. That can be easily computer using a simple R function (var):</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="intro.html#cb16-1"></a><span class="co"># calculate variation of variable 1</span></span>
+<span id="cb16-2"><a href="intro.html#cb16-2"></a>variation_var1&lt;-<span class="kw">var</span>(data[,var1])</span>
+<span id="cb16-3"><a href="intro.html#cb16-3"></a></span>
+<span id="cb16-4"><a href="intro.html#cb16-4"></a><span class="co"># calculate variation of variable 2</span></span>
+<span id="cb16-5"><a href="intro.html#cb16-5"></a>variation_var2&lt;-<span class="kw">var</span>(data[,var2])</span>
+<span id="cb16-6"><a href="intro.html#cb16-6"></a></span>
+<span id="cb16-7"><a href="intro.html#cb16-7"></a><span class="kw">sprintf</span>(<span class="st">&quot;Variation of variable1: %f Varition of variable2: %f&quot;</span>,variation_var1,variation_var2)</span></code></pre></div>
+<pre><code>## [1] &quot;Variation of variable1: 3.282278 Varition of variable2: 2.753621&quot;</code></pre>
+<p>In the beginning it might sound to use variation to quantify information as one variable can contain huge noise level that can easily be higher than another variable that is more informative. However, in the presence of no addition information (such as groups in this example), we can at least assume (hope) that if the experiment has been done perfectly the variation of information is higher than variation of noise. So in this case, we can say that variable 1 has more information than variable 2.</p>
+<p>We also mentioned that any two variables can possibly contain redundant information. To quantify that, we use a method that is called covariance. Covariance measures to what extend two variables are showing the same information. To calculate the covariance, for each of the observations (samples), we calculate difference of that observation to the mean for variable 1, we do the same thing for variable 2 and then multiply this the resulting numbers number. Once we did that for all the observations, we sum all the numbers and divide the results by total number of observations. The sign of covariance tells whether the two variables are positively or negatively related. The magnitude of covariance can be thought as total variation or the amount of redundancy between two samples. The higher the absolute value the higher the redundancy (we go through this in detail in the next chapters). The covariance of zero or close to zero means we have no or little redundancy.</p>
+<p>Let’s try to see what’s visually happening:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="intro.html#cb18-1"></a><span class="co"># define variables</span></span>
+<span id="cb18-2"><a href="intro.html#cb18-2"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb18-3"><a href="intro.html#cb18-3"></a>var2&lt;-<span class="dv">20355</span></span>
+<span id="cb18-4"><a href="intro.html#cb18-4"></a><span class="co"># plot the data</span></span>
+<span id="cb18-5"><a href="intro.html#cb18-5"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var2)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 2&quot;</span>)</span>
+<span id="cb18-6"><a href="intro.html#cb18-6"></a></span>
+<span id="cb18-7"><a href="intro.html#cb18-7"></a><span class="co"># fig position of labels</span></span>
+<span id="cb18-8"><a href="intro.html#cb18-8"></a>pos_plot&lt;-(<span class="kw">as.numeric</span>(<span class="kw">sort</span>(data[,variableIndex])<span class="op">&gt;</span><span class="kw">mean</span>(data[,variableIndex]))<span class="op">*</span><span class="dv">2</span>)<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb18-9"><a href="intro.html#cb18-9"></a><span class="co"># Draw sample index</span></span>
+<span id="cb18-10"><a href="intro.html#cb18-10"></a><span class="kw">text</span>((data[,var1]), (data[,var2]),  <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data),</span>
+<span id="cb18-11"><a href="intro.html#cb18-11"></a>     <span class="dt">cex=</span><span class="fl">0.65</span>,<span class="dt">pos=</span>pos_plot)</span>
+<span id="cb18-12"><a href="intro.html#cb18-12"></a></span>
+<span id="cb18-13"><a href="intro.html#cb18-13"></a><span class="co"># plot mean of variable 1</span></span>
+<span id="cb18-14"><a href="intro.html#cb18-14"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(data[,var1]),<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>)</span>
+<span id="cb18-15"><a href="intro.html#cb18-15"></a></span>
+<span id="cb18-16"><a href="intro.html#cb18-16"></a><span class="co"># plot mean of variable 2</span></span>
+<span id="cb18-17"><a href="intro.html#cb18-17"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">mean</span>(data[,var2]),<span class="dt">col=</span><span class="st">&quot;coral&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>)</span>
+<span id="cb18-18"><a href="intro.html#cb18-18"></a></span>
+<span id="cb18-19"><a href="intro.html#cb18-19"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data))</span>
+<span id="cb18-20"><a href="intro.html#cb18-20"></a>{</span>
+<span id="cb18-21"><a href="intro.html#cb18-21"></a>  </span>
+<span id="cb18-22"><a href="intro.html#cb18-22"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> (data[,var1])[i],<span class="dt">x1 =</span> <span class="kw">mean</span>(data[,var1]),<span class="dt">y0 =</span> (data[,var2])[i],<span class="dt">y1 =</span>  (data[,var2])[i],<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,</span>
+<span id="cb18-23"><a href="intro.html#cb18-23"></a>             <span class="dt">col=</span><span class="kw">ifelse</span>(data[i,var1]<span class="op">&gt;</span><span class="kw">mean</span>(data[,var1]),<span class="dt">yes =</span> <span class="st">&quot;indianred1&quot;</span>,<span class="dt">no =</span> <span class="st">&quot;lightblue&quot;</span>))</span>
+<span id="cb18-24"><a href="intro.html#cb18-24"></a>  </span>
+<span id="cb18-25"><a href="intro.html#cb18-25"></a>  </span>
+<span id="cb18-26"><a href="intro.html#cb18-26"></a>    <span class="kw">segments</span>(<span class="dt">x0 =</span> (data[,var1])[i],<span class="dt">x1 =</span> (data[,var1])[i],<span class="dt">y0 =</span> (data[,var2])[i],<span class="dt">y1 =</span>  <span class="kw">mean</span>(data[,var2]),<span class="dt">lty=</span><span class="st">&quot;dashed&quot;</span>,</span>
+<span id="cb18-27"><a href="intro.html#cb18-27"></a>             <span class="dt">col=</span><span class="kw">ifelse</span>(data[i,var2]<span class="op">&gt;</span><span class="kw">mean</span>(data[,var2]),<span class="dt">yes =</span> <span class="st">&quot;indianred1&quot;</span>,<span class="dt">no =</span> <span class="st">&quot;lightblue&quot;</span>))</span>
+<span id="cb18-28"><a href="intro.html#cb18-28"></a>}</span>
+<span id="cb18-29"><a href="intro.html#cb18-29"></a></span>
+<span id="cb18-30"><a href="intro.html#cb18-30"></a><span class="co"># add areas to the plot</span></span>
+<span id="cb18-31"><a href="intro.html#cb18-31"></a></span>
+<span id="cb18-32"><a href="intro.html#cb18-32"></a><span class="kw">text</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="st">&quot;Area 1&quot;</span>)</span>
+<span id="cb18-33"><a href="intro.html#cb18-33"></a><span class="kw">text</span>(<span class="dv">10</span>,<span class="dv">8</span>,<span class="st">&quot;Area 2&quot;</span>)</span>
+<span id="cb18-34"><a href="intro.html#cb18-34"></a><span class="kw">text</span>(<span class="dv">10</span>,<span class="fl">2.5</span>,<span class="st">&quot;Area 3&quot;</span>)</span>
+<span id="cb18-35"><a href="intro.html#cb18-35"></a><span class="kw">text</span>(<span class="dv">4</span>,<span class="fl">2.5</span>,<span class="st">&quot;Area 4&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-cov2"></span>
+<img src="PCA_files/figure-html/fig-simple-cov2-1.png" alt="Here, we select two variables and show how the data is spread according to both of the variables. The solid purple and coral lines show mean of variable and variable 2, respectively. For each observation, we have two lines showing whether it has higher or lower value compared to mean of variable one and variable 2." width="672" />
+<p class="caption">
+Figure 2.6: Here, we select two variables and show how the data is spread according to both of the variables. The solid purple and coral lines show mean of variable and variable 2, respectively. For each observation, we have two lines showing whether it has higher or lower value compared to mean of variable one and variable 2.
+</p>
+</div>
+<p>In Figure <a href="intro.html#fig:fig-simple-cov2">2.6</a>, we have plotted the mean of variable 1 using the vertical purple line and mean of the variable 2 using horizontal coral line. For each observation we have two lines, vertical line shows the difference of that observation to mean of variable 1 and horizontal line show the difference to the mean of variable 2. If the line is red, it means the difference is higher than zero and if the mean is blue, it means the difference is negative thus lower than zero.</p>
+<p>If an observation lays in areas 1 or 3, it means that it behaves oppositely (relative to the mean: solid lines) in variable 1 and 2. This means if the expression goes up in variable 1, it goes down in variable 2 (or vice versa). However, if an observation lays in areas 2 or 4, it means its behavior is consistent in both of the variables. If most observation end of being in areas 2 and 4, we will have a positive covariance, meaning that they change consistently both in variable 1 and variable 2. If most of them are in area 1 and 3, we will have a negative covariance, meaning that they change in opposite directions. If the observations lay in all the four areas with approximately the same magnitude (distance to the mean: length of the red and blue lines), we will have a low or no covariance.</p>
+<p>Please note that, the magnitude of the distances to the mean is also very important. For example even if all the observations end up in the areas 1 and 3 but one observation lays in area 2 with a very large distance from the means, we could still get a large positive covariance. In R the covariance is calculated using “cov” function:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="intro.html#cb19-1"></a><span class="co"># calculate variation of variable 1</span></span>
+<span id="cb19-2"><a href="intro.html#cb19-2"></a>covariation_var1_<span class="dv">2</span>&lt;-<span class="kw">cov</span>(data[,var1],data[,var2])</span>
+<span id="cb19-3"><a href="intro.html#cb19-3"></a></span>
+<span id="cb19-4"><a href="intro.html#cb19-4"></a><span class="kw">sprintf</span>(<span class="st">&quot;Covariation of variable1 and variable 2 is: %f&quot;</span>,covariation_var1_<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Covariation of variable1 and variable 2 is: 0.172791&quot;</code></pre>
+<p>We see that we got a low covariance which means that we have small redundancy in the two variables. This was expected just by looking at the Figure <a href="intro.html#fig:fig-simple-cov2">2.6</a>. Most of our observations ended up being scattered in all four ares with very similar magnitudes.</p>
+<p>This might be exiting as we have two variables that are showing complimentary information. We did not waste our resources on measuring the things that are showing the same information. However, we have bigger issue here! We just took a look at two of the variables out of 45101 measured ones! We specifically selected these variable to show this information. Look at this new variable:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="intro.html#cb21-1"></a><span class="co"># define number of plots in the figure</span></span>
+<span id="cb21-2"><a href="intro.html#cb21-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb21-3"><a href="intro.html#cb21-3"></a></span>
+<span id="cb21-4"><a href="intro.html#cb21-4"></a><span class="co"># define variables</span></span>
+<span id="cb21-5"><a href="intro.html#cb21-5"></a>var1&lt;-<span class="dv">18924</span></span>
+<span id="cb21-6"><a href="intro.html#cb21-6"></a>var2&lt;-<span class="dv">20355</span></span>
+<span id="cb21-7"><a href="intro.html#cb21-7"></a>var3&lt;-<span class="dv">18505</span></span>
+<span id="cb21-8"><a href="intro.html#cb21-8"></a><span class="co"># plot the data variable 1 vs 3</span></span>
+<span id="cb21-9"><a href="intro.html#cb21-9"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb21-10"><a href="intro.html#cb21-10"></a></span>
+<span id="cb21-11"><a href="intro.html#cb21-11"></a><span class="co"># create legend</span></span>
+<span id="cb21-12"><a href="intro.html#cb21-12"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb21-13"><a href="intro.html#cb21-13"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb21-14"><a href="intro.html#cb21-14"></a></span>
+<span id="cb21-15"><a href="intro.html#cb21-15"></a><span class="co"># plot the data variable 2 vs 3</span></span>
+<span id="cb21-16"><a href="intro.html#cb21-16"></a><span class="kw">plot</span>(data[,<span class="kw">c</span>(var2,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 2&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 3&quot;</span>,<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb21-17"><a href="intro.html#cb21-17"></a></span>
+<span id="cb21-18"><a href="intro.html#cb21-18"></a></span>
+<span id="cb21-19"><a href="intro.html#cb21-19"></a></span>
+<span id="cb21-20"><a href="intro.html#cb21-20"></a><span class="co"># load 3d scatter plot library</span></span>
+<span id="cb21-21"><a href="intro.html#cb21-21"></a><span class="kw">library</span>(<span class="st">&quot;scatterplot3d&quot;</span>)</span>
+<span id="cb21-22"><a href="intro.html#cb21-22"></a></span>
+<span id="cb21-23"><a href="intro.html#cb21-23"></a><span class="co"># plot the data</span></span>
+<span id="cb21-24"><a href="intro.html#cb21-24"></a><span class="kw">scatterplot3d</span>(data[,<span class="kw">c</span>(var1,var2,var3)],<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Variable 2&quot;</span>,<span class="dt">zlab =</span> <span class="st">&quot;Variable 3&quot;</span>,</span>
+<span id="cb21-25"><a href="intro.html#cb21-25"></a>              <span class="dt">angle =</span> <span class="dv">10</span>,<span class="dt">color=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:fig-simple-cov3"></span>
+<img src="PCA_files/figure-html/fig-simple-cov3-1.png" alt="Here, we select one of the previous variables and an additional one and show how the data is spread according to both of the variables." width="960" />
+<p class="caption">
+Figure 2.7: Here, we select one of the previous variables and an additional one and show how the data is spread according to both of the variables.
+</p>
+</div>
+<p>The covariance of this new variable with the old ones is variable one: 3.4341536 and variable 2: 1.4907196. It is also obvious from the Figure <a href="intro.html#fig:fig-simple-cov3">2.7</a> these new variable contain redundant information.</p>
+<p>What about others? how kind of information do they contain? which ones are redundant which ones are complimentary? If we have to do the same analysis on the entire dataset, at best, we can repeat our analysis for three variables at a time, meaning that we will end up doing that 15288975159150 times! And how about if we should use more than 3 variables at the time to inspect the data pattern?</p>
+<p>In fact, as the dimension of data (number of variables, e.g. genes) increases, it becomes very difficult to draw conclusion from the data. We just cannot do that using simple methods. Fortunately, we have some amazing methods coming to rescue! This is the topic of the next chapter.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pcamot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PCA.pdf", "PCA.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

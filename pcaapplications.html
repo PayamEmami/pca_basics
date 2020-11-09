@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 PCA (applications) | Principal Component Analysis (PCA)</title>
+  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 PCA (applications) | Principal Component Analysis (PCA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 PCA (applications) | Principal Component Analysis (PCA)" />
+  
+  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  
+
+<meta name="author" content="Payam Emami" />
+
+
+<meta name="date" content="2020-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pcamot.html"/>
+<link rel="next" href="exer.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
+<li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
+<li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
+<li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="exer.html"><a href="exer.html#exercise-1"><i class="fa fa-check"></i><b>5.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="5.3" data-path="exer.html"><a href="exer.html#exercise-2"><i class="fa fa-check"></i><b>5.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="5.4" data-path="exer.html"><a href="exer.html#exercise-3"><i class="fa fa-check"></i><b>5.4</b> Exercise 3</a></li>
+<li class="chapter" data-level="5.5" data-path="exer.html"><a href="exer.html#exercise-4"><i class="fa fa-check"></i><b>5.5</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pcamath.html"><a href="pcamath.html"><i class="fa fa-check"></i><b>6</b> PCA (mathematical details)</a><ul>
+<li class="chapter" data-level="6.1" data-path="pcamath.html"><a href="pcamath.html#summary-of-the-previous-chapter-2"><i class="fa fa-check"></i><b>6.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="6.2" data-path="pcamath.html"><a href="pcamath.html#foundations"><i class="fa fa-check"></i><b>6.2</b> Foundations</a></li>
+<li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
+<li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Principal Component Analysis (PCA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pcaapplications" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> PCA (applications)</h1>
+<div id="summary-of-the-previous-chapter-1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Summary of the previous chapter</h2>
+<p>We have <a href="pcamot.html#pcafri">already discussed</a> what PCA does. This method is used to create a set of new variables that are combination of the original variables. PCA then sort these variables in descending order with respect to their variation. The total variation of all new variables are always the same as the original ones. The new variables will be always orthogonal (no covariance, no redundancy). Simply talking, PCA rotates the data and shows a particular view of the data such that the user can see where most of the variation is sitting! One can later decide where this variation is of interest or not depending on the research question. At this stage, we would like to remind you about the dataset we are using. In our data we have 23 observations (e.g. samples/patients) and 45101 variables (e.g. measurements such as genes). The observation are coming from 4 groups: group 1, group 2, group 3, group 4 (e.g. cancer sub-types). We have been coloring our points in the plot based on these groups. Finally this experiment was run in 2 batches (in the lab!). So let’s get started by doing some PCA!</p>
+</div>
+<div id="pcar" class="section level2">
+<h2><span class="header-section-number">4.2</span> PCA in R</h2>
+<p>We are going to use <em>prcomp</em> function in R to perform PCA. The main reason for selecting this function is simple. This is a function that is coming default with R, gives decent accuracy and is more or less accepted at the default method of doing a PCA in R. However, you should note that there are many more ways of doing a PCA in R, some of which provide much more functionalities compared to <em>prcomp</em>.</p>
+<p>Before proceeding with using <em>prcomp</em>, it is important to organize your data correctly:</p>
+<ul>
+<li>From now on, your data is a matrix (like table! although it’s sloppy to say that!)</li>
+<li><strong>Your observations (e.g. samples) are in rows</strong></li>
+<li><strong>Your variables (e.g. measurements) are in column</strong></li>
+</ul>
+<p><em>If you ever wanted to use other functions, please do check in what format they need the data. This is important</em></p>
+<p>So to give you an example, we show you part of our data:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="pcaapplications.html#cb33-1"></a><span class="co"># show 10 variables and all the samples</span></span>
+<span id="cb33-2"><a href="pcaapplications.html#cb33-2"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">as.data.frame</span>(<span class="kw">round</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">2</span>)),<span class="dt">caption =</span> <span class="st">&quot;An example matrix where samples are in the rows and variables are in column&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:tablesample">Table 4.1: </span>An example matrix where samples are in the rows and variables are in column</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">V1</th>
+<th align="right">V2</th>
+<th align="right">V3</th>
+<th align="right">V4</th>
+<th align="right">V5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sample1_Group1_Batch1</td>
+<td align="right">1.67</td>
+<td align="right">1.85</td>
+<td align="right">1.53</td>
+<td align="right">1.39</td>
+<td align="right">1.83</td>
+</tr>
+<tr class="even">
+<td align="left">Sample2_Group1_Batch1</td>
+<td align="right">1.44</td>
+<td align="right">1.71</td>
+<td align="right">1.76</td>
+<td align="right">1.53</td>
+<td align="right">2.06</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample3_Group1_Batch1</td>
+<td align="right">1.33</td>
+<td align="right">1.77</td>
+<td align="right">1.76</td>
+<td align="right">1.53</td>
+<td align="right">1.76</td>
+</tr>
+<tr class="even">
+<td align="left">Sample4_Group1_Batch1</td>
+<td align="right">1.54</td>
+<td align="right">1.95</td>
+<td align="right">1.73</td>
+<td align="right">1.48</td>
+<td align="right">1.76</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample5_Group3_Batch1</td>
+<td align="right">1.52</td>
+<td align="right">1.88</td>
+<td align="right">1.63</td>
+<td align="right">1.40</td>
+<td align="right">1.73</td>
+</tr>
+<tr class="even">
+<td align="left">Sample6_Group3_Batch1</td>
+<td align="right">1.76</td>
+<td align="right">1.65</td>
+<td align="right">1.82</td>
+<td align="right">1.53</td>
+<td align="right">1.74</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample7_Group3_Batch1</td>
+<td align="right">1.63</td>
+<td align="right">1.77</td>
+<td align="right">1.84</td>
+<td align="right">1.48</td>
+<td align="right">1.88</td>
+</tr>
+<tr class="even">
+<td align="left">Sample8_Group3_Batch1</td>
+<td align="right">1.59</td>
+<td align="right">1.65</td>
+<td align="right">1.63</td>
+<td align="right">1.58</td>
+<td align="right">1.69</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample9_Group3_Batch1</td>
+<td align="right">1.41</td>
+<td align="right">1.67</td>
+<td align="right">1.65</td>
+<td align="right">1.49</td>
+<td align="right">1.76</td>
+</tr>
+<tr class="even">
+<td align="left">Sample10_Group2_Batch1</td>
+<td align="right">1.54</td>
+<td align="right">1.77</td>
+<td align="right">1.53</td>
+<td align="right">1.48</td>
+<td align="right">1.63</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample11_Group2_Batch1</td>
+<td align="right">1.57</td>
+<td align="right">2.17</td>
+<td align="right">1.53</td>
+<td align="right">1.47</td>
+<td align="right">1.76</td>
+</tr>
+<tr class="even">
+<td align="left">Sample12_Group2_Batch1</td>
+<td align="right">1.47</td>
+<td align="right">1.79</td>
+<td align="right">1.83</td>
+<td align="right">1.47</td>
+<td align="right">1.56</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample13_Group2_Batch1</td>
+<td align="right">1.53</td>
+<td align="right">1.49</td>
+<td align="right">1.43</td>
+<td align="right">1.37</td>
+<td align="right">1.78</td>
+</tr>
+<tr class="even">
+<td align="left">Sample14_Group4_Batch1</td>
+<td align="right">1.50</td>
+<td align="right">1.74</td>
+<td align="right">1.58</td>
+<td align="right">1.50</td>
+<td align="right">1.77</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample15_Group4_Batch1</td>
+<td align="right">1.70</td>
+<td align="right">1.98</td>
+<td align="right">1.48</td>
+<td align="right">1.56</td>
+<td align="right">1.82</td>
+</tr>
+<tr class="even">
+<td align="left">Sample16_Group1_Batch2</td>
+<td align="right">2.17</td>
+<td align="right">2.49</td>
+<td align="right">2.40</td>
+<td align="right">2.28</td>
+<td align="right">2.54</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample4_Group1_Batch2</td>
+<td align="right">2.08</td>
+<td align="right">2.55</td>
+<td align="right">2.25</td>
+<td align="right">2.09</td>
+<td align="right">2.55</td>
+</tr>
+<tr class="even">
+<td align="left">SampleA_Group2_Batch2</td>
+<td align="right">2.28</td>
+<td align="right">2.71</td>
+<td align="right">2.44</td>
+<td align="right">2.26</td>
+<td align="right">2.35</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample10_Group2_Batch2</td>
+<td align="right">2.28</td>
+<td align="right">2.50</td>
+<td align="right">2.18</td>
+<td align="right">2.17</td>
+<td align="right">2.34</td>
+</tr>
+<tr class="even">
+<td align="left">Sample5_Group3_Batch2</td>
+<td align="right">2.20</td>
+<td align="right">2.48</td>
+<td align="right">2.27</td>
+<td align="right">2.17</td>
+<td align="right">2.33</td>
+</tr>
+<tr class="odd">
+<td align="left">SampleB_Group4_Batch2</td>
+<td align="right">2.08</td>
+<td align="right">2.38</td>
+<td align="right">2.44</td>
+<td align="right">2.21</td>
+<td align="right">2.36</td>
+</tr>
+<tr class="even">
+<td align="left">SampleCGroup4_Batch2</td>
+<td align="right">2.02</td>
+<td align="right">2.31</td>
+<td align="right">2.20</td>
+<td align="right">2.16</td>
+<td align="right">2.43</td>
+</tr>
+<tr class="odd">
+<td align="left">SampleD_Group4_Batch2</td>
+<td align="right">1.89</td>
+<td align="right">2.10</td>
+<td align="right">2.11</td>
+<td align="right">2.14</td>
+<td align="right">2.14</td>
+</tr>
+</tbody>
+</table>
+<p>As you see in Table <a href="pcaapplications.html#tab:tablesample">4.1</a>, the observations are in rows (e.g. Sample1_Group1_Batch1) and variables are in columns (e.g. V1).</p>
+<p>By now you should now how to use functions in R. However, for just a brief reminder, a function is like a small program and does something. Exactly like in Microsoft Word where you click on some menus to for example to change the font. You then need to select the font, style, size etc. These options, we tend to call them parameters or arguments. Normally functions in R need a few parameters in order to do exactly what you want. <em>prcomp</em> is no exception! Fortunately, the number of parameters that we will use is not too many:</p>
+<ul>
+<li>x: is your data matrix</li>
+<li>center: Shifts the variables to have zero mean (Don’t panic! See below)</li>
+<li>scale: Scales the variables to have unit variance (Scary huh?! See below)</li>
+</ul>
+<p>That was it. We won’t use the rest of the parameters! You actually don’t need them unless you are doing something very special!</p>
+<p>The way that we run a function in R is to write name of the function then parenthesis open, add parameters (separated by comma) and parenthesis close! So for running a PCA we can do for example:</p>
+<pre><code>prcomp(x=x,center=TRUE,scale. = TRUE)</code></pre>
+<p>This is normally reffered to as <em>calling a function</em>. It says, run a pca, with parameters, x equals to x, center is true and scale is also true. Many functions in R give the results of their jobs some form. We normally say, they return something. So we can even be cooler and save the retuned results somewhere so we can use it.</p>
+<pre><code>pcaResults &lt;- prcomp(x=x,center=TRUE,scale. = TRUE)</code></pre>
+<p>As said before, <em>x</em> is your data matrix that we have already <a href="#tablesample">prepared</a>.</p>
+</div>
+<div id="centering" class="section level2">
+<h2><span class="header-section-number">4.3</span> Centering</h2>
+<p>We have a set of variables (e.g genes) in our data. If we set centering to <em>TRUE</em>, R, first, will calculate average of each variable and then subtract this average from the values of the variable (for each observation, e.g. sample).</p>
+<p>In short, it will shift the data so that the center of our data is zero. We can see an example of this for ten of our variables:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="pcaapplications.html#cb36-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb36-2"><a href="pcaapplications.html#cb36-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb36-3"><a href="pcaapplications.html#cb36-3"></a><span class="co"># show 10 variables and all the samples</span></span>
+<span id="cb36-4"><a href="pcaapplications.html#cb36-4"></a><span class="kw">boxplot</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],<span class="dt">xlab=</span><span class="st">&quot;Variable&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Variable value (e.g. expression)&quot;</span>)</span>
+<span id="cb36-5"><a href="pcaapplications.html#cb36-5"></a><span class="kw">title</span>(<span class="st">&quot;Original data&quot;</span>)</span>
+<span id="cb36-6"><a href="pcaapplications.html#cb36-6"></a><span class="co"># calculate the means</span></span>
+<span id="cb36-7"><a href="pcaapplications.html#cb36-7"></a>means &lt;-<span class="st"> </span><span class="kw">apply</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],<span class="dv">2</span>,mean)</span>
+<span id="cb36-8"><a href="pcaapplications.html#cb36-8"></a><span class="co">#plot the means</span></span>
+<span id="cb36-9"><a href="pcaapplications.html#cb36-9"></a><span class="kw">points</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">y =</span> means,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">pch=</span><span class="dv">18</span>)</span>
+<span id="cb36-10"><a href="pcaapplications.html#cb36-10"></a></span>
+<span id="cb36-11"><a href="pcaapplications.html#cb36-11"></a></span>
+<span id="cb36-12"><a href="pcaapplications.html#cb36-12"></a><span class="co"># show 10 variables and all the samples but centered</span></span>
+<span id="cb36-13"><a href="pcaapplications.html#cb36-13"></a><span class="kw">boxplot</span>(<span class="kw">scale</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],<span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>),<span class="dt">xlab=</span><span class="st">&quot;Variable&quot;</span>,</span>
+<span id="cb36-14"><a href="pcaapplications.html#cb36-14"></a>        <span class="dt">ylab=</span><span class="st">&quot;Variable value (e.g. expression)&quot;</span>)</span>
+<span id="cb36-15"><a href="pcaapplications.html#cb36-15"></a><span class="kw">title</span>(<span class="st">&quot;Centered data&quot;</span>)</span>
+<span id="cb36-16"><a href="pcaapplications.html#cb36-16"></a><span class="co"># calculate the means</span></span>
+<span id="cb36-17"><a href="pcaapplications.html#cb36-17"></a>means &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="kw">scale</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],<span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>),<span class="dv">2</span>,mean)</span>
+<span id="cb36-18"><a href="pcaapplications.html#cb36-18"></a><span class="co">#plot the means</span></span>
+<span id="cb36-19"><a href="pcaapplications.html#cb36-19"></a><span class="kw">points</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">y =</span> means,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">pch=</span><span class="dv">18</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:centerExample"></span>
+<img src="PCA_files/figure-html/centerExample-1.png" alt="Boxplot of ten variables before and after centering" width="672" />
+<p class="caption">
+Figure 4.1: Boxplot of ten variables before and after centering
+</p>
+</div>
+<p>Figure <a href="pcaapplications.html#fig:centerExample">4.1</a> shows boxplots of ten variables in our data. The left panel is showing the original data where the mean of each variable has been showing in red dimonds. In the right panel, we see that after centering the mean of all variables become zero. We will go through this in detail later. for now:</p>
+<p><strong>IMPORTANT: You MUST center your data for doing PCA. If your data is not centered, you are NOT doing PCA.</strong></p>
+<p>Setting the <em>center</em> parameters to <em>TRUE</em> will force prcomp to center your data automatically. <strong>DO NOT set this to FALSE if you are not sure whether your data is centered</strong></p>
+</div>
+<div id="scaling" class="section level2">
+<h2><span class="header-section-number">4.4</span> Scaling</h2>
+<p>Many datasets typically come in different scales and this happens even within a dataset. That means that if i measures three variables (e.g genes), the scale of the measurements can be different between these three. This is specially the case for high throughput experiments where thousands of variables are measured at the same time. A mini example would be one person measuring height in centimeter and another one measuring height in meter. Scaling is a way of forcing your variables to show one unit scale. One common of way of doing this, is to calculate standard deviation (square root of variance) of each variable, and divide the variable by this standard deviation. Let’s see if we can demonstrate what it means with an example:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="pcaapplications.html#cb37-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb37-2"><a href="pcaapplications.html#cb37-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb37-3"><a href="pcaapplications.html#cb37-3"></a></span>
+<span id="cb37-4"><a href="pcaapplications.html#cb37-4"></a><span class="co"># create two variables</span></span>
+<span id="cb37-5"><a href="pcaapplications.html#cb37-5"></a>varibale1&lt;-data[,var1]</span>
+<span id="cb37-6"><a href="pcaapplications.html#cb37-6"></a>varibale2&lt;-data[,var1]<span class="op">*</span><span class="dv">10</span></span>
+<span id="cb37-7"><a href="pcaapplications.html#cb37-7"></a></span>
+<span id="cb37-8"><a href="pcaapplications.html#cb37-8"></a><span class="co"># create a data frame</span></span>
+<span id="cb37-9"><a href="pcaapplications.html#cb37-9"></a>dataDummy&lt;-<span class="kw">data.frame</span>(<span class="dt">Variable1=</span>varibale1,<span class="dt">Variable2=</span>varibale2)</span>
+<span id="cb37-10"><a href="pcaapplications.html#cb37-10"></a></span>
+<span id="cb37-11"><a href="pcaapplications.html#cb37-11"></a></span>
+<span id="cb37-12"><a href="pcaapplications.html#cb37-12"></a><span class="co"># show 10 variables and all the samples</span></span>
+<span id="cb37-13"><a href="pcaapplications.html#cb37-13"></a><span class="kw">boxplot</span>(dataDummy,<span class="dt">xlab=</span><span class="st">&quot;Variable&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Variable value (e.g. expression)&quot;</span>)</span>
+<span id="cb37-14"><a href="pcaapplications.html#cb37-14"></a></span>
+<span id="cb37-15"><a href="pcaapplications.html#cb37-15"></a><span class="co"># plot scatter</span></span>
+<span id="cb37-16"><a href="pcaapplications.html#cb37-16"></a><span class="kw">plot</span>(dataDummy)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:scaleExample1"></span>
+<img src="PCA_files/figure-html/scaleExample1-1.png" alt="Example of two variables with different scales" width="672" />
+<p class="caption">
+Figure 4.2: Example of two variables with different scales
+</p>
+</div>
+<p>In Figure <a href="pcaapplications.html#fig:scaleExample1">4.2</a>(left panel) which one of these two variables has most of the variation? Well you are right! Variable2 has 328.2277629 whereas Variable1 has 3.2822776. Remember what PCA shows: the angle with most of the variation. Obviously, this is going to be Variable2. There is one point and i guess you also see it in the code. These two variables are identical except that Variable2 equals to Variable1 multiply by 100. You can see that in the scatter plot in the right panel. These two variables are identical. Let’s see the effect of scalling:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="pcaapplications.html#cb38-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb38-2"><a href="pcaapplications.html#cb38-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb38-3"><a href="pcaapplications.html#cb38-3"></a></span>
+<span id="cb38-4"><a href="pcaapplications.html#cb38-4"></a><span class="co"># create two variables</span></span>
+<span id="cb38-5"><a href="pcaapplications.html#cb38-5"></a>varibale1&lt;-data[,var1]</span>
+<span id="cb38-6"><a href="pcaapplications.html#cb38-6"></a>varibale2&lt;-data[,var1]<span class="op">*</span><span class="dv">10</span></span>
+<span id="cb38-7"><a href="pcaapplications.html#cb38-7"></a></span>
+<span id="cb38-8"><a href="pcaapplications.html#cb38-8"></a><span class="co"># create a data frame</span></span>
+<span id="cb38-9"><a href="pcaapplications.html#cb38-9"></a>dataDummy&lt;-<span class="kw">data.frame</span>(<span class="dt">Variable1=</span>varibale1,<span class="dt">Variable2=</span>varibale2)</span>
+<span id="cb38-10"><a href="pcaapplications.html#cb38-10"></a></span>
+<span id="cb38-11"><a href="pcaapplications.html#cb38-11"></a><span class="co"># scale the data, not center</span></span>
+<span id="cb38-12"><a href="pcaapplications.html#cb38-12"></a>dataDummy&lt;-<span class="kw">scale</span>(dataDummy,<span class="dt">center =</span> <span class="ot">FALSE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb38-13"><a href="pcaapplications.html#cb38-13"></a></span>
+<span id="cb38-14"><a href="pcaapplications.html#cb38-14"></a><span class="co"># show 10 variables and all the samples</span></span>
+<span id="cb38-15"><a href="pcaapplications.html#cb38-15"></a><span class="kw">boxplot</span>(dataDummy,<span class="dt">xlab=</span><span class="st">&quot;Variable&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Variable value (e.g. expression)&quot;</span>)</span>
+<span id="cb38-16"><a href="pcaapplications.html#cb38-16"></a></span>
+<span id="cb38-17"><a href="pcaapplications.html#cb38-17"></a><span class="co"># plot scatter</span></span>
+<span id="cb38-18"><a href="pcaapplications.html#cb38-18"></a><span class="kw">plot</span>(dataDummy)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:scaleExample2"></span>
+<img src="PCA_files/figure-html/scaleExample2-1.png" alt="Example of two variables which are scalled" width="672" />
+<p class="caption">
+Figure 4.3: Example of two variables which are scalled
+</p>
+</div>
+<p>Perfect! right?! Now we see that they are identical and obviously have the same variation (0.0494634). So we were fooled by scales. If we have thousands of variables and just one or two of them are coming from a different scales compared to the rest, PCA would also have been fooled and showed us only those two variables! So the point is:</p>
+<p><strong>If you don’t know your variables are in the same scale, set <em>scale</em> to <em>TRUE</em></strong></p>
+<p>The rule of thumb is that, if you don’t know anything about your data, set both scale and center to TRUE. You will be probably safe :)</p>
+<p>Now it’s time to use PCA to do something.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="pcaapplications.html#cb39-1"></a><span class="co"># do pca</span></span>
+<span id="cb39-2"><a href="pcaapplications.html#cb39-2"></a>pcaResults&lt;-<span class="kw">prcomp</span>(data,<span class="dt">scale. =</span> T,<span class="dt">center =</span> T)</span>
+<span id="cb39-3"><a href="pcaapplications.html#cb39-3"></a></span>
+<span id="cb39-4"><a href="pcaapplications.html#cb39-4"></a><span class="co"># convert pca result to dataframe</span></span>
+<span id="cb39-5"><a href="pcaapplications.html#cb39-5"></a>pcaResults_table&lt;-<span class="kw">data.frame</span>(<span class="dt">Elements =</span> <span class="kw">names</span>(pcaResults),</span>
+<span id="cb39-6"><a href="pcaapplications.html#cb39-6"></a>           <span class="dt">Classes =</span> <span class="kw">sapply</span>(pcaResults, <span class="cf">function</span>(x)<span class="kw">class</span>(x)[<span class="dv">1</span>]),</span>
+<span id="cb39-7"><a href="pcaapplications.html#cb39-7"></a>           <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>))</span>
+<span id="cb39-8"><a href="pcaapplications.html#cb39-8"></a></span>
+<span id="cb39-9"><a href="pcaapplications.html#cb39-9"></a><span class="co"># make a table</span></span>
+<span id="cb39-10"><a href="pcaapplications.html#cb39-10"></a>knitr<span class="op">::</span><span class="kw">kable</span>(pcaResults_table[<span class="kw">order</span>(<span class="kw">rownames</span>(pcaResults_table)),],<span class="dt">caption =</span> <span class="st">&quot;PCA output classes&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:tabpca1">Table 4.2: </span>PCA output classes</caption>
+<thead>
+<tr class="header">
+<th align="left">Elements</th>
+<th align="left">Classes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">x</td>
+<td align="left">matrix</td>
+</tr>
+<tr class="even">
+<td align="left">sdev</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">rotation</td>
+<td align="left">matrix</td>
+</tr>
+<tr class="even">
+<td align="left">center</td>
+<td align="left">numeric</td>
+</tr>
+<tr class="odd">
+<td align="left">scale</td>
+<td align="left">numeric</td>
+</tr>
+</tbody>
+</table>
+<p>PCA gives you a list. A list in R can be thought of a database that keep many different type of information for you (called elements). You can see what type of information is in the result (list) of PCA in table <a href="pcaapplications.html#tab:tabpca1">4.2</a>. The single elemnts of PCA list can be accessed using the dollar sign (<em>$</em>) which comes immediately after the name of the list.</p>
+<p>For example if you want to see the values of x, it can be accessed by</p>
+<pre><code>pcaResults$x</code></pre>
+<p>Or rotations can be accessed by</p>
+<pre><code>pcaResults$rotation</code></pre>
+<p>In the next sections we will use these elements to investigate our data.</p>
+</div>
+<div id="pcavisdimreduct" class="section level2">
+<h2><span class="header-section-number">4.5</span> Visualization of data and dimentionality reduction</h2>
+<p>One of primary aspect of pattern recognition is to visually look at the data and see how the observations (samples) have been spread compared to each other. Do we see our treatment to be well separated from our control groups (potentially indicating a treatment effect)? Do we see a gradient of sample spread with respect to dose of a drug we gave to the patients? Do we have any unnoticed experimental bias? The list of questions can go on and on and it’s pretty much impossible to list them all. The key point here is that for the reasons that we previously mentioned, it’s difficult ot look at the original data mainly due to large number of variables and in addition maybe the effect of interest is not “caused” by one variable but a combinition of different variables. We can use PCA (or similar methods) to squeeze the data into a set of limited variables that is easier to look at.</p>
+<p>These new variables are in <em>x</em> element of our pca result. These are normally called PC scores or <em>variates</em> or <em>x</em>.</p>
+<p>Let’s have a look at this:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="pcaapplications.html#cb42-1"></a><span class="co"># make a table</span></span>
+<span id="cb42-2"><a href="pcaapplications.html#cb42-2"></a>knitr<span class="op">::</span><span class="kw">kable</span>(pcaResults<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],</span>
+<span id="cb42-3"><a href="pcaapplications.html#cb42-3"></a>      <span class="dt">caption =</span> <span class="st">&quot;PCA output Scores (only top 5 are shown)&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:tabpca2">Table 4.3: </span>PCA output Scores (only top 5 are shown)</caption>
+<colgroup>
+<col width="29%" />
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">PC1</th>
+<th align="right">PC2</th>
+<th align="right">PC3</th>
+<th align="right">PC4</th>
+<th align="right">PC5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sample1_Group1_Batch1</td>
+<td align="right">-142.4977</td>
+<td align="right">-20.151157</td>
+<td align="right">7.364239</td>
+<td align="right">-23.7018049</td>
+<td align="right">4.9708775</td>
+</tr>
+<tr class="even">
+<td align="left">Sample2_Group1_Batch1</td>
+<td align="right">-135.2110</td>
+<td align="right">-50.462934</td>
+<td align="right">43.692008</td>
+<td align="right">-4.1229620</td>
+<td align="right">-1.9423228</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample3_Group1_Batch1</td>
+<td align="right">-139.0443</td>
+<td align="right">-61.125761</td>
+<td align="right">-4.613422</td>
+<td align="right">38.4579480</td>
+<td align="right">-22.1566490</td>
+</tr>
+<tr class="even">
+<td align="left">Sample4_Group1_Batch1</td>
+<td align="right">-140.9501</td>
+<td align="right">8.041048</td>
+<td align="right">17.950046</td>
+<td align="right">-37.9425775</td>
+<td align="right">15.5112450</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample5_Group3_Batch1</td>
+<td align="right">-139.9421</td>
+<td align="right">36.752186</td>
+<td align="right">21.762929</td>
+<td align="right">18.2192019</td>
+<td align="right">4.6907520</td>
+</tr>
+<tr class="even">
+<td align="left">Sample6_Group3_Batch1</td>
+<td align="right">-143.9337</td>
+<td align="right">-13.608741</td>
+<td align="right">1.569605</td>
+<td align="right">36.2175322</td>
+<td align="right">12.1779967</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample7_Group3_Batch1</td>
+<td align="right">-133.4457</td>
+<td align="right">7.473995</td>
+<td align="right">6.967519</td>
+<td align="right">32.2483403</td>
+<td align="right">56.7414888</td>
+</tr>
+<tr class="even">
+<td align="left">Sample8_Group3_Batch1</td>
+<td align="right">-141.5472</td>
+<td align="right">16.808439</td>
+<td align="right">12.889779</td>
+<td align="right">11.4550017</td>
+<td align="right">0.0100097</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample9_Group3_Batch1</td>
+<td align="right">-139.4096</td>
+<td align="right">41.871771</td>
+<td align="right">4.580464</td>
+<td align="right">-3.7737890</td>
+<td align="right">6.0779133</td>
+</tr>
+<tr class="even">
+<td align="left">Sample10_Group2_Batch1</td>
+<td align="right">-146.9726</td>
+<td align="right">-11.140862</td>
+<td align="right">-38.872539</td>
+<td align="right">-21.4178914</td>
+<td align="right">-11.5489616</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample11_Group2_Batch1</td>
+<td align="right">-142.0313</td>
+<td align="right">2.452566</td>
+<td align="right">20.086084</td>
+<td align="right">-8.0942913</td>
+<td align="right">-29.6993857</td>
+</tr>
+<tr class="even">
+<td align="left">Sample12_Group2_Batch1</td>
+<td align="right">-141.3450</td>
+<td align="right">-22.237362</td>
+<td align="right">9.148693</td>
+<td align="right">-1.5475102</td>
+<td align="right">0.9198088</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample13_Group2_Batch1</td>
+<td align="right">-143.9038</td>
+<td align="right">-1.859245</td>
+<td align="right">2.014499</td>
+<td align="right">-26.7160541</td>
+<td align="right">-10.9344309</td>
+</tr>
+<tr class="even">
+<td align="left">Sample14_Group4_Batch1</td>
+<td align="right">-147.4363</td>
+<td align="right">35.800426</td>
+<td align="right">-38.092775</td>
+<td align="right">-12.0340459</td>
+<td align="right">-0.2656263</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample15_Group4_Batch1</td>
+<td align="right">-139.3653</td>
+<td align="right">30.648049</td>
+<td align="right">-64.715916</td>
+<td align="right">4.0801686</td>
+<td align="right">-23.3560720</td>
+</tr>
+<tr class="even">
+<td align="left">Sample16_Group1_Batch2</td>
+<td align="right">266.2316</td>
+<td align="right">-38.382633</td>
+<td align="right">-28.188729</td>
+<td align="right">-9.7919721</td>
+<td align="right">38.3088649</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample4_Group1_Batch2</td>
+<td align="right">264.8721</td>
+<td align="right">6.932182</td>
+<td align="right">50.200805</td>
+<td align="right">-47.9462872</td>
+<td align="right">-2.1211571</td>
+</tr>
+<tr class="even">
+<td align="left">SampleA_Group2_Batch2</td>
+<td align="right">263.1922</td>
+<td align="right">-21.574565</td>
+<td align="right">-32.166062</td>
+<td align="right">-16.5126360</td>
+<td align="right">14.7941615</td>
+</tr>
+<tr class="odd">
+<td align="left">Sample10_Group2_Batch2</td>
+<td align="right">264.0484</td>
+<td align="right">-40.878854</td>
+<td align="right">-34.106663</td>
+<td align="right">2.0871555</td>
+<td align="right">-15.0694882</td>
+</tr>
+<tr class="even">
+<td align="left">Sample5_Group3_Batch2</td>
+<td align="right">264.1643</td>
+<td align="right">6.182041</td>
+<td align="right">23.738773</td>
+<td align="right">28.2694399</td>
+<td align="right">-22.8995487</td>
+</tr>
+<tr class="odd">
+<td align="left">SampleB_Group4_Batch2</td>
+<td align="right">263.8839</td>
+<td align="right">41.230650</td>
+<td align="right">-12.071945</td>
+<td align="right">0.3629786</td>
+<td align="right">0.8558170</td>
+</tr>
+<tr class="even">
+<td align="left">SampleCGroup4_Batch2</td>
+<td align="right">265.4505</td>
+<td align="right">17.661788</td>
+<td align="right">26.862815</td>
+<td align="right">19.4137281</td>
+<td align="right">-20.7695081</td>
+</tr>
+<tr class="odd">
+<td align="left">SampleD_Group4_Batch2</td>
+<td align="right">265.1927</td>
+<td align="right">29.566972</td>
+<td align="right">3.999793</td>
+<td align="right">22.7903267</td>
+<td align="right">5.7042151</td>
+</tr>
+</tbody>
+</table>
+<p>You can see in Table <a href="pcaapplications.html#tab:tabpca2">4.3</a> that the observation are in rows and the new variables (new axis) are in columns. The total number of new axis can be maximum of 23 that is the total number of observations we have in the dataset.</p>
+<p>So we have 23 new variables. If you remember, we said that PCA sort these new variables so that the first one is the one showing most of the variance. The seocnd one is showing the next largest variance and so forth.</p>
+<p>You can see the standard deviation of these new axis in</p>
+<pre><code>pcaResults$sdev</code></pre>
+<p>Each element of <em>pcaResults<span class="math inline">\(sdev* correspond to the standard deviation of the same variable in *pcaResults\)</span>x</em>. This means <em>pcaResults<span class="math inline">\(sdev[1]* is the standard deviation of the first column of *pcaResults\)</span>x</em>. The same thing for the second one, <em>pcaResults<span class="math inline">\(sdev[2]* is the standard deviation of the second column of *pcaResults\)</span>x</em>. Here we refer to each column of x as component. So component 1 means the new variable 1 that has been created by PCA.</p>
+<p>Intuitively, as we are interested in most of the variation, we go ahead and plot the first two components of PCA.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="pcaapplications.html#cb44-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb44-2"><a href="pcaapplications.html#cb44-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb44-3"><a href="pcaapplications.html#cb44-3"></a></span>
+<span id="cb44-4"><a href="pcaapplications.html#cb44-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb44-5"><a href="pcaapplications.html#cb44-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb44-6"><a href="pcaapplications.html#cb44-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb44-7"><a href="pcaapplications.html#cb44-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb44-8"><a href="pcaapplications.html#cb44-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb44-9"><a href="pcaapplications.html#cb44-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb44-10"><a href="pcaapplications.html#cb44-10"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample1"></span>
+<img src="PCA_files/figure-html/pcaexample1-1.png" alt="PCA of the data using first two components" width="672" />
+<p class="caption">
+Figure 4.4: PCA of the data using first two components
+</p>
+</div>
+<p>Amazing. This is our PCA results. Here in Figure ’<span class="citation">@ref</span>(fig:pcaexample1), the x axis is component 1 and the y axis is component 2 of the PCA. We can see that the first compoent alone shows us 87 percent of the total variation in our dataset. This is amazing! we have had 45101 variables with a total of 3.034990810^{4} variation. Now we can see 87 percent of the variation (2.628180310^{4}) in only one variable! And look, the second component only explains 2 percent of the total variation so it’s not even that important compared to the fist one. But hold on, we first need to see what this new variable actually shows us? Here the statistics does not help much, we as researcher should make sense of this component. By adding shapes, colors etc to the figure, we can start making sense this.</p>
+<p>Let’s add our group information first:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pcaapplications.html#cb45-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb45-2"><a href="pcaapplications.html#cb45-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb45-3"><a href="pcaapplications.html#cb45-3"></a></span>
+<span id="cb45-4"><a href="pcaapplications.html#cb45-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb45-5"><a href="pcaapplications.html#cb45-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb45-6"><a href="pcaapplications.html#cb45-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb45-7"><a href="pcaapplications.html#cb45-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb45-8"><a href="pcaapplications.html#cb45-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb45-9"><a href="pcaapplications.html#cb45-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb45-10"><a href="pcaapplications.html#cb45-10"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb45-11"><a href="pcaapplications.html#cb45-11"></a><span class="co"># add legend</span></span>
+<span id="cb45-12"><a href="pcaapplications.html#cb45-12"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb45-13"><a href="pcaapplications.html#cb45-13"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample2"></span>
+<img src="PCA_files/figure-html/pcaexample2-1.png" alt="PCA of the data using first two components" width="672" />
+<p class="caption">
+Figure 4.5: PCA of the data using first two components
+</p>
+</div>
+<p>Well, OK. Perhaps not something that we actually expected. The largest variation in our data is not coming from difference between our biological groups (e.g. cancer sub-types). Our group of interest is only visible in the component 2. Remember, we <a href="pcamot.html#pcamot">discussed that PCA is great for finding patterns</a>, the ones that we don’t expect, in an unbiased manner! There is something else in our data that we ignore! That is:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pcaapplications.html#cb46-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb46-2"><a href="pcaapplications.html#cb46-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb46-3"><a href="pcaapplications.html#cb46-3"></a></span>
+<span id="cb46-4"><a href="pcaapplications.html#cb46-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb46-5"><a href="pcaapplications.html#cb46-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb46-6"><a href="pcaapplications.html#cb46-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb46-7"><a href="pcaapplications.html#cb46-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb46-8"><a href="pcaapplications.html#cb46-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb46-9"><a href="pcaapplications.html#cb46-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb46-10"><a href="pcaapplications.html#cb46-10"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb46-11"><a href="pcaapplications.html#cb46-11"></a><span class="co"># add legend</span></span>
+<span id="cb46-12"><a href="pcaapplications.html#cb46-12"></a><span class="kw">legend</span>(<span class="st">&quot;center&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
+<span id="cb46-13"><a href="pcaapplications.html#cb46-13"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb46-14"><a href="pcaapplications.html#cb46-14"></a><span class="co"># add legend</span></span>
+<span id="cb46-15"><a href="pcaapplications.html#cb46-15"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb46-16"><a href="pcaapplications.html#cb46-16"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample3"></span>
+<img src="PCA_files/figure-html/pcaexample3-1.png" alt="PCA of the data using first two components (v2)" width="672" />
+<p class="caption">
+Figure 4.6: PCA of the data using first two components (v2)
+</p>
+</div>
+<p>Exactly. We have such a large batch effect between our samples. That is our largest variation. What should we do. Well, we can ignore it go to the next components. Let’s go up to ten components:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pcaapplications.html#cb47-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb47-2"><a href="pcaapplications.html#cb47-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb47-3"><a href="pcaapplications.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="pcaapplications.html#cb47-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb47-5"><a href="pcaapplications.html#cb47-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb47-6"><a href="pcaapplications.html#cb47-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb47-7"><a href="pcaapplications.html#cb47-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb47-8"><a href="pcaapplications.html#cb47-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb47-9"><a href="pcaapplications.html#cb47-9"></a><span class="kw">pairs</span>(pcaResults<span class="op">$</span>x[,<span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>)],</span>
+<span id="cb47-10"><a href="pcaapplications.html#cb47-10"></a>      <span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample4"></span>
+<img src="PCA_files/figure-html/pcaexample4-1.png" alt="PCA of the data using up to ten components" width="672" />
+<p class="caption">
+Figure 4.7: PCA of the data using up to ten components
+</p>
+</div>
+<p>In Figure <a href="pcaapplications.html#fig:pcaexample4">4.7</a>, we have plotted all possible pairs of components from 2 to 10. This might look scary a bit but If we take a plot in Figure <a href="pcaapplications.html#fig:pcaexample4">4.7</a> which has data points in it, we can figure out what is the x axis but just going up and down and look what “PC” is on that column. The same for the y axis. We can just go left and right and figure out which PC is in that row. The combination of PC2 and PC9 looks interesting as they show some group differences.</p>
+<p>Let’s plot them:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pcaapplications.html#cb48-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb48-2"><a href="pcaapplications.html#cb48-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb48-3"><a href="pcaapplications.html#cb48-3"></a></span>
+<span id="cb48-4"><a href="pcaapplications.html#cb48-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb48-5"><a href="pcaapplications.html#cb48-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb48-6"><a href="pcaapplications.html#cb48-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb48-7"><a href="pcaapplications.html#cb48-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb48-8"><a href="pcaapplications.html#cb48-8"></a><span class="co"># plot the first 2 and 9 components</span></span>
+<span id="cb48-9"><a href="pcaapplications.html#cb48-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span>)],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb48-10"><a href="pcaapplications.html#cb48-10"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC9, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">3</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),</span>
+<span id="cb48-11"><a href="pcaapplications.html#cb48-11"></a>     <span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb48-12"><a href="pcaapplications.html#cb48-12"></a><span class="co"># add legend</span></span>
+<span id="cb48-13"><a href="pcaapplications.html#cb48-13"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb48-14"><a href="pcaapplications.html#cb48-14"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb48-15"><a href="pcaapplications.html#cb48-15"></a></span>
+<span id="cb48-16"><a href="pcaapplications.html#cb48-16"></a><span class="co"># add legend</span></span>
+<span id="cb48-17"><a href="pcaapplications.html#cb48-17"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
+<span id="cb48-18"><a href="pcaapplications.html#cb48-18"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample5"></span>
+<img src="PCA_files/figure-html/pcaexample5-1.png" alt="PCA of the data 2 and 9 components" width="672" />
+<p class="caption">
+Figure 4.8: PCA of the data 2 and 9 components
+</p>
+</div>
+<p>That is not that bad! We can see differences between groups of interest and not batch effect. So we can conclude that there is certainly some differences between the groups but it’s much lower than our experimental factors (such as batch or others that we don’t know!). So our experiment has been successful. Please also note that, if you see the variation of interest in the first components, it’s generally a good sign (unless there is confounding somewhere) as PCA found what you wanted without knowing it, meaning that the signal has been very strong compared to noise! Now we want to move one step back and ask given the differences we see in these new variables, what can we say about the original variables (e.g. genes). Are there some genes specific responsible for these differences that we see? Or What are the genes that are influence by group (cancer sub-types) or even batches? This is the topic the next secion.</p>
+</div>
+<div id="pcavarselect" class="section level2">
+<h2><span class="header-section-number">4.6</span> Variable selection</h2>
+<p>In many experiments, we are not only interested in seeing whether the experiment has been successful, but we are also interested in know whether any of the measurements (variables) have been affected let’s say by some kind of perturbation? Variable selection is the key to answer this question. In short, we are going to single out the variables that might be of interest for further investigation. Some examples can be performing t-test or regression and deciding which variables are “statistically significant”. PCA also gives us a tool to do so. However, it does that without a need to do statistical testing.</p>
+<p>If we recall, in Table <a href="pcaapplications.html#tab:tabpca2">4.3</a>, we had another element (returned by PCA) that is called <em>rotation</em>. What are these? We have been repeatedly saying that PCA creates new variables that are <strong>combinations</strong> of the original variable. We can think about a combination like <em>New variable (let’s say component 1) = original variable 1 + original variable 2 + original variable 3</em>. However, PCA adds a little more! It adds weights to the original variables and then combine them. So the new variable is the weighted combination of the original ones. These weights <strong>in each component</strong> are indications of importance or influence of a particular variable on the data pattern we see in a component. These weight can be positive or negative, but for now, the larger the absolute value, the more interesting the variable is for us. At the end please note that these weights <em>rotations</em> are also called loadings in many contexts.</p>
+<p>Having this said let’s have a look at the <em>rotation</em>:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="pcaapplications.html#cb49-1"></a><span class="co"># make a table</span></span>
+<span id="cb49-2"><a href="pcaapplications.html#cb49-2"></a>knitr<span class="op">::</span><span class="kw">kable</span>(pcaResults<span class="op">$</span>rotation[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],</span>
+<span id="cb49-3"><a href="pcaapplications.html#cb49-3"></a>             <span class="dt">caption =</span> <span class="st">&quot;PCA output rotation (only top 5 are shown)&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:tabpca3">Table 4.4: </span>PCA output rotation (only top 5 are shown)</caption>
+<thead>
+<tr class="header">
+<th align="right">PC1</th>
+<th align="right">PC2</th>
+<th align="right">PC3</th>
+<th align="right">PC4</th>
+<th align="right">PC5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0046596</td>
+<td align="right">-0.0015491</td>
+<td align="right">-0.0050678</td>
+<td align="right">-0.0013241</td>
+<td align="right">0.0030454</td>
+</tr>
+<tr class="even">
+<td align="right">0.0044884</td>
+<td align="right">-0.0020155</td>
+<td align="right">-0.0023613</td>
+<td align="right">-0.0061551</td>
+<td align="right">-0.0025862</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0046884</td>
+<td align="right">-0.0038413</td>
+<td align="right">0.0016769</td>
+<td align="right">0.0037431</td>
+<td align="right">0.0104244</td>
+</tr>
+<tr class="even">
+<td align="right">0.0049866</td>
+<td align="right">-0.0010551</td>
+<td align="right">-0.0030093</td>
+<td align="right">0.0018562</td>
+<td align="right">0.0009776</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0047319</td>
+<td align="right">-0.0029789</td>
+<td align="right">0.0029067</td>
+<td align="right">-0.0035312</td>
+<td align="right">0.0034596</td>
+</tr>
+</tbody>
+</table>
+<p>In Table <a href="pcaapplications.html#tab:tabpca3">4.4</a>, we only show five variables (weights) for five components but in fact there are 23 components (PCs) for each we have 45101 weights.
+The way the we do variable selection is, for the component of interest we sort the absolute values of these weights in descending order, and the select top x highest variables (let’s say top 5 if we only want 5 variables). For this experiment, we have already select the component 2 and 9 to be important for us. Now let’s select top 5 variables for each component.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="pcaapplications.html#cb50-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb50-2"><a href="pcaapplications.html#cb50-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">las=</span><span class="dv">2</span>)</span>
+<span id="cb50-3"><a href="pcaapplications.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="pcaapplications.html#cb50-4"></a></span>
+<span id="cb50-5"><a href="pcaapplications.html#cb50-5"></a>PC2_rotations&lt;-pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">2</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">2</span>]</span>
+<span id="cb50-6"><a href="pcaapplications.html#cb50-6"></a></span>
+<span id="cb50-7"><a href="pcaapplications.html#cb50-7"></a><span class="kw">names</span>(PC2_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">2</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb50-8"><a href="pcaapplications.html#cb50-8"></a>PC2_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC2_rotations))                                 </span>
+<span id="cb50-9"><a href="pcaapplications.html#cb50-9"></a><span class="kw">barplot</span>(PC2_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 2&quot;</span>)</span>
+<span id="cb50-10"><a href="pcaapplications.html#cb50-10"></a><span class="co"># add legend</span></span>
+<span id="cb50-11"><a href="pcaapplications.html#cb50-11"></a><span class="co"># set number of figures</span></span>
+<span id="cb50-12"><a href="pcaapplications.html#cb50-12"></a></span>
+<span id="cb50-13"><a href="pcaapplications.html#cb50-13"></a></span>
+<span id="cb50-14"><a href="pcaapplications.html#cb50-14"></a></span>
+<span id="cb50-15"><a href="pcaapplications.html#cb50-15"></a>PC9_rotations&lt;-pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">9</span>]</span>
+<span id="cb50-16"><a href="pcaapplications.html#cb50-16"></a></span>
+<span id="cb50-17"><a href="pcaapplications.html#cb50-17"></a><span class="kw">names</span>(PC9_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb50-18"><a href="pcaapplications.html#cb50-18"></a>PC9_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC9_rotations))   </span>
+<span id="cb50-19"><a href="pcaapplications.html#cb50-19"></a><span class="kw">barplot</span>(PC9_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 9&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample6"></span>
+<img src="PCA_files/figure-html/pcaexample6-1.png" alt="Selecting top five variables for components 2 and 9" width="480" />
+<p class="caption">
+Figure 4.9: Selecting top five variables for components 2 and 9
+</p>
+</div>
+<p>We can see the name of the variable on the y axis and its contribution on the x axis. So we have 10 unique variables (the variables can sometime overlap between different components). We will have to interpret these variables together with <a href="#pcaexample5">components</a>. Because we see differences between groups 2, 3 and 4 in the second components, variables selected for this component influence the differences between the mentioned groups. The variables selected for the component 9, will mostly influence the differences between group 1 and the rest. It will take some time to get used to this kind of interpretation but after a while it will become very convenient to do variable selection using PCA. This way, we can avoid doing statistical testing, and thus avoid multiple testing problem. In addition, we can easily remove variables to avoid for example overfitting of statistical models and many other advantages.
+We can have a look at the variables we selected in isolation:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="pcaapplications.html#cb51-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb51-2"><a href="pcaapplications.html#cb51-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>))</span>
+<span id="cb51-3"><a href="pcaapplications.html#cb51-3"></a></span>
+<span id="cb51-4"><a href="pcaapplications.html#cb51-4"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC2_rotations,<span class="dt">decreasing =</span> T)))</span>
+<span id="cb51-5"><a href="pcaapplications.html#cb51-5"></a>{</span>
+<span id="cb51-6"><a href="pcaapplications.html#cb51-6"></a>  <span class="co"># plot the data</span></span>
+<span id="cb51-7"><a href="pcaapplications.html#cb51-7"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
+<span id="cb51-8"><a href="pcaapplications.html#cb51-8"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb51-9"><a href="pcaapplications.html#cb51-9"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
+<span id="cb51-10"><a href="pcaapplications.html#cb51-10"></a></span>
+<span id="cb51-11"><a href="pcaapplications.html#cb51-11"></a>}</span>
+<span id="cb51-12"><a href="pcaapplications.html#cb51-12"></a></span>
+<span id="cb51-13"><a href="pcaapplications.html#cb51-13"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC9_rotations,<span class="dt">decreasing =</span> T)))</span>
+<span id="cb51-14"><a href="pcaapplications.html#cb51-14"></a>{</span>
+<span id="cb51-15"><a href="pcaapplications.html#cb51-15"></a>  <span class="co"># plot the data</span></span>
+<span id="cb51-16"><a href="pcaapplications.html#cb51-16"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
+<span id="cb51-17"><a href="pcaapplications.html#cb51-17"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC9,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb51-18"><a href="pcaapplications.html#cb51-18"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
+<span id="cb51-19"><a href="pcaapplications.html#cb51-19"></a></span>
+<span id="cb51-20"><a href="pcaapplications.html#cb51-20"></a>}</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcaexample7"></span>
+<img src="PCA_files/figure-html/pcaexample7-1.png" alt="Top 5 variables per component are plotted" width="480" />
+<p class="caption">
+Figure 4.10: Top 5 variables per component are plotted
+</p>
+</div>
+<p>We can see that, in case of component 2, most variable show the same trend that the component 2 showed us. However, This is not the case in the component 9 where there is only one or maybe two variables (28492 and 44067) that showed what component 9 showed. There are several reasons for this, including:</p>
+<ul>
+<li>PCA looks where most of the variation is without knowing about the groups. We can see that there is single observation in for example variable 14987 that is very different compared to the rest of the observation.</li>
+<li>PCA components are combinations of <strong>all</strong> the variables. Simply because we chose to select the top five variables does not mean the rest of the variables are not influencing the pattern</li>
+<li>From the PCA perspective, this variables are top ones. This does not mean that they will answer our research question. That is of course up to us what to conclude!</li>
+<li>The distances between the observations in the PCA components would have been the same as the orginal data IF you did not remove any components. Now that we decided to remove some components, the distances are not the same.</li>
+</ul>
+<p>By now you should have a good understanding of application PCA for dimentionality reduction and visualization. We could squeeze our dataset with 45101 variables to a few ones still showing the overall data pattern. We could also extract variables with most influence on the data for the purpose of further investigations.</p>
+<p>We could stop here and you are good to start using PCA. But there is one more thing to talk about. Let’s move to the last section of this chapter.</p>
+</div>
+<div id="pcabtrm" class="section level2">
+<h2><span class="header-section-number">4.7</span> Batch removing (removing variation)</h2>
+<p>Working with PCA components is nice, their are standarized, they have specific meaning but there are situations that we want to work on the original data. However, maybe we find a variation of interest in a few PCA components and we have to keep that variation and remove the rest. Or it also can be that we found a variation that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw <a href="#pcaexample1">before</a>. Maybe we want to remove batch effect from our data. PCA will give us a very power tool to do so. Let’s have another look at the previous batch effect. We also select top two variables affected by the batch effect and plot them</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="pcaapplications.html#cb52-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb52-2"><a href="pcaapplications.html#cb52-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb52-3"><a href="pcaapplications.html#cb52-3"></a></span>
+<span id="cb52-4"><a href="pcaapplications.html#cb52-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb52-5"><a href="pcaapplications.html#cb52-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb52-6"><a href="pcaapplications.html#cb52-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb52-7"><a href="pcaapplications.html#cb52-7"></a>x.pvar &lt;-<span class="st"> </span>x.pvar <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span>
+<span id="cb52-8"><a href="pcaapplications.html#cb52-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb52-9"><a href="pcaapplications.html#cb52-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">1</span>]), <span class="st">&quot;percent&quot;</span>), </span>
+<span id="cb52-10"><a href="pcaapplications.html#cb52-10"></a>    <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">2</span>]), <span class="st">&quot;percent&quot;</span>), <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb52-11"><a href="pcaapplications.html#cb52-11"></a><span class="co"># plot title</span></span>
+<span id="cb52-12"><a href="pcaapplications.html#cb52-12"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect&quot;</span>)</span>
+<span id="cb52-13"><a href="pcaapplications.html#cb52-13"></a></span>
+<span id="cb52-14"><a href="pcaapplications.html#cb52-14"></a><span class="co"># add legend</span></span>
+<span id="cb52-15"><a href="pcaapplications.html#cb52-15"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend =</span> <span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>, <span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))), </span>
+<span id="cb52-16"><a href="pcaapplications.html#cb52-16"></a>    <span class="dt">pch =</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb52-17"><a href="pcaapplications.html#cb52-17"></a></span>
+<span id="cb52-18"><a href="pcaapplications.html#cb52-18"></a><span class="co"># </span></span>
+<span id="cb52-19"><a href="pcaapplications.html#cb52-19"></a>PC1_rotations &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </span>
+<span id="cb52-20"><a href="pcaapplications.html#cb52-20"></a>    <span class="dv">1</span>]</span>
+<span id="cb52-21"><a href="pcaapplications.html#cb52-21"></a></span>
+<span id="cb52-22"><a href="pcaapplications.html#cb52-22"></a><span class="kw">names</span>(PC1_rotations) &lt;-<span class="st"> </span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span>
+<span id="cb52-23"><a href="pcaapplications.html#cb52-23"></a></span>
+<span id="cb52-24"><a href="pcaapplications.html#cb52-24"></a><span class="kw">plot</span>(data[, (<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, </span>
+<span id="cb52-25"><a href="pcaapplications.html#cb52-25"></a>    <span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]), <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, <span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]), </span>
+<span id="cb52-26"><a href="pcaapplications.html#cb52-26"></a>    <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb52-27"><a href="pcaapplications.html#cb52-27"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcabatch1"></span>
+<img src="PCA_files/figure-html/pcabatch1-1.png" alt="PCA of the data showing the batch effect in our data" width="672" />
+<p class="caption">
+Figure 4.11: PCA of the data showing the batch effect in our data
+</p>
+</div>
+<p>Wow! Look at how the variables have been affected by batch effect. Now we do a trick (we will go through this in detail later) and ignore the component one and tell PCA to rebuild our dataset without that component but including all other components.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pcaapplications.html#cb53-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb53-2"><a href="pcaapplications.html#cb53-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb53-3"><a href="pcaapplications.html#cb53-3"></a></span>
+<span id="cb53-4"><a href="pcaapplications.html#cb53-4"></a><span class="co"># Reconstruct the data without the first component</span></span>
+<span id="cb53-5"><a href="pcaapplications.html#cb53-5"></a>new_data&lt;-pcaResults<span class="op">$</span>x[,<span class="op">-</span><span class="dv">1</span>]<span class="op">%*%</span><span class="kw">t</span>(pcaResults<span class="op">$</span>rotation[,<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb53-6"><a href="pcaapplications.html#cb53-6"></a></span>
+<span id="cb53-7"><a href="pcaapplications.html#cb53-7"></a><span class="co"># rescale and recenter the data</span></span>
+<span id="cb53-8"><a href="pcaapplications.html#cb53-8"></a>new_data&lt;-<span class="kw">scale</span>(new_data,<span class="dt">scale =</span> <span class="dv">1</span><span class="op">/</span>pcaResults<span class="op">$</span>scale,<span class="dt">center =</span> <span class="dv">-1</span><span class="op">*</span>pcaResults<span class="op">$</span>center)</span>
+<span id="cb53-9"><a href="pcaapplications.html#cb53-9"></a></span>
+<span id="cb53-10"><a href="pcaapplications.html#cb53-10"></a><span class="co"># do another PCA</span></span>
+<span id="cb53-11"><a href="pcaapplications.html#cb53-11"></a>pcaResults_new&lt;-<span class="kw">prcomp</span>(new_data,<span class="dt">center =</span> T,<span class="dt">scale. =</span> T)</span>
+<span id="cb53-12"><a href="pcaapplications.html#cb53-12"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb53-13"><a href="pcaapplications.html#cb53-13"></a>x.var &lt;-<span class="st"> </span>pcaResults_new<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb53-14"><a href="pcaapplications.html#cb53-14"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb53-15"><a href="pcaapplications.html#cb53-15"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb53-16"><a href="pcaapplications.html#cb53-16"></a><span class="co"># plot the first two components</span></span>
+<span id="cb53-17"><a href="pcaapplications.html#cb53-17"></a><span class="kw">plot</span>(pcaResults_new<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb53-18"><a href="pcaapplications.html#cb53-18"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb53-19"><a href="pcaapplications.html#cb53-19"></a><span class="co"># plot title</span></span>
+<span id="cb53-20"><a href="pcaapplications.html#cb53-20"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect removed&quot;</span>)</span>
+<span id="cb53-21"><a href="pcaapplications.html#cb53-21"></a></span>
+<span id="cb53-22"><a href="pcaapplications.html#cb53-22"></a><span class="co"># add legend</span></span>
+<span id="cb53-23"><a href="pcaapplications.html#cb53-23"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
+<span id="cb53-24"><a href="pcaapplications.html#cb53-24"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb53-25"><a href="pcaapplications.html#cb53-25"></a></span>
+<span id="cb53-26"><a href="pcaapplications.html#cb53-26"></a></span>
+<span id="cb53-27"><a href="pcaapplications.html#cb53-27"></a><span class="kw">plot</span>(new_data[,(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">1</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]),</span>
+<span id="cb53-28"><a href="pcaapplications.html#cb53-28"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb53-29"><a href="pcaapplications.html#cb53-29"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:pcabatch2"></span>
+<img src="PCA_files/figure-html/pcabatch2-1.png" alt="PCA of the data showing the removal of batch effect in our data" width="672" />
+<p class="caption">
+Figure 4.12: PCA of the data showing the removal of batch effect in our data
+</p>
+</div>
+<p>Isn’t this beautiful!? What we did in this plot (Figure <a href="pcaapplications.html#fig:pcabatch2">4.12</a> ) was rebuilding (called reconstruction) of our data without the variation that we are not interested in and did another PCA to check where most of the variation is in the new data (the plot on the left)! We also plotted the same variables that we plotted in Figure <a href="pcaapplications.html#fig:pcabatch1">4.11</a>. We clearly see that the batch effect has gone. We can use the very same method to remove/keep any variation or data pattern. We can also use the same method to decrease the size of images etc etc.</p>
+<p>That was it for the application PCA. We are going to do some simple exercises in <a href="exer.html#exer">the next chapter</a> and then jump into <a href="pcamath.html#pcamath">the mathematical</a> details of PCA.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pcamot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exer.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PCA.pdf", "PCA.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

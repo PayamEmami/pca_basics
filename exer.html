@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Exercises | Principal Component Analysis (PCA)</title>
+  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Exercises | Principal Component Analysis (PCA)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Exercises | Principal Component Analysis (PCA)" />
+  
+  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  
+
+<meta name="author" content="Payam Emami" />
+
+
+<meta name="date" content="2020-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pcaapplications.html"/>
+<link rel="next" href="pcamath.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
+<li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
+<li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
+<li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
+<li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="exer.html"><a href="exer.html#exercise-1"><i class="fa fa-check"></i><b>5.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="5.3" data-path="exer.html"><a href="exer.html#exercise-2"><i class="fa fa-check"></i><b>5.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="5.4" data-path="exer.html"><a href="exer.html#exercise-3"><i class="fa fa-check"></i><b>5.4</b> Exercise 3</a></li>
+<li class="chapter" data-level="5.5" data-path="exer.html"><a href="exer.html#exercise-4"><i class="fa fa-check"></i><b>5.5</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="pcamath.html"><a href="pcamath.html"><i class="fa fa-check"></i><b>6</b> PCA (mathematical details)</a><ul>
+<li class="chapter" data-level="6.1" data-path="pcamath.html"><a href="pcamath.html#summary-of-the-previous-chapter-2"><i class="fa fa-check"></i><b>6.1</b> Summary of the previous chapter</a></li>
+<li class="chapter" data-level="6.2" data-path="pcamath.html"><a href="pcamath.html#foundations"><i class="fa fa-check"></i><b>6.2</b> Foundations</a></li>
+<li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
+<li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Principal Component Analysis (PCA)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exer" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Exercises</h1>
+<p>Welcome to the exercises! We are going to do three exercises based on a dataset that is already available in you R environment. We are not providing answer to the exercises. You will have to find them yourself.</p>
+<div id="data" class="section level2">
+<h2><span class="header-section-number">5.1</span> Data</h2>
+<p>The dataset is called <em>iris</em>. It’s coming default with R. According to R help page this is:</p>
+<pre><code>This famous (Fisher&#39;s or Anderson&#39;s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginic</code></pre>
+<p>You can simply write iris in your R console to make sure you have the dataset. If you see an error, try</p>
+<pre><code>data(iris)</code></pre>
+<p>The dataset contains 5 columns corresponding to four variables and one grouping information.</p>
+<p>PCA only works on the numberical data. You can extract the four numerical variables using</p>
+<pre><code>iris[,1:4]</code></pre>
+<p>The grouping information can be extracted using</p>
+<pre><code>iris[,5]</code></pre>
+<p>Now you have all you need!</p>
+</div>
+<div id="exercise-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> Exercise 1</h2>
+<p>How does the data look? Do you see any pattern!? Any differences between groups?</p>
+<p>Produce a plot showing the differences between the groups. You will have to do a pca and make a plot of PCA scores (components)</p>
+</div>
+<div id="exercise-2" class="section level2">
+<h2><span class="header-section-number">5.3</span> Exercise 2</h2>
+<p>What is the most important variable in component 4? What does it show? What is the meaning of it?</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2><span class="header-section-number">5.4</span> Exercise 3</h2>
+<p>What is the most important variable affected by the species of lowers?</p>
+</div>
+<div id="exercise-4" class="section level2">
+<h2><span class="header-section-number">5.5</span> Exercise 4</h2>
+<p>Remove the first component and reconstruct the data. Now repeat exercises 1 to 3!</p>
+<p>Goog luck!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pcaapplications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pcamath.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PCA.pdf", "PCA.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
