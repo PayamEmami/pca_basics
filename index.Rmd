@@ -21,7 +21,6 @@ In order to run the code in this chapter, you will need to install a number of p
 
 The **bookdown** package can be installed from CRAN or Github:
 
-```{{r setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE, tidy.opts=list(width.cutoff=60), tidy=TRUE)```
 
 ```{r eval=TRUE,each=FALSE,message=FALSE,warning=FALSE}
 install.packages("bookdown")

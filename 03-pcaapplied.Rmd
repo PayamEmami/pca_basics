@@ -22,7 +22,7 @@ Before proceeding with using *prcomp*, it is important to organize your data cor
 
 So to give you an example, we show you part of our data:
 
-```{r tablesample,warning=FALSE,message=FALSE,tidy=TRUE, tidy.opts=list(width.cutoff=50)}
+```{r tablesample,warning=FALSE,message=FALSE, tidy.opts=list(width.cutoff=50)}
 
 # show 10 variables and all the samples
 knitr::kable(as.data.frame(round(data[,1:5],2)),caption = "An example matrix where samples are in the rows and variables are in column")
@@ -181,7 +181,7 @@ These new variables are in *x* element of our pca result. These are normally cal
 
 Let's have a look at this:
 
-```{r tabpca2,tidy=TRUE}
+```{r tabpca2}
 
 
 # make a table
