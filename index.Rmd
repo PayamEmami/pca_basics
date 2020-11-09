@@ -23,7 +23,7 @@ The **bookdown** package can be installed from CRAN or Github:
 
 ```{{r setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE, tidy.opts=list(width.cutoff=60), tidy=TRUE)```
 
-```{r eval=FALSE}
+```{r eval=TRUE,each=FALSE,message=FALSE,warning=FALSE}
 install.packages("bookdown")
 install.packages("scatterplot3d")
 install.packages("plotrix")
