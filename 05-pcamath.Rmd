@@ -1066,7 +1066,9 @@ If we have thousands of variables (thousands of dimensions),defining our space t
 
 Almost all the operations that we will be talking about in the rest of the chapter is around square matrices. Let's quickly define them and go forward with the rest of the chapter.
 
+
 #### Square matrices
+
 A Square matrix is a matrix with the same number of rows and columns. Square matrices are used in linear algebra quite a lot and are easier to work with. There are several reasons to why we want to use square matrices but to summarize all:
 When we multiply a matrix with $n$ number of rows and $m$ number columns by by another matrix with $m$ rows and $l$ columns, we are mapping the space from $m$ to $n$ which is essentially another space which might change the definitions of certain things. In many cases, we would like to stay in the same dimensions (not going to a totally different space). In these cases, square matrices are used to map from $n$ to $n$, meaning that it maps from a space to itself. Please note that, we are still doing the transformation to the vectors and everything else in that space, but we are in the same dimensions. Let's look at an example.
 
@@ -1098,7 +1100,326 @@ You see in Figure \@ref(fig:matrix9) that at some point the meaning of things st
 
 In addition, working on square matrices gives us some extra tools that are handy for describing the space and the transformation itself.
 
+##### Determinant of a matrix
+
+As we discussed before, matrix multiplication will change the space and anything inside. This change can be rotation, stretching, squeezing etc. Some transformation such squeezing will make the space smaller, some like stretching will make it bigger, and some like rotation does not change the size or the volume of our space. Determinant of a matrix will summarize for us whether the transformation make the volume of our data smaller or bigger or unchanged. Let's have a look at an example:
+
+```{r matrix10, fig.cap='Space volume of cat', fig.align='center',warning=FALSE,message=FALSE}
+# set number of figures
+par(mfrow=c(2,2))
+
+# read the data
+cat_data<-read.table("data/cat.tsv")[,2:3]
+
+# plot the original space
+plot(cat_data,xlab="",ylab="",xlim=c(-110,110),ylim=c(-150,150))
+# write title
+title("Original")
+
+# create a rotation matrix
+tet<-2
+b<-matrix(c(cos(tet),sin(tet),-sin(tet),cos(tet)),nrow = 2,byrow = T)
+
+# plot the rotated data
+rt_data<-t(b%*%t(as.matrix(cat_data)))
+plot(rt_data,xlab="",ylab="",xlim=c(-110,110),ylim=c(-150,150))
+title("Rotated")
+# do inverse
+bs<-matrix(c(0.5,0,0,0.5),2)
+# plot inverse
+plot(t(bs%*%t(as.matrix(cat_data))),xlab="",ylab="",xlim=c(-110,110),ylim=c(-150,150))
+# write title
+title("Squeezing")
+
+bs2<-matrix(c(1.5,0,0,1.5),2)
+# plot inverse
+plot(t(bs2%*%t(as.matrix(cat_data))),xlab="",ylab="",xlim=c(-110,110),ylim=c(-150,150))
+# write title
+title("Stretching")
+
+
+
+```
+
+It's obvious in the Figure \@ref(fig:matrix11) that, the volume of data is the same between the original cat picture and the rotated one. This gives us determinant of `r det(b)` for rotated space, meaning that the volume has not changed. Anything lower than one, means the volume has decreased. For example, in Squeezing, the determinant is `r det(bs)`. Obviously in stretching, the volume has increasing which gives us the determinant of `r det(bs2)`, meaning that the volume has increased by `r det(bs2)` scaling factor. 
+
+```{definition, label="det", name="Determinant"}
+Determinant is a scalar value that is computed from square matrices. The absolute value of determinant shows the scaling of the volume resulted by the matrix transformation. Here we show the determinant of matrix A by |A|.
+It should be clear by now that the determinant of zero means that our transformation has mapped the space to something that has no volume for example, either a line or just the origin. More formally, if there exist two columns or rows in the matrix that are linear dependent (eg. $\vec{a}=c \times \vec{b}$), the determinant will be zero. 
+
+```
+
+The determinant of 2 by 2 matrix is calculated by:
+  
+$$|A|=\begin{vmatrix} a & b \\ c & d \end{vmatrix}=
+  ad-bc$$
+
+For 3 by 3:
+
+$$|A|=\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}=
+  a\begin{vmatrix} e & f \\ h & i \end{vmatrix}-b\begin{vmatrix} d & f \\ g & i \end{vmatrix}+c\begin{vmatrix} d & e \\ h & g \end{vmatrix}=
+  aei+bfg+cdh-ceg-bdi-afh$$
+
+
+For example:
+
+  $$|A|=\begin{vmatrix} 1 & 0\\ 0 & 1 \end{vmatrix}=
+  1 \times 1-0 \times 0=1$$
+
+In practice these numbers are calculated by a software for a programming language.
+
+  
 ##### Inverse of a matrix
+
+Inverse of a matrix is define as the opposite transformation of what it does to the space (the inverse of a matrix $X$ is shown by $X^{-1}$). For example, if a matrix rotates the space by $45^o$, the inverse of it will rotate the space back by $45^o$. Let's have a look at an example:
+
+
+```{r matrix11, fig.cap='Inverse of a matrix', fig.align='center',warning=FALSE,message=FALSE}
+# set number of figures
+par(mfrow=c(1,3))
+
+# read the data
+cat_data<-read.table("data/cat.tsv")[,2:3]
+
+# plot the original space
+plot(cat_data,xlab="",ylab="")
+# write title
+title("Original space")
+
+# create a rotation matrix
+tet<-2
+b<-matrix(c(cos(tet),sin(tet),-sin(tet),cos(tet)),nrow = 2,byrow = T)
+
+# plot the rotated data
+rt_data<-t(b%*%t(as.matrix(cat_data)))
+plot(rt_data,xlab="",ylab="")
+title("Rotated data")
+# do inverse
+bin<-solve(b)
+# plot inverse
+plot(t(bin%*%t(as.matrix(rt_data))),xlab="",ylab="")
+# write title
+title("Inverse of rotation")
+
+
+
+```
+
+Another way of understanding the inverse is by thinking about division. If we have a scalar $7$ and multiply it by another scalar $2$, giving us $14$, how do we go back to $2$? Well, we divide $14$ by $7$. The division is matrix world is by multiply the result matrix by the inverse of the transformation matrix. Therefore, we can deduce that if $\frac{7}{7}=1$, $X\cdot X^{-1}=I$. Here $I$ is a special matrix (called identity matrix) that has "1" on its main diagonal elements and zero elsewhere. I identity matrix does not change the space if multiply with another matrix. 
+
+```{definition, label="inv", name="Inverse of a matrix"}
+Inverse of matrix $A$ is define by the reverse transformation induced by A which is denoted by $A^-1$. More formally if the matrix is invertible, there exists another matrix  $A^-1$ where $A \cdot A^{-1} =A^{-1} \cdot A=I$, where $I$ is indentity matrix. Not all the matrices have inverse. If the determinant (\@ref(def:det)) of a matrix is zero, the matrix is not invertible (there is no reverse trasformation). 
+
+```
+
+There are many methods for finding of inverse of a matrix. Here we focus on one solution. 
+
+Given, a matrix $A$, $A^{-1}$ can be calculated using:
+
+
+$$A^{-1}=\frac{1}{|A|}\begin{vmatrix} C_{11} & C_{21} & ... & C_{n1}\\ C_{12} & C_{22} & ... & C_{n2}\\.&.&.&.\\.&.&.&.\\.&.&.&.\\C_{1n} & C_{2n} & ... & C_{nn}\
+\end{vmatrix}$$
+
+Yes. It looks scary and in fact it is!. Let's break it down to three steps: 
+
+**Step 1:**
+In step one, we want to find that big matrix. 
+
+$$\begin{vmatrix} C_{11} & C_{21} & ... & C_{n1}\\ C_{12} & C_{22} & ... & C_{n2}\\\vdots &\vdots&\ddots& \vdots\\C_{1n} & C_{2n} & ... & C_{nn}\
+\end{vmatrix}$$
+
+This is called cofactors. It still looks scary but let's look at the a square matrix together. 
+
+
+$$\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}$$
+Can we see any sub-square in this matrix? Let's try to see how we can extract the sub squares of this matrix:
+
+Let's select the first element of the matrix, that is $a$: 
+
+$$
+
+\left|\begin{array}{ccc}
+\textbf{a} & \underline{b} & \underline{c}\\ 
+\underline{d} &
+\begin{array}{|c}
+\hline e
+\end{array} & 
+\begin{array}{c|}
+\hline f
+\end{array}
+\\ \underline{g} &
+\begin{array}{|c}
+h\\ \hline 
+\end{array} & 
+\begin{array}{c|}
+i\\
+\hline
+\end{array}\end{array}\right|
+$$
+$a$ is bold in the matrix above, if we ignore all elements (underlined text) sitting on the same row ($b$ and $c$) and same column ($d$ and $g$) as $a$, the rest of the elements give us a square. We just calculate the determinant of this square and call it $a_t$. We put $a_t$ in an empty matrix in the exact location of $a$, $\begin{vmatrix} a_t &  & \\  &  & \\ &  & \end{vmatrix}$ We now move to the second element in our matrix ($b$). 
+
+
+
+
+$$
+\left|\begin{array}{ccc}
+\underline{a} & \textbf{b} & \underline{c}\\ 
+\begin{array}{|c}
+ \hline d
+ \end{array} &
+\underline{e}
+ & 
+\begin{array}{c|}
+\hline f
+\end{array} 
+\\
+
+\begin{array}{|c}
+g \\ \hline 
+ \end{array}  &
+
+\begin{array}{c}
+\underline{h}\\ 
+\end{array} & 
+\begin{array}{c|}
+i\\
+\hline
+\end{array}\end{array}\right|
+$$
+In this case, if we ignore all the underlined elements, we will end up with another square $\begin{vmatrix} d & f \\ g & i \end{vmatrix}$, we calculate its determinant call it $b_t$. We put it in the matrix:
+$\begin{vmatrix} a_t & b_t & \\  &  & \\ &  & \end{vmatrix}$
+If we do the same procedure for all the elements of the matrix, we end up with 
+
+$$M=\begin{vmatrix} a_t & b_t &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}$$
+
+This is our matrix of minor. 
+
+
+**step 2**
+
+We can now calculate our matrix of cofactors easily. We start from the first element of $M$ and multiply with $+1$
+
+$$M_1=\begin{vmatrix} a_t \times +1 & b_t &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}$$
+We now take the second element and multiply by -1!
+
+$$M_1=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}$$
+Now for the third one +1!
+$$M_1=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \times +1 \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}$$
+We just keep doing this for all the elements and every time change the sign of $1$ to $+$ or $-$. 
+
+$$C=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \times +1 \\ d_t \times -1 & e_t \times +1 & f_t \times -1\\g_t \times +1 & h_t \times -1 &i_t\times +1 \end{vmatrix}$$
+We now transpose $C$. 
+
+```{definition, label="transpose", name="Transpose of a matrix"}
+Transpose of a matrix is simply an operation and swap the position of rows and columns of the matrix, so the first column of the matrix is now the first row and so forth. Traspose of matrix $X$ is shown by $X^T$. For example,
+
+$X=\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}$
+So
+
+$X^{T}=\begin{vmatrix} a & d &g \\ b & e & h\\c & f &i \end{vmatrix}$
+  
+```
+
+At this stage the big formula we had up there can be written as 
+$$A^{-1}=\frac{1}{|A|}C^T$$
+Where $C^T$ is the transpose of the $C$ matrix we calculate up there and $|A|$ is determinant of $A$ that we know how to calculate (\@ref(def:det)).
+
+For example,
+
+$$A=\begin{vmatrix}
+1 & 4 & 3\\
+1 & 5 & 1\\
+3 & 2 & 1\\
+\end{vmatrix}$$
+
+
+We find $a_t=5 \times 1 - 1 \times 2=3$, $b_t=1 \times 1 - 1 \times 3=-2$, ... , $i_t=1 \times 5 - 4 \times 1=1$
+
+We put them to a matrix 
+
+$$C=
+\begin{vmatrix}
+
+3 & -2 & -13\\
+
+-2 & -8 & -10\\
+
+-11 & -2 & 1\\
+
+\end{vmatrix}$$
+
+Now we multiply this by $+$ and $-$ (this is elementwise multiplication: each element on the left hand matrix will be multiplied by its corresponding one right hand):
+
+$$C=\begin{vmatrix}
+
+3 & -2 & -13\\
+
+-2 & -8 & -10\\
+
+-11 & -2 & 1\\
+
+\end{vmatrix} \times \begin{vmatrix}
+
+1 & -1 & 1\\
+
+-1 & 1 & -1\\
+
+1 & -1 & 1\\
+
+\end{vmatrix}=\begin{vmatrix}
+
+3 & 2 & -13\\
+
+2 & -8 & 10\\
+
+-11 & 2 & 1\\
+
+\end{vmatrix}$$
+
+we can now calculate the transpose of $C$:
+
+$$C^T=\begin{vmatrix}
+
+3 & 2 & -13\\
+
+2 & -8 & 10\\
+
+-11 & 2 & 1\\
+
+\end{vmatrix}^{T}=\begin{vmatrix}
+
+3 & 2 & -11\\
+
+2 & -8 & 2\\
+
+-13 & 10 & 1\\
+
+\end{vmatrix}$$
+
+$$A^{-1}=\frac{1}{|A|}C^T=  \frac{1}{-28} \begin{vmatrix}
+
+3 & 2 & -11\\
+
+2 & -8 & 2\\
+
+-13 & 10 & 1\\
+
+\end{vmatrix}=\begin{vmatrix}
+
+-0.1071429 & -0.0714286 & 0.3928571\\
+
+-0.0714286 & 0.2857143 & -0.0714286\\
+
+0.4642857 & -0.3571429 & -0.0357143\\
+\end{vmatrix}
+
+$$
+
+In practice you will use a function in R to do that:
+
+    solve(A)
+    
+Easy right?! Let's move forward.
 
 #### Rank of a matrix
 
