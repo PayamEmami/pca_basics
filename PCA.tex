@@ -110,7 +110,7 @@
 
 \title{Principal Component Analysis (PCA)}
 \author{Payam Emami}
-\date{2020-11-09}
+\date{2020-11-11}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -141,13 +141,12 @@ In order to run the code in this chapter, you will need to install a number of p
 
 The \textbf{bookdown} package can be installed from CRAN or Github:
 
-\texttt{\{\{r\ setup,\ include=FALSE\}\ knitr::opts\_chunk\$set(echo\ =\ TRUE,\ tidy.opts=list(width.cutoff=60),\ tidy=TRUE)}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"scatterplot3d"}\NormalTok{)}
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"plotrix"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"formatR"}\NormalTok{)}
 
 \KeywordTok{library}\NormalTok{(scatterplot3d)}
 \KeywordTok{library}\NormalTok{(plotrix)}
@@ -1120,8 +1119,7 @@ So to give you an example, we show you part of our data:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# show 10 variables and all the samples}
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{round}\NormalTok{(data[, }\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{], }\DecValTok{2}\NormalTok{)), }
-    \DataTypeTok{caption =} \StringTok{"An example matrix where samples are in the rows and variables are in column"}\NormalTok{)}
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{round}\NormalTok{(data[,}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{],}\DecValTok{2}\NormalTok{)),}\DataTypeTok{caption =} \StringTok{"An example matrix where samples are in the rows and variables are in column"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1399,7 +1397,8 @@ Let's have a look at this:
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# make a table}
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(pcaResults}\OperatorTok{$}\NormalTok{x[, }\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{], }\DataTypeTok{caption =} \StringTok{"PCA output Scores (only top 5 are shown)"}\NormalTok{)}
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(pcaResults}\OperatorTok{$}\NormalTok{x[,}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{],}
+      \DataTypeTok{caption =} \StringTok{"PCA output Scores (only top 5 are shown)"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1498,7 +1497,7 @@ Intuitively, as we are interested in most of the variation, we go ahead and plot
 \caption{PCA of the data using first two components}\label{fig:pcaexample1}
 \end{figure}
 
-Amazing. This is our PCA results. Here in Figure '({\textbf{???}})(fig:pcaexample1), the x axis is component 1 and the y axis is component 2 of the PCA. We can see that the first compoent alone shows us 87 percent of the total variation in our dataset. This is amazing! we have had 45101 variables with a total of \ensuremath{3.0349908\times 10^{4}} variation. Now we can see 87 percent of the variation (\ensuremath{2.6281803\times 10^{4}}) in only one variable! And look, the second component only explains 2 percent of the total variation so it's not even that important compared to the fist one. But hold on, we first need to see what this new variable actually shows us? Here the statistics does not help much, we as researcher should make sense of this component. By adding shapes, colors etc to the figure, we can start making sense this.
+Amazing. This is our PCA results. Here in Figure '\ref{fig:pcaexample1}, the x axis is component 1 and the y axis is component 2 of the PCA. We can see that the first compoent alone shows us 87 percent of the total variation in our dataset. This is amazing! we have had 45101 variables with a total of \ensuremath{3.0349908\times 10^{4}} variation. Now we can see 87 percent of the variation (\ensuremath{2.6281803\times 10^{4}}) in only one variable! And look, the second component only explains 2 percent of the total variation so it's not even that important compared to the fist one. But hold on, we first need to see what this new variable actually shows us? Here the statistics does not help much, we as researcher should make sense of this component. By adding shapes, colors etc to the figure, we can start making sense this.
 
 Let's add our group information first:
 
@@ -2123,7 +2122,7 @@ So by now we have the magnitude and direction of a vector. A vector also has a s
 \CommentTok{# plot arrow and text}
 \KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{13}\NormalTok{)}
 \CommentTok{# draw circle}
-\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
+\NormalTok{plotrix}\OperatorTok{::}\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
 
 \KeywordTok{text}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\StringTok{"1.2"}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
@@ -2140,15 +2139,15 @@ So by now we have the magnitude and direction of a vector. A vector also has a s
 
 Now we can go ahead and define some preliminary operations on the vector.
 
-\hypertarget{operations-on-the-vector}{%
-\section{Operations on the vector}\label{operations-on-the-vector}}
+\hypertarget{operations-on-vectors}{%
+\section{Operations on vectors}\label{operations-on-vectors}}
 
 \begin{definition}[Scalar multiplication]
 \protect\hypertarget{def:scalarv}{}{\label{def:scalarv} \iffalse (Scalar multiplication) \fi{} }If we multiply a vector by a scalar (a number) other than one (1), the resulting vector will change magnitunde by not direction. However, a vector might flip (pointing to opposite direction) but it will NEVER change the direction of its span.
 
 When we multiply a scalar to a vector, we take each element of the vector (e.g.~\(x\) and \(y\)) and we multiply each of them by that scalar
 
-\[\vec{a}*j=[x\times j,y\times j]\]
+\[\vec{a} \times j=[x\times j,y\times j]\]
 
 where \(\vec{a}\) is a vector and \(j\) is an scalar.
 \end{definition}
@@ -2175,7 +2174,7 @@ For example if we take our vector \(\vec{a}=[5,13]\) and multiply by \(1.5\) the
 \KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{13}\NormalTok{)}
 
 \CommentTok{# draw circle}
-\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
+\NormalTok{plotrix}\OperatorTok{::}\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
 
 \KeywordTok{text}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\StringTok{"1.2"}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
@@ -2213,7 +2212,7 @@ As you see in Figure \ref{fig:spaceex7}, the green vector is the result of the m
 \KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{13}\NormalTok{)}
 
 \CommentTok{# draw circle}
-\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
+\NormalTok{plotrix}\OperatorTok{::}\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
 
 \KeywordTok{text}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\StringTok{"1.2"}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
@@ -2296,7 +2295,7 @@ Let's look at the graphics:
 
 
 \CommentTok{# draw circle}
-\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
+\NormalTok{plotrix}\OperatorTok{::}\KeywordTok{draw.arc}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{angle2=}\DecValTok{1}\NormalTok{)}
 
 \KeywordTok{text}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\StringTok{"1.2"}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
 \end{Highlighting}
@@ -2596,7 +2595,7 @@ These small raw vectors (\(\vec{b1}\) and \(vec{b2}\)) together with our operati
 
 \begin{definition}[Basis vectors]
 \protect\hypertarget{def:bvectors}{}{\label{def:bvectors} \iffalse (Basis vectors) \fi{} }
-The basis vectors are a set of vectors that when used in weighted combinition can create any vector in our space. In fact our space itself is defined by the basis vectors.
+The basis vectors are a set of vectors that when used in weighted combinition can create any vector in our space. In fact our space itself is defined by the basis vectors. To be called basis vector, these should be pointing to different directions. To be more concrete, the basis vectors should be linearly independent, meaning that they cannot be created by combination of other vectors.
 
 Our ``default'' basis vectors are x={[}1,0{]} and y={[}0,1{]}. That is the only reason that when we plot any data in for examle R, the values of our measurements will be plotted exactly as they are. If we assume anything else than x={[}1,0{]} and y={[}0,1{]}, our plot will end up being something else. So in short, the default basis vector, let us moving around our space to any point and also show us the original angle of our data. We will see later that we can change these basis vectors in order ot rotate our data and see another angle of them. So far let's agree that our basis are {[}0,1{]} and {[}1,0{]} and they are used to construct our data vectors. We can think about this, We with the help of our data change direction, and magnitude of the basis vectors in order to represent our data in the space defined by the basis vectors.
 \end{definition}
@@ -2749,8 +2748,1273 @@ I hope that you got the point by now. We can use the basis vectors to construct 
 
 We come to the end of the vector section. The important point here is that we have been working on two dimensions, all the operations and concept discussed so far can be extend to work in high dimension. Remember our dataset had 45101 dimensions. We have only worked on two of them so far :)
 
-\begin{definition}[Vector space and basis]
-\protect\hypertarget{def:uspace}{}{\label{def:uspace} \iffalse (Vector space and basis) \fi{} }Let's also agree on an arbitrary space, we refer to as unit space. In this space, each axis has just length of one. For example if we have two dimensions, the space is defined by \(x=(1,0)\) and
+\hypertarget{matrices}{%
+\section{Matrices}\label{matrices}}
+
+Matrices can be thought as generalization of vectors where we put multiple vectors together to form a ``table''. You can think about an Excel sheet where each row or each column is vector but the complete sheet is a matrix. We normally store our data in matrices as we showed in Table \ref{tab:tablesample}. As you noticed, matrices have can have columns and rows. These are dimensions of a matrix. In our test data, we dimension is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show dimensions of the data}
+\KeywordTok{dim}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]    23 45101
+\end{verbatim}
+
+Throughout this section, we show matrices with capital letters as opposed to vectors that are shown using small letters.
+\[
+A=\begin{bmatrix}
+1 & 2 & 3\\
+4 & 5 & 6
+\end{bmatrix}
+\]
+As you see, we have two rows and three columns. When we want to refer to a specific location (\textbf{called entry}) in the matrix, we use \emph{i} for the row index and \emph{j} for the column index.
+
+For example \(A_{1,2}\) refers to an entry sitting in the \textbf{first} frow and the **second column of the matrix, giving us \(2\).
+
+We refer to the entire row of the matrix by \emph{i,*}. For example, \(A_{2,*}\) will give us \([4,5,6]\). The same way, we can refer to the entire column \(A_{*,2}\), giving us \([2,5]\).
+
+Many of the operations defined for the vectors are also applied on the matrices. We can add or subtract them but the important thing is that the matrices \textbf{MUST} be the same size (same dimensions) to be able to perform addition and subtraction. In the case of addition and subtraction, each entry of the first matrix will be added or substracted to the same entry (same location) in the second matrix:
+
+\[
+\begin{bmatrix}
+1 & 2 & 3\\
+4 & 5 & 6
+\end{bmatrix}+
+\begin{bmatrix}
+7 & 8 & 9\\
+10 & 11 & 12
+\end{bmatrix}=
+\begin{bmatrix}
+1+7 & 2+8 & 3+9\\
+4+10 & 5+11 & 6+12
+\end{bmatrix}
+\]
+The same applies in scalar multiplication:
+
+\[
+5 \times \begin{bmatrix}
+1 & 2 & 3\\
+4 & 5 & 6
+\end{bmatrix}=
+\begin{bmatrix}
+5 \times 1 & 5 \times 2 & 5 \times 3\\
+5 \times 4 & 5 \times 5 & 5 \times 6
+\end{bmatrix}
+\]
+We can think about addition, subtraction and scalar multiplication the same way as the vectors. However, instead of having one vector, we have multiple ones.
+
+For example, if we add \(A=\begin{bmatrix}2&4\\5&3\end{bmatrix}\) and \(B=\begin{bmatrix}4&5\\2&2\end{bmatrix}\) we will get \(C=\begin{bmatrix}6&9\\7&5\end{bmatrix}\). We can think about we have two genes (number of columns) and we have two patients (number of rows) in \(A\) and \(B\). Each patient will give us an arrow.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\CommentTok{# define matrices}
+\NormalTok{A<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\NormalTok{B<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\NormalTok{C=A}\OperatorTok{+}\NormalTok{B}
+
+\CommentTok{# Plot arrows in A}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{,}
+ \DataTypeTok{axes =}\NormalTok{ T,}\DataTypeTok{type =} \StringTok{"n"}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Matrix A"}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,A[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(A[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,A[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'A'}\NormalTok{[}\StringTok{"1,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,A[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(A[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,A[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'A'}\NormalTok{[}\StringTok{"2,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\CommentTok{# Plot arrows in B}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{,}
+ \DataTypeTok{axes =}\NormalTok{ T,}\DataTypeTok{type =} \StringTok{"n"}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Matrix B"}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,B[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],B[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(B[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,B[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'B'}\NormalTok{[}\StringTok{"1,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,B[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],B[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(B[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,B[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'B'}\NormalTok{[}\StringTok{"2,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\CommentTok{# Plot arrows in A+b}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{,}
+ \DataTypeTok{axes =}\NormalTok{ T,}\DataTypeTok{type =} \StringTok{"n"}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Matrix A+B"}\NormalTok{)}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,A[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(A[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,A[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'A'}\NormalTok{[}\StringTok{"1,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,A[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(A[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,A[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'A'}\NormalTok{[}\StringTok{"2,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+
+\KeywordTok{arrows}\NormalTok{(A[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],C[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],C[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{,}\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(C[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,C[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\KeywordTok{expression}\NormalTok{(}\StringTok{'B'}\NormalTok{[}\StringTok{"1,*"}\NormalTok{])),}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(A[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],A[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],C[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],C[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{,}\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(C[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,C[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\KeywordTok{expression}\NormalTok{(}\StringTok{'B'}\NormalTok{[}\StringTok{"2,*"}\NormalTok{])),}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{adj =} \DecValTok{-2}\NormalTok{)}
+
+
+\CommentTok{## plot C}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab =} \StringTok{""}\NormalTok{,}
+ \DataTypeTok{axes =}\NormalTok{ T,}\DataTypeTok{type =} \StringTok{"n"}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Matrix C"}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,C[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],C[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(C[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,C[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'C'}\NormalTok{[}\StringTok{"1,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,C[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],C[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length =} \FloatTok{0.1}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(C[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,C[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\DecValTok{2}\NormalTok{,}\KeywordTok{expression}\NormalTok{(}\StringTok{'C'}\NormalTok{[}\StringTok{"2,*"}\NormalTok{]),}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{adj =} \FloatTok{-0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix1-1} 
+
+}
+
+\caption{Example of matrix addition}\label{fig:matrix1}
+\end{figure}
+
+So what we see in Figure \ref{fig:matrix1} is that, we have two matrices A and B, we take the vectors in B and put them at the tip of the vectors in A, we then draw two lines from the origin to the new tips of B. So as it's obvious now, this is the same and vector addition we just do it for more vectors.
+
+\hypertarget{matrix-multiplication}{%
+\subsection{Matrix multiplication}\label{matrix-multiplication}}
+
+In order to understand matrix multiplication, we have to think about the space again. \protect\hyperlink{bvectors}{If you remember}, we said the we can represent our space by the basis vector \(\vec{x}=[1,0]\) and \(\vec{y}=[0,1]\). We can think about this as directions or our guide to move to any points in the space. We said that we can scale them, we can add/subtract them to represent any vectors in the space. Our space is an empty huge place wherein we just put our vectors! The way that we navigate in space, is just by scaling and adding and subtracting the basis vectors. I keep repeating this because it's important to understand it thoroughly. So let's have a look at our empty space (well, i just put the grid so we have feeling of it)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix2-1} 
+
+}
+
+\caption{Empty space}\label{fig:matrix2}
+\end{figure}
+
+We can go to any point on this grid, simply using our basis vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix3-1} 
+
+}
+
+\caption{Empty space and a target point}\label{fig:matrix3}
+\end{figure}
+
+Remember now, this target point can be an observation (e.g.~sample etc). We can move to this point simply by multiplying \(\vec{x}\) to 4 and \(\vec{y}\) to 3 and then add the resulting vectors, giving us the location of the purple point \([4,3]\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{7}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix4-1} 
+
+}
+
+\caption{Empty space and a target point}\label{fig:matrix4}
+\end{figure}
+
+So far we have only changed the vectors. But we can also change the space itself. If we multiply a matrix to the space itself, we change the space. You can think about this like stretching, squeezing etc applied on the whole grid and ALL the things on that grid. It might not be very understandable in the beginning. Let's have a look an example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix5-1} 
+
+}
+
+\caption{Multiply a matrix to space}\label{fig:matrix5}
+\end{figure}
+
+In figure \ref{fig:matrix5}, we multiply \(\begin{bmatrix}1&1\\0&2\end{bmatrix}\) to our space. Please remember, we agreed before that our space was defined by \(\vec{x}=[1,0]\) and \(\vec{y}=[0,1]\) and for clarification, we plotted all the parallel lines (grid) to \(\vec{x}=[1,0]\) and \(\vec{y}=[0,1]\). Isn't this awesome?! We can transform the space itself. We are in a transformed world! How do we find the new address (location) of the previous point (the purple one) in this new world? Well, the only thing we need, is our guides. The new location of the basis vectors. Once we get them, we can use them to find the new address. Let's find them:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix6-1} 
+
+}
+
+\caption{Multiply a matrix to space, including the basis vectors}\label{fig:matrix6}
+\end{figure}
+
+Now we have them. Great. In this new world, \(\vec{x}=[1,0]\) so unchanged but \(\vec{y}=[1,2]\). Now we use the same address as before. We said that we multiple \(\vec{x}\) to 4, so it becomes, \(\vec{x}=[4,0]\) and we multiply \(\vec{y}\) to 3 so it becomes \(\vec{y}=[3,6]\). Now we add them \(\vec{x}+\vec{y}=[7,6]\). This is the address of the same point in the new world!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{((b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{7}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix7-1} 
+
+}
+
+\caption{Location of the target point}\label{fig:matrix7}
+\end{figure}
+
+So to put it simple, we just changed our coordinate system. The way the we use to move around space has changed. The only way to find the location of the previous point, is to know what transformation has been done to the space and what happened to our basis.
+
+Let's have a look at another transformation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{tet<-}\DecValTok{2}
+\NormalTok{b<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{cos}\NormalTok{(tet),}\KeywordTok{sin}\NormalTok{(tet),}\OperatorTok{-}\KeywordTok{sin}\NormalTok{(tet),}\KeywordTok{cos}\NormalTok{(tet)),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{points}\NormalTok{((b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{7}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{))[}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix8-1} 
+
+}
+
+\caption{Location of the target point in rotation}\label{fig:matrix8}
+\end{figure}
+
+Exactly! This transformation has rotated our space. It's really cool. The next time you use a software to rotate your picture, you know there is math behind it!!
+So, We can change our empty base space to ``any space'' and still find the location any point in that space.
+
+\begin{definition}[Matrix multiplication]
+\protect\hypertarget{def:matrixm}{}{\label{def:matrixm} \iffalse (Matrix multiplication) \fi{} }
+Matrix multiplication is used to trasform the space into another shape. This multiplication is define between two matrices and will produce another matrix as the result. In order to be able to multiple two matrices, the number of columns of the first matrix (left hand side) \textbf{MUST} match the number of rows the second matrix. If the dimensions of the first matrix is \(l \times m\) and the dimensions of the second matrix is \(m \times n\), the result of the multiplication will be a matrix with dimensions of \(l \times n\).
+
+To multiply two matrices \(A\) and \(B\), giving \(C\), we take the first \textbf{row} of \(A\) and the first \textbf{column} of \(B\), multiple the corresponding elements and sum the results. This result will be the first element in \(C\) with location \([1,1]\). We then proceed with the second column of \(B\) matrix and calculate its multiplication with the first row of \(A\), sum the results in \(C\) at the first row and second column {[}1,2{]}. We repeat this until all columns of the second matrix have covered. We then move to the second row of \(A\), we repeat this process but put the results in the second row of \(C\). We keep doing this until we multiply all rows of \(A\) by all columns of \(B\).
+
+Example:
+
+\begin{bmatrix}
+1 & 2 \\
+4 & 5 
+\end{bmatrix} \cdot
+\begin{bmatrix}
+7 & 8 & 9\\
+10 & 11 & 12
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+1 \times 7 +  2 \times 10&
+1 \times 8 +  2 \times 11 & 
+1 \times 9 +  2 \times 12\\
+4 \times 7 +  5 \times 10&
+4 \times 8 +  5 \times 11 & 
+4 \times 9 +  5 \times 12
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+27 & 30 & 33\\
+78 & 87 & 96
+\end{bmatrix}
 \end{definition}
+
+Don't worry if it's too much of work. You can calculate this with pretty much any statistical software. There are even websites that can help you understand and do this multiplication. But for now, let's discuss what this matrix multiplication mean, in the context of our gene expression dataset.
+
+Considering what we have been saying, do you think our gene expression dataset changes the space?
+
+From the linear algebra perspective, yes it does! It might not be that intuitive in the beginning, but if we assume a stem cell as our basis, we then change this stem cell in a way that it represent the exact expression pattern found in a sample. We do pretty much the same thing with our spaces/vectors etc. We start with some basis vectors, a raw ``meaningless'' space (well, maybe biologically), we then change these to show our gene expression space.
+
+So to summarize, we have a raw space (n dimensions) that is defined by a set of unit vectors (e.g.~for two dimensions: \(\vec{x}=[1,0]\) and \(\vec{y}={0,1}\)), we then transform this space using our dataset so we are now in our gene expression space.
+
+We do this simply and naively by
+
+\begin{verbatim}
+data%*%diag(ncol(data))
+\end{verbatim}
+
+This funny operation \emph{(\%}\%)* will do matrix multiplication. Read verbally, take a raw space with the dimensions of my data \emph{ncol(data)} and transform it into my gene expression space. What is the results of this operation if you do it in R? Well, it's going to be exact gene expression data that you started with. So we actually don't need to do that, mathematically, we almost always assume that our starting basis vectors are \(\vec{x}=[1,0]\) and \(\vec{y}={0,1}\) etc. So we are in the gene expression space already from the start. Any location/observation/vectors can be found using the combination of genes.
+
+There are a few important things to know before moving forward:
+
+\begin{itemize}
+\tightlist
+\item
+  Each matrix has two spaces: column space and row space
+\end{itemize}
+
+I guess by now, you realized that matrices are very powerful, we can do a lot with them. The question is that what can we say about the transformation a matrix does to our space?
+If we have thousands of variables (thousands of dimensions),defining our space transformation, it's difficult to every time plot and see what it does. We need to be able to at least say something about the transformation without plotting so many arrows and other stuff!
+
+Almost all the operations that we will be talking about in the rest of the chapter is around square matrices. Let's quickly define them and go forward with the rest of the chapter.
+
+\hypertarget{square-matrices}{%
+\subsection{Square matrices}\label{square-matrices}}
+
+A Square matrix is a matrix with the same number of rows and columns. Square matrices are used in linear algebra quite a lot and are easier to work with. There are several reasons to why we want to use square matrices but to summarize all:
+When we multiply a matrix with \(n\) number of rows and \(m\) number columns by by another matrix with \(m\) rows and \(l\) columns, we are mapping the space from \(m\) to \(n\) which is essentially another space which might change the definitions of certain things. In many cases, we would like to stay in the same dimensions (not going to a totally different space). In these cases, square matrices are used to map from \(n\) to \(n\), meaning that it maps from a space to itself. Please note that, we are still doing the transformation to the vectors and everything else in that space, but we are in the same dimensions. Let's look at an example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+
+\NormalTok{cat_data<-}\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/cat.tsv"}\NormalTok{)}
+\NormalTok{scatterplot3d}\OperatorTok{::}\KeywordTok{scatterplot3d}\NormalTok{(cat_data,}\DataTypeTok{angle =} \DecValTok{150}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{zlab =} \StringTok{""}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original data"}\NormalTok{)}
+
+
+\NormalTok{tet<-}\FloatTok{3.2}
+\NormalTok{b<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\KeywordTok{cos}\NormalTok{(tet),}\KeywordTok{sin}\NormalTok{(tet),}\DecValTok{0}\NormalTok{,}\OperatorTok{-}\KeywordTok{sin}\NormalTok{(tet),}\KeywordTok{cos}\NormalTok{(tet)),}\DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+\NormalTok{scatterplot3d}\OperatorTok{::}\KeywordTok{scatterplot3d}\NormalTok{(}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data))),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{zlab =} \StringTok{""}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Square matrix (rotation)"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{t}\NormalTok{(b[}\OperatorTok{-}\DecValTok{1}\NormalTok{,]}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data))),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"2d matrix transformation"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{t}\NormalTok{(b[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),]}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data))),}\DataTypeTok{y=}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\KeywordTok{nrow}\NormalTok{(cat_data)),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"1d matrix transformation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix9-1} 
+
+}
+
+\caption{Cat example}\label{fig:matrix9}
+\end{figure}
+
+You see in Figure \ref{fig:matrix9} that at some point the meaning of things starts vanishing. We have volume in both of top panel but no volume in the bottom ones. Obviously, the 1d transformation totally distort our view. Can we say the cat's tail is located in the middle of the body or the legs are almost parallel? Probably not in the 2d and 1d transformation. In any transformation, it's nice to have the same geometric meaning of the concepts before and after performing such transformation.
+
+In addition, working on square matrices gives us some extra tools that are handy for describing the space and the transformation itself.
+
+\hypertarget{determinant-of-a-matrix}{%
+\subsection{Determinant of a matrix}\label{determinant-of-a-matrix}}
+
+As we discussed before, matrix multiplication will change the space and anything inside. This change can be rotation, stretching, squeezing etc. Some transformation such squeezing will make the space smaller, some like stretching will make it bigger, and some like rotation does not change the size or the volume of our space. Determinant of a matrix will summarize for us whether the transformation make the volume of our data smaller or bigger or unchanged. Let's have a look at an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# set number of figures}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# read the data}
+\NormalTok{cat_data<-}\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/cat.tsv"}\NormalTok{)[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+
+\CommentTok{# plot the original space}
+\KeywordTok{plot}\NormalTok{(cat_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{110}\NormalTok{,}\DecValTok{110}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{))}
+\CommentTok{# write title}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original"}\NormalTok{)}
+
+\CommentTok{# create a rotation matrix}
+\NormalTok{tet<-}\DecValTok{2}
+\NormalTok{b<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{cos}\NormalTok{(tet),}\KeywordTok{sin}\NormalTok{(tet),}\OperatorTok{-}\KeywordTok{sin}\NormalTok{(tet),}\KeywordTok{cos}\NormalTok{(tet)),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\CommentTok{# plot the rotated data}
+\NormalTok{rt_data<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data)))}
+\KeywordTok{plot}\NormalTok{(rt_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{110}\NormalTok{,}\DecValTok{110}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Rotated"}\NormalTok{)}
+\CommentTok{# do inverse}
+\NormalTok{bs<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{),}\DecValTok{2}\NormalTok{)}
+\CommentTok{# plot inverse}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{t}\NormalTok{(bs}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data))),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{110}\NormalTok{,}\DecValTok{110}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{))}
+\CommentTok{# write title}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Squeezing"}\NormalTok{)}
+
+\NormalTok{bs2<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{1.5}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\FloatTok{1.5}\NormalTok{),}\DecValTok{2}\NormalTok{)}
+\CommentTok{# plot inverse}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{t}\NormalTok{(bs2}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data))),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{110}\NormalTok{,}\DecValTok{110}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{))}
+\CommentTok{# write title}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Stretching"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix10-1} 
+
+}
+
+\caption{Space volume of cat}\label{fig:matrix10}
+\end{figure}
+
+It's obvious in the Figure \ref{fig:matrix11} that, the volume of data is the same between the original cat picture and the rotated one. This gives us determinant of 1 for rotated space, meaning that the volume has not changed. Anything lower than one, means the volume has decreased. For example, in Squeezing, the determinant is 0.25. Obviously in stretching, the volume has increasing which gives us the determinant of 2.25, meaning that the volume has increased by 2.25 scaling factor.
+
+\begin{definition}[Determinant]
+\protect\hypertarget{def:det}{}{\label{def:det} \iffalse (Determinant) \fi{} }Determinant is a scalar value that is computed from square matrices. The absolute value of determinant shows the scaling of the volume resulted by the matrix transformation. Here we show the determinant of matrix A by \textbar A\textbar.
+It should be clear by now that the determinant of zero means that our transformation has mapped the space to something that has no volume for example, either a line or just the origin. More formally, if there exist two columns or rows in the matrix that are linear dependent (eg. \(\vec{a}=c \times \vec{b}\)), the determinant will be zero.
+\end{definition}
+
+The determinant of 2 by 2 matrix is calculated by:
+
+\[|A|=\begin{vmatrix} a & b \\ c & d \end{vmatrix}=
+  ad-bc\]
+
+For 3 by 3:
+
+\[|A|=\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}=
+  a\begin{vmatrix} e & f \\ h & i \end{vmatrix}-b\begin{vmatrix} d & f \\ g & i \end{vmatrix}+c\begin{vmatrix} d & e \\ h & g \end{vmatrix}=
+  aei+bfg+cdh-ceg-bdi-afh\]
+
+For example:
+
+\[|A|=\begin{vmatrix} 1 & 0\\ 0 & 1 \end{vmatrix}=
+  1 \times 1-0 \times 0=1\]
+
+In practice these numbers are calculated by a software for a programming language.
+
+\hypertarget{inverse-of-a-matrix}{%
+\subsection{Inverse of a matrix}\label{inverse-of-a-matrix}}
+
+Inverse of a matrix is define as the opposite transformation of what it does to the space (the inverse of a matrix \(X\) is shown by \(X^{-1}\)). For example, if a matrix rotates the space by \(45^o\), the inverse of it will rotate the space back by \(45^o\). Let's have a look at an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# set number of figures}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+
+\CommentTok{# read the data}
+\NormalTok{cat_data<-}\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/cat.tsv"}\NormalTok{)[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+
+\CommentTok{# plot the original space}
+\KeywordTok{plot}\NormalTok{(cat_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+\CommentTok{# write title}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original space"}\NormalTok{)}
+
+\CommentTok{# create a rotation matrix}
+\NormalTok{tet<-}\DecValTok{2}
+\NormalTok{b<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{cos}\NormalTok{(tet),}\KeywordTok{sin}\NormalTok{(tet),}\OperatorTok{-}\KeywordTok{sin}\NormalTok{(tet),}\KeywordTok{cos}\NormalTok{(tet)),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\CommentTok{# plot the rotated data}
+\NormalTok{rt_data<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(cat_data)))}
+\KeywordTok{plot}\NormalTok{(rt_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Rotated data"}\NormalTok{)}
+\CommentTok{# do inverse}
+\NormalTok{bin<-}\KeywordTok{solve}\NormalTok{(b)}
+\CommentTok{# plot inverse}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{t}\NormalTok{(bin}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(rt_data))),}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+\CommentTok{# write title}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Inverse of rotation"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/matrix11-1} 
+
+}
+
+\caption{Inverse of a matrix}\label{fig:matrix11}
+\end{figure}
+
+Another way of understanding the inverse is by thinking about division. If we have a scalar \(7\) and multiply it by another scalar \(2\), giving us \(14\), how do we go back to \(2\)? Well, we divide \(14\) by \(7\). The division is matrix world is by multiply the result matrix by the inverse of the transformation matrix. Therefore, we can deduce that if \(\frac{7}{7}=1\), \(X\cdot X^{-1}=I\). Here \(I\) is a special matrix (called identity matrix) that has ``1'' on its main diagonal elements and zero elsewhere. I identity matrix does not change the space if multiply with another matrix.
+
+\begin{definition}[Inverse of a matrix]
+\protect\hypertarget{def:inv}{}{\label{def:inv} \iffalse (Inverse of a matrix) \fi{} }Inverse of matrix \(A\) is define by the reverse transformation induced by A which is denoted by \(A^-1\). More formally if the matrix is invertible, there exists another matrix \(A^-1\) where \(A \cdot A^{-1} =A^{-1} \cdot A=I\), where \(I\) is indentity matrix. Not all the matrices have inverse. If the determinant (\ref{def:det}) of a matrix is zero, the matrix is not invertible (there is no reverse trasformation).
+\end{definition}
+
+There are many methods for finding of inverse of a matrix. Here we focus on one solution.
+
+Given, a matrix \(A\), \(A^{-1}\) can be calculated using:
+
+\[A^{-1}=\frac{1}{|A|}\begin{vmatrix} C_{11} & C_{21} & ... & C_{n1}\\ C_{12} & C_{22} & ... & C_{n2}\\.&.&.&.\\.&.&.&.\\.&.&.&.\\C_{1n} & C_{2n} & ... & C_{nn}\
+\end{vmatrix}\]
+
+Yes. It looks scary and in fact it is!. Let's break it down to three steps:
+
+\textbf{Step 1:}
+In step one, we want to find that big matrix.
+
+\[\begin{vmatrix} C_{11} & C_{21} & ... & C_{n1}\\ C_{12} & C_{22} & ... & C_{n2}\\\vdots &\vdots&\ddots& \vdots\\C_{1n} & C_{2n} & ... & C_{nn}\
+\end{vmatrix}\]
+
+This is called cofactors. It still looks scary but let's look at the a square matrix together.
+
+\[\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}\]
+Can we see any sub-square in this matrix? Let's try to see how we can extract the sub squares of this matrix:
+
+Let's select the first element of the matrix, that is \(a\):
+
+\$\$
+
+\left\textbar{}
+
+\begin{array}{ccc}
+\textbf{a} & \underline{b} & \underline{c}\\ 
+\underline{d} &
+\begin{array}{|c}
+\hline e
+\end{array} & 
+\begin{array}{c|}
+\hline f
+\end{array}
+\\ \underline{g} &
+\begin{array}{|c}
+h\\ \hline 
+\end{array} & 
+\begin{array}{c|}
+i\\
+\hline
+\end{array}\end{array}
+
+\right\textbar{}
+\$\$
+\(a\) is bold in the matrix above, if we ignore all elements (underlined text) sitting on the same row (\(b\) and \(c\)) and same column (\(d\) and \(g\)) as \(a\), the rest of the elements give us a square. We just calculate the determinant of this square and call it \(a_t\). We put \(a_t\) in an empty matrix in the exact location of \(a\), \(\begin{vmatrix} a_t & & \\ & & \\ & & \end{vmatrix}\) We now move to the second element in our matrix (\(b\)).
+
+\$\$
+\left\textbar{}
+
+\begin{array}{ccc}
+\underline{a} & \textbf{b} & \underline{c}\\ 
+\begin{array}{|c}
+ \hline d
+ \end{array} &
+\underline{e}
+ & 
+\begin{array}{c|}
+\hline f
+\end{array} 
+\\
+
+\begin{array}{|c}
+g \\ \hline 
+ \end{array}  &
+
+\begin{array}{c}
+\underline{h}\\ 
+\end{array} & 
+\begin{array}{c|}
+i\\
+\hline
+\end{array}\end{array}
+
+\right\textbar{}
+\$\$
+In this case, if we ignore all the underlined elements, we will end up with another square \(\begin{vmatrix} d & f \\ g & i \end{vmatrix}\), we calculate its determinant call it \(b_t\). We put it in the matrix:
+\(\begin{vmatrix} a_t & b_t & \\ & & \\ & & \end{vmatrix}\)
+If we do the same procedure for all the elements of the matrix, we end up with
+
+\[M=\begin{vmatrix} a_t & b_t &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}\]
+
+This is our matrix of minor.
+
+\textbf{step 2}
+
+We can now calculate our matrix of cofactors easily. We start from the first element of \(M\) and multiply with \(+1\)
+
+\[M_1=\begin{vmatrix} a_t \times +1 & b_t &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}\]
+We now take the second element and multiply by -1!
+
+\[M_1=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}\]
+Now for the third one +1!
+\[M_1=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \times +1 \\ d_t & e_t & f_t\\g_t & h_t &i_t \end{vmatrix}\]
+We just keep doing this for all the elements and every time change the sign of \(1\) to \(+\) or \(-\).
+
+\[C=\begin{vmatrix} a_t \times +1 & b_t \times -1 &c_t \times +1 \\ d_t \times -1 & e_t \times +1 & f_t \times -1\\g_t \times +1 & h_t \times -1 &i_t\times +1 \end{vmatrix}\]
+We now transpose \(C\).
+
+\begin{definition}[Transpose of a matrix]
+\protect\hypertarget{def:transpose}{}{\label{def:transpose} \iffalse (Transpose of a matrix) \fi{} }Transpose of a matrix is simply an operation and swap the position of rows and columns of the matrix, so the first column of the matrix is now the first row and so forth. Traspose of matrix \(X\) is shown by \(X^T\). For example,
+
+\(X=\begin{vmatrix} a & b &c \\ d & e & f\\g & h &i \end{vmatrix}\)
+So
+
+\(X^{T}=\begin{vmatrix} a & d &g \\ b & e & h\\c & f &i \end{vmatrix}\)
+\end{definition}
+
+At this stage the big formula we had up there can be written as
+\[A^{-1}=\frac{1}{|A|}C^T\]
+Where \(C^T\) is the transpose of the \(C\) matrix we calculate up there and \(|A|\) is determinant of \(A\) that we know how to calculate (\ref{def:det}).
+
+For example,
+
+\[A=\begin{vmatrix}
+1 & 4 & 3\\
+1 & 5 & 1\\
+3 & 2 & 1\\
+\end{vmatrix}\]
+
+We find \(a_t=5 \times 1 - 1 \times 2=3\), \(b_t=1 \times 1 - 1 \times 3=-2\), \ldots{} , \(i_t=1 \times 5 - 4 \times 1=1\)
+
+We put them to a matrix
+
+\$\$C=
+
+\begin{vmatrix}
+
+3 & -2 & -13\\
+
+-2 & -8 & -10\\
+
+-11 & -2 & 1\\
+
+\end{vmatrix}
+
+\$\$
+
+Now we multiply this by \(+\) and \(-\) (this is elementwise multiplication: each element on the left hand matrix will be multiplied by its corresponding one right hand):
+
+\$\$C=
+
+\begin{vmatrix}
+
+3 & -2 & -13\\
+
+-2 & -8 & -10\\
+
+-11 & -2 & 1\\
+
+\end{vmatrix}
+
+\times 
+
+\begin{vmatrix}
+
+1 & -1 & 1\\
+
+-1 & 1 & -1\\
+
+1 & -1 & 1\\
+
+\end{vmatrix}
+
+=
+
+\begin{vmatrix}
+
+3 & 2 & -13\\
+
+2 & -8 & 10\\
+
+-11 & 2 & 1\\
+
+\end{vmatrix}
+
+\$\$
+
+we can now calculate the transpose of \(C\):
+
+\$\$C\^{}T=
+
+\begin{vmatrix}
+
+3 & 2 & -13\\
+
+2 & -8 & 10\\
+
+-11 & 2 & 1\\
+
+\end{vmatrix}
+
+\^{}\{T\}=
+
+\begin{vmatrix}
+
+3 & 2 & -11\\
+
+2 & -8 & 2\\
+
+-13 & 10 & 1\\
+
+\end{vmatrix}
+
+\$\$
+
+\$\$A\textsuperscript{\{-1\}=\frac{1}{|A|}C}T= \frac{1}{-28}
+
+\begin{vmatrix}
+
+3 & 2 & -11\\
+
+2 & -8 & 2\\
+
+-13 & 10 & 1\\
+
+\end{vmatrix}
+
+=
+
+\begin{vmatrix}
+
+-0.1071429 & -0.0714286 & 0.3928571\\
+
+-0.0714286 & 0.2857143 & -0.0714286\\
+
+0.4642857 & -0.3571429 & -0.0357143\\
+\end{vmatrix}
+
+\$\$
+
+In practice you will use a function in R to do that:
+
+\begin{verbatim}
+solve(A)
+\end{verbatim}
+
+Easy right?! Let's move forward.
+
+\hypertarget{rank-of-a-matrix}{%
+\subsection{Rank of a matrix}\label{rank-of-a-matrix}}
+
+Remember we talked about the basis vectors (\ref{def:bvectors})? We said that, the basis vectors are vectors that define our space and they must be linearly independent. The linear independence means that, if we select one of the basis vectors, this vector cannot be constructed by linearly combining the other vectors. For example we consider our standard basis vectors in 3d dimensions \(\vec{x}=[1,0,0]\), \(\vec{y}=[0,1,0]\), and \(\vec{z}=[0,0,1]\), Can we come us with a formula to combine \(\vec{x}\) and \(\vec{y}\) to be equal to \(\vec{z}\)? We said that we can use addition, multiplication, subtraction etc. For example, can we find a scalar \(c\) such that \(\vec{z}=c \times \vec{x} + c \times \vec{y}\)? The answer is no if the vectors are linearly independent. By definition the standard basis vectors are linearly independent. But here comes a problem! We said a matrix will change our space including the position our standard basis vectors. So are these new locations (vectors) linearly independent? Or similarly can the new vectors be called basis vectors? Let's have a look at an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# fix the plot number}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\CommentTok{# create basis vector}
+\NormalTok{basis_vectors<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{byrow =}\NormalTok{ T,}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{# create transformation matrix}
+\NormalTok{b<-}\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{,}\DataTypeTok{byrow =}\NormalTok{ T)}
+
+\CommentTok{# create the transformed vectors}
+\NormalTok{trasformed_spcae<-b}\OperatorTok{%*%}\NormalTok{basis_vectors}
+
+\CommentTok{# empty plot}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{11}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{11}\NormalTok{),}\DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab =} \StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{)}
+
+
+\CommentTok{## base arrows}
+\CommentTok{# arrows}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{size=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\CommentTok{# arrows}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{size=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+
+
+\CommentTok{# trasformed arrows}
+\CommentTok{# arrows}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,trasformed_spcae[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],trasformed_spcae[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DataTypeTok{size=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{lty =} \StringTok{"dashed"}\NormalTok{)}
+\CommentTok{# arrows}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,trasformed_spcae[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],trasformed_spcae[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{size=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{lty=}\StringTok{"dashed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/bvectors1-1} 
+
+}
+
+\caption{The transformed basis vectors}\label{fig:bvectors1}
+\end{figure}
+
+We see if Figure \ref{fig:bvectors1} that using \(\begin{vmatrix} 1&2\\3&6 \end{vmatrix}\) matrix we transformed our basis vectors from \(\vec{x}=[1,0] \ and \ \vec{y}=[0,1]\) (solid lines) to \(\vec{x}=[1,3] \ and \ \vec{y}=[2,6]\). Are these new vectors basis vectors? We can see that \(\vec{y}\) is basically \(2 \times \vec{x}\), so no they are not basis vectors. In fact, they might thought as redundant. Thinking about addressing in space, we can go to exact locations that we can go with \(\vec{y}\) using \(\vec{x}\). So all of these mean that we have only one basis vector in the new space! This is related to the \textbf{rank of a matrix}.
+
+\begin{definition}[Rank of a matrix]
+\protect\hypertarget{def:matrixr}{}{\label{def:matrixr} \iffalse (Rank of a matrix) \fi{} }Rank of a matrix \(A\) is defined by the maximum number of linearly independent vectors generated by the trasformation by via \(A\). We show rank of matrix \(A\) by \(Rank(A)\) As we saw, the concept is very related to the basis of the space gernated by that matrix. However, the rank of a matrix is indepdent from the choise of the basis. If the rank of a matrix is equal to the number of variables (or number of samples), we say the matrix is full ranked. That means all the vectors are linearly independent. Otherwsie, we call the matrix rank deficient. The matrix with no zero determinant is always full rank!
+\end{definition}
+
+There many methods for calculating the rank of a matrix. The simplest one is called row reduction or even fancier Gaussian elimination! Without going into much details of this beast, this is a process by which would would like to transform our matrix into a form where everything becomes zero! Well, that sounds easy! We can just multiply a matrix by zero! Nope! We are given three tools:
+
+\begin{itemize}
+\tightlist
+\item
+  1: We can only multiply a row by a non zero scalar
+\item
+  2: We can swap the position of two rows
+\item
+  3: We can add or subtract two rows from each other
+\end{itemize}
+
+We can use any number of the steps above in any order to reach our goal. We at some stage, it was not possible to go forward, we just stop. We count the number of non-zero rows, that is the rank of the matrix! Let's start with
+
+\(A=\begin{vmatrix} 1&2&3\\4&5&12\\3&1&9\end{vmatrix}\)\$
+
+Let's for the start, add ``4'' to the first row
+
+\[\begin{vmatrix} 4&8&12\\4&5&12\\3&1&9\end{vmatrix}\]
+Why we added 4? Because, we looked at the first and third entities of the second row and saw it's like that first row multiply by 4! Doing that, will give us the chance of subtracting the first row from the second one making some elements zero! Let's do it.
+
+\[\begin{vmatrix} 4&8&12\\0&-3&0\\3&1&9\end{vmatrix}\]
+
+Awww! We are getting close. Now let's do the same thing for the third row!
+
+Now multiply the first row by \(\frac{3}{4}\)
+
+\[\begin{vmatrix} 3&6&9\\0&-3&0\\3&1&9\end{vmatrix}\]
+
+Then subtract from the third row.
+
+\[\begin{vmatrix} 3&6&9\\0&-3&0\\0&-5&0\end{vmatrix}\]
+
+A little bit more! We multiply the second row with \(\frac{5}{3}\)
+
+\[\begin{vmatrix} 3&6&9\\0&-5&0\\0&-5&0\end{vmatrix}\]
+You see, now we can get rid of the third row by subtracting the second row from the third one!
+
+\[\begin{vmatrix} 3&6&9\\0&-5&0\\0&0&0\end{vmatrix}\]
+At this point, no matter how much we try, we won't be able to change make the first and the second row zero. What is the rank of the matrix? It's the number of non zero rows. That is 2!
+
+In practice, you can calculate that using a function in R (like this one in Matrix package):
+
+\begin{verbatim}
+Matrix::rankMatrix()
+\end{verbatim}
+
+We are now ready to know a bit more about the matrices. Let's move forward to one of the most amazing topics linear algebra.
+
+\hypertarget{eigenvector-eigenvalues}{%
+\subsection{Eigenvector \& eigenvalues}\label{eigenvector-eigenvalues}}
+
+Remember, we said if we multiply a matrix \(A\) by \(B\) (\(A\cdot B\)), it will transform the space of \(B\) including all the vectors inside B?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original space"}\NormalTok{)}
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Transformed space"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/eigen1-1} 
+
+}
+
+\caption{Multiply a matrix to space, including the basis vectors}\label{fig:eigen1}
+\end{figure}
+
+Well, yes that's true but not completely true! Sometimes there exist some vectors that the matrix transformation cannot move them that much! In fact, it can move them by just stretching them. It cannot move the span of those vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+
+
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{10}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{10}\NormalTok{)}
+
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original space"}\NormalTok{)}
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{1}\NormalTok{],mydata[,}\DecValTok{3}\NormalTok{])),}\KeywordTok{range}\NormalTok{(}\KeywordTok{rbind}\NormalTok{(mydata[,}\DecValTok{2}\NormalTok{],mydata[,}\DecValTok{4}\NormalTok{])),}
+     \DataTypeTok{type=}\StringTok{"n"}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\DecValTok{8}\NormalTok{),}\DataTypeTok{axes =}\NormalTok{ F,}\DataTypeTok{bg=}\StringTok{"black"}\NormalTok{)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{mydata<-}\KeywordTok{cbind}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{))}
+
+\NormalTok{mydata2<-}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{11}\NormalTok{),}\OperatorTok{-}\DecValTok{5}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]))}
+\NormalTok{mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(mydata2[,}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]))}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\NormalTok{nl<-}\KeywordTok{apply}\NormalTok{(mydata2,}\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}
+  \KeywordTok{segments}\NormalTok{(x[}\DecValTok{1}\NormalTok{],x[}\DecValTok{2}\NormalTok{],x[}\DecValTok{3}\NormalTok{],x[}\DecValTok{4}\NormalTok{])\})}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{,)}
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors)[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],(b}\OperatorTok{%*%}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors)[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+\KeywordTok{segments}\NormalTok{(}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\OperatorTok{-}\DecValTok{10}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors)[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{10}\NormalTok{,(b}\OperatorTok{%*%}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors)[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{10}\NormalTok{)}
+
+\KeywordTok{title}\NormalTok{(}\StringTok{"Transformed space"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/eigen2-1} 
+
+}
+
+\caption{Multiply a matrix to space, including the basis vectors and span of eigen vectors}\label{fig:eigen2}
+\end{figure}
+
+What we see in Figure \ref{fig:eigen2} is that the purple vector stays on its span (the back line) but the blue vector has been knocked off its span. These vectors that stay on their span might stretched or flipped but they will hold on to the span. Can you find another vector that stays on its span? Yes exactly. That is the red one! It is the same vector, the same size and the same direction. These guys are called eigen vectors. Pretty awesome, right!? But we said although the vector stays on its span can be stretched. How much? The value that this specific vector is stretched by is called eigenvalue. I agree! That is difficult to imagine! Let's look at our cat!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{cat_data<-}\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/cat.tsv"}\NormalTok{)[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+
+\NormalTok{cat_data<-}\KeywordTok{scale}\NormalTok{(cat_data,}\DataTypeTok{center =}\NormalTok{ T)}
+
+\KeywordTok{plot}\NormalTok{(cat_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Original cat image"}\NormalTok{)}
+
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\KeywordTok{arrows}\NormalTok{(}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+
+
+
+\NormalTok{eigenB<-}\KeywordTok{eigen}\NormalTok{(b)}
+\NormalTok{eigendif<-}\KeywordTok{apply}\NormalTok{(cat_data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DataTypeTok{y=}\NormalTok{x[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])\})}
+
+\ControlFlowTok{for}\NormalTok{(x }\ControlFlowTok{in} \KeywordTok{which}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(eigendif,}\ControlFlowTok{function}\NormalTok{(x)\{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\NormalTok{x[}\DecValTok{2}\NormalTok{]\})))}\OperatorTok{<}\FloatTok{0.2}\NormalTok{))}\CommentTok{#which(abs(tmp[,1]-tmp[,2])<0.013))}
+\NormalTok{\{}
+  \KeywordTok{points}\NormalTok{(cat_data[x][}\DecValTok{1}\NormalTok{],cat_data[x,][}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{4}\NormalTok{)}
+\NormalTok{\}}
+
+
+\NormalTok{eigendif<-}\KeywordTok{apply}\NormalTok{(cat_data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{y=}\NormalTok{x[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{])\})}
+
+\NormalTok{selectedPoints2<-}\KeywordTok{which}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(eigendif,}\ControlFlowTok{function}\NormalTok{(x)\{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\NormalTok{x[}\DecValTok{2}\NormalTok{]\})))}\OperatorTok{<}\FloatTok{0.1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(x }\ControlFlowTok{in}\NormalTok{ selectedPoints2)}\CommentTok{#which(abs(tmp[,1]-tmp[,2])<0.013))}
+\NormalTok{\{}
+  \KeywordTok{points}\NormalTok{(cat_data[x][}\DecValTok{1}\NormalTok{],cat_data[x,][}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{4}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/eigen3-1} 
+
+}
+
+\caption{Eigenvector and values of a cat!}\label{fig:eigen3}
+\end{figure}
+
+In this Figure, we plotted the eigenvectors of the cat! The blue one is the eigenvector with the largest span of eigenvalue where as the red line is the span of the eigenvector with the smallest eigenvalue.
+There are some green points also on the plot. These are the points that are colored green and purple. The green points are on (or very close) to the first eigenvector. The purple ones are on the second eigenvector.
+
+Let's now look at what happens when we transform the space using our amazing matrix:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\NormalTok{cat_data<-}\KeywordTok{read.table}\NormalTok{(}\StringTok{"data/cat.tsv"}\NormalTok{)[,}\DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{]}
+
+\NormalTok{cat_data<-}\KeywordTok{scale}\NormalTok{(cat_data,}\DataTypeTok{center =}\NormalTok{ T)}
+
+
+\NormalTok{b<-}\KeywordTok{as.matrix}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{a=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DataTypeTok{b=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{cat_data<-}\KeywordTok{t}\NormalTok{(b}\OperatorTok{%*%}\KeywordTok{t}\NormalTok{(cat_data))}
+\NormalTok{cat_data<-}\KeywordTok{scale}\NormalTok{(cat_data,}\DataTypeTok{center =}\NormalTok{ T)}
+\KeywordTok{plot}\NormalTok{(cat_data,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{""}\NormalTok{,}\DataTypeTok{xlim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\StringTok{"Transformed cat image"}\NormalTok{)}
+
+\NormalTok{eigenVectors<-}\KeywordTok{eigen}\NormalTok{(b)}\OperatorTok{$}\NormalTok{vectors}
+
+\NormalTok{eigenVectors<-b}\OperatorTok{%*%}\NormalTok{eigenVectors}
+\KeywordTok{arrows}\NormalTok{(eigenVectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+\KeywordTok{arrows}\NormalTok{(eigenVectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*-}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,eigenVectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{,}\DataTypeTok{length=}\FloatTok{0.1}\NormalTok{)}
+
+
+
+
+\NormalTok{eigenB<-}\KeywordTok{eigen}\NormalTok{(b)}
+\NormalTok{eigendif<-}\KeywordTok{apply}\NormalTok{(cat_data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{],}\DataTypeTok{y=}\NormalTok{x[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{])\})}
+
+\ControlFlowTok{for}\NormalTok{(x }\ControlFlowTok{in} \KeywordTok{which}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(eigendif,}\ControlFlowTok{function}\NormalTok{(x)\{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\NormalTok{x[}\DecValTok{2}\NormalTok{]\})))}\OperatorTok{<}\FloatTok{0.2}\NormalTok{))}\CommentTok{#which(abs(tmp[,1]-tmp[,2])<0.013))}
+\NormalTok{\{}
+  \KeywordTok{points}\NormalTok{(cat_data[x][}\DecValTok{1}\NormalTok{],cat_data[x,][}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{4}\NormalTok{)}
+\NormalTok{\}}
+
+
+\NormalTok{eigendif<-}\KeywordTok{apply}\NormalTok{(cat_data,}\DecValTok{1}\NormalTok{,}\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{],}\DataTypeTok{y=}\NormalTok{x[}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{eigenB}\OperatorTok{$}\NormalTok{vectors[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{])\})}
+
+\NormalTok{selectedPoints2<-}\KeywordTok{which}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(}\KeywordTok{sapply}\NormalTok{(eigendif,}\ControlFlowTok{function}\NormalTok{(x)\{x[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\NormalTok{x[}\DecValTok{2}\NormalTok{]\})))}\OperatorTok{<}\FloatTok{0.1}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(x }\ControlFlowTok{in}\NormalTok{ selectedPoints2)}\CommentTok{#which(abs(tmp[,1]-tmp[,2])<0.013))}
+\NormalTok{\{}
+  \KeywordTok{points}\NormalTok{(cat_data[x][}\DecValTok{1}\NormalTok{],cat_data[x,][}\DecValTok{2}\NormalTok{],}\DataTypeTok{col=}\StringTok{"purple"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{4}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{PCA_files/figure-latex/eigen4-1} 
+
+}
+
+\caption{Eigenvector and values of transformed cat!}\label{fig:eigen4}
+\end{figure}
+
+Isn't this beautiful? The colored points are still on the same lines! Every other points (black ones) have changed directions. Put it simply, the eigenvectors give us the direction which does not change direction after transforming the data. In other word, it gives us the axis around which our image has been transformed. That is the reason why the points on the eigenvectors will never go off their spans. Let's take it step by step. First consider the blue line. We took the blue line and then flipped the cat around the blue line. We then did some stretching. Next we took the red line and did a bit of squeezing. So great. So we now know the axis of rotation. But how about squeezing and stretching? It seems like the the distance between the head and the tip of the tails of the cat is a bit longer in Figure \ref{fig:eigen4} compared to the original image (\ref{fig:eigen3}). Also the distance between the feet and the back of cat seems to be squeezed. Can we say that we actually stretched the cat along the blue line so that the cat is more spread along the blue line? Yes of course. We also did squeezing along the red line so the cat is less spread along that line. The eigenvalues exctly say the same thing! Do you remember, the blue line is the first eigenvector that has the largest eigenvalue, meaning that it has more spread than the red line. That was an informal definition of eigenvalues and eigenvectors. We can do a more formal one.
+
+\begin{definition}[Eigenvectors and eigenvalues]
+\protect\hypertarget{def:eigens}{}{\label{def:eigens} \iffalse (Eigenvectors and eigenvalues) \fi{} }Eigenvectors are vectors in space that when trasformed by a matrix, they do not change span but only scale by a certain factor. This scaling factor is called eigenvalue.So if we have eigenvectors in \(v\) and we have a matrix \(A\):
+
+\(A \cdot v = \lambda \times v\)
+
+Which is basically saying that after transformation, our eigenvectors are just become scalled by \(\lambda\) which contains eigenvalues!
+\end{definition}
+
+Eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization
+
+\hypertarget{matrix-diagonalization}{%
+\subsection{Matrix diagonalization}\label{matrix-diagonalization}}
 
 \end{document}

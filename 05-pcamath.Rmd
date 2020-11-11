@@ -1067,7 +1067,7 @@ If we have thousands of variables (thousands of dimensions),defining our space t
 Almost all the operations that we will be talking about in the rest of the chapter is around square matrices. Let's quickly define them and go forward with the rest of the chapter.
 
 
-#### Square matrices
+### Square matrices
 
 A Square matrix is a matrix with the same number of rows and columns. Square matrices are used in linear algebra quite a lot and are easier to work with. There are several reasons to why we want to use square matrices but to summarize all:
 When we multiply a matrix with $n$ number of rows and $m$ number columns by by another matrix with $m$ rows and $l$ columns, we are mapping the space from $m$ to $n$ which is essentially another space which might change the definitions of certain things. In many cases, we would like to stay in the same dimensions (not going to a totally different space). In these cases, square matrices are used to map from $n$ to $n$, meaning that it maps from a space to itself. Please note that, we are still doing the transformation to the vectors and everything else in that space, but we are in the same dimensions. Let's look at an example.
@@ -1100,7 +1100,7 @@ You see in Figure \@ref(fig:matrix9) that at some point the meaning of things st
 
 In addition, working on square matrices gives us some extra tools that are handy for describing the space and the transformation itself.
 
-##### Determinant of a matrix
+### Determinant of a matrix
 
 As we discussed before, matrix multiplication will change the space and anything inside. This change can be rotation, stretching, squeezing etc. Some transformation such squeezing will make the space smaller, some like stretching will make it bigger, and some like rotation does not change the size or the volume of our space. Determinant of a matrix will summarize for us whether the transformation make the volume of our data smaller or bigger or unchanged. Let's have a look at an example:
 
@@ -1169,7 +1169,7 @@ For example:
 In practice these numbers are calculated by a software for a programming language.
 
   
-##### Inverse of a matrix
+### Inverse of a matrix
 
 Inverse of a matrix is define as the opposite transformation of what it does to the space (the inverse of a matrix $X$ is shown by $X^{-1}$). For example, if a matrix rotates the space by $45^o$, the inverse of it will rotate the space back by $45^o$. Let's have a look at an example:
 
@@ -1421,7 +1421,7 @@ In practice you will use a function in R to do that:
     
 Easy right?! Let's move forward.
 
-#### Rank of a matrix
+### Rank of a matrix
 
 Remember we talked about the basis vectors (\@ref(def:bvectors))? We said that, the basis vectors are vectors that define our space and they must be linearly independent. The linear independence means that, if we select one of the basis vectors, this vector cannot be constructed by linearly combining the other vectors. For example we consider our standard basis vectors in 3d dimensions $\vec{x}=[1,0,0]$, $\vec{y}=[0,1,0]$, and $\vec{z}=[0,0,1]$, Can we come us with a formula to combine $\vec{x}$ and $\vec{y}$ to be equal to $\vec{z}$? We said that we can use addition, multiplication, subtraction etc. For example, can we find a scalar $c$ such that $\vec{z}=c \times \vec{x} + c \times \vec{y}$? The answer is no if the vectors are linearly independent. By definition the standard basis vectors are linearly independent. But here comes a problem! We said a matrix will change our space including the position our standard basis vectors. So are these new locations (vectors) linearly independent? Or similarly can the new vectors be called basis vectors? Let's have a look at an example:
 
@@ -1503,5 +1503,347 @@ At this point, no matter how much we try, we won't be able to change make the fi
 
 In practice, you can calculate that using a function in R (like this one in Matrix package):
 
-  Matrix::rankMatrix()
+    Matrix::rankMatrix()
 
+We are now ready to know a bit more about the matrices. Let's move forward to one of the most amazing topics linear algebra.
+
+### Eigenvector & eigenvalues
+
+Remember, we said if we multiply a matrix $A$ by $B$ ($A\cdot B$), it will transform the space of $B$ including all the vectors inside B?
+
+```{r eigen1, fig.cap='Multiply a matrix to space, including the basis vectors', fig.align='center',warning=FALSE,message=FALSE}
+par(mfrow=c(1,2))
+
+
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = F,bg="black")
+
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+
+arrows(0,0,1,0,col="red",length=0.1)
+arrows(0,0,0,1,col="blue",length=0.1)
+title("Original space")
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-8,8),ylim=c(-8,8),axes = F,bg="black")
+
+
+b<-as.matrix(data.frame(a=c(1,0),b=c(1,2)))
+
+mydata[,c(1,2)]<-t(b%*%t(mydata[,c(1,2)]))
+mydata[,c(3,4)]<-t(b%*%t(mydata[,c(3,4)]))
+
+mydata2[,c(1,2)]<-t(b%*%t(mydata2[,c(1,2)]))
+mydata2[,c(3,4)]<-t(b%*%t(mydata2[,c(3,4)]))
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+arrows(0,0,1,0,col="red",length=0.1,)
+arrows(0,0,1,2,col="blue",length=0.1)
+title("Transformed space")
+
+```
+
+Well, yes that's true but not completely true! Sometimes there exist some vectors that the matrix transformation cannot move them that much! In fact, it can move them by just stretching them. It cannot move the span of those vectors. 
+
+```{r eigen2, fig.cap='Multiply a matrix to space, including the basis vectors and span of eigen vectors', fig.align='center',warning=FALSE,message=FALSE}
+par(mfrow=c(1,2))
+
+
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = F,bg="black")
+
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+
+arrows(0,0,1,0,col="red",length=0.1)
+arrows(0,0,0,1,col="blue",length=0.1)
+
+
+arrows(0,0,eigen(b)$vectors[1,1],eigen(b)$vectors[2,1],col="purple",length=0.1)
+segments(-10,-10,eigen(b)$vectors[1,1]*10,eigen(b)$vectors[2,1]*10)
+
+title("Original space")
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-8,8),ylim=c(-8,8),axes = F,bg="black")
+
+
+b<-as.matrix(data.frame(a=c(1,0),b=c(1,2)))
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+mydata[,c(1,2)]<-t(b%*%t(mydata[,c(1,2)]))
+mydata[,c(3,4)]<-t(b%*%t(mydata[,c(3,4)]))
+
+mydata2[,c(1,2)]<-t(b%*%t(mydata2[,c(1,2)]))
+mydata2[,c(3,4)]<-t(b%*%t(mydata2[,c(3,4)]))
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4])})
+
+arrows(0,0,1,0,col="red",length=0.1,)
+arrows(0,0,1,2,col="blue",length=0.1)
+
+arrows(0,0,(b%*%eigen(b)$vectors)[1,1],(b%*%eigen(b)$vectors)[2,1],col="purple",length=0.1)
+segments(-10,-10,(b%*%eigen(b)$vectors)[1,1]*10,(b%*%eigen(b)$vectors)[2,1]*10)
+
+title("Transformed space")
+
+
+```
+What we see in Figure \@ref(fig:eigen2) is that the purple vector stays on its span (the back line) but the blue vector has been knocked off its span. These vectors that stay on their span might stretched or flipped but they will hold on to the span. Can you find another vector that stays on its span? Yes exactly. That is the red one! It is the same vector, the same size and the same direction. These guys are called eigen vectors. Pretty awesome, right!? But we said although the vector stays on its span can be stretched. How much? The value that this specific vector is stretched by is called eigenvalue. I agree! That is difficult to imagine! Let's look at our cat!
+
+
+```{r eigen3, fig.cap='Eigenvector and values of a cat!', fig.align='center',warning=FALSE,message=FALSE}
+
+
+par(mfrow=c(1,1))
+
+cat_data<-read.table("data/cat.tsv")[,2:3]
+
+cat_data<-scale(cat_data,center = T)
+
+plot(cat_data,xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5))
+title("Original cat image")
+
+
+
+b<-as.matrix(data.frame(a=c(1,10),b=c(1,2)))
+
+arrows(eigen(b)$vectors[1,1]*100,eigen(b)$vectors[2,1]*100,eigen(b)$vectors[1,1]*-100,eigen(b)$vectors[2,1]*-100,col="blue",length=0.1)
+
+arrows(eigen(b)$vectors[1,2]*-100,eigen(b)$vectors[2,2]*-100,eigen(b)$vectors[1,2]*100,eigen(b)$vectors[2,2]*100,col="red",length=0.1)
+
+
+
+
+eigenB<-eigen(b)
+eigendif<-apply(cat_data,1,function(x){data.frame(x=x[1]/eigenB$vectors[1,1],y=x[2]/eigenB$vectors[2,1])})
+
+for(x in which(abs(unlist(sapply(eigendif,function(x){x[1]-x[2]})))<0.2))#which(abs(tmp[,1]-tmp[,2])<0.013))
+{
+  points(cat_data[x][1],cat_data[x,][2],col="green",pch=4)
+}
+
+
+eigendif<-apply(cat_data,1,function(x){data.frame(x=x[1]/eigenB$vectors[1,2],y=x[2]/eigenB$vectors[2,2])})
+
+selectedPoints2<-which(abs(unlist(sapply(eigendif,function(x){x[1]-x[2]})))<0.1)
+for(x in selectedPoints2)#which(abs(tmp[,1]-tmp[,2])<0.013))
+{
+  points(cat_data[x][1],cat_data[x,][2],col="purple",pch=4)
+}
+
+
+
+
+```
+
+In this Figure, we plotted the eigenvectors of the cat! The blue one is the eigenvector with the largest span of eigenvalue where as the red line is the span of the eigenvector with the smallest eigenvalue. 
+There are some green points also on the plot. These are the points that are colored green and purple. The green points are on (or very close) to the first eigenvector. The purple ones are on the second eigenvector. 
+
+Let's now look at what happens when we transform the space using our amazing matrix:
+
+```{r eigen4, fig.cap='Eigenvector and values of transformed cat!', fig.align='center',warning=FALSE,message=FALSE}
+
+
+par(mfrow=c(1,1))
+
+cat_data<-read.table("data/cat.tsv")[,2:3]
+
+cat_data<-scale(cat_data,center = T)
+
+
+b<-as.matrix(data.frame(a=c(1,10),b=c(1,2)))
+
+cat_data<-t(b%*%t(cat_data))
+cat_data<-scale(cat_data,center = T)
+plot(cat_data,xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5))
+title("Transformed cat image")
+
+eigenVectors<-eigen(b)$vectors
+
+eigenVectors<-b%*%eigenVectors
+arrows(eigenVectors[1,1]*100,eigenVectors[2,1]*100,eigenVectors[1,1]*-100,eigenVectors[2,1]*-100,col="blue",length=0.1)
+
+arrows(eigenVectors[1,2]*-100,eigenVectors[2,2]*-100,eigenVectors[1,2]*100,eigenVectors[2,2]*100,col="red",length=0.1)
+
+
+
+
+eigenB<-eigen(b)
+eigendif<-apply(cat_data,1,function(x){data.frame(x=x[1]/eigenB$vectors[1,1],y=x[2]/eigenB$vectors[2,1])})
+
+for(x in which(abs(unlist(sapply(eigendif,function(x){x[1]-x[2]})))<0.2))#which(abs(tmp[,1]-tmp[,2])<0.013))
+{
+  points(cat_data[x][1],cat_data[x,][2],col="green",pch=4)
+}
+
+
+eigendif<-apply(cat_data,1,function(x){data.frame(x=x[1]/eigenB$vectors[1,2],y=x[2]/eigenB$vectors[2,2])})
+
+selectedPoints2<-which(abs(unlist(sapply(eigendif,function(x){x[1]-x[2]})))<0.1)
+for(x in selectedPoints2)#which(abs(tmp[,1]-tmp[,2])<0.013))
+{
+  points(cat_data[x][1],cat_data[x,][2],col="purple",pch=4)
+}
+
+```
+Isn't this beautiful? The colored points are still on the same lines! Every other points (black ones) have changed directions. Put it simply, the eigenvectors give us the direction which does not change direction after transforming the data. In other word, it gives us the axis around which our image has been transformed. That is the reason why the points on the eigenvectors will never go off their spans. Let's take it step by step. First consider the blue line. We took the blue line and then flipped the cat around the blue line. We then did some stretching. Next we took the red line and did a bit of squeezing. So great. So we now know the axis of rotation. But how about squeezing and stretching? It seems like the the distance between the head and the tip of the tails of the cat is a bit longer in Figure \@ref(fig:eigen4) compared to the original image (\@ref(fig:eigen3)). Also the distance between the feet and the back of cat seems to be squeezed. Can we say that we actually stretched the cat along the blue line so that the cat is more spread along the blue line? Yes of course. We also did squeezing along the red line so the cat is less spread along that line. The eigenvalues exctly say the same thing! Do you remember, the blue line is the first eigenvector that has the largest eigenvalue, meaning that it has more spread than the red line. The same applies a gene expression data. The eigenvalues can be thought of the backbone of data or its structure (you will see soon).  That was an informal definition of eigenvalues and eigenvectors. We can do a more formal one. 
+
+```{definition, label="eigens", name="Eigenvectors and eigenvalues"}
+Eigenvectors are vectors in space that when trasformed by a matrix, they do not change span but only scale by a certain factor. This scaling factor is called eigenvalue.So if we have eigenvectors in $v$ and we have a matrix $A$:
+
+$A \cdot v = \lambda \times v$
+  
+Which is basically saying that after transformation, our eigenvectors are just become scalled by $\lambda$ which contains eigenvalues! As opposite to what some think, eigenvectors might not neccesary orthogonal to each other. In a special cases of symetric matrix (a matrix that have same things on upper diagonal elements than the lower part $A=\begin{vmatrix} 1&2&3\\2&4&6\\3&6&9\end{vmatrix}$), the eigenvectors become orthogonal. The number of eigenvectors in a matrix is equal it its rank.
+
+```
+
+Eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization.
+
+### Matrix diagonalization 
+
+Matrix diagonalization is defined as taking a square matrix like $A=\begin{vmatrix} 1&2&3\\4&5&6\\7&8&9\end{vmatrix}$ and transform it into another square matrix like $B$ where all the off diagonal elements of the matrix is zero for example $B=\begin{vmatrix} 1&0&0\\0&5&0\\0&0&9\end{vmatrix}$ but this matrix should still capture whatever pattern it was in the original matrix! That seems fancy and in fact it is! Before going through what should we do to achieve that, we might have a look why we would like to do that in context of PCA. That is getting back to [covariance and variance of variables](#fig-simple-cov). 
+
+#### Covariance matrix
+
+If you remember, we said variation is our focus, at least here. We consider variation as both information and noise but we assume that variation of signal is higher than the variation of noise (refer to the [introduction](#intro) if you don't remember this). We can simply calculate the variation as the spread around the mean:
+
+```{r pcavar, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean', fig.align='center',warning=FALSE,message=FALSE}
+# Select variable
+variableIndex<-1
+
+# plot the data for variable 1
+plot(data[,variableIndex],xlab = "Sample index",ylab = paste("Variable",variableIndex),
+     ylim = c(min(data[,variableIndex])-0.1,max(data[,variableIndex])+0.1),xaxt='n')
+axis(side = 1, at = 1:nrow(data), labels = 1:nrow(data))
+
+# fig position of labels
+pos_plot<-(as.numeric(data[,variableIndex]>mean(data[,variableIndex]))*2)+1
+# Draw sample index
+text(1:nrow(data), data[,variableIndex],  1:nrow(data),
+     cex=0.65,col="red",pos=pos_plot)
+
+# draw the mean line
+abline(h=mean(data[,variableIndex],),col="red")
+
+# for each observation draw a line from that point to the mean
+for(i in 1:nrow(data))
+{
+  segments(x0 = i,x1 = i,y0 = data[i,variableIndex],y1 = mean(data[,variableIndex]),lty="dashed")
+}
+
+```
+
+This is calculated as $\sigma^2 = \frac{\sum_{i=1}^{n}(x_i - \mu)^2} {n-1}$ which is saying that for each value in this specific variable, subtract it by the average of the variable and raise it to the power two. Then sum all resulting values and divide the results by $n-1$. For example if we have $a=[1,2,3]$, average of $a$ is $2$ and the variance is $\sigma^{2}=\frac{(1-2)^{2}+(2-2)^{2}+(3-2)^{2}}{3-1}=1$
+
+We also defined covariance as the measure redundancy in our data. More specifically, if we calculate covariance between two variables, a value of higher than zero means the variable show the similar information with same direction. If it's below zero they are showing the opposite information (still redundant but opposite). And if it's zero, they are showing complementary information. 
+
+
+```{r pcacov, fig.cap='Here, we select two variables and show how the data is spread according to both of the variables. The solid purple and coral lines show mean of variable and variable 2, respectively. For each observation, we have two lines showing whether it has higher or lower value compared to mean of variable one and variable 2.', fig.align='center',warning=FALSE,message=FALSE}
+# define variables
+var1<-18924
+var2<-20355
+# plot the data
+plot(data[,c(var1,var2)],xlab = "Variable 1", ylab = "Variable 2")
+
+# fig position of labels
+pos_plot<-(as.numeric(sort(data[,variableIndex])>mean(data[,variableIndex]))*2)+1
+# Draw sample index
+text((data[,var1]), (data[,var2]),  1:nrow(data),
+     cex=0.65,pos=pos_plot)
+
+# plot mean of variable 1
+abline(v=mean(data[,var1]),col="purple",lty=1)
+
+# plot mean of variable 2
+abline(h=mean(data[,var2]),col="coral",lty=1)
+
+for(i in 1:nrow(data))
+{
+  
+    segments(x0 = (data[,var1])[i],x1 = mean(data[,var1]),y0 = (data[,var2])[i],y1 =  (data[,var2])[i],lty="dashed",
+             col=ifelse(data[i,var1]>mean(data[,var1]),yes = "indianred1",no = "lightblue"))
+  
+  
+    segments(x0 = (data[,var1])[i],x1 = (data[,var1])[i],y0 = (data[,var2])[i],y1 =  mean(data[,var2]),lty="dashed",
+             col=ifelse(data[i,var2]>mean(data[,var2]),yes = "indianred1",no = "lightblue"))
+}
+
+# add areas to the plot
+
+text(4,8,"Area 1")
+text(10,8,"Area 2")
+text(10,2.5,"Area 3")
+text(4,2.5,"Area 4")
+```
+
+We calculate covariance as $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ which is saying (as depicted in Figure \@ref(fig:pcacov)): We have two variables, select the first value in the first variable, find how much it's going up or down compare to its mean. Now select the corresponding value in the second variable and do the same thing. Multiply the result. Then Do the same thing for all the values in the two variables. Sum the results and divide by number of values. The whole thing is asking where the values of two variables are consistently going up or down compared to their means. For example if we have $a=[1,2,3]$ and $b=[4,2,5]$ the covariance of $a$ with average of $2$ and $b$ with average of $3.6$ is $Cov(a,b)=\frac{(1-2) \times (4-3.6) + (2-2) \times (2-3.6) + (3-2) \times (5-3.6)}{3-1}=0.5$. 
+
+
+There is small little thing here! That we often have many variables (thousands) and we have to calculate variance for each of them and covariance for all the two paris of variables. Can we store this information somewhere? That is a covariance matrix. The diagnoal elements in covariance matrix show variance and the off diagnoal elements show covariance. For example if we have three variables (three genes): $a$, $b$, $c$, we can define the covariance matrix as follow
+
+$$\begin{array}{c c} &
+\begin{array}{c c c} a & b &c \\
+\end{array}
+\\
+\begin{array}{c c c}
+a \\
+b\\
+c
+\end{array}
+&
+\left|
+\begin{array}{c c c}
+0.4 & .3 & 0 \\
+0.3 & 2 & 5 \\
+0 & 5 & 0.8
+\end{array}
+\right|
+\end{array}$$
+
+We can calculate a covariance matrix of $A$ simply by doing $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ (look the matrix multiplication).  Look at covariance formula, the first part of $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ is $\frac{1}{n-1}$ which is basically the division we do in $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$. The second part is doing $cov_{x,y}=\sum_{i=1}^{N}(x_{i})(y_{i})$ we are missing something! What is that? Subtraction by the average. Here comes the trick. If we [center our data](#centerExample), the average of each variable becomes zero. So  $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ becomes $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-0)(y_{i}-0)}{n-1}$ that is exactly $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$. There are some functions, software that do covaraince matrix using the tradition formula however, to be safe, make sure that you **ALWAYS** center your data. 
+
+The variance of variable a is 0.4 (diagonal element), variance of b is 2 and variance of c is 0.8. The covariance between a and b is 0.3 as define by the first row and the second column of the matrix or the first column and the second row of the matrix (yes, it's symmetric! Amazing!). Covariance of b and c is 5 (second row and third column) and so forth. I guess by now you realized we summarized the whole structure of our data is a covariance matrix. It shows how individual variables are spread and how they are related. Well, this pretty much our data characteristics! As we said we like our data to have good variance but low covariance, meaning that we have not waste our time and money measuring things that show the same thing! But we rather have complementary information. With this definition, what is a nice covariance matrix? It's a matrix that have zero on the off diagonal elements (no covariance between any variable in our data) and large numbers on the diagonal elements. Or at least the first one is the largest then the second one and so on. Did i say there is method (diagonalization) that can take a square matrix and make everything off diagonal zero and still keep the structure? Yes! We want to apply diagonalization on the covariance matrix to end up with nonzero elements on the diagonal and zero elements elseware. This means a structure that is guaranteed to no have redundant information! Awesome! Let's move on to how we calculate it. 
+
+### Eigendecomposition of a matrix
+
+There are many methods for diagonalization but here we focus on the classic one. 
