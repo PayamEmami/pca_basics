@@ -70,6 +70,13 @@ fig:matrix7
 fig:matrix8
 def:matrixm
 fig:matrix9
+fig:matrix10
+def:det
+fig:matrix11
+def:inv
+def:transpose
+fig:bvectors1
+def:matrixr
 prerequisites
 intro
 pcamot
@@ -98,5 +105,6 @@ operations-on-vectors
 matrices
 matrix-multiplication
 square-matrices
+determinant-of-a-matrix
 inverse-of-a-matrix
 rank-of-a-matrix
