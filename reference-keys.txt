@@ -77,6 +77,13 @@ def:inv
 def:transpose
 fig:bvectors1
 def:matrixr
+fig:eigen1
+fig:eigen2
+fig:eigen3
+fig:eigen4
+def:eigens
+fig:pcavar
+fig:pcacov
 prerequisites
 intro
 pcamot
@@ -108,3 +115,7 @@ square-matrices
 determinant-of-a-matrix
 inverse-of-a-matrix
 rank-of-a-matrix
+eigenvector-eigenvalues
+matrix-diagonalization
+covariance-matrix
+eigendecomposition-of-a-matrix

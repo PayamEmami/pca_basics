@@ -166,6 +166,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3" data-path="pcamath.html"><a href="pcamath.html#operations-on-vectors"><i class="fa fa-check"></i><b>6.3</b> Operations on vectors</a></li>
 <li class="chapter" data-level="6.4" data-path="pcamath.html"><a href="pcamath.html#matrices"><i class="fa fa-check"></i><b>6.4</b> Matrices</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="pcamath.html"><a href="pcamath.html#matrix-multiplication"><i class="fa fa-check"></i><b>6.4.1</b> Matrix multiplication</a></li>
+<li class="chapter" data-level="6.4.2" data-path="pcamath.html"><a href="pcamath.html#square-matrices"><i class="fa fa-check"></i><b>6.4.2</b> Square matrices</a></li>
+<li class="chapter" data-level="6.4.3" data-path="pcamath.html"><a href="pcamath.html#determinant-of-a-matrix"><i class="fa fa-check"></i><b>6.4.3</b> Determinant of a matrix</a></li>
+<li class="chapter" data-level="6.4.4" data-path="pcamath.html"><a href="pcamath.html#inverse-of-a-matrix"><i class="fa fa-check"></i><b>6.4.4</b> Inverse of a matrix</a></li>
+<li class="chapter" data-level="6.4.5" data-path="pcamath.html"><a href="pcamath.html#rank-of-a-matrix"><i class="fa fa-check"></i><b>6.4.5</b> Rank of a matrix</a></li>
+<li class="chapter" data-level="6.4.6" data-path="pcamath.html"><a href="pcamath.html#eigenvector-eigenvalues"><i class="fa fa-check"></i><b>6.4.6</b> Eigenvector &amp; eigenvalues</a></li>
+<li class="chapter" data-level="6.4.7" data-path="pcamath.html"><a href="pcamath.html#matrix-diagonalization"><i class="fa fa-check"></i><b>6.4.7</b> Matrix diagonalization</a></li>
+<li class="chapter" data-level="6.4.8" data-path="pcamath.html"><a href="pcamath.html#eigendecomposition-of-a-matrix"><i class="fa fa-check"></i><b>6.4.8</b> Eigendecomposition of a matrix</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -206,15 +213,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;scatterplot3d&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCd5J1g/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpynanvt/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;plotrix&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCd5J1g/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpynanvt/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;formatR&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpCd5J1g/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpynanvt/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1"></a><span class="kw">library</span>(scatterplot3d)</span>
 <span id="cb9-2"><a href="index.html#cb9-2"></a><span class="kw">library</span>(plotrix)</span>
 <span id="cb9-3"><a href="index.html#cb9-3"></a></span>
