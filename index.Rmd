@@ -20,6 +20,7 @@ install.packages("bookdown")
 install.packages("scatterplot3d")
 install.packages("plotrix")
 install.packages("formatR")
+install.packages("heplots")
 
 library(scatterplot3d)
 library(plotrix)

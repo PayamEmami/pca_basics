@@ -5,7 +5,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Principal Component Analysis</a></li>
       after: |
-        <li>Payam Emami/li>
+        <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

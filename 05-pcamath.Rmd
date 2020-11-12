@@ -1019,8 +1019,26 @@ Matrix multiplication is used to trasform the space into another shape. This mul
 
 To multiply two matrices $A$ and $B$, giving $C$, we take the first **row** of $A$ and the first **column** of $B$, multiple the corresponding elements and sum the results. This result will be the first element in $C$ with location $[1,1]$. We then proceed with the second column of $B$ matrix and calculate its multiplication with the first row of $A$, sum the results in $C$ at the first row and second column [1,2].  We repeat this until all columns of the second matrix have covered. We then move to the second row of $A$, we repeat this process but put the results in the second row of $C$. We keep doing this until we multiply all rows of $A$ by all columns of $B$. 
 
+\begin{bmatrix}
+a & b \\
+c & d 
+\end{bmatrix} \cdot
+\begin{bmatrix}
+e & f & g\\
+h & i & j
+\end{bmatrix}=\begin{bmatrix}
+a \times e +  b \times h&
+a \times f +  b \times i & 
+a \times g +  b \times j\\
+c \times e +  d \times h&
+c \times f +  d \times i & 
+c \times g +  d \times j
+\end{bmatrix}
+
+```
+
 Example:
-  
+ $$ 
 \begin{bmatrix}
 1 & 2 \\
 4 & 5 
@@ -1039,8 +1057,7 @@ Example:
 27 & 30 & 33\\
 78 & 87 & 96
 \end{bmatrix}
-
-```
+$$
 
 Don't worry if it's too much of work. You can calculate this with pretty much any statistical software. There are even websites that can help you understand and do this multiplication. But for now, let's discuss what this matrix multiplication mean, in the context of our gene expression dataset.
 
@@ -1525,10 +1542,10 @@ plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
 
 
 nl<-apply(mydata,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 nl<-apply(mydata2,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 
 arrows(0,0,1,0,col="red",length=0.1)
@@ -1551,10 +1568,10 @@ mydata2[,c(1,2)]<-t(b%*%t(mydata2[,c(1,2)]))
 mydata2[,c(3,4)]<-t(b%*%t(mydata2[,c(3,4)]))
 
 nl<-apply(mydata,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 nl<-apply(mydata2,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 arrows(0,0,1,0,col="red",length=0.1,)
 arrows(0,0,1,2,col="blue",length=0.1)
@@ -1578,10 +1595,10 @@ plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
 
 
 nl<-apply(mydata,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 nl<-apply(mydata2,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 
 arrows(0,0,1,0,col="red",length=0.1)
@@ -1613,10 +1630,10 @@ mydata2[,c(1,2)]<-t(b%*%t(mydata2[,c(1,2)]))
 mydata2[,c(3,4)]<-t(b%*%t(mydata2[,c(3,4)]))
 
 nl<-apply(mydata,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 nl<-apply(mydata2,MARGIN = 1,function(x){
-  segments(x[1],x[2],x[3],x[4])})
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
 
 arrows(0,0,1,0,col="red",length=0.1,)
 arrows(0,0,1,2,col="blue",length=0.1)
@@ -1726,18 +1743,318 @@ for(x in selectedPoints2)#which(abs(tmp[,1]-tmp[,2])<0.013))
 }
 
 ```
-Isn't this beautiful? The colored points are still on the same lines! Every other points (black ones) have changed directions. Put it simply, the eigenvectors give us the direction which does not change direction after transforming the data. In other word, it gives us the axis around which our image has been transformed. That is the reason why the points on the eigenvectors will never go off their spans. Let's take it step by step. First consider the blue line. We took the blue line and then flipped the cat around the blue line. We then did some stretching. Next we took the red line and did a bit of squeezing. So great. So we now know the axis of rotation. But how about squeezing and stretching? It seems like the the distance between the head and the tip of the tails of the cat is a bit longer in Figure \@ref(fig:eigen4) compared to the original image (\@ref(fig:eigen3)). Also the distance between the feet and the back of cat seems to be squeezed. Can we say that we actually stretched the cat along the blue line so that the cat is more spread along the blue line? Yes of course. We also did squeezing along the red line so the cat is less spread along that line. The eigenvalues exctly say the same thing! Do you remember, the blue line is the first eigenvector that has the largest eigenvalue, meaning that it has more spread than the red line. The same applies a gene expression data. The eigenvalues can be thought of the backbone of data or its structure (you will see soon).  That was an informal definition of eigenvalues and eigenvectors. We can do a more formal one. 
+Isn't this beautiful? The colored points are still on the same lines! Every other points (black ones) have changed directions. Put it simply, the eigenvectors give us the direction which does not change direction after transforming the data. In other word, it gives us the axis around which our image has been transformed. That is the reason why the points on the eigenvectors will never go off their spans. Let's take it step by step. First consider the blue line. We took the blue line and then flipped the cat around the blue line. We then did some stretching. Next we took the red line and did a bit of squeezing. So great. So we now know the axis of rotation. But how about squeezing and stretching? It seems like the the distance between the head and the tip of the tails of the cat is a bit longer in Figure \@ref(fig:eigen4) compared to the original image (\@ref(fig:eigen3)). Also the distance between the feet and the back of cat seems to be squeezed. Can we say that we actually stretched the cat along the blue line so that the cat is more spread along the blue line? Yes of course. We also did squeezing along the red line so the cat is less spread along that line. The eigenvalues exctly say the same thing! Do you remember, the blue line is the first eigenvector that has the largest eigenvalue, meaning that it has more spread than the red line. The same applies to a gene expression data. The eigenvalues can be thought of the backbone of data or its structure (you will see soon).  The eigen values are spread of the data on these lines. So now we have tools to find the spread of our space (e.g. variance) and also we know in which direction the space has been changed. But there might still be a question that: why are these vectors are so important for us? Well, simply talking we can use these vectors to squish the whole space into single line. But this line has a very specific meaning, that the direction of changes our data has done to the space which in turns means the direction which our data has most variance. These direction can be used to define another space which can be thought as a backbone of our data. Let's look at an example. 
+
+Imagine we have a matrix of $$A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$$
+You can consider this as a very small, gene expression data where we have two genes (columns) and two patients (rows)
+We also want to define our space by basis vector $\vec{y}=[0,1]$ so $\vec{x}=[0,0]$ or we just ignore $x$ for now. What does this transformation look if we do $A \cdot y$? Let's have a look:
+
+
+
+
+
+```{r eigen5, fig.cap='Smal gene expression matrix has been used to trasform a basic space', fig.align='center',warning=FALSE,message=FALSE}
+
+
+par(mfrow=c(2,2))
+
+
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-8,8),ylim=c(-8,8),axes = F,bg="black")
+
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
+
+
+arrows(0,0,1,0,col="red",length=0.1)
+arrows(0,0,0,1,col="blue",length=0.1)
+
+title("Original space")
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-8,8),ylim=c(-8,8),axes = F,bg="black")
+
+
+b<-as.matrix(data.frame(a=c(2,7),b=c(1,2)))
+
+mydata<-cbind(-5:5,rep(-5,11),-5:5,rep(5,11))
+
+mydata2<-cbind(rep(-5,11),-5:5,rep(5,11),-5:5)
+
+mydata[,c(1,2)]<-t(b%*%t(mydata[,c(1,2)]))
+mydata[,c(3,4)]<-t(b%*%t(mydata[,c(3,4)]))
+
+mydata2[,c(1,2)]<-t(b%*%t(mydata2[,c(1,2)]))
+mydata2[,c(3,4)]<-t(b%*%t(mydata2[,c(3,4)]))
+
+nl<-apply(mydata,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
+
+nl<-apply(mydata2,MARGIN = 1,function(x){
+  segments(x[1],x[2],x[3],x[4],col = "grey")})
+
+arrows(0,0,b[1,1],b[2,1],col="red",length=0.1,)
+arrows(0,0,b[1,2],b[2,2],col="blue",length=0.1)
+
+title("Transformed space")
+
+
+plot(t(b),xlab="",ylab="",xlim=c(-8,8),ylim=c(-8,8),axes = T,bg="black")
+text(t(b),labels = c("sample 1","sample 2"),adj = 1.2)
+arrows(0,0,b[1,1],b[2,1],col="red",length=0.1,)
+arrows(0,0,b[1,2],b[2,2],col="blue",length=0.1)
+title("Transformed space without grid")
+
+
+```
+
+Well, that was not unexpected. As we talked before, our small gene expression matrix change the basis vectors to point to each patient. However, as mentioned, it also transformed the base, standard space to the gene expression space. How about if we start from another space which is difference from the standard one. Well, we saw that standard space has a simple meaning: a space that can be transformed to anything and after the trasformation, its not the standard space anymore! But do we have another space that has a more concrete meaning compared to standard one and still keeps its meaning if we transform it? Yes we do. That is the space defined by our eigenvectors. The eigenvectors cannot be changed (their span of course), so they keep their meaning even after transformation:
+
+
+```{r eigen6, fig.cap='Smal gene expression matrix has been used to trasform the eigenvector space', fig.align='center',warning=FALSE,message=FALSE}
+
+
+par(mfrow=c(2,2))
+
+b<-as.matrix(data.frame(a=c(2,7),b=c(1,2)))
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = T,bg="black")
+
+title("Original eigen space")
+
+for(i in -110:110)
+{
+ abline(a=i,eigen_b$vectors[2,1]/eigen_b$vectors[1,1],col="grey")
+ abline(a=i,eigen_b$vectors[2,2]/eigen_b$vectors[1,2],col="grey")
+}
+
+eigen_b<-eigen(b)
+
+eigen_b$vectors<-eigen_b$vectors
+
+arrows(0,0,eigen_b$vectors[1,1],eigen_b$vectors[2,1],col="red",length=0.1)
+text(eigen_b$vectors[1,1],eigen_b$vectors[2,1],"eigen1",adj = -0.5,col = "red")
+
+arrows(0,0,eigen_b$vectors[1,2],eigen_b$vectors[2,2],col="blue",length=0.1)
+text(eigen_b$vectors[1,1],eigen_b$vectors[2,1],"eigen2",adj = 2,col = "blue")
+
+
+segments(0,0,eigen_b$vectors[1,1]*10,eigen_b$vectors[2,1]*10,col="red",lty = "dashed")
+segments(0,0,eigen_b$vectors[1,2]*10,eigen_b$vectors[2,2]*10,col="blue",lty = "dashed")
+
+segments(0,0,eigen_b$vectors[1,1]*-10,eigen_b$vectors[2,1]*-10,col="red",lty = "dashed")
+segments(0,0,eigen_b$vectors[1,2]*-10,eigen_b$vectors[2,2]*-10,col="blue",lty = "dashed")
+
+eigen_b$vectors<-b%*%eigen_b$vectors
+
+plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
+     type="n",xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = T,bg="black")
+
+for(i in -110:110)
+{
+ abline(a=i,eigen_b$vectors[2,1]/eigen_b$vectors[1,1],col="grey")
+ abline(a=i,eigen_b$vectors[2,2]/eigen_b$vectors[1,2],col="grey")
+}
+
+
+
+arrows(0,0,eigen_b$vectors[1,1],eigen_b$vectors[2,1],col="red",length=0.1)
+
+
+arrows(0,0,eigen_b$vectors[1,2],eigen_b$vectors[2,2],col="blue",length=0.1)
+
+segments(0,0,eigen_b$vectors[1,1]*10,eigen_b$vectors[2,1]*10,col="red",lty = "dashed")
+segments(0,0,eigen_b$vectors[1,2]*10,eigen_b$vectors[2,2]*10,col="blue",lty = "dashed")
+
+segments(0,0,eigen_b$vectors[1,1]*-10,eigen_b$vectors[2,1]*-10,col="red",lty = "dashed")
+segments(0,0,eigen_b$vectors[1,2]*-10,eigen_b$vectors[2,2]*-10,col="blue",lty = "dashed")
+
+title("Transformed space")
+
+
+plot(t(eigen_b$vectors),xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = T,bg="black")
+text(t(eigen_b$vectors),labels = c("sample 1","sample 2"),adj = 1.2)
+arrows(0,0,eigen_b$vectors[1,1],eigen_b$vectors[2,1],col="red",length=0.1,)
+arrows(0,0,eigen_b$vectors[1,2],eigen_b$vectors[2,2],col="blue",length=0.1)
+title("Transformed space without grid")
+
+
+```
+
+What happened? Well, instead of the standard basis, we started from another set of basis (eigen basis). In Figure \@ref(fig:eigen6), we plotted the eigenvectors as those small little red and blue vectors. Their corresponding span has been plotted as dashed lines and we have grid lines (line parallel to the vectors). We then did the transformtion of $A \cdot E$ where $E$ is now our matrix of eigenvectors. What we see in the upper right panel is that our transformation could not change the space! The eigenvectors where stretched or squeezed but they are on the same spans. What does this mean? Let's start from the start, we had basis vector defining a space for us. We took our data, smashed it to that space. Because the space was too "flexible", our data changed the space to the shape of our data. Like smashing an apple to a wall made of dough! It was too flexible! We changed our basis to eigens (concrete wall). We smash our data to this new space so instead of reshaping the wall, our data gets flattened on the space, giving us its overall shape. That is the lower left panel in Figure \@ref(fig:eigen6). Another interesting point, if our data is an apple (3d), we smash to dough (standard space), dough itself is going to be 3d! But if we define a concrete wall (eigen space) that is 2d and smash our 3d apple against it, the apple is going to be 2d! Yes! This sounds familiar right? This is dimentionality reduction. Exactly what PCA or similar methods do for us! Fun is enough! Let's try to mathematically find that concrete wall!
+
+
 
 ```{definition, label="eigens", name="Eigenvectors and eigenvalues"}
 Eigenvectors are vectors in space that when trasformed by a matrix, they do not change span but only scale by a certain factor. This scaling factor is called eigenvalue.So if we have eigenvectors in $v$ and we have a matrix $A$:
 
-$A \cdot v = \lambda \times v$
+$A \cdot v = \lambda \cdot v$
   
-Which is basically saying that after transformation, our eigenvectors are just become scalled by $\lambda$ which contains eigenvalues! As opposite to what some think, eigenvectors might not neccesary orthogonal to each other. In a special cases of symetric matrix (a matrix that have same things on upper diagonal elements than the lower part $A=\begin{vmatrix} 1&2&3\\2&4&6\\3&6&9\end{vmatrix}$), the eigenvectors become orthogonal. The number of eigenvectors in a matrix is equal it its rank.
+Which is basically saying that after transformation, our eigenvectors are just become scalled by $\lambda$ (which is scalar)! As opposite to what some think, eigenvectors might not neccesary orthogonal to each other. In a special cases of symetric matrix (a matrix that have same things on upper diagonal elements than the lower part (for example, $A=\begin{vmatrix} 1&2&3\\2&4&6\\3&6&9\end{vmatrix}$), the eigenvectors become orthogonal. The number of eigenvectors in a matrix is equal it its rank.
 
 ```
 
-Eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization.
+How do we calculate the eigenvalues and eigenvectors from this equation? Let's go step by step. 
+
+$A \cdot v = \lambda \cdot v$
+
+We have a few problems now, $A$ and $v$ are matrices but $\lambda$ is just a number. If we want to solve this funny equation, we have bring $\lambda \cdot v$ to the left part of the equation. To do so we have to transform it into matrix shape by just multiply it to an identity matrix, the size of number of columns of $A$. So let's do it
+
+$A \cdot v = \lambda \cdot I_n \cdot v$
+
+We can now safely bring $\lambda \cdot I_n \cdot v$ to the left part. 
+
+$A \cdot v - \lambda \cdot I_n \cdot v=0 $
+
+Noticed how $v$ is repeating here? We have $A \cdot v$ and $\lambda \cdot I_n \cdot v$, we can factor $v$ and rewrite the whole thing as
+
+$(A -\lambda \cdot I_n) \cdot v=0 $
+
+Ok! That became little boring. So solve this, we could just find inverse of $(A -\lambda \cdot I_n)$ and multiply it by both sides? We know that if we multiple a matrix by its inverse, the result will be identity matrix (like 1 in you divide a number by itself). In this case, $v$ will be zero. So our eigenvector is just zero! Boring! 
+
+Let's be smart! We have matrix $A$, that is our data. We are left with one parameter to change that $\lambda$, we can choose $\lambda$ in a way that $(A -\lambda \cdot I_n)$ does not have an inverse anymore so we cannot end up with $v=0$! Smart right? 
+
+Do you remember when a matrix did not have an inverse (\@ref(def:det))? Exactly, when its determinant is zero! So we want to find a $\lambda$ so determinant of $(A -\lambda \cdot I_n)$ is zero. 
+That is 
+
+$|A -\lambda \cdot I_n|=0$
+
+We know $A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$ and $I_n=A=\begin{vmatrix} 1&0\\0&1\end{vmatrix}$ let's put back thins:
+
+$|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$
+
+We know that if we multiply a scalar by a matrix, every element of the matrix will be multiplied by that scalar so what is $\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}$?
+
+It's 
+
+$$\begin{vmatrix} \lambda \times 1 &\lambda \times 0\\ \lambda \times 0 & \lambda \times 1 \end{vmatrix}= \begin{vmatrix} \lambda &0\\0&\lambda \end{vmatrix}$$
+
+Awesome! let's put back things in $|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$:
+
+$$|\begin{vmatrix} 2&1\\7&2\end{vmatrix} - \begin{vmatrix} \lambda &0\\0&\lambda \end{vmatrix}|=0$$
+
+Let's move forward! We know that if we subtract two matrices of similar size, each element of the left hand side will be subtracted by the corresponding element of the left hand side. So, 
+
+$|\begin{vmatrix} 2-\lambda&1-0\\7-0 & 2-\lambda\end{vmatrix}|=0$ that is $|\begin{vmatrix} 2-\lambda&1\\7 & 2-\lambda\end{vmatrix}|=0$$
+
+Now time for determinant (\@ref(def:det)).
+
+$(2-\lambda) \times (2-\lambda) - 1 \times 7$ which is $(2-\lambda) \times (2-\lambda) - 7$. Do you remember how solve this? Probably not. Long time from high school!
+
+Let's start with $(2-\lambda) \times (2-\lambda)$, we can fix this but multiplying evey scalar or variable ($\lambda$) in left parenthesis to everything in right parenthesis in a pairwise manner. 
+
+That is $(2-\lambda) \times (2-\lambda)= 2 \times 2 \ + \lambda \times -2 \ + 2 \times -\lambda \ + -\lambda \  \times -\lambda=4 - 2\lambda-2\lambda+\lambda^2=4 - 4\lambda+\lambda^2 $
+
+We turn things around and it becomes $\lambda^2 \ - 4\lambda + 4$ we put this back in the original equation ($(2-\lambda) \times (2-\lambda) - 7$):
+
+$$\lambda^2 \ - 4\lambda + 4-7=\lambda^2 \ - 4\lambda -3$$
+
+We need to solve this beast! $\lambda^2 \ - 4\lambda -3=0$
+
+This is a quadratic formula with the form. $ax^2+bx+c=0$. So we have $a=1 , b=-4, c=-3$ for which we have a formula ready:
+
+$$\lambda=\frac{-b \pm \sqrt{b^2-4ac}}{2a}$$
+So we plug in the numbers:
+
+$$\lambda=\frac{-(-4) \pm \sqrt{-4^2-4(1)(-3)}}{2(1)}$$
+Which will give us
+
+$$\lambda=\frac{4 \pm \sqrt{28}}{2}$$
+Did you notice we have plus and minus? So we have two $x$ one with plus and one with minus:
+
+$\lambda=2 + \sqrt{7}=4.64$
+
+and 
+$\lambda=2 - \sqrt{7}=-0.64$
+
+These two are our eigenvalues. 
+Remember that we can also put these inside a matrix. Like $\Lambda= \begin{vmatrix}  \lambda  &  0 \\ 0 & \lambda \end{vmatrix}$. We will see where we use this later. For now let's have a look at the eigenvector formula again!
+
+
+$A \cdot v = \lambda \cdot I_n \cdot v$
+
+Amazing, we have lambda now. We can put them inside the formula, one by one:
+For the first one $4.64$:
+
+$A \cdot v = 4.64  \cdot v$
+
+Now we want $v$! What is $v$? We don't know. So let's just give it a name. We know that it's an eigenvector with coordinates $x$ and $y$, so we just call it $[x,y]$ but in matrix form:
+
+$A \cdot \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \cdot \begin{vmatrix}x\\y\end{vmatrix}$
+
+We know $A$ so we put it in
+
+$\begin{vmatrix} 2&1\\7&2\end{vmatrix} \cdot \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \cdot \begin{vmatrix}x\\y\end{vmatrix}$.
+
+Fortunately by now, we know how to multiply a matrix. So to use matrix multiplication to find $[x,y]$ we first multiply the first row $A$ by $v$ on the left hand side of the equation and the result will be equal to$\lambda$ multiply by the first row of $v$ on the right hand side. 
+
+$2 \times x + 1\times y=4.64 \times x$
+
+Now we repeat the same thing but for the second row.
+
+$7 \times x + 2\times y=4.64 \times y$
+
+Great! We can now start solving $x$ and $y$:
+
+Let's bring evenything on the left:
+
+$2x + y-4.64x=0$
+$7x + 2y-4.64y=0$
+
+Let's try to simplify the first equation. We have two x there, we could just subtract them so the first equation become
+$y-2.64x=0$
+
+The same thing for the second equation:
+$7x -2.64y=0$
+
+Let's start with the simpler equation (the first one) and calculate x:
+so $y-2.64x=0$ becomes $x=\frac{y}{2.64}$ and we do the same for the second equation that is $7x -2.64y=0$ becomes $y=\frac{7x}{2.64}$. 
+
+Great! We are actually there! So now our first eigenvector is $[x,\frac{7x}{2.64}]$, you can put any value there in x! It does not matter!
+
+With the similar setting we can solve the second eigenvector $[p,l]$:
+
+$2 \times p + 1\times l=-0.64 \times p$
+$7 \times p + 2\times l=-0.64 \times l$
+
+$2p + l+0.64p=0$
+$7p + 2l+0.64l=0$
+
+which will give us 
+
+$l=-2.64p$
+
+$p=\frac{-2.64l}{7}$
+
+So our second eigenvector is $[p,-2.64p]$, you are free to choose any $p$. So our amazing basis vectors are defined as 
+
+$$v=\begin{vmatrix} x&p\\ \frac{7x}{2.64}&-2.64p\end{vmatrix}$$
+Now i just put a value there and i get our eigenvector to be for example:
+
+$$v=\begin{vmatrix} x&p\\ \frac{7x}{2.64}&-2.64p\end{vmatrix}$$
+
+$$v=\begin{vmatrix} 0.3535534&-0.3535534\\ 0.9354143&0.9354143\end{vmatrix}$$
+How i got to those numbers? well, i just put a number in $x$ and $p$ and then calculate the two other numbers. Then for each column, i divided the values of column by norm (magnitude) of the vector in those column. For example for the first column, i chose $x=1$ then the second row became $2.645751$ then i canlculated the maginitude of this vector $[1,2.645751]$ as $\sqrt{1^2+2.645751^2}=2.828427$ then i divided $[1,2.645751]$ by $2.828427$ which gave me $[0.3535534,0.9354143]$. 
+
+You can try for the second column! 
+
+We now have eigenvector and their eigenvalues. This is called eigendecomposition and PCA uses this to rotated our data and put on the space of these vectors. We will see how it does it soon! In fact, eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization.
+
+
 
 ### Matrix diagonalization 
 
@@ -1840,10 +2157,147 @@ c
 \right|
 \end{array}$$
 
-We can calculate a covariance matrix of $A$ simply by doing $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ (look the matrix multiplication).  Look at covariance formula, the first part of $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ is $\frac{1}{n-1}$ which is basically the division we do in $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$. The second part is doing $cov_{x,y}=\sum_{i=1}^{N}(x_{i})(y_{i})$ we are missing something! What is that? Subtraction by the average. Here comes the trick. If we [center our data](#centerExample), the average of each variable becomes zero. So  $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ becomes $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-0)(y_{i}-0)}{n-1}$ that is exactly $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$. There are some functions, software that do covaraince matrix using the tradition formula however, to be safe, make sure that you **ALWAYS** center your data. 
+We can calculate the covariance matrix of $A$ simply by doing $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ (look the matrix multiplication).  Look at covariance formula, the first part of $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$ is $\frac{1}{n-1}$ which is basically the division we do in $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$. The second part is doing $cov_{x,y}=\sum_{i=1}^{N}(x_{i})(y_{i})$ we are missing something! What is that? Subtraction by the average. Here comes the trick. If we [center our data](#centerExample), the average of each variable becomes zero. So  $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ becomes $cov_{x,y}=\frac{\sum_{i=1}^{N}(x_{i}-0)(y_{i}-0)}{n-1}$ that is exactly $Cov(A)=\frac{1}{n-1} \times A \cdot A^T$. There are some functions, software that do covaraince matrix using the tradition formula however, to be safe, make sure that you **ALWAYS** center your data. 
 
-The variance of variable a is 0.4 (diagonal element), variance of b is 2 and variance of c is 0.8. The covariance between a and b is 0.3 as define by the first row and the second column of the matrix or the first column and the second row of the matrix (yes, it's symmetric! Amazing!). Covariance of b and c is 5 (second row and third column) and so forth. I guess by now you realized we summarized the whole structure of our data is a covariance matrix. It shows how individual variables are spread and how they are related. Well, this pretty much our data characteristics! As we said we like our data to have good variance but low covariance, meaning that we have not waste our time and money measuring things that show the same thing! But we rather have complementary information. With this definition, what is a nice covariance matrix? It's a matrix that have zero on the off diagonal elements (no covariance between any variable in our data) and large numbers on the diagonal elements. Or at least the first one is the largest then the second one and so on. Did i say there is method (diagonalization) that can take a square matrix and make everything off diagonal zero and still keep the structure? Yes! We want to apply diagonalization on the covariance matrix to end up with nonzero elements on the diagonal and zero elements elseware. This means a structure that is guaranteed to no have redundant information! Awesome! Let's move on to how we calculate it. 
+The variance of variable a is 0.4 (diagonal element), variance of b is 2 and variance of c is 0.8. The covariance between a and b is 0.3 as define by the first row and the second column of the matrix or the first column and the second row of the matrix (yes, it's symmetric! Amazing!). Covariance of b and c is 5 (second row and third column) and so forth. I guess by now you realized we summarized the whole structure of our data is a covariance matrix. It shows how individual variables are spread and how they are related. Well, this pretty much our data characteristics! As we said we like our data to have good variance but low covariance, meaning that we have not waste our time and money measuring things that show the same thing! But we rather have complementary information. With this definition, what is a nice covariance matrix? It's a matrix that have zero on the off diagonal elements (no covariance between any variable in our data) and large numbers on the diagonal elements. Or at least the first one is the largest then the second one and so on. Did i say there is method (diagonalization) that can take a square matrix and make everything off diagonal zero and still keep the structure? Yes! We want to apply diagonalization on the covariance matrix to end up with nonzero elements on the diagonal and zero elements elsewhere. This means a structure that is guaranteed to no have redundant information! Awesome! Let's move on to how we calculate it. 
 
-### Eigendecomposition of a matrix
+### Eigendecomposition of a covariance matrix
 
-There are many methods for diagonalization but here we focus on the classic one. 
+There are many methods for diagonalization but here we focus on the classic one using findin. 
+
+Let's say our data is sitting in matrix $X$, in which the rows are observations and the columns are variables. Our goal is to find a matrix $P$ that can map our original data $X$ to another space $Y$ so that the covariance of $Y$ becomes diagonal (zero on all off diagonal elements). So the goal is $Y=P \ctod X$ so that $Cov(Y)=diagonal \ or \ \frac{1}{n}Y \cdot Y^T=diagonal$. So we can write this formally as $Y=PX$ which is just a matrix multiplication, saying that i use $P$ to transform $X$ to $Y$. That's it!
+
+So as said before we can calculate the coveriance of the mapped data ($Y$) as $Cov(Y)= \frac{1}{n}Y \cdot Y^T$. We covariance of the original data (before transformaton) is $Cov(X)= \frac{1}{n}X \cdot X^T$  We can try to rewrite this formula like this:
+
+
+$Cov(Y)= \frac{1}{n}Y \cdot Y^T$
+We said that $Y=PX$ right?
+So let's replace $Y$ by $PX$ in right side of $Cov(Y)= \frac{1}{n}Y \cdot Y^T$
+
+$Cov(Y)= \frac{1}{n} (PX) \cdot (PX)^T$
+
+We just expand transpose in $(PX)^T$ and write it like $X^T P^T$ (note that we have to switch the order to $PX$ to $XP$). Now let's reorder the dividiton by $n$ and remove the paranthesis. 
+
+$Cov(Y)=  P\frac{1}{n}XX^TP^T$
+
+Great! Do you see something cool in the middle of the equation? Yes. That is the coviarance of the original matrix ($Cov(X)= \frac{1}{n}X \cdot X^T$). 
+
+$Cov(Y)=  P(\frac{1}{n}XX^T)P^T$
+
+It reads that if we have to come up with a matrix $P$ and put it inside a formula, then the covriance of the mapped data become diagonal. This is exactly what we wanted! How do we come up with such a matrix $P$? There is a theory saying that if we have a symmetric matrix, we can diagonalize it using its eigenvector. What does it mean? We said that we can calculate covariance matrix of our data and this covariance matrix is symetric. We can find the eigenvectors of this covariance matrix and use it as $P$ in $Cov(Y)=  P(\frac{1}{n}XX^T)P^T$. This way we are mapping our data to another space (using eigenvectors) where the mapped data will not have any covariance between its variables. Exactly what we were aiming for. Let's see a short proof.
+
+Do you remember we have two $\lambda$ in the eigenvalue section (\@ref(def:eigens))? We said that we can put them inside a diagonal matrix like this $\Lambda= \begin{vmatrix}  \lambda  &  0 \\ 0 & \lambda \end{vmatrix}$. Doing so our eigenvector formula becomes $A \cdot v = \Lambda  \cdot v$ where $\Lambda$ is a matrix. We said the we want to find eigenvalues for covariance matrix so for ($Cov(X)$). So let's fix the eigen formula first. 
+
+ $Cov(X) \cdot v = \Lambda  \cdot v$
+ 
+How can we make $Cov(X)$ isolated (separated) from $v$? Well, we can multiply both side of the equation with $v^{-1}$. So our equation become $Cov(X)=v^{-1} \Lambda  \cdot v$. 
+Maybe we don't remember anymore, but we said the if we find the eigenvectors of a symetric matrix, the eithervectors are orthogonal. There is a super amazing thing about orthogonality. If all the vectors inside a matrix are orthogonal, the inverse of that matrix is equal to its transpose. So we said vectors in $v$ (containg eigenvectors) are orthoginal, this means $v^{-1}=v^T$. So let's fix the equation above:
+
+$Cov(X)=v^{T} \Lambda  \cdot v$. 
+
+We said that $Cov(X)=\frac{1}{n}XX^T$ so then $Cov(X)=v^{T} \Lambda  \cdot v$ becomes  $\frac{1}{n}XX^T=v^{T} \Lambda  \cdot v$
+
+Now it's much better. We can find covaraince of our original data by using the eigenvector and eigenvalues of covariance matrix. Now let's get back to the mapped data $Y$
+
+$Cov(Y)=  P(\frac{1}{n}XX^T)P^T$
+
+We said that $\frac{1}{n}XX^T=v^{T} \Lambda  \cdot v$ so why not replace $\frac{1}{n}XX^T$ in $Cov(Y)=  P(\frac{1}{n}XX^T)P^T$ by $v^{T} \Lambda  \cdot v$? Then we get rid of $X$. 
+Let's do that
+
+$Cov(Y)=  P(v^{T} \Lambda  \cdot v)P^T$
+
+So great! Didn't we say that one way to diagonalize a symetric matrix is by its eigenvectors and we said the eigenvectors are in $P$? Awesome. We just calculate them. They are in $v$. Yes!! So Let's replace $P$ by $v$:
+
+$Cov(Y)=  v(v^{T} \Lambda  \cdot v)v^T$
+
+We said the $v^T=v^{-1}$, what is the result of $v \cdot v^T$ in this case? It's identity matrix or to oversimplify it, it is $1$.
+
+So, let's take off the parenthesis and start removing all the $vv^T$
+
+$Cov(Y)=  vv^{T} \Lambda  \cdot vv^T= \Lambda $
+
+What happened? Well, if we calculate the eigenvalues and eigenvectors of a covariance matrix, then map the data using the the eigenvectors, then take the covarance of of all the variables in the mapped data, the result will be equal to our eigenvalue matrix. Yes, eigenvalue matrix ($\Lambda $) is diagonal, showing that we will NOT have any redundancy in the mapped space. And each eigenvalue (the value on the diagonal of $\Lambda $) is the variance of the each variable in the new space! Do you remember we said that eigenvalue show how much the space has been changed related to EACH eigenvector. They are essemtially the variance of your new variables. So for application, you start with the eigenvector that has the largest eigenvalue and then move to the second one. That corresponds to taking the PC1, PC2 PC3 etc in PCA.
+
+We are almost reaching the end of this section. Let's try to summarize what PCA does. 
+
+* Take the dataset (gene expression), $A$
+* Calculate covariance matrix of $A$ that is $Cov(A)$
+* Find eigenvectors of $Cov(A)$, that are $v$ and eigenvalues of $Cov(A)$ that are $\Lambda$
+* Sort the eigenvectors with respect to eigenvalues so the vector with the largest eigenvalue comes first and the second largest come next and so on (the columns of $v$ are ordered based on $\Lambda$) 
+* Multiply $A$ by sorted $v$ and call it $Y$ that is $Y=A \cdot v$
+* $Y$ contains your data in new space
+* Your data in the new space is NOT correlated
+* $\Lambda$ is covariance matrix of your new data
+* The eigenvalues can also be interpreted as loadings in context of PCA
+* The maximum number of eigenvectors is rank of your data!
+
+Now you can start interpreting PCA! But before saying goodbye. There are a few things i want to mention quickly.
+
+## Extra topics
+
+### PCA and ellipses
+I understand that the math behind PCA might be too difficult for some people. Probably the best way of understanding what is happening is by showing ellipses. 
+
+PCA can be thought as fitting your data inside an ellipse in 2d (or ellipsoid in n dimensions) then rotating the ellipse so that the axis of ellipse is aligned with the standard basis. 
+
+Let's look at an example:
+
+
+```{r pcacov2, fig.cap='Here, we select two variables and show how the data is spread according to both of the variables. We plotted the main axis of the ellipse and showed how it is rotated by PCA', fig.align='center',warning=FALSE,message=FALSE}
+
+par(mfrow=c(1,2))
+# define variables
+var1<-18924
+var2<-20355
+var3<-18505
+
+# dfine data
+x<-scale(data[,c(var1,var3)],scale = F)
+# plot the data
+plot(x,xlab = "Variable 1", ylab = "Variable 2",xlim=c(-4,4),ylim=c(-4,4))
+title("Original data")
+# Draw ellipses
+heplots:::covEllipses.data.frame(as.data.frame(x),add=T)
+
+# Do PCA
+eigen_vectors<-prcomp(x)$rotation
+
+# Draw main axis of ellipses
+arrows(0,0,eigen_vectors[1,1],eigen_vectors[2,1],col="red",length=0.1)
+
+arrows(0,0,eigen_vectors[1,2],eigen_vectors[2,2],col="blue",length=0.1)
+
+# plot PCA
+plot(prcomp(x)$x,xlim=c(-4,4),ylim=c(-4,4))
+title("PCA")
+# Draw ellipse
+heplots:::covEllipses(as.data.frame(prcomp(x)$x),add=T)
+
+# Rotate eigen vectors
+eg2<-eigen_vectors%*%eigen_vectors
+
+# plot arrows
+arrows(0,0,eg2[1,1],eg2[2,1],col="red",length=0.1)
+
+arrows(0,0,eg2[1,2],eg2[2,2],col="blue",length=0.1)
+
+lm(prcomp(x)$x[,1]~x[,1]+x[,2])
+```
+
+We see that in Figure \@ref(fig:pcacov2), that PCA put an ellipse on the data (the left panel). It find its main axes The axis are eigenvectors! The axis of the largest spread of the ellipse is the eigenvector with the largest eigenvalue (red arrows) and the second one is the next largest. It then rotates the ellipse around the center so that the eigenvectors are aligned with standard bases $[1,0]$ and $[0,1]$. I hope that it's giving a better intuition about what PCA does!
+
+### Choosing the number of components
+
+### Eigenvectors and regression
+
+### Eigenvectors and correlation
+
+### Eigenvector decomposition vs. singular value decomposition
+
+### Assumptions of PCA
+
+## Final notes
+
+
+
+
