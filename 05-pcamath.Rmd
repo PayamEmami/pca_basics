@@ -1835,14 +1835,14 @@ plot(range(rbind(mydata[,1],mydata[,3])),range(rbind(mydata[,2],mydata[,4])),
      type="n",xlab="",ylab="",xlim=c(-5,5),ylim=c(-5,5),axes = T,bg="black")
 
 title("Original eigen space")
-
+eigen_b<-eigen(b)
 for(i in -110:110)
 {
  abline(a=i,eigen_b$vectors[2,1]/eigen_b$vectors[1,1],col="grey")
  abline(a=i,eigen_b$vectors[2,2]/eigen_b$vectors[1,2],col="grey")
 }
 
-eigen_b<-eigen(b)
+
 
 eigen_b$vectors<-eigen_b$vectors
 
@@ -2264,7 +2264,6 @@ eigen_vectors<-prcomp(x)$rotation
 
 # Draw main axis of ellipses
 arrows(0,0,eigen_vectors[1,1],eigen_vectors[2,1],col="red",length=0.1)
-
 arrows(0,0,eigen_vectors[1,2],eigen_vectors[2,2],col="blue",length=0.1)
 
 # plot PCA
@@ -2278,10 +2277,8 @@ eg2<-eigen_vectors%*%eigen_vectors
 
 # plot arrows
 arrows(0,0,eg2[1,1],eg2[2,1],col="red",length=0.1)
-
 arrows(0,0,eg2[1,2],eg2[2,2],col="blue",length=0.1)
 
-lm(prcomp(x)$x[,1]~x[,1]+x[,2])
 ```
 
 We see that in Figure \@ref(fig:pcacov2), that PCA put an ellipse on the data (the left panel). It find its main axes The axis are eigenvectors! The axis of the largest spread of the ellipse is the eigenvector with the largest eigenvalue (red arrows) and the second one is the next largest. It then rotates the ellipse around the center so that the eigenvectors are aligned with standard bases $[1,0]$ and $[0,1]$. I hope that it's giving a better intuition about what PCA does!

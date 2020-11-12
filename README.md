@@ -1,1 +1,1 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/home/about/ for how to compile this example.
+This is a small tutorial describing some of the concept behind PCA. The target audience is biologist. Some of the concepts are oversimplified to make them easier to understand. If you find a major problem it would be great to report it :)
