@@ -81,9 +81,12 @@ fig:eigen1
 fig:eigen2
 fig:eigen3
 fig:eigen4
+fig:eigen5
+fig:eigen6
 def:eigens
 fig:pcavar
 fig:pcacov
+fig:pcacov2
 prerequisites
 intro
 pcamot
@@ -118,4 +121,12 @@ rank-of-a-matrix
 eigenvector-eigenvalues
 matrix-diagonalization
 covariance-matrix
-eigendecomposition-of-a-matrix
+eigendecomposition-of-a-covariance-matrix
+extra-topics
+pca-and-ellipses
+choosing-the-number-of-components
+eigenvectors-and-regression
+eigenvectors-and-correlation
+eigenvector-decomposition-vs.-singular-value-decomposition
+assumptions-of-pca
+final-notes
