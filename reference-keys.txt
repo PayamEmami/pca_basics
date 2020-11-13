@@ -126,7 +126,7 @@ extra-topics
 pca-and-ellipses
 choosing-the-number-of-components
 eigenvectors-and-regression
-eigenvectors-and-correlation
+eigenvectors-loadings-and-correlation
 eigenvector-decomposition-vs.-singular-value-decomposition
 assumptions-of-pca
 final-notes

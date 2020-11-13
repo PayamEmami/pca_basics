@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Exercises | Principal Component Analysis (PCA)</title>
-  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="description" content="This is a short tutorial on how PCA works." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Exercises | Principal Component Analysis (PCA)" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  <meta property="og:description" content="This is a short tutorial on how PCA works." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 Exercises | Principal Component Analysis (PCA)" />
   
-  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  <meta name="twitter:description" content="This is a short tutorial on how PCA works." />
   
 
 <meta name="author" content="Payam Emami" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
 <li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
 <li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
-<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimensionality reduction</a></li>
 <li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
 <li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
 </ul></li>
@@ -178,13 +178,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.1" data-path="pcamath.html"><a href="pcamath.html#pca-and-ellipses"><i class="fa fa-check"></i><b>6.5.1</b> PCA and ellipses</a></li>
 <li class="chapter" data-level="6.5.2" data-path="pcamath.html"><a href="pcamath.html#choosing-the-number-of-components"><i class="fa fa-check"></i><b>6.5.2</b> Choosing the number of components</a></li>
 <li class="chapter" data-level="6.5.3" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-and-regression"><i class="fa fa-check"></i><b>6.5.3</b> Eigenvectors and regression</a></li>
-<li class="chapter" data-level="6.5.4" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-and-correlation"><i class="fa fa-check"></i><b>6.5.4</b> Eigenvectors and correlation</a></li>
+<li class="chapter" data-level="6.5.4" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-loadings-and-correlation"><i class="fa fa-check"></i><b>6.5.4</b> Eigenvectors, loadings, and correlation</a></li>
 <li class="chapter" data-level="6.5.5" data-path="pcamath.html"><a href="pcamath.html#eigenvector-decomposition-vs.-singular-value-decomposition"><i class="fa fa-check"></i><b>6.5.5</b> Eigenvector decomposition vs. singular value decomposition</a></li>
 <li class="chapter" data-level="6.5.6" data-path="pcamath.html"><a href="pcamath.html#assumptions-of-pca"><i class="fa fa-check"></i><b>6.5.6</b> Assumptions of PCA</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="pcamath.html"><a href="pcamath.html#final-notes"><i class="fa fa-check"></i><b>6.6</b> Final notes</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
 
@@ -207,15 +206,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="exer" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Exercises</h1>
-<p>Welcome to the exercises! We are going to do three exercises based on a dataset that is already available in you R environment. We are not providing answer to the exercises. You will have to find them yourself.</p>
+<p>Welcome to the exercises! We are going to do three exercises based on a dataset that is already available in your R environment. We are not providing answers to the exercises. You will have to find them yourself.</p>
 <div id="data" class="section level2">
 <h2><span class="header-section-number">5.1</span> Data</h2>
 <p>The dataset is called <em>iris</em>. It’s coming default with R. According to R help page this is:</p>
-<pre><code>This famous (Fisher&#39;s or Anderson&#39;s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginic</code></pre>
+<pre><code>This famous (Fisher&#39;s or Anderson&#39;s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are setosa, versicolor, and virginic</code></pre>
 <p>You can simply write iris in your R console to make sure you have the dataset. If you see an error, try</p>
 <pre><code>data(iris)</code></pre>
 <p>The dataset contains 5 columns corresponding to four variables and one grouping information.</p>
-<p>PCA only works on the numberical data. You can extract the four numerical variables using</p>
+<p>PCA only works on the numerical data. You can extract the four numerical variables using</p>
 <pre><code>iris[,1:4]</code></pre>
 <p>The grouping information can be extracted using</p>
 <pre><code>iris[,5]</code></pre>
@@ -224,7 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercise-1" class="section level2">
 <h2><span class="header-section-number">5.2</span> Exercise 1</h2>
 <p>How does the data look? Do you see any pattern!? Any differences between groups?</p>
-<p>Produce a plot showing the differences between the groups. You will have to do a pca and make a plot of PCA scores (components)</p>
+<p>Produce a plot showing the differences between the groups. You will have to do a PCA and make a plot of PCA scores (components)</p>
 </div>
 <div id="exercise-2" class="section level2">
 <h2><span class="header-section-number">5.3</span> Exercise 2</h2>
@@ -237,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercise-4" class="section level2">
 <h2><span class="header-section-number">5.5</span> Exercise 4</h2>
 <p>Remove the first component and reconstruct the data. Now repeat exercises 1 to 3!</p>
-<p>Goog luck!</p>
+<p>Good luck!</p>
 
 </div>
 </div>

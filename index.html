@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Principal Component Analysis (PCA)</title>
-  <meta name="description" content="This a short tutorial on how PCA works." />
+  <meta name="description" content="This is a short tutorial on how PCA works." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Principal Component Analysis (PCA)" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This a short tutorial on how PCA works." />
+  <meta property="og:description" content="This is a short tutorial on how PCA works." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Principal Component Analysis (PCA)" />
   
-  <meta name="twitter:description" content="This a short tutorial on how PCA works." />
+  <meta name="twitter:description" content="This is a short tutorial on how PCA works." />
   
 
 <meta name="author" content="Payam Emami" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2" data-path="pcaapplications.html"><a href="pcaapplications.html#pcar"><i class="fa fa-check"></i><b>4.2</b> PCA in R</a></li>
 <li class="chapter" data-level="4.3" data-path="pcaapplications.html"><a href="pcaapplications.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
 <li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
-<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimentionality reduction</a></li>
+<li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimensionality reduction</a></li>
 <li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
 <li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
 </ul></li>
@@ -178,13 +178,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.1" data-path="pcamath.html"><a href="pcamath.html#pca-and-ellipses"><i class="fa fa-check"></i><b>6.5.1</b> PCA and ellipses</a></li>
 <li class="chapter" data-level="6.5.2" data-path="pcamath.html"><a href="pcamath.html#choosing-the-number-of-components"><i class="fa fa-check"></i><b>6.5.2</b> Choosing the number of components</a></li>
 <li class="chapter" data-level="6.5.3" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-and-regression"><i class="fa fa-check"></i><b>6.5.3</b> Eigenvectors and regression</a></li>
-<li class="chapter" data-level="6.5.4" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-and-correlation"><i class="fa fa-check"></i><b>6.5.4</b> Eigenvectors and correlation</a></li>
+<li class="chapter" data-level="6.5.4" data-path="pcamath.html"><a href="pcamath.html#eigenvectors-loadings-and-correlation"><i class="fa fa-check"></i><b>6.5.4</b> Eigenvectors, loadings, and correlation</a></li>
 <li class="chapter" data-level="6.5.5" data-path="pcamath.html"><a href="pcamath.html#eigenvector-decomposition-vs.-singular-value-decomposition"><i class="fa fa-check"></i><b>6.5.5</b> Eigenvector decomposition vs. singular value decomposition</a></li>
 <li class="chapter" data-level="6.5.6" data-path="pcamath.html"><a href="pcamath.html#assumptions-of-pca"><i class="fa fa-check"></i><b>6.5.6</b> Assumptions of PCA</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="pcamath.html"><a href="pcamath.html#final-notes"><i class="fa fa-check"></i><b>6.6</b> Final notes</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li>Payam Emami ( <li><a href="https://www.nbis.se/">National Bioinformatics Infrastructure Sweden</a></li>)</li>
 
@@ -208,13 +207,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Principal Component Analysis (PCA)</h1>
 <p class="author"><em>Payam Emami</em></p>
-<p class="date"><em>2020-11-12</em></p>
+<p class="date"><em>2020-11-13</em></p>
 </div>
 <div id="prerequisites" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
 <p>In order to run the code in this chapter, you will need to install a number of packages. The packages are listed below. The recommended way of installing the packages is through BioManager.</p>
 <p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="co"># Install packages</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##   There is a binary version available but the source version is later:
 ##          binary source needs_compilation
@@ -222,25 +222,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;scatterplot3d&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKAq6v3/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpWlShtb/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;plotrix&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKAq6v3/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpWlShtb/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;formatR&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKAq6v3/downloaded_packages</code></pre>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpWlShtb/downloaded_packages</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="index.html#cb9-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;heplots&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## The downloaded binary packages are in
-##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKAq6v3/downloaded_packages</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="index.html#cb11-1"></a><span class="kw">library</span>(scatterplot3d)</span>
-<span id="cb11-2"><a href="index.html#cb11-2"></a><span class="kw">library</span>(plotrix)</span>
-<span id="cb11-3"><a href="index.html#cb11-3"></a></span>
-<span id="cb11-4"><a href="index.html#cb11-4"></a><span class="co"># or the development version</span></span>
-<span id="cb11-5"><a href="index.html#cb11-5"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>We will also use a dataset in this chapter. The dataset contains several thousands genes measured on a 23 of samples. The samples are coming from four groups and have been measured in two batches.</p>
+##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpWlShtb/downloaded_packages</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="index.html#cb11-1"></a><span class="co"># load packages</span></span>
+<span id="cb11-2"><a href="index.html#cb11-2"></a><span class="kw">library</span>(scatterplot3d)</span>
+<span id="cb11-3"><a href="index.html#cb11-3"></a><span class="kw">library</span>(plotrix)</span></code></pre></div>
+<p>We will also use a dataset in this chapter. The dataset contains several thousand genes measured on 23 samples. The samples are coming from four groups and have been measured in two batches.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="index.html#cb12-1"></a><span class="co"># read the raw data</span></span>
 <span id="cb12-2"><a href="index.html#cb12-2"></a>data&lt;-<span class="kw">read.table</span>(<span class="st">&quot;data/b1_b2_data.gct&quot;</span>,<span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,<span class="dt">header =</span> T,<span class="dt">comment.char =</span> <span class="st">&quot;#&quot;</span>)</span>
 <span id="cb12-3"><a href="index.html#cb12-3"></a></span>
