@@ -37,10 +37,10 @@ for(i in 1:nrow(data))
 
 ```
 
-In Figure \@ref(fig:fig-simple-variation), we have plotted the sample number (just a simple index) on the x axis and the expression of variable 1 on the y axis. The red line shows the mean (average) of the variable one and the dashed lines show the distance between each observation (sample) to the mean. The variation is simply the average of squared of these distances to the mean. However, we are still not sure whether the variation we are seen is of any interest for us. Let's reorder the samples based on the expression.
+In Figure \@ref(fig:fig-simple-variation), we have plotted the sample number (just a simple index) on the x-axis and the expression of variable 1 on the y-axis. The red line shows the mean (average) of the variable one and the dashed lines show the distance between each observation (sample) to the mean. The variation is simply the average of squared of these distances to the mean. However, we are still not sure whether the variation we are seen is of any interest to us. Let's reorder the samples based on the expression.
 
 
-```{r fig-simple-variation-reorder, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE}
+```{r fig-simple-variation-reorder, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on the expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE}
 # Select variable
 variableIndex<-18924
 
@@ -71,11 +71,11 @@ for(i in 1:nrow(data))
 }
 
 ```
-Figure \@ref(fig:fig-simple-variation) shows the same variable as Figure \@ref(fig:fig-simple-variation-reorder) but we have reorder the observations so that the ones with lower expression come first. We have also added color so that we can see where there is a difference between the groups in this experiment. What is clear now is that, the variation in this variable alone does not provide us with much useful information about all the groups. However, the second group appears to have lower expression compared to the rest of the groups. In addition, The First and the third group show higher expression compared to the rest.  
+Figure \@ref(fig:fig-simple-variation) shows the same variable as Figure \@ref(fig:fig-simple-variation-reorder) but we have to reorder the observations so that the ones with lower expression come first. We have also added color so that we can see where there is a difference between the groups in this experiment. What is clear now is that the variation in this variable alone does not provide us with much useful information about all the groups. However, the second group appears to have lower expression compared to the rest of the groups. In addition, The First and the third group show higher expression compared to the rest.  
 
 That's great Let's pick another variable and plot the same thing:
 
-```{r fig-simple-variation-reorder-v2, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE}
+```{r fig-simple-variation-reorder-v2, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on the expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE}
 # Select variable
 variableIndex<-20355
 
@@ -106,9 +106,9 @@ for(i in 1:nrow(data))
 }
 ```
 
-As it's evident in Figure \@ref(fig:fig-simple-variation-reorder-v2), the variation in this variable shows us the difference between the fourth group and the rest but it does not provide much information about the the rest of the groups. Let's have a look at what information both of these variable give. We simply put both figures Figure \@ref(fig:fig-simple-variation-reorder) and Figure \@ref(fig:fig-simple-variation-reorder-v2) together:
+As it's evident in Figure \@ref(fig:fig-simple-variation-reorder-v2), the variation in this variable shows us the difference between the fourth group and the rest but it does not provide much information about the rest of the groups. Let's have a look at what information both of these variables give. We simply put both figures Figure \@ref(fig:fig-simple-variation-reorder) and Figure \@ref(fig:fig-simple-variation-reorder-v2) together:
 
-```{r fig-simple-variation-reorder-v3, fig.cap='Here, we select two previous variables and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE,fig.height=10}
+```{r fig-simple-variation-reorder-v3, fig.cap='Here, we select two previous variables and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean. Please note that the samples are reordered based on the expression. the color of points show the grouping of samples', fig.align='center',warning=FALSE,message=FALSE,fig.height=10}
 par(mfrow=c(2,1))
 # Select variable
 variableIndex<-18924
@@ -171,7 +171,7 @@ for(i in 1:nrow(data))
 }
 ```
 
-We can see in Figure \@ref(fig:fig-simple-variation-reorder-v3), there is obviously some information that is almost only explained by individual variables. For example the differences between group 2 and group 4 is mostly explained by variable 20355. But there is also some small information that seems to be redundant. For example the differences between combined groups 1 and 3 vs group 4. We can have a look at variation and redundancy together by plotting the expressions of both variables against each other. 
+We can see in Figure \@ref(fig:fig-simple-variation-reorder-v3), there is obviously some information that is almost only explained by individual variables. For example, the differences between group 2 and group 4 are mostly explained by variable 20355. But there is also some small information that seems to be redundant. For example the differences between combined groups 1 and 3 vs group 4. We can have a look at variation and redundancy together by plotting the expressions of both variables against each other. 
 
 plot(data[,c(18924,20355)],col=factor(metadata$Covariate))
 
@@ -193,11 +193,11 @@ text((data[,var1]), (data[,var2]),  1:nrow(data),
 
 ```
 
-Figure \@ref(fig:fig-simple-cov) is called 2d scatter plot that is used to show the relationships between two variables. It's now more evident that we can separate group 2 and 4 more easily. This means the combination of two variables gave us more information than a single variable at the time. At this time we can more formally say that we have two axis x and y (Variable 1 and 2) which define our data. Each axis has some information. To quantify that information, let's agree that the amount of information in each axis is measured by variation of the observations in that axis.
-As said before, the variation is define as the the average squared distances from the mean. That can be easily computer using a simple R function (var):
+Figure \@ref(fig:fig-simple-cov) is called a 2d scatter plot that is used to show the relationships between two variables. It's now more evident that we can separate groups 2 and 4 more easily. This means the combination of two variables gave us more information than a single variable at the time. At this time we can more formally say that we have two axis x and y (Variable 1 and 2) which define our data. Each axis has some information. To quantify that information, let's agree that the amount of information in each axis is measured by the variation of the observations in that axis.
+As said before, the variation is defined as the average squared distances from the mean. That can be easily computed using a simple R function (var):
 
 ```{r }
-# calculate variation of variable 1
+# calculate the variation of variable 1
 variation_var1<-var(data[,var1])
 
 # calculate variation of variable 2
@@ -206,9 +206,9 @@ variation_var2<-var(data[,var2])
 sprintf("Variation of variable1: %f Varition of variable2: %f",variation_var1,variation_var2)
 ```
 
-In the beginning it might sound to use variation to quantify information as one variable can contain huge noise level that can easily be higher than another variable that is more informative. However, in the presence of no addition information (such as groups in this example), we can at least assume (hope) that if the experiment has been done perfectly the variation of information is higher than variation of noise. So in this case, we can say that variable 1 has more information than variable 2. 
+In the beginning, it might sound to use variation to quantify information as one variable can contain a huge noise level that can easily be higher than another variable that is more informative. However, in the presence of no additional information (such as groups in this example), we can at least assume (hope) that if the experiment has been done perfectly the variation of information is higher than the variation of noise. So in this case, we can say that variable 1 has more information than variable 2. 
 
-We also mentioned that any two variables can possibly contain redundant information. To quantify that, we use a method that is called covariance. Covariance measures to what extend two variables are showing the same information. To calculate the covariance, for each of the observations (samples), we calculate difference of that observation to the mean for variable 1, we do the same thing for variable 2 and then multiply this the resulting numbers number. Once we did that for all the observations, we sum all the numbers and divide the results by total number of observations. The sign of covariance tells whether the two variables are positively or negatively related. The magnitude of covariance can be thought as total variation or the amount of redundancy between two samples. The higher the absolute value the higher the redundancy (we go through this in detail in the next chapters). The covariance of zero or close to zero means we have no or little redundancy.
+We also mentioned that any two variables can possibly contain redundant information. To quantify that, we use a method that is called covariance. Covariance measures to what extent two variables are showing the same information. To calculate the covariance, for each of the observations (samples), we calculate the difference of that observation to the mean for variable 1, we do the same thing for variable 2 and then multiply this by the resulting numbers. Once we did that for all the observations, we sum all the numbers and divide the results by the total number of observations. The sign of covariance tells whether the two variables are positively or negatively related. The magnitude of covariance can be thought of as a total variation or the amount of redundancy between two samples. The higher the absolute value the higher the redundancy (we go through this in detail in the next chapters). The covariance of zero or close to zero means we have no or little redundancy.
 
 Let's try to see what's visually happening:
 
@@ -251,22 +251,22 @@ text(10,2.5,"Area 3")
 text(4,2.5,"Area 4")
 ```
 
-In Figure \@ref(fig:fig-simple-cov2), we have plotted the mean of variable 1 using the vertical purple line and mean of the variable 2 using horizontal coral line. For each observation we have two lines, vertical line shows the difference of that observation to mean of variable 1 and horizontal line show the difference to the mean of variable 2. If the line is red, it means the difference is higher than zero and if the mean is blue, it means the difference is negative thus lower than zero. 
+In Figure \@ref(fig:fig-simple-cov2), we have plotted the mean of variable 1 using the vertical purple line and mean of variable 2 using the horizontal coral line. For each observation we have two lines, the vertical line shows the difference of that observation to the mean of variable 1 and the horizontal line shows the difference to the mean of variable 2. If the line is red, it means the difference is higher than zero and if the mean is blue, it means the difference is negative thus lower than zero. 
 
-If an observation lays in areas 1 or 3, it means that it behaves oppositely (relative to the mean: solid lines) in variable 1 and 2. This means if the expression goes up in variable 1, it goes down in variable 2 (or vice versa). However, if  an observation lays in areas 2 or 4, it means its behavior is consistent in both of the variables. If most observation end of being in areas 2 and 4, we will have a positive covariance, meaning that they change consistently both in variable 1 and variable 2. If most of them are in area 1 and 3, we will have a negative covariance, meaning that they change in opposite directions. If the observations lay in all the four areas with approximately the same magnitude (distance to the mean: length of the red and blue lines), we will have a low or no covariance. 
+If an observation lays in areas 1 or 3, it means that it behaves oppositely (relative to the mean: solid lines) in variables 1 and 2. This means if the expression goes up in variable 1, it goes down in variable 2 (or vice versa). However, if an observation lays in areas 2 or 4, it means its behavior is consistent in both of the variables. If most observation end up being in areas 2 and 4, we will have a positive covariance, meaning that they change consistently both in variable 1 and variable 2. If most of them are in areas 1 and 3, we will have a negative covariance, meaning that they change in opposite directions. If the observations lay in all the four areas with approximately the same magnitude (distance to the mean: length of the red and blue lines), we will have a low or no covariance. 
 
-Please note that, the magnitude of the distances to the mean is also very important. For example even if all the observations end up in the areas 1 and 3 but one observation lays in area 2 with a very large distance from the means, we could still get a large positive covariance. In R the covariance is calculated using "cov" function:
+Please note that the magnitude of the distances to the mean is also very important. For example, even if all the observations end up in areas 1 and 3 but one observation lays in area 2 with a very large distance from the means, we could still get a large positive covariance. In R the covariance is calculated using "cov" function:
 
 ```{r }
-# calculate variation of variable 1
+# calculate the variation of variable 1
 covariation_var1_2<-cov(data[,var1],data[,var2])
 
 sprintf("Covariation of variable1 and variable 2 is: %f",covariation_var1_2)
 ```
 
-We see that we got a low covariance which means that we have small redundancy in the two variables. This was expected just by looking at the Figure \@ref(fig:fig-simple-cov2). Most of our observations ended up being scattered in all four ares with very similar magnitudes. 
+We see that we got a low covariance which means that we have small redundancy in the two variables. This was expected just by looking at Figure \@ref(fig:fig-simple-cov2). Most of our observations ended up being scattered in all four areas with very similar magnitudes. 
 
-This might be exiting as we have two variables that are showing complimentary information. We did not waste our resources on measuring the things that are showing the same information. However, we have bigger issue here! We just took a look at two of the variables out of `r ncol(data)` measured ones! We specifically selected these variable to show this information. Look at this new variable:
+This might be exciting as we have two variables that are showing complementary information. We did not waste our resources on measuring the things that are showing the same information. However, we have a bigger issue here! We just took a look at two of the variables out of `r ncol(data)` measured ones! We specifically selected these variables to show this information. Look at this new variable:
 
 ```{r fig-simple-cov3, fig.cap='Here, we select one of the previous variables and an additional one and show how the data is spread according to both of the variables.', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
 # define number of plots in the figure
@@ -299,9 +299,11 @@ scatterplot3d(data[,c(var1,var2,var3)],xlab = "Variable 1",ylab="Variable 2",zla
 
 The covariance of this new variable with the old ones is variable one: `r cov(data[,var1],data[,var3])` and variable 2: `r cov(data[,var2],data[,var3])`. It is also obvious from the Figure \@ref(fig:fig-simple-cov3) these new variable contain redundant information. 
 
-What about others? how kind of information do they contain? which ones are redundant which ones are complimentary? If we have to do the same analysis on the entire dataset, at best, we can repeat our analysis for three variables at a time, meaning that we will end up doing that `r as.character(choose(ncol(data),3))` times! And how about if we should use more than 3 variables at the time to inspect the data pattern?
+What about others? how kind of information do they contain? which ones are redundant which ones are complimentary? If we have to do the same analysis on the entire dataset, at best, we can repeat our analysis for three variables at a time, meaning that we will end up doing that `r as.character(choose(ncol(data),3))` times! And how about if we should use more than 3 variables at a time to inspect the data pattern?
 
-In fact, as the dimension of data (number of variables, e.g. genes) increases, it becomes very difficult to draw conclusion from the data. We just cannot do that using simple methods. Fortunately, we have some amazing methods coming to rescue! This is the topic of the next chapter. 
+In fact, as the dimension of data (number of variables, e.g. genes) increases, it becomes very difficult to draw conclusions from the data. We just cannot do that using simple methods. Fortunately, we have some amazing methods coming to the rescue! This is the topic of the next chapter. 
+
+
 
 
 

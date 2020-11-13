@@ -6,17 +6,17 @@ editor_options:
 # PCA (motivation) {#pcamot}
 
 ## Summary of the previous chapter
-In the [previous chapter](#intro), we talked about two measures for summarizing our data, variation and covariation. Variation was used to measure the spread of a single variable whereas the covariation was between two variables measuring how much they agree with each other, thus showing the redundancy. We also emphasized that it is nice to have variables showing complimentary information rather than overlapping one!  We also decided that, we want the variation of signal to be higher than the variation of noise. That is, probably the variables with higher variation are more interesting to us. We also show that the combination of two variables can give us more information about the data pattern, meaning that each of the variable contribute to the overall pattern. So to summarize:
+In the [previous chapter](#intro), we talked about two measures for summarizing our data, variation, and covariation. Variation was used to measure the spread of a single variable whereas the covariation was between two variables measuring how much they agree with each other, thus showing the redundancy. We also emphasized that it is nice to have variables showing complementary information rather than overlapping one!  We also decided that we want the variation of the signal to be higher than the variation of noise. That is, probably the variables with higher variation are more interesting to us. We also show that the combination of two variables can give us more information about the data pattern, meaning that each of the variables contributes to the overall pattern. So to summarize:
 
-* We agree that, we are interested in variation
-* We hope that the variation of signal is higher noise
+* We agree that we are interested in variation
+* We hope that the variation of the signal is higher than the noise
 * By combining more variables together, we can probably get more information
-* There are redundancies between the different variables but we are mostly interested in the complimentary information they provide and to a lesser extend to the redundant information
-* We cannot manually handle a huge number of variable at the same time
+* There are redundancies between the different variables but we are mostly interested in the complementary information they provide and to a lesser extent to the redundant information
+* We cannot manually handle a huge number of variables at the same time
 
 
 ##  Variation and covariation 
-This is a small point but so important that we put it under a separate heading. **Please note that variation and covariation are unbiased estimates.** This means that, they do not take into account the groupings/phenotype/meta data/other information about observations (samples). And we are going to agree that if **variable A** (a gene) has a variation of 2 and another **variable B** has a variation 1. We want to remain unbiased and give higher value to variable A compared to variable B EVEN if B shows us more "true" information about our experiment. So the higher the variation, the better, no matter what it shows. This might sound counterintuitive, but we will show that, remaining unbiased, will show us the data pattern that otherwise could not have been found.
+This is a small point but so important that we put it under a separate heading. **Please note that variation and covariation are unbiased estimates.** This means that they do not take into account the groupings/phenotype/metadata/other information about observations (samples). And we are going to agree that if **variable A** (a gene) has a variation of 2 and another **variable B** has a variation 1. We want to remain unbiased and give a higher value to variable A compared to variable B EVEN if B shows us more "true" information about our experiment. So the higher the variation, the better, no matter what it shows. This might sound counterintuitive, but we will show that remaining unbiased, will show us the data pattern that otherwise could not have been found.
 
 * **So as of now, we are not going to show you labels of samples until when we want to interpret the data pattern**
 * **Remember: the higher the variation, the better**
@@ -24,7 +24,7 @@ This is a small point but so important that we put it under a separate heading. 
 
 ## Finding the largest variation {#pcavar}
 
-Let's start working on the same dataset. In the [previous chapter](#intro), we worked on maximum of three variables at the time (three axis: variable 1, 2, and 3). Twos variables showed high covariance. Let's plot them again. This time, without any colors!
+Let's start working on the same dataset. In the [previous chapter](#intro), we worked on a maximum of three variables at the time (three axes: variables 1, 2, and 3). Twos variables showed high covariance. Let's plot them again. This time, without any colors!
 
 ```{r fig-simple-cov4, fig.cap='Here, we select two variables and show how the data is spread according to the variables.', fig.align='center',warning=FALSE,message=FALSE}
 # fix number of columns in the plot
@@ -71,7 +71,7 @@ axis(1, col = 'red',cex=4,pos = c(0,0),at =unique(c(floor(data[,c(var1)]),ceilin
 
 ```
 
-We can see in Figure \@ref(fig:fig-simple-location1) (left panel), all of our observations have been mapped (projected) to the axis x (variable 1). The result is shown on the right plot.  Obviously, it gives us the original values of observations in variable 1 with variation of `r var(data[,c(var1)])`. We could do the same thing for variable 3. 
+We can see in Figure \@ref(fig:fig-simple-location1) (left panel), all of our observations have been mapped (projected) to the axis x (variable 1). The result is shown in the right plot.  Obviously, it gives us the original values of observations in variable 1 with variation of `r var(data[,c(var1)])`. We could do the same thing for variable 3. 
 
 
 ```{r fig-simple-location2, fig.cap='Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the second axis', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
@@ -162,7 +162,7 @@ abline(a = b,b = m,col="red")
 
 ```
 
-So in Figure \@ref(fig:fig-simple-line1) we have drawn an arbitrary line (left panel) and put everything on that line (right panel). It might be a bit confusing. But let's rotate that red line so it becomes horizontal exactly line x axis. 
+So in Figure \@ref(fig:fig-simple-line1) we have drawn an arbitrary line (left panel) and put everything on that line (right panel). It might be a bit confusing. But let's rotate that red line so it becomes horizontal exactly line x-axis. 
 
 ```{r fig-simple-line2, fig.cap='Simple rotation of the projected points on the line', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
 # set number of figures in a plot
@@ -173,7 +173,7 @@ plot(x=apply(projected_variables,1,mean),y=rep(0,nrow(data)),axes = F,ylab = "",
 axis(1, col = 'red',cex=4,pos = c(0,0),at =unique(c(floor(apply(projected_variables,1,mean)),ceiling(apply(projected_variables,1,mean)))) )
 
 ```
-Figure \@ref(fig:fig-simple-line2) shows our new x axis. If fact, this is a new variable! It's not quite variable 1, it's not variable 3, but a combination of these two. What is the variation of this new variable?! The variation is: `r var(apply(projected_variables,1,mean))`. Well, that is great! But the question is, we can draw as many lines as we want, what should we do? Let's, imagine that we can try infinite possibilities. Which line would you select?  
+Figure \@ref(fig:fig-simple-line2) shows our new x-axis. If fact, this is a new variable! It's not quite variable 1, it's not variable 3, but a combination of these two. What is the variation of this new variable?! The variation is: `r var(apply(projected_variables,1,mean))`. Well, that is great! But the question is, we can draw as many lines as we want, what should we do? Let's, imagine that we can try infinite possibilities. Which line would you select?  
 
 
 ```{r fig-simple-line3, fig.cap='We try to fit many lines through the data but there is only one of the lines that capture most of the variance', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
@@ -255,11 +255,11 @@ axis(1, col = 'blue',cex=4,pos = c(0,0),at =unique(c(floor(decenter_data[,1]),ce
 
 ```
 
-Intuitively, one would select a line that has the maximum variation. That is the blue line. Variation of this line is `r var(decenter_data[,1])` that is the highest amount all other lines that can be drawn. By now, we have a new variable that is a combination the original two variables and has captured most of the variation. But how about the remaining variation? What should we do about the redundancy?
+Intuitively, one would select a line that has the maximum variation. That is the blue line. Variation of this line is `r var(decenter_data[,1])` that is the highest amount all other lines that can be drawn. By now, we have a new variable that is a combination of the original two variables and has captured most of the variation. But how about the remaining variation? What should we do about the redundancy?
 
-So ideally what we want to do is to come up with another line that when we mapped the data on it, it captures the remaining variation but also **avoid redundancy**. Last point means that the covariance between the observations that we have already mapped to the first line (the blue line in Figure \@ref(fig:fig-simple-line3)) and the observations that we mapped on this new line should be **zero** or **very close to zero**.
+So ideally what we want to do is to come up with another line that when we mapped the data on it, it captures the remaining variation but also **avoid redundancy**. The last point means that the covariance between the observations that we have already mapped to the first line (the blue line in Figure \@ref(fig:fig-simple-line3)) and the observations that we mapped on this new line should be **zero** or **very close to zero**.
 
-It turns out that the only way of finding such a line is to find the line that is orthogonal to the first line (the blue line in Figure \@ref(fig:fig-simple-line3)). Orthogonal means that the angle of this new line to the blue on should be exactly 90 degree:
+It turns out that the only way of finding such a line is to find the line that is orthogonal to the first line (the blue line in Figure \@ref(fig:fig-simple-line3)). Orthogonal means that the angle of this new line to the blue on should be exactly 90 degrees:
 
 ```{r fig-simple-line4, fig.cap='We try to fit many lines through the data', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
 
@@ -355,7 +355,7 @@ axis(1, col = 'green',cex=4,pos = c(0,0),at =unique(c(floor(decenter_data[,2]),c
 
 ```
 
-Great! Now we have two new axis. The variance of the first one (blue) was  `r var(decenter_data[,1])` and the second one was  `r var(decenter_data[,2])`. And most importantly, the covariance (redndancy) betweem these two new axis is  `r cov(decenter_data[,1],decenter_data[,2])`. That is almost zero. Perfect! We have two new variables that are showing complementary variation and no redundancy. Please also note that, our small two variable dataset had a total variation of `r sum(diag(cov(data[,c(var1,var3)])))` and our new variables also have `r sum(diag(cov((decenter_data))))`. So we did not remove anything! We just rotate the data along two new axis (blue and green) such that our first axis (blue) show us most of the variation and does not have covariance with our second variable. Now it's time to plot both the new variables and see what they show us:
+Great! Now we have two new axes. The variance of the first one (blue) was  `r var(decenter_data[,1])` and the second one was  `r var(decenter_data[,2])`. And most importantly, the covariance (redundancy) between these two new axis is  `r cov(decenter_data[,1],decenter_data[,2])`. That is almost zero. Perfect! We have two new variables that are showing complementary variation and no redundancy. Please also note that, our small two-variable dataset had a total variation of `r sum(diag(cov(data[,c(var1,var3)])))` and our new variables also have `r sum(diag(cov((decenter_data))))`. So we did not remove anything! We just rotate the data along two new axes (blue and green) such that our first axis (blue) show us most of the variation and does not have covariance with our second variable. Now it's time to plot both the new variables and see what they show us:
 
 ```{r fig-simple-line6, fig.cap='Plot of the original variables together with the new axis', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
 
@@ -403,16 +403,17 @@ We can see in Figure \@ref(fig:fig-remove1) that the differences are represented
 
 PCA does exactly what we have been doing so far but it can do it for much much more complex data with thousands of variables (e.g. genes)! Its job is to find new variables from the combination of original variables and then sort them. It does that in a way that, after sorting, the first variable has the most variation (e.g. information), the second one has the second most and so forth. And all this amazing thing comes with the luxury of not having redundant variation between the new variables. 
 
-All these words mean that PCA will take your data, and rotate them and show you the angle of the data that you will see most of the differences between your observations (e.g. samples/patients/data points etc). It does this unbiased, without knowing what you are interested in. It simply does not care! For PCA higher variation is better, it will simply show it first. That is exactly the reason why it's a fantastic method for finding hidden pattern in the data. We will go through a few examples in [the next chapter](#pcaapplications). 
+All these words mean that PCA will take your data, and rotate them and show you the angle of the data that you will see most of the differences between your observations (e.g. samples/patients/data points, etc). It does this unbiased, without knowing what you are interested in. It simply does not care! For PCA higher variation is better, it will simply show it first. That is exactly the reason why it's a fantastic method for finding a hidden pattern in the data. We will go through a few examples in [the next chapter](#pcaapplications). 
 
 In short, you can do the following with PCA:
 
 * [Visualization of high dimensional data](#pcavisdimreduct): dimensions are normally the number of variables (e.g. genes) that are in the dataset
 * [Dimentionality reduction](#pcavisdimreduct): exactly like we did here for removing variables
-* [Variable selection](#pcavarselect): selecting which of the variables (e.g. genes) has most influence on the overal data pattern
+* [Variable selection](#pcavarselect): selecting which of the variables (e.g. genes) has the most influence on the overall data pattern
 * [Batch removing](#pcabtrm): Batch effect or other experimental biases can be removed by PCA
 
-We are going to go through all the abovementinoed points in the next chapter.
+We are going to go through all the abovementioned points in the next chapter.
 
 See you!
+
 

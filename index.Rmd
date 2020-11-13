@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 link-citations: yes
-description: "This a short tutorial on how PCA works."
+description: "This is a short tutorial on how PCA works."
 ---
 
 # Prerequisites
@@ -15,22 +15,23 @@ In order to run the code in this chapter, you will need to install a number of p
 The **bookdown** package can be installed from CRAN or Github:
 
 
-```{r eval=TRUE,each=FALSE,message=FALSE,warning=FALSE}
+```{r eval=TRUE,each=FALSE,message=FALSE,warning=FALSE,error=FALSE}
+
+# Install packages
 install.packages("bookdown")
 install.packages("scatterplot3d")
 install.packages("plotrix")
 install.packages("formatR")
 install.packages("heplots")
 
+# load packages
 library(scatterplot3d)
 library(plotrix)
 
-# or the development version
-# devtools::install_github("rstudio/bookdown")
 
 ```
 
-We will also use a dataset in this chapter. The dataset contains several thousands genes measured on a 23 of samples. The samples are coming from four groups and have been measured in two batches.
+We will also use a dataset in this chapter. The dataset contains several thousand genes measured on 23 samples. The samples are coming from four groups and have been measured in two batches.
 
 ```{r}
 # read the raw data
@@ -55,3 +56,5 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
+
