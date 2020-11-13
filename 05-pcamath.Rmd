@@ -1019,7 +1019,7 @@ So, We can change our empty base space to "any space" and still find the locatio
 
 ```{definition, label="matrixm", name="Matrix multiplication"}
 
-Matrix multiplication is used to transform the space into another shape. This multiplication is defined between two matrices and will produce another matrix as the result. In order to be able to multiply two matrices, the number of columns of the first matrix (left-hand side) **MUST** matches the number of rows in the second matrix. If the dimensions of the first matrix are $l \times m$ and the dimensions of the second matrix is $m \times n$, the result of the multiplication will be a matrix with dimensions of $l \times n$.
+Matrix multiplication is used to transform the space into another shape. This multiplication is defined between two matrices and will produce another matrix as the result. In order to be able to multiply two matrices, the number of columns of the first matrix (left-hand side) **MUST** matches the number of rows in the second matrix. If the dimensions of the first matrix are $l \times m$ and the dimensions of the second matrix is $m \times n$, the result of the multiplication will be a matrix with dimensions of $l \times n$. **We show matrix multiplication by just putting to matrix next to each other (e.g. $AB$ for multiplying $A$ and $B$).** Also please remember that $AB$ is not equal to $BA$.
 
 
 To multiply two matrices $A$ and $B$, giving $C$, we take the first **row** of $A$ and the first **column** of $B$, multiple the corresponding elements, and sum the results. This result will be the first element in $C$ with location $[1,1]$. We then proceed with the second column of $B$ matrix and calculate its multiplication with the first row of $A$, sum the results in $C$ at the first row and second column [1,2].  We repeat this until all columns of the second matrix have covered. We then move to the second row of $A$, we repeat this process but put the results in the second row of $C$. We keep doing this until we multiply all rows of $A$ by all columns of $B$. 
@@ -1027,7 +1027,7 @@ To multiply two matrices $A$ and $B$, giving $C$, we take the first **row** of $
 \begin{bmatrix}
 a & b \\
 c & d 
-\end{bmatrix} \cdot
+\end{bmatrix} \ 
 \begin{bmatrix}
 e & f & g\\
 h & i & j
@@ -1047,7 +1047,7 @@ Example:
 \begin{bmatrix}
 1 & 2 \\
 4 & 5 
-\end{bmatrix} \cdot
+\end{bmatrix} \ 
 \begin{bmatrix}
 7 & 8 & 9\\
 10 & 11 & 12
@@ -1230,10 +1230,10 @@ title("Inverse of rotation")
 
 ```
 
-Another way of understanding the inverse is by thinking about division. If we have a scalar $7$ and multiply it by another scalar $2$, giving us $14$, how do we go back to $2$? Well, we divide $14$ by $7$. The division is matrix world is by multiply the result matrix by the inverse of the transformation matrix. Therefore, we can deduce that if $\frac{7}{7}=1$, $X\cdot X^{-1}=I$. Here $I$ is a special matrix (called identity matrix) that has "1" on its main diagonal elements and zero elsewhere. I identity matrix does not change the space if multiply with another matrix. 
+Another way of understanding the inverse is by thinking about division. If we have a scalar $7$ and multiply it by another scalar $2$, giving us $14$, how do we go back to $2$? Well, we divide $14$ by $7$. The division is matrix world is by multiply the result matrix by the inverse of the transformation matrix. Therefore, we can deduce that if $\frac{7}{7}=1$, $X\  X^{-1}=I$. Here $I$ is a special matrix (called identity matrix) that has "1" on its main diagonal elements and zero elsewhere. I identity matrix does not change the space if multiply with another matrix. 
 
 ```{definition, label="inv", name="Inverse of a matrix"}
-The inverse of matrix $A$ is defined by the reverse transformation induced by A which is denoted by $A^-1$. More formally if the matrix is invertible, there exists another matrix  $A^-1$ where $A \cdot A^{-1} =A^{-1} \cdot A=I$, where $I$ is identity matrix. Not all the matrices have an inverse. If the determinant (\@ref(def:det)) of a matrix is zero, the matrix is not invertible (there is no reverse transformation). 
+The inverse of matrix $A$ is defined by the reverse transformation induced by A which is denoted by $A^-1$. More formally if the matrix is invertible, there exists another matrix  $A^-1$ where $A \  A^{-1} =A^{-1} \  A=I$, where $I$ is identity matrix. Not all the matrices have an inverse. If the determinant (\@ref(def:det)) of a matrix is zero, the matrix is not invertible (there is no reverse transformation). 
 
 ```
 
@@ -1501,7 +1501,7 @@ We are now ready to know a bit more about the matrices. Let's move forward to on
 
 ### Eigenvector & eigenvalues
 
-Remember, we said if we multiply a matrix $A$ by $B$ ($A\cdot B$), it will transform the space of $B$ including all the vectors inside B?
+Remember, we said if we multiply a matrix $A$ by $B$ ($A\  B$), it will transform the space of $B$ including all the vectors inside B?
 
 ```{r eigen1, fig.cap='Multiply a matrix to space, including the basis vectors', fig.align='center',warning=FALSE,message=FALSE}
 par(mfrow=c(1,2))
@@ -1735,7 +1735,7 @@ Isn't this beautiful? The colored points are still on the same lines! Every othe
 
 Imagine we have a matrix of $$A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$$
 You can consider this as a very small, gene expression data where we have two genes (columns) and two patients (rows)
-We also want to define our space by basis vector $\vec{y}=[0,1]$ so $\vec{x}=[0,0]$ or we just ignore $x$ for now. What does this transformation look if we do $A \cdot y$? Let's have a look:
+We also want to define our space by basis vector $\vec{y}=[0,1]$ so $\vec{x}=[0,0]$ or we just ignore $x$ for now. What does this transformation look if we do $A \  y$? Let's have a look:
 
 
 
@@ -1889,14 +1889,14 @@ title("Transformed space without grid")
 
 ```
 
-What happened? Well, instead of the standard basis, we started from another set of bases (eigenbasis). In Figure \@ref(fig:eigen6), we plotted the eigenvectors as those small little red and blue vectors. Their corresponding span has been plotted as dashed lines and we have grid lines (line parallel to the vectors). We then did the transformation of $A \cdot E$ where $E$ is now our matrix of eigenvectors. What we see in the upper right panel is that our transformation could not change the space! The eigenvectors were stretched or squeezed but they are on the same spans. What does this mean? Let's start from the start, we had a basis vector defining a space for us. We took our data, smashed it into that space. Because space was too "flexible", our data changed the space to the shape of our data. Like smashing an apple to a wall made of dough! It was too flexible! We changed our basis to eigenvectors (concrete wall). We smash our data to this new space so instead of reshaping the wall, our data gets flattened on the space, giving us its overall shape. That is the lower-left panel in Figure \@ref(fig:eigen6). Another interesting point, if our data is an apple (3d), we smash to dough (standard space), the dough itself is going to be 3d! But if we define a concrete wall (eigenspace) that is 2d and smash our 3d apple against it, the apple is going to be 2d! Yes! This sounds familiar, right? This is dimensionality reduction. Exactly what PCA or similar methods do for us! Fun is enough! Let's try to mathematically find that concrete wall!
+What happened? Well, instead of the standard basis, we started from another set of bases (eigenbasis). In Figure \@ref(fig:eigen6), we plotted the eigenvectors as those small little red and blue vectors. Their corresponding span has been plotted as dashed lines and we have grid lines (line parallel to the vectors). We then did the transformation of $A \  E$ where $E$ is now our matrix of eigenvectors. What we see in the upper right panel is that our transformation could not change the space! The eigenvectors were stretched or squeezed but they are on the same spans. What does this mean? Let's start from the start, we had a basis vector defining a space for us. We took our data, smashed it into that space. Because space was too "flexible", our data changed the space to the shape of our data. Like smashing an apple to a wall made of dough! It was too flexible! We changed our basis to eigenvectors (concrete wall). We smash our data to this new space so instead of reshaping the wall, our data gets flattened on the space, giving us its overall shape. That is the lower-left panel in Figure \@ref(fig:eigen6). Another interesting point, if our data is an apple (3d), we smash to dough (standard space), the dough itself is going to be 3d! But if we define a concrete wall (eigenspace) that is 2d and smash our 3d apple against it, the apple is going to be 2d! Yes! This sounds familiar, right? This is dimensionality reduction. Exactly what PCA or similar methods do for us! Fun is enough! Let's try to mathematically find that concrete wall!
 
 
 
 ```{definition, label="eigens", name="Eigenvectors and eigenvalues"}
 Eigenvectors are vectors in space that when transformed by a matrix, do not change span but only scale by a certain factor. This scaling factor is called an eigenvalue. So if we have eigenvectors in $v$ and we have a matrix $A$:
 
-$A \cdot v = \lambda \cdot v$
+$A \  v = \lambda \  v$
   
 Which is basically saying that after transformation, our eigenvectors are just become scaled by $\lambda$ (which is scalar)! As opposed to what some think, eigenvectors might not necessarily orthogonal to each other. In special cases of symmetric matrix (a matrix that has same things on upper diagonal elements than the lower part (for example, $A=\begin{vmatrix} 1&2&3\\2&4&6\\3&6&9\end{vmatrix}$), the eigenvectors become orthogonal. The number of eigenvectors in a matrix is equal to its rank.
 
@@ -1904,40 +1904,40 @@ Which is basically saying that after transformation, our eigenvectors are just b
 
 How do we calculate the eigenvalues and eigenvectors from this equation? Let's go step by step. 
 
-$A \cdot v = \lambda \cdot v$
+$A \  v = \lambda \  v$
 
-We have a few problems now, $A$ and $v$ are matrices but $\lambda$ is just a number. If we want to solve this funny equation, we have brought $\lambda \cdot v$ to the left part of the equation. To do so we have to transform it into a matrix shape by just multiply it to an identity matrix, the size of the number of columns of $A$. So let's do it
+We have a few problems now, $A$ and $v$ are matrices but $\lambda$ is just a number. If we want to solve this funny equation, we have brought $\lambda \  v$ to the left part of the equation. To do so we have to transform it into a matrix shape by just multiply it to an identity matrix, the size of the number of columns of $A$. So let's do it
 
-$A \cdot v = \lambda \cdot I_n \cdot v$
+$A \  v = \lambda \  I_n \  v$
 
-We can now safely bring $\lambda \cdot I_n \cdot v$ to the left part. 
+We can now safely bring $\lambda \  I_n \  v$ to the left part. 
 
-$A \cdot v - \lambda \cdot I_n \cdot v=0$
+$A \  v - \lambda \  I_n \  v=0$
 
-Noticed how $v$ is repeating here? We have $A \cdot v$ and $\lambda \cdot I_n \cdot v$, we can factor $v$ and rewrite the whole thing as
+Noticed how $v$ is repeating here? We have $A \  v$ and $\lambda \  I_n \  v$, we can factor $v$ and rewrite the whole thing as
 
-$(A -\lambda \cdot I_n) \cdot v=0$
+$(A -\lambda \  I_n) \  v=0$
 
-Ok! That became a little boring. To solve this, we could just find the inverse of $(A -\lambda \cdot I_n)$ and multiply it by both sides? We know that if we multiply a matrix by its inverse, the result will be an identity matrix (like 1 in you divide a number by itself). In this case, $v$ will be zero. So our eigenvector is just zero! Boring! 
+Ok! That became a little boring. To solve this, we could just find the inverse of $(A -\lambda \  I_n)$ and multiply it by both sides? We know that if we multiply a matrix by its inverse, the result will be an identity matrix (like 1 in you divide a number by itself). In this case, $v$ will be zero. So our eigenvector is just zero! Boring! 
 
-Let's be smart! We have matrix $A$, that is our data. We are left with one parameter to change that $\lambda$, we can choose $\lambda$ in a way that $(A -\lambda \cdot I_n)$ does not have an inverse anymore so we cannot end up with $v=0$! Smart right? 
+Let's be smart! We have matrix $A$, that is our data. We are left with one parameter to change that $\lambda$, we can choose $\lambda$ in a way that $(A -\lambda \  I_n)$ does not have an inverse anymore so we cannot end up with $v=0$! Smart right? 
 
-Do you remember when a matrix did not have an inverse (\@ref(def:det))? Exactly, when its determinant is zero! So we want to find a $\lambda$ so determinant of $(A -\lambda \cdot I_n)$ is zero. 
+Do you remember when a matrix did not have an inverse (\@ref(def:det))? Exactly, when its determinant is zero! So we want to find a $\lambda$ so determinant of $(A -\lambda \  I_n)$ is zero. 
 That is 
 
-$|A -\lambda \cdot I_n|=0$
+$|A -\lambda \  I_n|=0$
 
 We know $A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$ and $I_n=A=\begin{vmatrix} 1&0\\0&1\end{vmatrix}$ let's put back thins:
 
-$|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$
+$|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \  \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$
 
-We know that if we multiply a scalar by a matrix, every element of the matrix will be multiplied by that scalar so what is $\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}$?
+We know that if we multiply a scalar by a matrix, every element of the matrix will be multiplied by that scalar so what is $\lambda \  \begin{vmatrix} 1&0\\0&1\end{vmatrix}$?
 
 It's 
 
 $$\begin{vmatrix} \lambda \times 1 &\lambda \times 0\\ \lambda \times 0 & \lambda \times 1 \end{vmatrix}= \begin{vmatrix} \lambda &0\\0&\lambda \end{vmatrix}$$
 
-Awesome! let's put back things in $|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \cdot \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$:
+Awesome! let's put back things in $|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \  \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$:
 
 $$|\begin{vmatrix} 2&1\\7&2\end{vmatrix} - \begin{vmatrix} \lambda &0\\0&\lambda \end{vmatrix}|=0$$
 
@@ -1979,20 +1979,20 @@ These two are our eigenvalues.
 Remember that we can also put these inside a matrix. Like $\Lambda= \begin{vmatrix}  \lambda  &  0 \\ 0 & \lambda \end{vmatrix}$. We will see where we use this later. For now let's have a look at the eigenvector formula again!
 
 
-$A \cdot v = \lambda \cdot I_n \cdot v$
+$A \  v = \lambda \  I_n \  v$
 
 Amazing, we have lambda now. We can put them inside the formula, one by one:
 For the first one $4.64$:
 
-$A \cdot v = 4.64  \cdot v$
+$A \  v = 4.64  \  v$
 
 Now we want $v$! What is $v$? We don't know. So let's just give it a name. We know that it's an eigenvector with coordinates $x$ and $y$, so we just call it $[x,y]$ but in matrix form:
 
-$A \cdot \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \cdot \begin{vmatrix}x\\y\end{vmatrix}$
+$A \  \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \  \begin{vmatrix}x\\y\end{vmatrix}$
 
 We know $A$ so we put it in
 
-$\begin{vmatrix} 2&1\\7&2\end{vmatrix} \cdot \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \cdot \begin{vmatrix}x\\y\end{vmatrix}$.
+$\begin{vmatrix} 2&1\\7&2\end{vmatrix} \  \begin{vmatrix}x\\y\end{vmatrix} = 4.64  \  \begin{vmatrix}x\\y\end{vmatrix}$.
 
 Fortunately, by now, we know how to multiply a matrix. So to use matrix multiplication to find $[x,y]$ we first multiply the first row $A$ by $v$ on the left-hand side of the equation and the result will be equal to$\lambda$ multiply by the first row of $v$ on the right-hand side. 
 
@@ -2046,7 +2046,7 @@ How I got to those numbers? well, I just put a number in $x$ and $p$ and then ca
 
 You can try for the second column!
 
-We now have eigenvector and their eigenvalues. We can put the $\lambda$ and $v$ inside matrices and do everything with matrices : $A \cdot V = \Lambda \cdot V$. This is called eigendecomposition and PCA uses this to rotated our data and put on the space of these vectors. We will see how it does it soon! In fact, eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization.
+We now have eigenvector and their eigenvalues. We can put the $\lambda$ and $v$ inside matrices and do everything with matrices : $A \  V = \Lambda \  V$. This is called eigendecomposition and PCA uses this to rotated our data and put on the space of these vectors. We will see how it does it soon! In fact, eigenvectors are used in many different applications but here we focus on one application, called matrix diagonalization.
 
 
 
@@ -2151,7 +2151,7 @@ c
 \right|
 \end{array}$$
 
-We can calculate the covariance matrix of $A$ simply by doing $Cov(A)=\frac{1}{n-1} \times A^T \cdot A$ (look the matrix multiplication).  Look at covariance formula, the first part of $Cov(A)=\frac{1}{n-1} \times A^T \cdot A$ is $\frac{1}{n-1}$ which is basically the division we do in $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$. The second part is doing $Cov(x,y)=\sum_{i=1}^{N}(x_{i})(y_{i})$ we are missing something! What is that? Subtraction by the average. Here comes the trick. If we [center our data](#centerExample), the average of each variable becomes zero. So  $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ becomes $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-0)(y_{i}-0)}{n-1}$ that is exactly $Cov(A)=\frac{1}{n-1} \times A^T \cdot A$. There are some functions, software that do covaraince matrix using the tradition formula however, to be safe, make sure that you **ALWAYS** center your data. In the rest of this chapter, we assume that we have centered our data. 
+We can calculate the covariance matrix of $A$ simply by doing $Cov(A)=\frac{1}{n-1} \times A^T \  A$ (look the matrix multiplication).  Look at covariance formula, the first part of $Cov(A)=\frac{1}{n-1} \times A^T \  A$ is $\frac{1}{n-1}$ which is basically the division we do in $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$. The second part is doing $Cov(x,y)=\sum_{i=1}^{N}(x_{i})(y_{i})$ we are missing something! What is that? Subtraction by the average. Here comes the trick. If we [center our data](#centerExample), the average of each variable becomes zero. So  $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}$ becomes $Cov(x,y)=\frac{\sum_{i=1}^{N}(x_{i}-0)(y_{i}-0)}{n-1}$ that is exactly $Cov(A)=\frac{1}{n-1} \times A^T \  A$. There are some functions, software that do covaraince matrix using the tradition formula however, to be safe, make sure that you **ALWAYS** center your data. In the rest of this chapter, we assume that we have centered our data. 
 
 The variance of variable a is 0.4 (diagonal element), the variance of b is 2, and the variance of c is 0.8. The covariance between a and b is 0.3 as defined by the first row and the second column of the matrix or the first column and the second row of the matrix (yes, it's symmetric! Amazing!). The covariance of b and c is 5 (second row and third column) and so forth. I guess by now you realized we summarized the whole structure of our data is a covariance matrix. It shows how individual variables are spread and how they are related. Well, this pretty much our data characteristics! As we said we like our data to have good variance but low covariance, meaning that we have not wasted our time and money measuring things that show the same thing! But we rather have complementary information. With this definition, what is a nice covariance matrix? It's a matrix that has zero on the off-diagonal elements (no covariance between any variable in our data) and large numbers on the diagonal elements. Or at least the first one is the largest then the second one and so on. Did I say there is a method (diagonalization) that can take a square matrix and make everything off-diagonal zero and still keep the structure? Yes! We want to apply diagonalization on the covariance matrix to end up with nonzero elements on the diagonal and zero elements elsewhere. This means a structure that is guaranteed to no have redundant information! Awesome! Let's move on to how we calculate it. 
 
@@ -2159,16 +2159,16 @@ The variance of variable a is 0.4 (diagonal element), the variance of b is 2, an
 
 There are many methods for diagonalization but here we focus on the classic one using eigendecomposition. 
 
-Let's say our data is sitting in matrix $X$, in which the rows are observations and the columns are variables. Our goal is to find an orthonormal matrix $P$ that when we mapped map our original data $X$ to another space $Y$ so that the covariance of $Y$ becomes diagonal (zero on all off-diagonal elements). So the goal is $Y=X \cdot P$ so that $Cov(Y)=diagonal \ or \ \frac{1}{n}Y^T \cdot Y=diagonal$. 
+Let's say our data is sitting in matrix $X$, in which the rows are observations and the columns are variables. Our goal is to find an orthonormal matrix $P$ that when we mapped map our original data $X$ to another space $Y$ so that the covariance of $Y$ becomes diagonal (zero on all off-diagonal elements). So the goal is $Y=X \  P$ so that $Cov(Y)=diagonal \ or \ \frac{1}{n}Y^T \  Y=diagonal$. 
 
-So as said before we can calculate the covariance of the mapped data ($Y$) as $Cov(Y)= \frac{1}{n}Y \cdot Y^T$. We covariance of the original data (before transformation) is $Cov(X)= \frac{1}{n}X^T \cdot X$  We can try to rewrite this formula like this:
+So as said before we can calculate the covariance of the mapped data ($Y$) as $Cov(Y)= \frac{1}{n}Y \  Y^T$. We covariance of the original data (before transformation) is $Cov(X)= \frac{1}{n}X^T \  X$  We can try to rewrite this formula like this:
 
 
-$Cov(Y)= \frac{1}{n}Y^T \cdot Y$
+$Cov(Y)= \frac{1}{n}Y^T \  Y$
 Did we say that $Y=XP$ right?
-So let's replace $Y$ by $XP$ in right side of $Cov(Y)= \frac{1}{n}Y^T \cdot Y$
+So let's replace $Y$ by $XP$ in right side of $Cov(Y)= \frac{1}{n}Y^T \  Y$
 
-$Cov(Y)= \frac{1}{n} (XP)^T \cdot (XP)$
+$Cov(Y)= \frac{1}{n} (XP)^T \  (XP)$
 
 We just expand transpose in $(PX)^T$ and write it like $X^T P^T$ (note that we have to switch the order to $PX$ to $XP$). Now let's reorder the division by $n$ and remove the parenthesis. 
 
@@ -2176,41 +2176,41 @@ We just expand transpose in $(PX)^T$ and write it like $X^T P^T$ (note that we h
 
 $Cov(Y)=  P^T\frac{1}{n}X^T XP$
 
-Great! Do you see something cool in the middle of the equation? Yes. That is the covariance of the original matrix ($Cov(X)= \frac{1}{n}X^T \cdot X$). 
+Great! Do you see something cool in the middle of the equation? Yes. That is the covariance of the original matrix ($Cov(X)= \frac{1}{n}X^T \  X$). 
 
 $Cov(Y)=  P^T(\frac{1}{n}X^T X)P$
 
 It reads that if we have to come up with a matrix $P$ and put it inside a formula, then the covariance of the mapped data becomes diagonal. This is exactly what we wanted! How do we come up with such a matrix $P$? There is a theory saying that if we have a symmetric matrix, we can diagonalize it using its eigenvector. What does it mean? We said that we can calculate the covariance matrix of our data and this covariance matrix is symmetric. We can find the eigenvectors of this covariance matrix and use it as $P$ in $Cov(Y)=  P^T(\frac{1}{n}X^T X)P$. This way we are mapping our data to another space (using eigenvectors) where the mapped data will not have any covariance between its variables. Exactly what we were aiming for. Let's see a short proof.
 
-Do you remember we have two $\lambda$ in the eigenvalue section (\@ref(def:eigens))? We said that we can put them inside a diagonal matrix like this $\Lambda= \begin{vmatrix}  \lambda  &  0 \\ 0 & \lambda \end{vmatrix}$. Doing so our eigenvector formula becomes $A \cdot V = \Lambda  \cdot V$ where $\Lambda$ is a matrix. We said the we want to find eigenvalues for covariance matrix so for ($Cov(X)$). So let's fix the eigen formula first. 
+Do you remember we have two $\lambda$ in the eigenvalue section (\@ref(def:eigens))? We said that we can put them inside a diagonal matrix like this $\Lambda= \begin{vmatrix}  \lambda  &  0 \\ 0 & \lambda \end{vmatrix}$. Doing so our eigenvector formula becomes $A \  V = \Lambda  \  V$ where $\Lambda$ is a matrix. We said the we want to find eigenvalues for covariance matrix so for ($Cov(X)$). So let's fix the eigen formula first. 
 
-$A \cdot V = \Lambda \cdot V$.
+$A \  V = \Lambda \  V$.
  
-How can we make $Cov(X)$ isolated (separated) from $V$? Well, we can multiply both side of the equation with $V^{-1}$. So our equation become $Cov(X)=V^{-1} \Lambda  \cdot V$. 
+How can we make $Cov(X)$ isolated (separated) from $V$? Well, we can multiply both side of the equation with $V^{-1}$. So our equation become $Cov(X)=V^{-1} \Lambda  \  V$. 
 Maybe we don't remember anymore, but we said the if we find the eigenvectors of a symmetric matrix, the eigenvectors are orthogonal. There is a super amazing thing about orthogonality. If all the vectors inside a matrix are orthogonal, the inverse of that matrix is equal to its transpose. So we said vectors in $V$ (containing eigenvectors) are orthogonal, this means $V^{-1}=V^T$. So let's fix the equation above:
 
-$Cov(X)=V \Lambda  \cdot V^T$. 
+$Cov(X)=V \Lambda  \  V^T$. 
 
-We said that $Cov(X)=\frac{1}{n}X^TX$ so then $Cov(X)=V \Lambda  \cdot V^T$ becomes  $\frac{1}{n}XX^T=V \Lambda  \cdot V^T$
+We said that $Cov(X)=\frac{1}{n}X^TX$ so then $Cov(X)=V \Lambda  \  V^T$ becomes  $\frac{1}{n}XX^T=V \Lambda  \  V^T$
 
 Now it's much better. We can find covariance of our original data by using the eigenvector and eigenvalues of the covariance matrix. Now let's get back to the mapped data $Y$
 
 $Cov(Y)=  P^T(\frac{1}{n}X^T X)P$
 
-We said that $\frac{1}{n}XX^T=V \Lambda  \cdot V^T$ so why not replace $\frac{1}{n}X^TX$ in $Cov(Y)=  P^T(\frac{1}{n}X^T X)P$ by $V \Lambda  \cdot V^T$? Then we get rid of $X$. 
+We said that $\frac{1}{n}XX^T=V \Lambda  \  V^T$ so why not replace $\frac{1}{n}X^TX$ in $Cov(Y)=  P^T(\frac{1}{n}X^T X)P$ by $V \Lambda  \  V^T$? Then we get rid of $X$. 
 Let's do that
 
-$Cov(Y)=  P^T(V \Lambda  \cdot V^T)P$
+$Cov(Y)=  P^T(V \Lambda  \  V^T)P$
 
 So great! Didn't we say that one way to diagonalize a symmetric matrix is by its eigenvectors and we said the eigenvectors are in $P$? Awesome. We just calculate them. They are in $V$. Yes!! So Let's replace $P$ by $V$:
 
-$Cov(Y)=  V^T(V \Lambda  \cdot V^T)V$
+$Cov(Y)=  V^T(V \Lambda  \  V^T)V$
 
-We said the $V^T=V^{-1}$, what is the result of $V \cdot V^T$ in this case? It's an identity matrix or to oversimplify it, it is $1$.
+We said the $V^T=V^{-1}$, what is the result of $V \  V^T$ in this case? It's an identity matrix or to oversimplify it, it is $1$.
 
 So, let's take off the parenthesis and start removing all the $VV^T$
 
-$Cov(Y)=  V^TV \Lambda  \cdot V^TV=\Lambda$
+$Cov(Y)=  V^TV \Lambda  \  V^TV=\Lambda$
 
 
 
@@ -2222,7 +2222,7 @@ We are almost reaching the end of this section. Let's try to summarize what PCA 
 * Calculate covariance matrix of $A$ that is $Cov(A)$
 * Find eigenvectors of $Cov(A)$, that are $V$ and eigenvalues of $Cov(A)$ that are $\Lambda$
 * Sort the eigenvectors with respect to eigenvalues so the vector with the largest eigenvalue comes first and the second largest come next and so on (the columns of $V$ are ordered based on $\Lambda$) 
-* Multiply $A$ by sorted $V$ and call it $Y$ that is $Y=A \cdot v$
+* Multiply $A$ by sorted $V$ and call it $Y$ that is $Y=A \  v$
 * $Y$ contains your data in new space (called PC/components/scores)
 * Your variables in the new space are NOT correlated
 * $\Lambda$ is the covariance matrix of your new data
@@ -2311,7 +2311,7 @@ If we scale and center our data so the mean of each variable is zero and its sta
 Recall, the formula for covariance. That is $Cov(X)=\frac{1}{n-1}X^TX$, The Pearson correlation is given by the covariance divided by pooled standard deviation so. For two variables, we can say $r=\frac{Cov(x,y)}{\sigma_x \sigma_y}$. In this formula $\sigma$ is standard deviation of a variable such as $x$ or $y$. We already said that we scalled our data so $\sigma=1$ therefore $r_{x,y}=\frac{Cov(x,y)}{\sigma_x \sigma_y}==\frac{Cov(x,y)}{1}=Cov(x,y)$. So if we scale our data we can find the correlation matrix between original data $X$ and PC scores $Y$ as $Cov(X,Y)=\frac{1}{n-1}X^TY$
 
 $$Cov(X,Y)=\frac{1}{n-1}X^TY=\frac{1}{n-1}(YV^T)^TY=\frac{1}{n-1}VY^TY =V\frac{1}{n-1}Y^TY $$
-Didn't we say that the covariance of Y is $Cov(Y)= \frac{1}{n-1}Y^TY= V^TV \Lambda  \cdot V^TV=\Lambda$
+Didn't we say that the covariance of Y is $Cov(Y)= \frac{1}{n-1}Y^TY= V^TV \Lambda  \  V^TV=\Lambda$
 So then we replace 
 $$Cov(X,Y)=V\frac{1}{n-1}Y^TY=V \Lambda $$
 This is basically saying that if we scale our eigenvectors by eigenvalues we then have covariance between the original data $X$ and PCA scores $Y$. If we take the square root of $\Lambda$ we have the correlation, only and only if we have scaled our data. 
@@ -2345,7 +2345,7 @@ $X^TX=VS^TU^T \ USV^T=VS^2V^T$
 
 Bringing $V^T$ to the other side will give us $X^TXV=VS^2$ What is this? If you remember this looks like the eigenvector decomposition formula:
 
-$$A \cdot V = \Lambda \cdot V$$
+$$A \  V = \Lambda \  V$$
 With this difference that $A=X^TX$. We can solve this and we get to the same results.
 
 In practice, you saw that this approach did not change our computational problem. In fact, SVD is nowadays calculated using iterative methods that will almost never calculate the whole covariance matrix, letting us do PCA for very large datasets. 
