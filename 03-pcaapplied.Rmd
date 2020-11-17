@@ -7,7 +7,7 @@ editor_options:
 
 ## Summary of the previous chapter
 
-We have [already discussed](#pcafri) what PCA does. This method is used to create a set of new variables that are a combination of the original variables. PCA then sort these variables in descending order with respect to their variation. The total variation of all new variables is always the same as the original ones. The new variables will be always orthogonal (no covariance, no redundancy). Simply talking, PCA rotates the data and shows a particular view of the data such that the user can see where most of the variation is sitting! One can later decide where this variation is of interest or not depending on the research question. At this stage, we would like to remind you about the dataset we are using. In our data we have `r nrow(data)` observations (e.g. samples/patients) and `r ncol(data)` variables (e.g. measurements such as genes). The observation are coming from `r length(unique(metadata$Covariate))` groups: `r (sort(unique(metadata$Covariate)))` (e.g. cancer sub-types). We have been coloring our points in the plot based on these groups. Finally, this experiment was run in  `r length(unique(metadata$Batch))` batches (in the lab!). So let's get started by doing some PCA!
+We have [already discussed](#pcafri) what PCA does. This method is used to create a set of new variables that are a combination of the original variables. PCA then sort these variables in descending order with respect to their variance. The total variance of all new variables is always the same as the original ones. The new variables will be always orthogonal (no covariance, no redundancy). Simply talking, PCA rotates the data and shows a particular view of the data such that the user can see where most of the variance is sitting! One can later decide where this variance is of interest or not depending on the research question. At this stage, we would like to remind you about the dataset we are using. In our data we have `r nrow(data)` observations (e.g. samples/patients) and `r ncol(data)` variables (e.g. measurements such as genes). The observation are coming from `r length(unique(metadata$Covariate))` groups: `r (sort(unique(metadata$Covariate)))` (e.g. cancer sub-types). We have been coloring our points in the plot based on these groups. Finally, this experiment was run in  `r length(unique(metadata$Batch))` batches (in the lab!). So let's get started by doing some PCA!
 
 ## PCA in R {#pcar}
 We are going to use *prcomp* function in R to perform PCA. The main reason for selecting this function is simple. This is a function that is coming default with R, gives decent accuracy and is more or less accepted at the default method of doing a PCA in R. However, you should note that there are many more ways of doing a PCA in R, some of which provide much more functionalities compared to *prcomp*.
@@ -111,7 +111,7 @@ plot(dataDummy)
 
 ```
 
-In Figure \@ref(fig:scaleExample1)(left panel) which one of these two variables has most of the variation? Well, you are right! Variable2 has `r var(dataDummy[,2])` whereas Variable1 has `r var(dataDummy[,1])`. Remember what PCA shows: the angle with most of the variation. Obviously, this is going to be Variable2. There is one point and i guess you also see it in the code. These two variables are identical except that Variable2 equals to Variable1 multiply by 100. You can see that in the scatter plot in the right panel. These two variables are identical. Let's see the effect of scaling:
+In Figure \@ref(fig:scaleExample1)(left panel) which one of these two variables has most of the variance? Well, you are right! Variable2 has `r var(dataDummy[,2])` whereas Variable1 has `r var(dataDummy[,1])`. Remember what PCA shows: the angle with most of the variance. Obviously, this is going to be Variable2. There is one point and i guess you also see it in the code. These two variables are identical except that Variable2 equals to Variable1 multiply by 100. You can see that in the scatter plot in the right panel. These two variables are identical. Let's see the effect of scaling:
 
 
 
@@ -138,7 +138,7 @@ plot(dataDummy)
 
 ```
 
-Perfect! right?! Now we see that they are identical and obviously have the same variation (`r var(dataDummy[,1])`). So we were fooled by scales. If we have thousands of variables and just one or two of them are coming from different scales compared to the rest, PCA would also have been fooled and showed us only those two variables! So the point is:
+Perfect! right?! Now we see that they are identical and obviously have the same variance (`r var(dataDummy[,1])`). So we were fooled by scales. If we have thousands of variables and just one or two of them are coming from different scales compared to the rest, PCA would also have been fooled and showed us only those two variables! So the point is:
 
 **If you don't know your variables are in the same scale, set *scale* to *TRUE***
 
@@ -199,14 +199,14 @@ You can see the standard deviation of these new axes in
     
 Each element of *pcaResults\$sdev* corresponds to the standard deviation of the same variable in *pcaResults\$x*. This means *pcaResults\$sdev[1]* is the standard deviation of the first column of *pcaResults\$x*. The same thing for the second one, *pcaResults\$sdev[2]* is the standard deviation of the second column of *pcaResults\$x*. Here we refer to each column of x as a component. So component 1 means the new variable 1 that has been created by PCA. 
 
-Intuitively, as we are interested in most of the variation, we go ahead and plot the first two components of PCA.
+Intuitively, as we are interested in most of the variance, we go ahead and plot the first two components of PCA.
 
 ```{r pcaexample1,fig.align="center",fig.cap="PCA of the data using first two components",warning=FALSE,message=FALSE}
 
 # set number of figures
 par(mfrow=c(1,1))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -216,7 +216,7 @@ plot(pcaResults$x[,1:2],xlab=paste("PC1, var.exp:",round(x.pvar[1]),"percent"),
 
 ```
 
-Amazing. This is our PCA results. Here in Figure '@ref(fig:pcaexample1), the x-axis is component 1 and the y-axis is component 2 of the PCA. We can see that the first component alone shows us `r round(x.pvar[1])` percent of the total variation in our dataset. This is amazing! we have had  `r ncol(data)` variables with a total of `r sum(apply(data,2,var))` variation. Now we can see `r round(x.pvar[1])` percent of the variation (`r sum(apply(data,2,var))*(x.pvar[1]/100)`) in only one variable! And look, the second component only explains `r round(x.pvar[2])` percent of the total variation so it's not even that important compared to the first one. But hold on, we first need to see what this new variable actually shows us? Here the statistics do not help much, we as researchers should make sense of this component. By adding shapes, colors, etc to the figure, we can start making sense of this.
+Amazing. This is our PCA results. Here in Figure '@ref(fig:pcaexample1), the x-axis is component 1 and the y-axis is component 2 of the PCA. We can see that the first component alone shows us `r round(x.pvar[1])` percent of the total variance in our dataset. This is amazing! we have had  `r ncol(data)` variables with a total of `r sum(apply(data,2,var))` variance. Now we can see `r round(x.pvar[1])` percent of the variance (`r sum(apply(data,2,var))*(x.pvar[1]/100)`) in only one variable! And look, the second component only explains `r round(x.pvar[2])` percent of the total variance so it's not even that important compared to the first one. But hold on, we first need to see what this new variable actually shows us? Here the statistics do not help much, we as researchers should make sense of this component. By adding shapes, colors, etc to the figure, we can start making sense of this.
 
 Let's add our group information first:
 
@@ -225,7 +225,7 @@ Let's add our group information first:
 # set number of figures
 par(mfrow=c(1,1))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -237,14 +237,14 @@ legend("top", legend=c(unique(levels(factor(metadata$Covariate)))),
        col=unique(as.numeric(factor(metadata$Covariate))), cex=0.8, pch = 1)
 ```
 
-Well, OK. Perhaps not something that we actually expected. The largest variation in our data is not coming from differences between our biological groups (e.g. cancer sub-types). Our group of interest is only visible in component 2. Remember, we [discussed that PCA is great for finding patterns](#pcamot), the ones that we don't expect, in an unbiased manner! There is something else in our data that we ignore! That is:
+Well, OK. Perhaps not something that we actually expected. The largest variance in our data is not coming from differences between our biological groups (e.g. cancer sub-types). Our group of interest is only visible in component 2. Remember, we [discussed that PCA is great for finding patterns](#pcamot), the ones that we don't expect, in an unbiased manner! There is something else in our data that we ignore! That is:
 
 ```{r pcaexample3,fig.align="center",fig.cap="PCA of the data using first two components (v2)",warning=FALSE,message=FALSE}
 
 # set number of figures
 par(mfrow=c(1,1))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -259,14 +259,14 @@ legend("top", legend=c(unique(levels(factor(metadata$Covariate)))),
        col=unique(as.numeric(factor(metadata$Covariate))), cex=0.8, pch = 1)
 ```
 
-Exactly. We have such a large batch effect between our samples. That is our largest variation. What should we do. Well, we can ignore it go to the next components. Let's go up to ten components:
+Exactly. We have such a large batch effect between our samples. That is our largest variance. What should we do. Well, we can ignore it go to the next components. Let's go up to ten components:
 
 ```{r pcaexample4,fig.align="center",fig.cap="PCA of the data using up to ten components",warning=FALSE,message=FALSE,fig.height=10,fig.height=10}
 
 # set number of figures
 par(mfrow=c(1,1))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -288,7 +288,7 @@ Let's plot them:
 # set number of figures
 par(mfrow=c(1,1))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -305,7 +305,7 @@ legend("topleft", legend=paste("Batch",c(unique(levels(factor(metadata$Batch))))
        pch=unique(as.numeric(factor(metadata$Batch))), cex=0.8)
 ```
 
-That is not that bad! We can see differences between groups of interest and not the batch effect. So we can conclude that there are certainly some differences between the groups but it's much lower than our experimental factors (such as batch or others that we don't know!). So our experiment has been successful. Please also note that, if you see the variation of interest in the first components, it's generally a good sign (unless there is confounding somewhere) as PCA found what you wanted without knowing it, meaning that the signal has been very strong compared to noise! Now we want to move one step back and ask given the differences we see in these new variables, what can we say about the original variables (e.g. genes). Are there some genes specific responsibility for these differences that we see? Or What are the genes that are influenced by group (cancer sub-types) or even batches? This is the topic of the next section. 
+That is not that bad! We can see differences between groups of interest and not the batch effect. So we can conclude that there are certainly some differences between the groups but it's much lower than our experimental factors (such as batch or others that we don't know!). So our experiment has been successful. Please also note that, if you see the variance of interest in the first components, it's generally a good sign (unless there is confounding somewhere) as PCA found what you wanted without knowing it, meaning that the signal has been very strong compared to noise! Now we want to move one step back and ask given the differences we see in these new variables, what can we say about the original variables (e.g. genes). Are there some genes specific responsibility for these differences that we see? Or What are the genes that are influenced by group (cancer sub-types) or even batches? This is the topic of the next section. 
 
 
 
@@ -381,7 +381,7 @@ axis(1,cex=4,pos = c(0.9,0.5) )
 
 We can see that, in the case of component 2, most variables show the same trend that component 2 showed us. However, This is not the case in component 9 where there are only one or maybe two variables (28492 and 44067) that showed what component 9 showed. There are several reasons for this, including:
 
-* PCA looks where most of the variation is without knowing about the groups. We can see that there is a single observation in for example variable 14987 that is very different compared to the rest of the observation. 
+* PCA looks where most of the variance is without knowing about the groups. We can see that there is a single observation in for example variable 14987 that is very different compared to the rest of the observation. 
 * PCA components are combinations of **all** the variables. Simply because we chose to select the top five variables does not mean the rest of the variables are not influencing the pattern
 * From the PCA perspective, these variables are top ones. This does not mean that they will answer our research question. That is of course up to us what to conclude!
 * The distances between the observations in the PCA components would have been the same as the original data IF you did not remove any components. Now that we decided to remove some components, the distances are not the same.
@@ -390,9 +390,9 @@ By now you should have a good understanding of application PCA for dimensionalit
 
 We could stop here and you are good to start using PCA. But there is one more thing to talk about. Let's move to the last section of this chapter.
 
-## Batch removing (removing variation) {#pcabtrm}
+## Batch removing (removing variance) {#pcabtrm}
 
-Working with PCA components is nice, they are standardized, they have a specific meaning but there are situations that we want to work on the original data. However, maybe we find a variation of interest in a few PCA components and we have to keep that variation and remove the rest. Or it also can be that we found a variation that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw [before](#pcaexample1). Maybe we want to remove the batch effect from our data. PCA will give us a very powerful tool to do so. Let's have another look at the previous batch effect. We also select the top two variables affected by the batch effect and plot them
+Working with PCA components is nice, they are standardized, they have a specific meaning but there are situations that we want to work on the original data. However, maybe we find a variance of interest in a few PCA components and we have to keep that variance and remove the rest. Or it also can be that we found a variance that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw [before](#pcaexample1). Maybe we want to remove the batch effect from our data. PCA will give us a very powerful tool to do so. Let's have another look at the previous batch effect. We also select the top two variables affected by the batch effect and plot them
 
 
 ```{r pcabatch1,fig.align="center",fig.cap="PCA of the data showing the batch effect in our data",warning=FALSE,message=FALSE, tidy=TRUE}
@@ -400,7 +400,7 @@ Working with PCA components is nice, they are standardized, they have a specific
 # set number of figures
 par(mfrow=c(1,2))
 
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -440,7 +440,7 @@ new_data<-scale(new_data,scale = 1/pcaResults$scale,center = -1*pcaResults$cente
 
 # do another PCA
 pcaResults_new<-prcomp(new_data,center = T,scale. = T)
-# calculate variation explained
+# calculate variance explained
 x.var <- pcaResults_new$sdev ^ 2
 x.pvar <- x.var/sum(x.var)
 x.pvar<-x.pvar*100
@@ -460,7 +460,7 @@ plot(new_data[,(order(abs(pcaResults$rotation[,1]),decreasing = T)[1:2])],xlab=p
 title("Original variables")
 ```
 
-Isn't this beautiful!? What we did in this plot (Figure \@ref(fig:pcabatch2) ) was rebuilding (called reconstruction) of our data without the variation that we are not interested in and did another PCA to check where most of the variation is in the new data (the plot on the left)! We also plotted the same variables that we plotted in Figure \@ref(fig:pcabatch1). We clearly see that the batch effect has gone. We can use the very same method to remove/keep any variation or data pattern. We can also use the same method to decrease the size of images etc. 
+Isn't this beautiful!? What we did in this plot (Figure \@ref(fig:pcabatch2) ) was rebuilding (called reconstruction) of our data without the variance that we are not interested in and did another PCA to check where most of the variance is in the new data (the plot on the left)! We also plotted the same variables that we plotted in Figure \@ref(fig:pcabatch1). We clearly see that the batch effect has gone. We can use the very same method to remove/keep any variance or data pattern. We can also use the same method to decrease the size of images etc. 
 
 That was it for the application PCA. We are going to do some simple exercises in [the next chapter](#exer) and then jump into [the mathematical](#pcamath) details of PCA.
 

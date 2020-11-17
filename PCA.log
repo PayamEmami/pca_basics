@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.10.21)  11 NOV 2020 14:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.10.21)  13 NOV 2020 15:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -866,7 +866,7 @@ Package: amsthm 2017/10/31 v2.20.4
 \c@definition=\count131
 \c@example=\count132
 \c@exercise=\count133
-No file PCA.aux.
+(./PCA.aux)
 \openout1 = `PCA.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
@@ -991,7 +991,14 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-]
+] (./PCA.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 4.
+)
 \tf@toc=\write4
 \openout4 = `PCA.toc'.
 
@@ -1005,7 +1012,7 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 145.
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 146.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 147.
 [5] [6]
 Chapter 2.
 LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 191
@@ -1015,35 +1022,23 @@ File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [7
 
 ]
-<PCA_files/figure-latex/fig-simple-variation-1.pdf, id=49, 469.755pt x 325.215p
-t>
+<PCA_files/figure-latex/fig-simple-variation-1.pdf, id=103, 469.755pt x 325.215
+pt>
 File: PCA_files/figure-latex/fig-simple-variation-1.pdf Graphic file (type pdf)
 
 <use PCA_files/figure-latex/fig-simple-variation-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-variation-1.pdf  use
 d on input line 213.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:fig-simple-variation' on page 8 undefined on inpu
-t line 220.
-
 [8 <./PCA_files/figure-latex/fig-simple-variation-1.pdf>]
-<PCA_files/figure-latex/fig-simple-variation-reorder-1.pdf, id=60, 469.755pt x 
-325.215pt>
+<PCA_files/figure-latex/fig-simple-variation-reorder-1.pdf, id=115, 469.755pt x
+ 325.215pt>
 File: PCA_files/figure-latex/fig-simple-variation-reorder-1.pdf Graphic file (t
 ype pdf)
 <use PCA_files/figure-latex/fig-simple-variation-reorder-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-variation-reorder-1.
 pdf  used on input line 257.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:fig-simple-variation' on page 9 undefined on inpu
-t line 264.
-
-
-LaTeX Warning: Reference `fig:fig-simple-variation-reorder' on page 9 undefined
- on input line 264.
-
 
 Underfull \vbox (badness 2181) detected at line 299
  []
@@ -1052,29 +1047,17 @@ Underfull \vbox (badness 2181) detected at line 299
 Underfull \vbox (badness 1342) has occurred while \output is active []
 
 [9] [10 <./PCA_files/figure-latex/fig-simple-variation-reorder-1.pdf>]
-<PCA_files/figure-latex/fig-simple-variation-reorder-v2-1.pdf, id=75, 469.755pt
- x 325.215pt>
+<PCA_files/figure-latex/fig-simple-variation-reorder-v2-1.pdf, id=132, 469.755p
+t x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-variation-reorder-v2-1.pdf Graphic file
  (type pdf)
 <use PCA_files/figure-latex/fig-simple-variation-reorder-v2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-variation-reorder-v2
 -1.pdf  used on input line 303.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:fig-simple-variation-reorder-v2' on page 11 undef
-ined on input line 310.
-
-
-LaTeX Warning: Reference `fig:fig-simple-variation-reorder' on page 11 undefine
-d on input line 310.
-
-
-LaTeX Warning: Reference `fig:fig-simple-variation-reorder-v2' on page 11 undef
-ined on input line 310.
-
 [11] [12 <./PCA_files/figure-latex/fig-simple-variation-reorder-v2-1.pdf>]
-<PCA_files/figure-latex/fig-simple-variation-reorder-v3-1.pdf, id=90, 469.755pt
- x 722.7pt>
+<PCA_files/figure-latex/fig-simple-variation-reorder-v3-1.pdf, id=150, 469.755p
+t x 722.7pt>
 File: PCA_files/figure-latex/fig-simple-variation-reorder-v3-1.pdf Graphic file
  (type pdf)
 <use PCA_files/figure-latex/fig-simple-variation-reorder-v3-1.pdf>
@@ -1085,26 +1068,15 @@ Package pdftex.def Info: PCA_files/figure-latex/fig-simple-variation-reorder-v3
 LaTeX Warning: Float too large for page by 52.70901pt on input line 384.
 
 
-LaTeX Warning: Reference `fig:fig-simple-variation-reorder-v3' on page 13 undef
-ined on input line 386.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [13] [14 <./PCA_files/figure-latex/fig-simple-variation-reorder-v3-1.pdf>]
-<PCA_files/figure-latex/fig-simple-cov-1.pdf, id=106, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-cov-1.pdf, id=168, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-cov-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-cov-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-cov-1.pdf  used on i
 nput line 410.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:fig-simple-cov' on page 15 undefined on input lin
-e 417.
-
-
-Underfull \vbox (badness 2073) has occurred while \output is active []
-
 [15 <./PCA_files/figure-latex/fig-simple-cov-1.pdf>]
 Overfull \hbox (38.24889pt too wide) in paragraph at lines 434--434
 []\T1/lmtt/m/n/10 ## [1] "Variation of variable1: 3.282278 Varition of variable
@@ -1112,32 +1084,19 @@ Overfull \hbox (38.24889pt too wide) in paragraph at lines 434--434
  []
 
 [16]
-<PCA_files/figure-latex/fig-simple-cov2-1.pdf, id=121, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-cov2-1.pdf, id=184, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-cov2-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-cov2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-cov2-1.pdf  used on 
 input line 484.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:fig-simple-cov2' on page 17 undefined on input li
-ne 491.
-
-[17] [18 <./PCA_files/figure-latex/fig-simple-cov2-1.pdf>]
-
-LaTeX Warning: Reference `fig:fig-simple-cov2' on page 19 undefined on input li
-ne 510.
-
-[19]
-<PCA_files/figure-latex/fig-simple-cov3-1.pdf, id=141, 722.7pt x 325.215pt>
+[17] [18 <./PCA_files/figure-latex/fig-simple-cov2-1.pdf>] [19]
+<PCA_files/figure-latex/fig-simple-cov3-1.pdf, id=206, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-cov3-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-cov3-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-cov3-1.pdf  used on 
 input line 546.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-
-LaTeX Warning: Reference `fig:fig-simple-cov3' on page 20 undefined on input li
-ne 553.
-
 [20 <./PCA_files/figure-latex/fig-simple-cov3-1.pdf>]
 Chapter 3.
 LaTeX Font Info:    Try loading font information for TS1+lmr on input line 570.
@@ -1147,14 +1106,14 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [21
 
 ]
-<PCA_files/figure-latex/fig-simple-cov4-1.pdf, id=166, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-cov4-1.pdf, id=228, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-cov4-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-cov4-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-cov4-1.pdf  used on 
 input line 615.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
 [22]
-<PCA_files/figure-latex/fig-simple-location1-1.pdf, id=175, 722.7pt x 325.215pt
+<PCA_files/figure-latex/fig-simple-location1-1.pdf, id=236, 722.7pt x 325.215pt
 >
 File: PCA_files/figure-latex/fig-simple-location1-1.pdf Graphic file (type pdf)
 
@@ -1163,15 +1122,10 @@ Package pdftex.def Info: PCA_files/figure-latex/fig-simple-location1-1.pdf  use
 d on input line 656.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
 
-LaTeX Warning: Reference `fig:fig-simple-location1' on page 23 undefined on inp
-ut line 663.
-
-
-Underfull \vbox (badness 6526) detected at line 692
- []
+Underfull \vbox (badness 1062) has occurred while \output is active []
 
 [23 <./PCA_files/figure-latex/fig-simple-cov4-1.pdf>]
-<PCA_files/figure-latex/fig-simple-location2-1.pdf, id=186, 722.7pt x 325.215pt
+<PCA_files/figure-latex/fig-simple-location2-1.pdf, id=249, 722.7pt x 325.215pt
 >
 File: PCA_files/figure-latex/fig-simple-location2-1.pdf Graphic file (type pdf)
 
@@ -1180,35 +1134,29 @@ Package pdftex.def Info: PCA_files/figure-latex/fig-simple-location2-1.pdf  use
 d on input line 696.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
 
-LaTeX Warning: Reference `fig:fig-simple-location2' on page 24 undefined on inp
-ut line 703.
+Underfull \vbox (badness 4846) has occurred while \output is active []
 
 [24 <./PCA_files/figure-latex/fig-simple-location1-1.pdf>]
 Underfull \vbox (badness 3861) detected at line 756
  []
 
 [25 <./PCA_files/figure-latex/fig-simple-location2-1.pdf>]
-<PCA_files/figure-latex/fig-simple-line1-1.pdf, id=208, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-line1-1.pdf, id=271, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line1-1.pdf  used on
  input line 760.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
 
-LaTeX Warning: Reference `fig:fig-simple-line1' on page 26 undefined on input l
-ine 773.
+Underfull \vbox (badness 3724) has occurred while \output is active []
 
 [26 <./PCA_files/figure-latex/fig-simple-line1-1.pdf>]
-<PCA_files/figure-latex/fig-simple-line2-1.pdf, id=219, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-line2-1.pdf, id=283, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line2-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line2-1.pdf  used on
  input line 788.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-
-LaTeX Warning: Reference `fig:fig-simple-line2' on page 27 undefined on input l
-ine 795.
-
 [27 <./PCA_files/figure-latex/fig-simple-line2-1.pdf>]
 Underfull \vbox (badness 10000) detected at line 875
  []
@@ -1218,167 +1166,101 @@ Underfull \vbox (badness 10000) detected at line 875
  []
 
 [28]
-<PCA_files/figure-latex/fig-simple-line3-1.pdf, id=234, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-line3-1.pdf, id=300, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line3-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line3-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line3-1.pdf  used on
  input line 879.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-
-LaTeX Warning: Reference `fig:fig-simple-line3' on page 29 undefined on input l
-ine 888.
-
-
-LaTeX Warning: Reference `fig:fig-simple-line3' on page 29 undefined on input l
-ine 890.
-
 [29 <./PCA_files/figure-latex/fig-simple-line3-1.pdf>]
-<PCA_files/figure-latex/fig-simple-line4-1.pdf, id=245, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-line4-1.pdf, id=313, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line4-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line4-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line4-1.pdf  used on
  input line 924.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-
-LaTeX Warning: Reference `fig:fig-simple-line4' on page 30 undefined on input l
-ine 931.
-
-[30 <./PCA_files/figure-latex/fig-simple-line4-1.pdf>]
-
-LaTeX Warning: Reference `fig:fig-simple-line3' on page 31 undefined on input l
-ine 933.
-
-
-Overfull \vbox (2.21272pt too high) detected at line 992
+[30]
+Underfull \vbox (badness 10000) detected at line 992
  []
 
-[31]
-<PCA_files/figure-latex/fig-simple-line5-1.pdf, id=261, 722.7pt x 325.215pt>
+
+Underfull \vbox (badness 10000) detected at line 992
+ []
+
+[31 <./PCA_files/figure-latex/fig-simple-line4-1.pdf>]
+<PCA_files/figure-latex/fig-simple-line5-1.pdf, id=331, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line5-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line5-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line5-1.pdf  used on
  input line 996.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1003.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1003.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 1003.
 [32 <./PCA_files/figure-latex/fig-simple-line5-1.pdf>]
-<PCA_files/figure-latex/fig-simple-line6-1.pdf, id=277, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-simple-line6-1.pdf, id=347, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-simple-line6-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-simple-line6-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-simple-line6-1.pdf  used on
  input line 1031.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [33 <./PCA_files/figure-latex/fig-simple-line6-1.pdf>]
-<PCA_files/figure-latex/fig-remove1-1.pdf, id=291, 722.7pt x 325.215pt>
+<PCA_files/figure-latex/fig-remove1-1.pdf, id=361, 722.7pt x 325.215pt>
 File: PCA_files/figure-latex/fig-remove1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/fig-remove1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/fig-remove1-1.pdf  used on inpu
 t line 1056.
 (pdftex.def)             Requested size: 344.99533pt x 155.2479pt.
-
-LaTeX Warning: Reference `fig:fig-remove1' on page 34 undefined on input line 1
-063.
-
 [34 <./PCA_files/figure-latex/fig-remove1-1.pdf>] [35] [36
 
 ]
 Chapter 4.
 [37]
-
-LaTeX Warning: Reference `tab:tablesample' on page 38 undefined on input line 1
-183.
-
-
-Overfull \hbox (6.97342pt too wide) in paragraph at lines 1183--1184
-[]\T1/lmr/m/n/10 (-20) As you see in Ta-ble [], the ob-ser-va-tions are in rows
- (e.g. Sam-ple1_Group1_Batch1)
+Overfull \hbox (8.63461pt too wide) in paragraph at lines 1183--1184
+[]\T1/lmr/m/n/10 (-20) As you see in Ta-ble []4.1[], the ob-ser-va-tions are in
+ rows (e.g. Sam-ple1_Group1_Batch1)
  []
 
 [38] [39]
-<PCA_files/figure-latex/centerExample-1.pdf, id=347, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/centerExample-1.pdf, id=413, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/centerExample-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/centerExample-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/centerExample-1.pdf  used on in
 put line 1246.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:centerExample' on page 40 undefined on input line
- 1253.
-
 [40 <./PCA_files/figure-latex/centerExample-1.pdf>]
-<PCA_files/figure-latex/scaleExample1-1.pdf, id=360, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/scaleExample1-1.pdf, id=427, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/scaleExample1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/scaleExample1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/scaleExample1-1.pdf  used on in
 put line 1287.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
 
-LaTeX Warning: Reference `fig:scaleExample1' on page 41 undefined on input line
- 1294.
-
-
 Underfull \vbox (badness 1460) detected at line 1317
  []
 
 [41]
-<PCA_files/figure-latex/scaleExample2-1.pdf, id=366, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/scaleExample2-1.pdf, id=435, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/scaleExample2-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/scaleExample2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/scaleExample2-1.pdf  used on in
 put line 1321.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-[42 <./PCA_files/figure-latex/scaleExample1-1.pdf>]
-
-LaTeX Warning: Reference `tab:tabpca1' on page 43 undefined on input line 1372.
-
-
-[43 <./PCA_files/figure-latex/scaleExample2-1.pdf>]
+[42 <./PCA_files/figure-latex/scaleExample1-1.pdf>] [43 <./PCA_files/figure-lat
+ex/scaleExample2-1.pdf>]
 Overfull \hbox (82.79063pt too wide) in paragraph at lines 1409--1460
  [][] 
  []
 
-
-LaTeX Warning: Reference `tab:tabpca2' on page 44 undefined on input line 1462.
-
-
 [44] [45]
-Overfull \hbox (44.31577pt too wide) in paragraph at lines 1472--1473
-[]\T1/lmr/m/n/10 (-20) Each el-e-ment of \T1/lmr/m/it/10 (-20) pcaResults$\OML/
-lmm/m/it/10 sdev \OMS/lmsy/m/n/10 ^^C \OML/lmm/m/it/10 correspondtothestandardd
-eviationofthesamevariablein \OMS/lmsy/m/n/10 ^^C
- []
-
-
-Overfull \hbox (44.29582pt too wide) in paragraph at lines 1472--1473
-\OML/lmm/m/it/10 pcaResults$\T1/lmr/m/it/10 (-20) x\T1/lmr/m/n/10 (-20) . This 
-means \T1/lmr/m/it/10 (-20) pcaResults$\OML/lmm/m/it/10 sdev\OT1/lmr/m/n/10 (-2
-0) [1] \OMS/lmsy/m/n/10 ^^C \OML/lmm/m/it/10 isthestandarddeviationofthefirstco
-lumnof \OMS/lmsy/m/n/10 ^^C
- []
-
-
-Underfull \hbox (badness 1097) in paragraph at lines 1472--1473
-\OML/lmm/m/it/10 pcaResults$\T1/lmr/m/it/10 (+20) x\T1/lmr/m/n/10 (+20) . The s
-ame thing for the sec-ond one, \T1/lmr/m/it/10 (+20) pcaResults$\OML/lmm/m/it/1
-0 sdev\OT1/lmr/m/n/10 (+20) [2] \OMS/lmsy/m/n/10 ^^C
- []
-
-<PCA_files/figure-latex/pcaexample1-1.pdf, id=400, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/pcaexample1-1.pdf, id=469, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcaexample1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample1-1.pdf  used on inpu
 t line 1493.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:pcaexample1' on page 46 undefined on input line 1
-500.
-
 [46 <./PCA_files/figure-latex/pcaexample1-1.pdf>]
-<PCA_files/figure-latex/pcaexample2-1.pdf, id=411, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/pcaexample2-1.pdf, id=481, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcaexample2-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample2-1.pdf  used on inpu
@@ -1389,13 +1271,13 @@ Underfull \vbox (badness 1466) detected at line 1552
  []
 
 [47]
-<PCA_files/figure-latex/pcaexample3-1.pdf, id=417, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/pcaexample3-1.pdf, id=487, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcaexample3-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample3-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample3-1.pdf  used on inpu
 t line 1556.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-<PCA_files/figure-latex/pcaexample4-1.pdf, id=418, 469.755pt x 722.7pt>
+<PCA_files/figure-latex/pcaexample4-1.pdf, id=488, 469.755pt x 722.7pt>
 File: PCA_files/figure-latex/pcaexample4-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample4-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample4-1.pdf  used on inpu
@@ -1404,33 +1286,16 @@ t line 1582.
 
 LaTeX Warning: Float too large for page by 4.70901pt on input line 1587.
 
-
-LaTeX Warning: Reference `fig:pcaexample4' on page 48 undefined on input line 1
-589.
-
-
-LaTeX Warning: Reference `fig:pcaexample4' on page 48 undefined on input line 1
-589.
-
 [48 <./PCA_files/figure-latex/pcaexample2-1.pdf>]
-<PCA_files/figure-latex/pcaexample5-1.pdf, id=429, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/pcaexample5-1.pdf, id=502, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcaexample5-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample5-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample5-1.pdf  used on inpu
 t line 1618.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
 [49 <./PCA_files/figure-latex/pcaexample3-1.pdf>] [50 <./PCA_files/figure-latex
-/pcaexample4-1.pdf>] [51 <./PCA_files/figure-latex/pcaexample5-1.pdf>]
-
-LaTeX Warning: Reference `tab:tabpca2' on page 52 undefined on input line 1632.
-
-
-
-LaTeX Warning: Reference `tab:tabpca3' on page 52 undefined on input line 1665.
-
-
-[52]
-<PCA_files/figure-latex/pcaexample6-1.pdf, id=468, 361.35pt x 722.7pt>
+/pcaexample4-1.pdf>] [51 <./PCA_files/figure-latex/pcaexample5-1.pdf>] [52]
+<PCA_files/figure-latex/pcaexample6-1.pdf, id=540, 361.35pt x 722.7pt>
 File: PCA_files/figure-latex/pcaexample6-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample6-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample6-1.pdf  used on inpu
@@ -1440,83 +1305,501 @@ t line 1694.
 LaTeX Warning: Float too large for page by 23.952pt on input line 1699.
 
 [53] [54 <./PCA_files/figure-latex/pcaexample6-1.pdf>]
-<PCA_files/figure-latex/pcaexample7-1.pdf, id=486, 361.35pt x 722.7pt>
+<PCA_files/figure-latex/pcaexample7-1.pdf, id=559, 1084.05pt x 722.7pt>
 File: PCA_files/figure-latex/pcaexample7-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcaexample7-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcaexample7-1.pdf  used on inpu
 t line 1731.
-(pdftex.def)             Requested size: 275.00378pt x 550.00757pt.
-
-LaTeX Warning: Float too large for page by 23.952pt on input line 1736.
-
-[55] [56 <./PCA_files/figure-latex/pcaexample7-1.pdf>]
-<PCA_files/figure-latex/pcabatch1-1.pdf, id=505, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 345.00084pt x 230.00055pt.
+[55 <./PCA_files/figure-latex/pcaexample7-1.pdf>]
+<PCA_files/figure-latex/pcabatch1-1.pdf, id=572, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcabatch1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcabatch1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcabatch1-1.pdf  used on input 
 line 1790.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[56]
+Underfull \vbox (badness 10000) detected at line 1831
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1831
+ []
+
 [57 <./PCA_files/figure-latex/pcabatch1-1.pdf>]
-<PCA_files/figure-latex/pcabatch2-1.pdf, id=517, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/pcabatch2-1.pdf, id=589, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/pcabatch2-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/pcabatch2-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/pcabatch2-1.pdf  used on input 
 line 1835.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
-
-LaTeX Warning: Reference `fig:pcabatch2' on page 58 undefined on input line 184
-2.
-
-
-LaTeX Warning: Reference `fig:pcabatch1' on page 58 undefined on input line 184
-2.
-
-[58] [59 <./PCA_files/figure-latex/pcabatch2-1.pdf>] [60
-
-]
+[58 <./PCA_files/figure-latex/pcabatch2-1.pdf>]
 Chapter 5.
 
-Overfull \hbox (1077.74586pt too wide) in paragraph at lines 1858--1858
+Overfull \hbox (1051.49594pt too wide) in paragraph at lines 1858--1858
 []\T1/lmtt/m/n/10 This famous (Fisher\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s or And
 erson\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 s) iris data set gives the measurements 
 in centimeters of the variables sepal length and width and petal length and wid
 th, respectively, for 50 flowers from each of 3 species of iris. The species ar
-e Iris setosa, versicolor, and virginic[] 
+e setosa, versicolor, and virginic[] 
  []
 
-[61] [62]
+[59
+
+] [60]
 Chapter 6.
-[63
+[61
 
 ]
-<PCA_files/figure-latex/spaceex1-1.pdf, id=573, 469.755pt x 325.215pt>
+<PCA_files/figure-latex/spaceex1-1.pdf, id=629, 469.755pt x 325.215pt>
 File: PCA_files/figure-latex/spaceex1-1.pdf Graphic file (type pdf)
 <use PCA_files/figure-latex/spaceex1-1.pdf>
 Package pdftex.def Info: PCA_files/figure-latex/spaceex1-1.pdf  used on input l
 ine 1947.
 (pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[62 <./PCA_files/figure-latex/spaceex1-1.pdf>]
+<PCA_files/figure-latex/spaceex2-1.pdf, id=644, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex2-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex2-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex2-1.pdf  used on input l
+ine 1980.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+<PCA_files/figure-latex/spaceex3-1.pdf, id=645, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex3-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex3-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex3-1.pdf  used on input l
+ine 2011.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[63] [64 <./PCA_files/figure-latex/spaceex2-1.pdf> <./PCA_files/figure-latex/sp
+aceex3-1.pdf>]
+<PCA_files/figure-latex/spaceex4-1.pdf, id=673, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex4-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex4-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex4-1.pdf  used on input l
+ine 2043.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[65 <./PCA_files/figure-latex/spaceex4-1.pdf>]
+<PCA_files/figure-latex/spaceex5-1.pdf, id=686, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex5-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex5-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex5-1.pdf  used on input l
+ine 2090.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[66]
+<PCA_files/figure-latex/spaceex6-1.pdf, id=692, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex6-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex6-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex6-1.pdf  used on input l
+ine 2125.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[67 <./PCA_files/figure-latex/spaceex5-1.pdf>] [68 <./PCA_files/figure-latex/sp
+aceex6-1.pdf>]
+<PCA_files/figure-latex/spaceex7-1.pdf, id=717, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex7-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex7-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex7-1.pdf  used on input l
+ine 2177.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
 
-LaTeX Warning: Reference `fig:spaceex1' on page 64 undefined on input line 1954
-.
+Overfull \vbox (0.1357pt too high) detected at line 2211
+ []
 
-[64 <./PCA_files/figure-latex/spaceex1-1.pdf>]
+[69 <./PCA_files/figure-latex/spaceex7-1.pdf>]
+<PCA_files/figure-latex/spaceex8-1.pdf, id=729, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex8-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex8-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex8-1.pdf  used on input l
+ine 2215.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
 
-! LaTeX Error: File `https://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA2
-2564-640x350' not found.
+Underfull \vbox (badness 5533) has occurred while \output is active []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1964 ...mages/images/wallpaper/PIA22564-640x350}
-                                                   \end{center} 
+[70 <./PCA_files/figure-latex/spaceex8-1.pdf>] [71]
+<PCA_files/figure-latex/spaceex9-1.pdf, id=746, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex9-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex9-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex9-1.pdf  used on input l
+ine 2298.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[72 <./PCA_files/figure-latex/spaceex9-1.pdf>]
+<PCA_files/figure-latex/spaceex10-1.pdf, id=758, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex10-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex10-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex10-1.pdf  used on input 
+line 2340.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[73]
+<PCA_files/figure-latex/spaceex11-1.pdf, id=764, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex11-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex11-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex11-1.pdf  used on input 
+line 2379.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[74 <./PCA_files/figure-latex/spaceex10-1.pdf>] [75 <./PCA_files/figure-latex/s
+paceex11-1.pdf>]
+<PCA_files/figure-latex/spaceex12-1.pdf, id=788, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex12-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex12-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex12-1.pdf  used on input 
+line 2427.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[76 <./PCA_files/figure-latex/spaceex12-1.pdf>]
+<PCA_files/figure-latex/spaceex13-1.pdf, id=799, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex13-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex13-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex13-1.pdf  used on input 
+line 2464.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[77 <./PCA_files/figure-latex/spaceex13-1.pdf>]
+<PCA_files/figure-latex/spaceex14-1.pdf, id=810, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex14-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex14-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex14-1.pdf  used on input 
+line 2509.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[78]
+<PCA_files/figure-latex/spaceex15-1.pdf, id=817, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex15-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex15-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex15-1.pdf  used on input 
+line 2535.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 4569) detected at line 2564
+ []
+
+[79 <./PCA_files/figure-latex/spaceex14-1.pdf>]
+<PCA_files/figure-latex/spaceex16-1.pdf, id=829, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex16-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex16-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex16-1.pdf  used on input 
+line 2568.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[80 <./PCA_files/figure-latex/spaceex15-1.pdf>] [81 <./PCA_files/figure-latex/s
+paceex16-1.pdf>]
+<PCA_files/figure-latex/spaceex17-1.pdf, id=852, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex17-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex17-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex17-1.pdf  used on input 
+line 2615.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Overfull \vbox (1.50334pt too high) detected at line 2639
+ []
+
+[82]
+<PCA_files/figure-latex/spaceex18-1.pdf, id=857, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex18-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex18-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex18-1.pdf  used on input 
+line 2643.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+<PCA_files/figure-latex/spaceex19-1.pdf, id=858, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex19-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex19-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex19-1.pdf  used on input 
+line 2671.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[83 <./PCA_files/figure-latex/spaceex17-1.pdf>] [84 <./PCA_files/figure-latex/s
+paceex18-1.pdf> <./PCA_files/figure-latex/spaceex19-1.pdf>]
+<PCA_files/figure-latex/spaceex20-1.pdf, id=885, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex20-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex20-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex20-1.pdf  used on input 
+line 2699.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[85 <./PCA_files/figure-latex/spaceex20-1.pdf>]
+<PCA_files/figure-latex/spaceex21-1.pdf, id=897, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/spaceex21-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/spaceex21-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/spaceex21-1.pdf  used on input 
+line 2730.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[86 <./PCA_files/figure-latex/spaceex21-1.pdf>] [87]
+Underfull \vbox (badness 10000) detected at line 2865
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2865
+ []
+
+[88]
+<PCA_files/figure-latex/matrix1-1.pdf, id=918, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix1-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix1-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix1-1.pdf  used on input li
+ne 2869.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[89 <./PCA_files/figure-latex/matrix1-1.pdf>]
+<PCA_files/figure-latex/matrix2-1.pdf, id=935, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix2-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix2-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix2-1.pdf  used on input li
+ne 2910.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[90]
+<PCA_files/figure-latex/matrix3-1.pdf, id=940, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix3-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix3-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix3-1.pdf  used on input li
+ne 2948.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 4467) detected at line 2982
+ []
+
+[91 <./PCA_files/figure-latex/matrix2-1.pdf>]
+<PCA_files/figure-latex/matrix4-1.pdf, id=951, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix4-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix4-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix4-1.pdf  used on input li
+ne 2986.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 4467) detected at line 3023
+ []
+
+[92 <./PCA_files/figure-latex/matrix3-1.pdf>]
+<PCA_files/figure-latex/matrix5-1.pdf, id=960, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix5-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix5-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix5-1.pdf  used on input li
+ne 3027.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[93 <./PCA_files/figure-latex/matrix4-1.pdf>]
+Underfull \vbox (badness 10000) detected at line 3068
+ []
+
+
+Underfull \vbox (badness 6493) has occurred while \output is active []
+
+[94 <./PCA_files/figure-latex/matrix5-1.pdf>]
+<PCA_files/figure-latex/matrix6-1.pdf, id=978, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix6-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix6-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix6-1.pdf  used on input li
+ne 3072.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[95 <./PCA_files/figure-latex/matrix6-1.pdf>]
+<PCA_files/figure-latex/matrix7-1.pdf, id=987, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix7-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix7-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix7-1.pdf  used on input li
+ne 3117.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[96]
+<PCA_files/figure-latex/matrix8-1.pdf, id=992, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix8-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix8-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix8-1.pdf  used on input li
+ne 3165.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[97 <./PCA_files/figure-latex/matrix7-1.pdf>]
+Underfull \vbox (badness 2197) has occurred while \output is active []
+
+[98 <./PCA_files/figure-latex/matrix8-1.pdf>]
+Overfull \hbox (54.44447pt too wide) detected at line 3218
+[]  [] \OT1/lmr/m/n/10 = [] = []  []
+ []
+
+[99]
+<PCA_files/figure-latex/matrix9-1.pdf, id=1016, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix9-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix9-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix9-1.pdf  used on input li
+ne 3283.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[100] [101 <./PCA_files/figure-latex/matrix9-1.pdf>]
+<PCA_files/figure-latex/matrix10-1.pdf, id=1037, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix10-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix10-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix10-1.pdf  used on input l
+ine 3337.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[102] [103 <./PCA_files/figure-latex/matrix10-1.pdf>]
+<PCA_files/figure-latex/matrix11-1.pdf, id=1060, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/matrix11-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/matrix11-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/matrix11-1.pdf  used on input l
+ine 3406.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[104] [105 <./PCA_files/figure-latex/matrix11-1.pdf>] [106] [107]
+Overfull \hbox (18.03186pt too wide) detected at line 3577
+\OML/lmm/m/it/10 A[] \OT1/lmr/m/n/10 = []\OML/lmm/m/it/10 C[] \OT1/lmr/m/n/10 =
+ [] [] = []
+ []
+
+[108]
+<PCA_files/figure-latex/bvectors1-1.pdf, id=1097, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/bvectors1-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/bvectors1-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/bvectors1-1.pdf  used on input 
+line 3627.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[109]
+Underfull \vbox (badness 2781) has occurred while \output is active []
+
+[110 <./PCA_files/figure-latex/bvectors1-1.pdf>] [111]
+Overfull \vbox (0.92897pt too high) detected at line 3746
+ []
+
+[112]
+<PCA_files/figure-latex/eigen1-1.pdf, id=1126, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen1-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen1-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen1-1.pdf  used on input lin
+e 3750.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[113 <./PCA_files/figure-latex/eigen1-1.pdf>]
+Overfull \vbox (2.22223pt too high) detected at line 3824
+ []
+
+[114]
+<PCA_files/figure-latex/eigen2-1.pdf, id=1141, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen2-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen2-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen2-1.pdf  used on input lin
+e 3828.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[115 <./PCA_files/figure-latex/eigen2-1.pdf>]
+<PCA_files/figure-latex/eigen3-1.pdf, id=1154, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen3-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen3-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen3-1.pdf  used on input lin
+e 3883.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[116] [117 <./PCA_files/figure-latex/eigen3-1.pdf>]
+<PCA_files/figure-latex/eigen4-1.pdf, id=1170, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen4-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen4-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen4-1.pdf  used on input lin
+e 3948.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[118] [119 <./PCA_files/figure-latex/eigen4-1.pdf>]
+Overfull \vbox (2.22223pt too high) detected at line 4028
+ []
+
+[120]
+<PCA_files/figure-latex/eigen5-1.pdf, id=1192, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen5-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen5-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen5-1.pdf  used on input lin
+e 4032.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[121 <./PCA_files/figure-latex/eigen5-1.pdf>]
+Underfull \vbox (badness 10000) detected at line 4111
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[122]
+<PCA_files/figure-latex/eigen6-1.pdf, id=1209, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/eigen6-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/eigen6-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/eigen6-1.pdf  used on input lin
+e 4115.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[123] [124 <./PCA_files/figure-latex/eigen6-1.pdf>] [125] [126] [127] [128]
+<PCA_files/figure-latex/pcavar-1.pdf, id=1253, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/pcavar-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/pcavar-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/pcavar-1.pdf  used on input lin
+e 4316.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[129] [130 <./PCA_files/figure-latex/pcavar-1.pdf>]
+<PCA_files/figure-latex/pcacov-1.pdf, id=1273, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/pcacov-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/pcacov-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/pcacov-1.pdf  used on input lin
+e 4369.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 4416) has occurred while \output is active []
+
+[131] [132 <./PCA_files/figure-latex/pcacov-1.pdf>] [133] [134] [135] [136]
+<PCA_files/figure-latex/pcacov2-1.pdf, id=1314, 469.755pt x 325.215pt>
+File: PCA_files/figure-latex/pcacov2-1.pdf Graphic file (type pdf)
+<use PCA_files/figure-latex/pcacov2-1.pdf>
+Package pdftex.def Info: PCA_files/figure-latex/pcacov2-1.pdf  used on input li
+ne 4540.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[137] [138 <./PCA_files/figure-latex/pcacov2-1.pdf>] [139] [140] [141]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4640.
+[142]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4640.
+(./PCA.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4640.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4640.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4640.
+ ) 
 Here is how much of TeX's memory you used:
- 14100 strings out of 494923
- 206328 string characters out of 6180741
- 310108 words of memory out of 5000000
- 16913 multiletter control sequences out of 15000+600000
- 77784 words of font info for 127 fonts, out of 8000000 for 9000
+ 14636 strings out of 494923
+ 218768 string characters out of 6180741
+ 326088 words of memory out of 5000000
+ 17201 multiletter control sequences out of 15000+600000
+ 95022 words of font info for 159 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,8n,38p,1144b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,38p,2199b,461s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{centerExample} has been referenced but does not e
+xist, replaced by a fixed one
 
-!  ==> Fatal error occurred, no output PDF file produced!
+pdfTeX warning (dest): name{fig-simple-cov} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{bvectors} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{spaceex3} has been referenced but does not exist, r
+eplaced by a fixed one
+
+pdfTeX warning (dest): name{pcaexample1} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{pcaexample5} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{tablesample} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{fig-simple-line6} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{fig-simple-cov4} has been referenced but does not e
+xist, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvip
+s/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/sha
+re/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-m
+athsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}</usr/share/texmf/fon
+ts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmmi5.pfb></usr/share/texmf/fonts/type1/p
+ublic/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/shar
+e/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm
+/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr5.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmr7.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pf
+b></usr/share/texmf/fonts/type1/public/lm/lmro10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy7.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
+Output written on PCA.pdf (142 pages, 3546276 bytes).
+PDF statistics:
+ 1591 PDF objects out of 1728 (max. 8388607)
+ 1273 compressed objects within 13 object streams
+ 342 named destinations out of 1000 (max. 500000)
+ 14916 words of extra memory for PDF output out of 17280 (max. 10000000)
+

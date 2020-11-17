@@ -1024,7 +1024,7 @@ Matrix multiplication is used to transform the space into another shape. This mu
 
 To multiply two matrices $A$ and $B$, giving $C$, we take the first **row** of $A$ and the first **column** of $B$, multiple the corresponding elements, and sum the results. This result will be the first element in $C$ with location $[1,1]$. We then proceed with the second column of $B$ matrix and calculate its multiplication with the first row of $A$, sum the results in $C$ at the first row and second column [1,2].  We repeat this until all columns of the second matrix have covered. We then move to the second row of $A$, we repeat this process but put the results in the second row of $C$. We keep doing this until we multiply all rows of $A$ by all columns of $B$. 
 
-\begin{bmatrix}
+$$\begin{bmatrix}
 a & b \\
 c & d 
 \end{bmatrix} \ 
@@ -1038,7 +1038,7 @@ a \times g +  b \times j\\
 c \times e +  d \times h&
 c \times f +  d \times i & 
 c \times g +  d \times j
-\end{bmatrix}
+\end{bmatrix}$$
 
 ```
 
@@ -1111,6 +1111,7 @@ b<-matrix(c(1,0,0,0,cos(tet),sin(tet),0,-sin(tet),cos(tet)),nrow = 3,byrow = T)
 #plot
 scatterplot3d::scatterplot3d(t(b%*%t(as.matrix(cat_data))),xlab="",ylab="",zlab = "")
 title("Square matrix (rotation)")
+
 
 plot(t(b[-1,]%*%t(as.matrix(cat_data))),xlab="",ylab="")
 title("2d matrix transformation")
@@ -2056,7 +2057,7 @@ Matrix diagonalization is defined as taking a square matrix, like $A=\begin{vmat
 
 #### Covariance matrix
 
-If you remember, we said variation is our focus, at least here. We consider variation as both information and noise but we assume that variation of the signal is higher than the variation of noise (refer to the [introduction](#intro) if you don't remember this). We can simply calculate the variation as the spread around the mean:
+If you remember, we said variance is our focus, at least here. We consider variance as both information and noise but we assume that variance of the signal is higher than the variance of noise (refer to the [introduction](#intro) if you don't remember this). We can simply calculate the variance as the spread around the mean:
 
 ```{r pcavar, fig.cap='Here, we select one variable (a gene) and show how the data is spread around the mean. The red numbers show the index of each sample. The red line shows the mean and the dashed lines show the distance between each observation and mean', fig.align='center',warning=FALSE,message=FALSE}
 # Select variable
@@ -2214,7 +2215,7 @@ $Cov(Y)=  V^TV \Lambda  \  V^TV=\Lambda$
 
 
 
-What happened? Well, if we calculate the eigenvalues and eigenvectors of a covariance matrix, then map the data using the eigenvectors, then take the covariance of all the variables in the mapped data, the result will be equal to our eigenvalue matrix. Yes, eigenvalue matrix ($\Lambda $) is diagonal, showing that we will NOT have any redundancy in the mapped space. And each eigenvalue (the value on the diagonal of $\Lambda $) is the variance of the each variable in the new space! Do you remember we said that eigenvalue show how much space has been changed related to each eigenvector? They are essentially the variance of your new variables. So for application, you start with the eigenvector that has the largest eigenvalue and then move to the second one. That corresponds to taking the PC1, PC2 PC3, etc in PCA.
+What happened? Well, if we calculate the eigenvalues and eigenvectors of a covariance matrix, then map the data using the eigenvectors, then take the covariance of all the variables in the mapped data, the result will be equal to our eigenvalue matrix. Yes, eigenvalue matrix ($\Lambda$) is diagonal, showing that we will NOT have any redundancy in the mapped space. And each eigenvalue (the value on the diagonal of $\Lambda$) is the variance of the each variable in the new space! Do you remember we said that eigenvalue show how much space has been changed related to each eigenvector? They are essentially the variance of your new variables. So for application, you start with the eigenvector that has the largest eigenvalue and then move to the second one. That corresponds to taking the PC1, PC2 PC3, etc in PCA.
 
 We are almost reaching the end of this section. Let's try to summarize what PCA does. 
 
@@ -2253,7 +2254,8 @@ var3<-18505
 # dfine data
 x<-scale(data[,c(var1,var3)],scale = F)
 # plot the data
-plot(x,xlab = "Variable 1", ylab = "Variable 2",xlim=c(-4,4),ylim=c(-4,4))
+plot(x,xlab = "Variable 1", ylab = "Variable 2",xlim=c(-4,4),ylim=c(-4,4),axes = F)
+
 title("Original data")
 # Draw ellipses
 heplots:::covEllipses.data.frame(as.data.frame(x),add=T)
@@ -2323,7 +2325,7 @@ This will come in handy when you start interpreting the results.
 
 ### Eigenvector decomposition vs. singular value decomposition
 
-As said, eigenvector decomposition is only valid on square matrices. We data is normally not square. In PCA, we are interested in variation so PCA does a trick and converts our data to the square form by just taking covariance matrix. It then does eigenvector decomposition on the covariance matrix to diagonalize the covariance matrix giving us only variance.
+As said, eigenvector decomposition is only valid on square matrices. We data is normally not square. In PCA, we are interested in variance so PCA does a trick and converts our data to the square form by just taking covariance matrix. It then does eigenvector decomposition on the covariance matrix to diagonalize the covariance matrix giving us only variance.
 
 Calculating the covariance matrix for a large dataset is computationally difficult. We will need to calculate all possible pairwise combinations of all variables which might take a lot of time and memory. In addition, some people might not want to do PCA. They might want to decompose their matrix which is not necessarily a square matrix. 
 
