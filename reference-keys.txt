@@ -29,6 +29,7 @@ fig:pcaexample5
 tab:tabpca3
 fig:pcaexample6
 fig:pcaexample7
+fig:pcaexamplebi7
 fig:pcabatch1
 fig:pcabatch2
 def:scalar
