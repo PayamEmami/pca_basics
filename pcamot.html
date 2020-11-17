@@ -24,7 +24,7 @@
 <meta name="author" content="Payam Emami" />
 
 
-<meta name="date" content="2020-11-13" />
+<meta name="date" content="2020-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
 <li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
-<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
-<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
-<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variance-and-covariance"><i class="fa fa-check"></i><b>3.2</b> variance and covariance</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variance</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (friendly definition)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
 <li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
 <li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimensionality reduction</a></li>
 <li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
-<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variance)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
 <li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
@@ -208,26 +208,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 3</span> PCA (motivation)</h1>
 <div id="summary-of-the-previous-chapter" class="section level2">
 <h2><span class="header-section-number">3.1</span> Summary of the previous chapter</h2>
-<p>In the <a href="intro.html#intro">previous chapter</a>, we talked about two measures for summarizing our data, variation, and covariation. Variation was used to measure the spread of a single variable whereas the covariation was between two variables measuring how much they agree with each other, thus showing the redundancy. We also emphasized that it is nice to have variables showing complementary information rather than overlapping one! We also decided that we want the variation of the signal to be higher than the variation of noise. That is, probably the variables with higher variation are more interesting to us. We also show that the combination of two variables can give us more information about the data pattern, meaning that each of the variables contributes to the overall pattern. So to summarize:</p>
+<p>In the <a href="intro.html#intro">previous chapter</a>, we talked about two measures for summarizing our data, variance, and covariance. variance was used to measure the spread of a single variable whereas the covariance was between two variables measuring how much they agree with each other, thus showing the redundancy. We also emphasized that it is nice to have variables showing complementary information rather than overlapping one! We also decided that we want the variance of the signal to be higher than the variance of noise. That is, probably the variables with higher variance are more interesting to us. We also show that the combination of two variables can give us more information about the data pattern, meaning that each of the variables contributes to the overall pattern. So to summarize:</p>
 <ul>
-<li>We agree that we are interested in variation</li>
-<li>We hope that the variation of the signal is higher than the noise</li>
+<li>We agree that we are interested in variance</li>
+<li>We hope that the variance of the signal is higher than the noise</li>
 <li>By combining more variables together, we can probably get more information</li>
 <li>There are redundancies between the different variables but we are mostly interested in the complementary information they provide and to a lesser extent to the redundant information</li>
 <li>We cannot manually handle a huge number of variables at the same time</li>
 </ul>
 </div>
-<div id="variation-and-covariation" class="section level2">
-<h2><span class="header-section-number">3.2</span> Variation and covariation</h2>
-<p>This is a small point but so important that we put it under a separate heading. <strong>Please note that variation and covariation are unbiased estimates.</strong> This means that they do not take into account the groupings/phenotype/metadata/other information about observations (samples). And we are going to agree that if <strong>variable A</strong> (a gene) has a variation of 2 and another <strong>variable B</strong> has a variation 1. We want to remain unbiased and give a higher value to variable A compared to variable B EVEN if B shows us more “true” information about our experiment. So the higher the variation, the better, no matter what it shows. This might sound counterintuitive, but we will show that remaining unbiased, will show us the data pattern that otherwise could not have been found.</p>
+<div id="variance-and-covariance" class="section level2">
+<h2><span class="header-section-number">3.2</span> variance and covariance</h2>
+<p>This is a small point but so important that we put it under a separate heading. <strong>Please note that variance and covariance are unbiased estimates.</strong> This means that they do not take into account the groupings/phenotype/metadata/other information about observations (samples). And we are going to agree that if <strong>variable A</strong> (a gene) has a variance of 2 and another <strong>variable B</strong> has a variance 1. We want to remain unbiased and give a higher value to variable A compared to variable B EVEN if B shows us more “true” information about our experiment. So the higher the variance, the better, no matter what it shows. This might sound counterintuitive, but we will show that remaining unbiased, will show us the data pattern that otherwise could not have been found.</p>
 <ul>
 <li><strong>So as of now, we are not going to show you labels of samples until when we want to interpret the data pattern</strong></li>
-<li><strong>Remember: the higher the variation, the better</strong></li>
-<li><strong>Variation of the data is how the data is spread, the bigger the spread the larger the variation</strong></li>
+<li><strong>Remember: the higher the variance, the better</strong></li>
+<li><strong>variance of the data is how the data is spread, the bigger the spread the larger the variance</strong></li>
 </ul>
 </div>
 <div id="pcavar" class="section level2">
-<h2><span class="header-section-number">3.3</span> Finding the largest variation</h2>
+<h2><span class="header-section-number">3.3</span> Finding the largest variance</h2>
 <p>Let’s start working on the same dataset. In the <a href="intro.html#intro">previous chapter</a>, we worked on a maximum of three variables at the time (three axes: variables 1, 2, and 3). Twos variables showed high covariance. Let’s plot them again. This time, without any colors!</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="pcamot.html#cb24-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb24-2"><a href="pcamot.html#cb24-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
@@ -274,7 +274,7 @@ Figure 3.1: Here, we select two variables and show how the data is spread accord
 Figure 3.2: Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the fist axis
 </p>
 </div>
-<p>We can see in Figure <a href="pcamot.html#fig:fig-simple-location1">3.2</a> (left panel), all of our observations have been mapped (projected) to the axis x (variable 1). The result is shown in the right plot. Obviously, it gives us the original values of observations in variable 1 with variation of 3.2822776. We could do the same thing for variable 3.</p>
+<p>We can see in Figure <a href="pcamot.html#fig:fig-simple-location1">3.2</a> (left panel), all of our observations have been mapped (projected) to the axis x (variable 1). The result is shown in the right plot. Obviously, it gives us the original values of observations in variable 1 with variance of 3.2822776. We could do the same thing for variable 3.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="pcamot.html#cb26-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb26-2"><a href="pcamot.html#cb26-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb26-3"><a href="pcamot.html#cb26-3"></a><span class="co"># define variables</span></span>
@@ -305,9 +305,9 @@ Figure 3.2: Here, we select two variables and show how the data is spread accord
 Figure 3.3: Here, we select two variables and show how the data is spread according to the variables. We show how the data is projected on the second axis
 </p>
 </div>
-<p>This axis in Figure <a href="pcamot.html#fig:fig-simple-location2">3.3</a> gave us variation of 6.3821145. The covariance of these two axis is 3.4341536.</p>
+<p>This axis in Figure <a href="pcamot.html#fig:fig-simple-location2">3.3</a> gave us variance of 6.3821145. The covariance of these two axis is 3.4341536.</p>
 <p><strong>So to summarize, we draw two lines (axis) and mapped (projected the data points to these lines and measured the variance and covariance of the mapped data.</strong></p>
-<p>Well, we are not limited to these lines! We can draw other lines. The idea is to come up with a line drawn through the data in a way that the projected data (orthogonal projection) has maximum variation. Let’s try to see what it means in action by randomly draw a line</p>
+<p>Well, we are not limited to these lines! We can draw other lines. The idea is to come up with a line drawn through the data in a way that the projected data (orthogonal projection) has maximum variance. Let’s try to see what it means in action by randomly draw a line</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="pcamot.html#cb27-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb27-2"><a href="pcamot.html#cb27-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb27-3"><a href="pcamot.html#cb27-3"></a><span class="co"># define variables</span></span>
@@ -372,7 +372,7 @@ Figure 3.4: Here, we select two variables and show how the data is spread accord
 Figure 3.5: Simple rotation of the projected points on the line
 </p>
 </div>
-<p>Figure <a href="pcamot.html#fig:fig-simple-line2">3.5</a> shows our new x-axis. If fact, this is a new variable! It’s not quite variable 1, it’s not variable 3, but a combination of these two. What is the variation of this new variable?! The variation is: 2.9923055. Well, that is great! But the question is, we can draw as many lines as we want, what should we do? Let’s, imagine that we can try infinite possibilities. Which line would you select?</p>
+<p>Figure <a href="pcamot.html#fig:fig-simple-line2">3.5</a> shows our new x-axis. If fact, this is a new variable! It’s not quite variable 1, it’s not variable 3, but a combination of these two. What is the variance of this new variable?! The variance is: 2.9923055. Well, that is great! But the question is, we can draw as many lines as we want, what should we do? Let’s, imagine that we can try infinite possibilities. Which line would you select?</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="pcamot.html#cb30-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb30-2"><a href="pcamot.html#cb30-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
 <span id="cb30-3"><a href="pcamot.html#cb30-3"></a><span class="co"># define variables</span></span>
@@ -454,8 +454,8 @@ Figure 3.5: Simple rotation of the projected points on the line
 Figure 3.6: We try to fit many lines through the data but there is only one of the lines that capture most of the variance
 </p>
 </div>
-<p>Intuitively, one would select a line that has the maximum variation. That is the blue line. Variation of this line is 8.5999087 that is the highest amount all other lines that can be drawn. By now, we have a new variable that is a combination of the original two variables and has captured most of the variation. But how about the remaining variation? What should we do about the redundancy?</p>
-<p>So ideally what we want to do is to come up with another line that when we mapped the data on it, it captures the remaining variation but also <strong>avoid redundancy</strong>. The last point means that the covariance between the observations that we have already mapped to the first line (the blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>) and the observations that we mapped on this new line should be <strong>zero</strong> or <strong>very close to zero</strong>.</p>
+<p>Intuitively, one would select a line that has the maximum variance. That is the blue line. variance of this line is 8.5999087 that is the highest amount all other lines that can be drawn. By now, we have a new variable that is a combination of the original two variables and has captured most of the variance. But how about the remaining variance? What should we do about the redundancy?</p>
+<p>So ideally what we want to do is to come up with another line that when we mapped the data on it, it captures the remaining variance but also <strong>avoid redundancy</strong>. The last point means that the covariance between the observations that we have already mapped to the first line (the blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>) and the observations that we mapped on this new line should be <strong>zero</strong> or <strong>very close to zero</strong>.</p>
 <p>It turns out that the only way of finding such a line is to find the line that is orthogonal to the first line (the blue line in Figure <a href="pcamot.html#fig:fig-simple-line3">3.6</a>). Orthogonal means that the angle of this new line to the blue on should be exactly 90 degrees:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="pcamot.html#cb31-1"></a><span class="co"># set number of plots to 1</span></span>
 <span id="cb31-2"><a href="pcamot.html#cb31-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
@@ -550,7 +550,7 @@ Figure 3.7: We try to fit many lines through the data
 Figure 3.8: We try to fit the second best line through the data
 </p>
 </div>
-<p>Great! Now we have two new axes. The variance of the first one (blue) was 8.5999087 and the second one was 1.0644835. And most importantly, the covariance (redundancy) between these two new axis is 3.556493910^{-10}. That is almost zero. Perfect! We have two new variables that are showing complementary variation and no redundancy. Please also note that, our small two-variable dataset had a total variation of 9.6643921 and our new variables also have 9.6643921. So we did not remove anything! We just rotate the data along two new axes (blue and green) such that our first axis (blue) show us most of the variation and does not have covariance with our second variable. Now it’s time to plot both the new variables and see what they show us:</p>
+<p>Great! Now we have two new axes. The variance of the first one (blue) was 8.5999087 and the second one was 1.0644835. And most importantly, the covariance (redundancy) between these two new axis is 3.556493910^{-10}. That is almost zero. Perfect! We have two new variables that are showing complementary variance and no redundancy. Please also note that, our small two-variable dataset had a total variance of 9.6643921 and our new variables also have 9.6643921. So we did not remove anything! We just rotate the data along two new axes (blue and green) such that our first axis (blue) show us most of the variance and does not have covariance with our second variable. Now it’s time to plot both the new variables and see what they show us:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="pcamot.html#cb33-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb33-2"><a href="pcamot.html#cb33-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb33-3"><a href="pcamot.html#cb33-3"></a><span class="co"># define variables</span></span>
@@ -576,7 +576,7 @@ Figure 3.8: We try to fit the second best line through the data
 Figure 3.9: Plot of the original variables together with the new axis
 </p>
 </div>
-<p>It should be clear by now that we just rotated the data. But there is one more thing to this <a href="#fig-simple-line6">plot</a>, in the left, the differences between groups are demonstrated by the values of two variables together (variable 1 and variable 3). However, in the panel on the right, the differences between the groups are mostly visible in just one variable (New variable 1, the blue line). So if we see the variation of interest in one variable, what is the reason to keep the other one? We can simply remove the New variable 2 and represent our data with only one variable.</p>
+<p>It should be clear by now that we just rotated the data. But there is one more thing to this <a href="#fig-simple-line6">plot</a>, in the left, the differences between groups are demonstrated by the values of two variables together (variable 1 and variable 3). However, in the panel on the right, the differences between the groups are mostly visible in just one variable (New variable 1, the blue line). So if we see the variance of interest in one variable, what is the reason to keep the other one? We can simply remove the New variable 2 and represent our data with only one variable.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="pcamot.html#cb34-1"></a><span class="co"># fix number of columns in the plot</span></span>
 <span id="cb34-2"><a href="pcamot.html#cb34-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb34-3"><a href="pcamot.html#cb34-3"></a><span class="co"># plot the data</span></span>
@@ -592,12 +592,12 @@ Figure 3.9: Plot of the original variables together with the new axis
 Figure 3.10: Plot of the data with one of the variables removed
 </p>
 </div>
-<p>We can see in Figure <a href="pcamot.html#fig:fig-remove1">3.10</a> that the differences are represented in one variable what is the combined effect of the two original variables. This might not sound such a big deal as one of our original variables (Variable 1) already represented the data very well. In addition, when removing the new variable 2, in fact we only remove 11 percent of the variation. Whereas if we remove either of the original variable 1 or 2, we will remove 34 or 66 percent respectively. Meaning that using the aforementioned method, we concentrated the variation in a limited number of variables. So removing the variable with little variation should not harm the overal data pattern. Reducing from two variables to one is not such a big deal! But how about reducing from 45101 variables to just a few ones? This is exactly what PCA does!</p>
+<p>We can see in Figure <a href="pcamot.html#fig:fig-remove1">3.10</a> that the differences are represented in one variable what is the combined effect of the two original variables. This might not sound such a big deal as one of our original variables (Variable 1) already represented the data very well. In addition, when removing the new variable 2, in fact we only remove 11 percent of the variance. Whereas if we remove either of the original variable 1 or 2, we will remove 34 or 66 percent respectively. Meaning that using the aforementioned method, we concentrated the variance in a limited number of variables. So removing the variable with little variance should not harm the overal data pattern. Reducing from two variables to one is not such a big deal! But how about reducing from 45101 variables to just a few ones? This is exactly what PCA does!</p>
 </div>
 <div id="pcafri" class="section level2">
-<h2><span class="header-section-number">3.4</span> PCA (freindly definition)</h2>
-<p>PCA does exactly what we have been doing so far but it can do it for much much more complex data with thousands of variables (e.g. genes)! Its job is to find new variables from the combination of original variables and then sort them. It does that in a way that, after sorting, the first variable has the most variation (e.g. information), the second one has the second most and so forth. And all this amazing thing comes with the luxury of not having redundant variation between the new variables.</p>
-<p>All these words mean that PCA will take your data, and rotate them and show you the angle of the data that you will see most of the differences between your observations (e.g. samples/patients/data points, etc). It does this unbiased, without knowing what you are interested in. It simply does not care! For PCA higher variation is better, it will simply show it first. That is exactly the reason why it’s a fantastic method for finding a hidden pattern in the data. We will go through a few examples in <a href="pcaapplications.html#pcaapplications">the next chapter</a>.</p>
+<h2><span class="header-section-number">3.4</span> PCA (friendly definition)</h2>
+<p>PCA does exactly what we have been doing so far but it can do it for much much more complex data with thousands of variables (e.g. genes)! Its job is to find new variables from the combination of original variables and then sort them. It does that in a way that, after sorting, the first variable has the most variance (e.g. information), the second one has the second most and so forth. And all this amazing thing comes with the luxury of not having redundant variance between the new variables.</p>
+<p>All these words mean that PCA will take your data, and rotate them and show you the angle of the data that you will see most of the differences between your observations (e.g. samples/patients/data points, etc). It does this unbiased, without knowing what you are interested in. It simply does not care! For PCA higher variance is better, it will simply show it first. That is exactly the reason why it’s a fantastic method for finding a hidden pattern in the data. We will go through a few examples in <a href="pcaapplications.html#pcaapplications">the next chapter</a>.</p>
 <p>In short, you can do the following with PCA:</p>
 <ul>
 <li><a href="pcaapplications.html#pcavisdimreduct">Visualization of high dimensional data</a>: dimensions are normally the number of variables (e.g. genes) that are in the dataset</li>
@@ -605,7 +605,7 @@ Figure 3.10: Plot of the data with one of the variables removed
 <li><a href="pcaapplications.html#pcavarselect">Variable selection</a>: selecting which of the variables (e.g. genes) has the most influence on the overall data pattern</li>
 <li><a href="pcaapplications.html#pcabtrm">Batch removing</a>: Batch effect or other experimental biases can be removed by PCA</li>
 </ul>
-<p>We are going to go through all the abovementioned points in the next chapter.</p>
+<p>We are going to go through all the above mentioned points in the next chapter.</p>
 <p>See you!</p>
 
 </div>

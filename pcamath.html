@@ -24,7 +24,7 @@
 <meta name="author" content="Payam Emami" />
 
 
-<meta name="date" content="2020-11-13" />
+<meta name="date" content="2020-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
 <li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
-<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
-<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
-<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variance-and-covariance"><i class="fa fa-check"></i><b>3.2</b> variance and covariance</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variance</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (friendly definition)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
 <li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
 <li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimensionality reduction</a></li>
 <li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
-<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variance)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
 <li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
@@ -1165,24 +1165,21 @@ So, We can change our empty base space to “any space” and still find the loc
 <p><span id="def:matrixm" class="definition"><strong>Definition 6.9  (Matrix multiplication)  </strong></span>
 Matrix multiplication is used to transform the space into another shape. This multiplication is defined between two matrices and will produce another matrix as the result. In order to be able to multiply two matrices, the number of columns of the first matrix (left-hand side) <strong>MUST</strong> matches the number of rows in the second matrix. If the dimensions of the first matrix are <span class="math inline">\(l \times m\)</span> and the dimensions of the second matrix is <span class="math inline">\(m \times n\)</span>, the result of the multiplication will be a matrix with dimensions of <span class="math inline">\(l \times n\)</span>. <strong>We show matrix multiplication by just putting to matrix next to each other (e.g. <span class="math inline">\(AB\)</span> for multiplying <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>).</strong> Also please remember that <span class="math inline">\(AB\)</span> is not equal to <span class="math inline">\(BA\)</span>.</p>
 <p>To multiply two matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, giving <span class="math inline">\(C\)</span>, we take the first <strong>row</strong> of <span class="math inline">\(A\)</span> and the first <strong>column</strong> of <span class="math inline">\(B\)</span>, multiple the corresponding elements, and sum the results. This result will be the first element in <span class="math inline">\(C\)</span> with location <span class="math inline">\([1,1]\)</span>. We then proceed with the second column of <span class="math inline">\(B\)</span> matrix and calculate its multiplication with the first row of <span class="math inline">\(A\)</span>, sum the results in <span class="math inline">\(C\)</span> at the first row and second column [1,2]. We repeat this until all columns of the second matrix have covered. We then move to the second row of <span class="math inline">\(A\)</span>, we repeat this process but put the results in the second row of <span class="math inline">\(C\)</span>. We keep doing this until we multiply all rows of <span class="math inline">\(A\)</span> by all columns of <span class="math inline">\(B\)</span>.</p>
-<span class="math display">\[\begin{bmatrix}
+<p><span class="math display">\[\begin{bmatrix}
 a &amp; b \\
 c &amp; d 
-\end{bmatrix}\]</span>
- 
-<span class="math display">\[\begin{bmatrix}
+\end{bmatrix} \ 
+\begin{bmatrix}
 e &amp; f &amp; g\\
 h &amp; i &amp; j
-\end{bmatrix}\]</span>
-=
-<span class="math display">\[\begin{bmatrix}
+\end{bmatrix}=\begin{bmatrix}
 a \times e +  b \times h&amp;
 a \times f +  b \times i &amp; 
 a \times g +  b \times j\\
 c \times e +  d \times h&amp;
 c \times f +  d \times i &amp; 
 c \times g +  d \times j
-\end{bmatrix}\]</span>
+\end{bmatrix}\]</span></p>
 </div>
 
 <p>Example:
@@ -1241,11 +1238,12 @@ When we multiply a matrix with <span class="math inline">\(n\)</span> number of 
 <span id="cb94-14"><a href="pcamath.html#cb94-14"></a>scatterplot3d<span class="op">::</span><span class="kw">scatterplot3d</span>(<span class="kw">t</span>(b<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>,<span class="dt">zlab =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb94-15"><a href="pcamath.html#cb94-15"></a><span class="kw">title</span>(<span class="st">&quot;Square matrix (rotation)&quot;</span>)</span>
 <span id="cb94-16"><a href="pcamath.html#cb94-16"></a></span>
-<span id="cb94-17"><a href="pcamath.html#cb94-17"></a><span class="kw">plot</span>(<span class="kw">t</span>(b[<span class="op">-</span><span class="dv">1</span>,]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb94-18"><a href="pcamath.html#cb94-18"></a><span class="kw">title</span>(<span class="st">&quot;2d matrix transformation&quot;</span>)</span>
-<span id="cb94-19"><a href="pcamath.html#cb94-19"></a></span>
-<span id="cb94-20"><a href="pcamath.html#cb94-20"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">t</span>(b[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(cat_data)),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb94-21"><a href="pcamath.html#cb94-21"></a><span class="kw">title</span>(<span class="st">&quot;1d matrix transformation&quot;</span>)</span></code></pre></div>
+<span id="cb94-17"><a href="pcamath.html#cb94-17"></a></span>
+<span id="cb94-18"><a href="pcamath.html#cb94-18"></a><span class="kw">plot</span>(<span class="kw">t</span>(b[<span class="op">-</span><span class="dv">1</span>,]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb94-19"><a href="pcamath.html#cb94-19"></a><span class="kw">title</span>(<span class="st">&quot;2d matrix transformation&quot;</span>)</span>
+<span id="cb94-20"><a href="pcamath.html#cb94-20"></a></span>
+<span id="cb94-21"><a href="pcamath.html#cb94-21"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">t</span>(b[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]<span class="op">%*%</span><span class="kw">t</span>(<span class="kw">as.matrix</span>(cat_data))),<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(cat_data)),<span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb94-22"><a href="pcamath.html#cb94-22"></a><span class="kw">title</span>(<span class="st">&quot;1d matrix transformation&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:matrix9"></span>
 <img src="PCA_files/figure-html/matrix9-1.png" alt="Cat example" width="672" />
 <p class="caption">
@@ -2024,7 +2022,7 @@ How I got to those numbers? well, I just put a number in <span class="math inlin
 <p>Matrix diagonalization is defined as taking a square matrix, like <span class="math inline">\(A=\begin{vmatrix} 1&amp;2&amp;3\\4&amp;5&amp;6\\7&amp;8&amp;9\end{vmatrix}\)</span> and transform it into another square matrix like <span class="math inline">\(B\)</span> where all the off-diagonal elements of the matrix is zero for example <span class="math inline">\(B=\begin{vmatrix} 1&amp;0&amp;0\\0&amp;5&amp;0\\0&amp;0&amp;9\end{vmatrix}\)</span> but this matrix should still capture whatever pattern it was in the original matrix! That seems fancy and in fact, it is! Before going through what should we do to achieve that, we might have a look at why we would like to do that in the context of PCA. That is getting back to <a href="#fig-simple-cov">covariance and variance of variables</a>.</p>
 <div id="covariance-matrix" class="section level4">
 <h4><span class="header-section-number">6.4.7.1</span> Covariance matrix</h4>
-<p>If you remember, we said variation is our focus, at least here. We consider variation as both information and noise but we assume that variation of the signal is higher than the variation of noise (refer to the <a href="intro.html#intro">introduction</a> if you don’t remember this). We can simply calculate the variation as the spread around the mean:</p>
+<p>If you remember, we said variance is our focus, at least here. We consider variance as both information and noise but we assume that variance of the signal is higher than the variance of noise (refer to the <a href="intro.html#intro">introduction</a> if you don’t remember this). We can simply calculate the variance as the spread around the mean:</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="pcamath.html#cb106-1"></a><span class="co"># Select variable</span></span>
 <span id="cb106-2"><a href="pcamath.html#cb106-2"></a>variableIndex&lt;-<span class="dv">1</span></span>
 <span id="cb106-3"><a href="pcamath.html#cb106-3"></a></span>
@@ -2150,7 +2148,7 @@ Let’s do that</p>
 <p>We said the <span class="math inline">\(V^T=V^{-1}\)</span>, what is the result of <span class="math inline">\(V \  V^T\)</span> in this case? It’s an identity matrix or to oversimplify it, it is <span class="math inline">\(1\)</span>.</p>
 <p>So, let’s take off the parenthesis and start removing all the <span class="math inline">\(VV^T\)</span></p>
 <p><span class="math inline">\(Cov(Y)= V^TV \Lambda \  V^TV=\Lambda\)</span></p>
-<p>What happened? Well, if we calculate the eigenvalues and eigenvectors of a covariance matrix, then map the data using the eigenvectors, then take the covariance of all the variables in the mapped data, the result will be equal to our eigenvalue matrix. Yes, eigenvalue matrix ($$) is diagonal, showing that we will NOT have any redundancy in the mapped space. And each eigenvalue (the value on the diagonal of $$) is the variance of the each variable in the new space! Do you remember we said that eigenvalue show how much space has been changed related to each eigenvector? They are essentially the variance of your new variables. So for application, you start with the eigenvector that has the largest eigenvalue and then move to the second one. That corresponds to taking the PC1, PC2 PC3, etc in PCA.</p>
+<p>What happened? Well, if we calculate the eigenvalues and eigenvectors of a covariance matrix, then map the data using the eigenvectors, then take the covariance of all the variables in the mapped data, the result will be equal to our eigenvalue matrix. Yes, eigenvalue matrix (<span class="math inline">\(\Lambda\)</span>) is diagonal, showing that we will NOT have any redundancy in the mapped space. And each eigenvalue (the value on the diagonal of <span class="math inline">\(\Lambda\)</span>) is the variance of the each variable in the new space! Do you remember we said that eigenvalue show how much space has been changed related to each eigenvector? They are essentially the variance of your new variables. So for application, you start with the eigenvector that has the largest eigenvalue and then move to the second one. That corresponds to taking the PC1, PC2 PC3, etc in PCA.</p>
 <p>We are almost reaching the end of this section. Let’s try to summarize what PCA does.</p>
 <ul>
 <li>Take the dataset (gene expression), <span class="math inline">\(A\)</span></li>
@@ -2183,30 +2181,31 @@ Let’s do that</p>
 <span id="cb108-7"><a href="pcamath.html#cb108-7"></a><span class="co"># dfine data</span></span>
 <span id="cb108-8"><a href="pcamath.html#cb108-8"></a>x&lt;-<span class="kw">scale</span>(data[,<span class="kw">c</span>(var1,var3)],<span class="dt">scale =</span> F)</span>
 <span id="cb108-9"><a href="pcamath.html#cb108-9"></a><span class="co"># plot the data</span></span>
-<span id="cb108-10"><a href="pcamath.html#cb108-10"></a><span class="kw">plot</span>(x,<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 2&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb108-11"><a href="pcamath.html#cb108-11"></a><span class="kw">title</span>(<span class="st">&quot;Original data&quot;</span>)</span>
-<span id="cb108-12"><a href="pcamath.html#cb108-12"></a><span class="co"># Draw ellipses</span></span>
-<span id="cb108-13"><a href="pcamath.html#cb108-13"></a>heplots<span class="op">:::</span><span class="kw">covEllipses.data.frame</span>(<span class="kw">as.data.frame</span>(x),<span class="dt">add=</span>T)</span>
-<span id="cb108-14"><a href="pcamath.html#cb108-14"></a></span>
-<span id="cb108-15"><a href="pcamath.html#cb108-15"></a><span class="co"># Do PCA</span></span>
-<span id="cb108-16"><a href="pcamath.html#cb108-16"></a>eigen_vectors&lt;-<span class="kw">prcomp</span>(x)<span class="op">$</span>rotation</span>
-<span id="cb108-17"><a href="pcamath.html#cb108-17"></a></span>
-<span id="cb108-18"><a href="pcamath.html#cb108-18"></a><span class="co"># Draw main axis of ellipses</span></span>
-<span id="cb108-19"><a href="pcamath.html#cb108-19"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eigen_vectors[<span class="dv">1</span>,<span class="dv">1</span>],eigen_vectors[<span class="dv">2</span>,<span class="dv">1</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
-<span id="cb108-20"><a href="pcamath.html#cb108-20"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eigen_vectors[<span class="dv">1</span>,<span class="dv">2</span>],eigen_vectors[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
-<span id="cb108-21"><a href="pcamath.html#cb108-21"></a></span>
-<span id="cb108-22"><a href="pcamath.html#cb108-22"></a><span class="co"># plot PCA</span></span>
-<span id="cb108-23"><a href="pcamath.html#cb108-23"></a><span class="kw">plot</span>(<span class="kw">prcomp</span>(x)<span class="op">$</span>x,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb108-24"><a href="pcamath.html#cb108-24"></a><span class="kw">title</span>(<span class="st">&quot;PCA&quot;</span>)</span>
-<span id="cb108-25"><a href="pcamath.html#cb108-25"></a><span class="co"># Draw ellipse</span></span>
-<span id="cb108-26"><a href="pcamath.html#cb108-26"></a>heplots<span class="op">:::</span><span class="kw">covEllipses</span>(<span class="kw">as.data.frame</span>(<span class="kw">prcomp</span>(x)<span class="op">$</span>x),<span class="dt">add=</span>T)</span>
-<span id="cb108-27"><a href="pcamath.html#cb108-27"></a></span>
-<span id="cb108-28"><a href="pcamath.html#cb108-28"></a><span class="co"># Rotate eigen vectors</span></span>
-<span id="cb108-29"><a href="pcamath.html#cb108-29"></a>eg2&lt;-eigen_vectors<span class="op">%*%</span>eigen_vectors</span>
-<span id="cb108-30"><a href="pcamath.html#cb108-30"></a></span>
-<span id="cb108-31"><a href="pcamath.html#cb108-31"></a><span class="co"># plot arrows</span></span>
-<span id="cb108-32"><a href="pcamath.html#cb108-32"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eg2[<span class="dv">1</span>,<span class="dv">1</span>],eg2[<span class="dv">2</span>,<span class="dv">1</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
-<span id="cb108-33"><a href="pcamath.html#cb108-33"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eg2[<span class="dv">1</span>,<span class="dv">2</span>],eg2[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<span id="cb108-10"><a href="pcamath.html#cb108-10"></a><span class="kw">plot</span>(x,<span class="dt">xlab =</span> <span class="st">&quot;Variable 1&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Variable 2&quot;</span>,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>),<span class="dt">axes =</span> F)</span>
+<span id="cb108-11"><a href="pcamath.html#cb108-11"></a></span>
+<span id="cb108-12"><a href="pcamath.html#cb108-12"></a><span class="kw">title</span>(<span class="st">&quot;Original data&quot;</span>)</span>
+<span id="cb108-13"><a href="pcamath.html#cb108-13"></a><span class="co"># Draw ellipses</span></span>
+<span id="cb108-14"><a href="pcamath.html#cb108-14"></a>heplots<span class="op">:::</span><span class="kw">covEllipses.data.frame</span>(<span class="kw">as.data.frame</span>(x),<span class="dt">add=</span>T)</span>
+<span id="cb108-15"><a href="pcamath.html#cb108-15"></a></span>
+<span id="cb108-16"><a href="pcamath.html#cb108-16"></a><span class="co"># Do PCA</span></span>
+<span id="cb108-17"><a href="pcamath.html#cb108-17"></a>eigen_vectors&lt;-<span class="kw">prcomp</span>(x)<span class="op">$</span>rotation</span>
+<span id="cb108-18"><a href="pcamath.html#cb108-18"></a></span>
+<span id="cb108-19"><a href="pcamath.html#cb108-19"></a><span class="co"># Draw main axis of ellipses</span></span>
+<span id="cb108-20"><a href="pcamath.html#cb108-20"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eigen_vectors[<span class="dv">1</span>,<span class="dv">1</span>],eigen_vectors[<span class="dv">2</span>,<span class="dv">1</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb108-21"><a href="pcamath.html#cb108-21"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eigen_vectors[<span class="dv">1</span>,<span class="dv">2</span>],eigen_vectors[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb108-22"><a href="pcamath.html#cb108-22"></a></span>
+<span id="cb108-23"><a href="pcamath.html#cb108-23"></a><span class="co"># plot PCA</span></span>
+<span id="cb108-24"><a href="pcamath.html#cb108-24"></a><span class="kw">plot</span>(<span class="kw">prcomp</span>(x)<span class="op">$</span>x,<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>),<span class="dt">ylim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb108-25"><a href="pcamath.html#cb108-25"></a><span class="kw">title</span>(<span class="st">&quot;PCA&quot;</span>)</span>
+<span id="cb108-26"><a href="pcamath.html#cb108-26"></a><span class="co"># Draw ellipse</span></span>
+<span id="cb108-27"><a href="pcamath.html#cb108-27"></a>heplots<span class="op">:::</span><span class="kw">covEllipses</span>(<span class="kw">as.data.frame</span>(<span class="kw">prcomp</span>(x)<span class="op">$</span>x),<span class="dt">add=</span>T)</span>
+<span id="cb108-28"><a href="pcamath.html#cb108-28"></a></span>
+<span id="cb108-29"><a href="pcamath.html#cb108-29"></a><span class="co"># Rotate eigen vectors</span></span>
+<span id="cb108-30"><a href="pcamath.html#cb108-30"></a>eg2&lt;-eigen_vectors<span class="op">%*%</span>eigen_vectors</span>
+<span id="cb108-31"><a href="pcamath.html#cb108-31"></a></span>
+<span id="cb108-32"><a href="pcamath.html#cb108-32"></a><span class="co"># plot arrows</span></span>
+<span id="cb108-33"><a href="pcamath.html#cb108-33"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eg2[<span class="dv">1</span>,<span class="dv">1</span>],eg2[<span class="dv">2</span>,<span class="dv">1</span>],<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span>
+<span id="cb108-34"><a href="pcamath.html#cb108-34"></a><span class="kw">arrows</span>(<span class="dv">0</span>,<span class="dv">0</span>,eg2[<span class="dv">1</span>,<span class="dv">2</span>],eg2[<span class="dv">2</span>,<span class="dv">2</span>],<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">length=</span><span class="fl">0.1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcacov2"></span>
 <img src="PCA_files/figure-html/pcacov2-1.png" alt="Here, we select two variables and show how the data is spread according to both of the variables. We plotted the main axis of the ellipse and showed how it is rotated by PCA" width="672" />
 <p class="caption">
@@ -2244,7 +2243,7 @@ This is basically saying that if we scale our eigenvectors by eigenvalues we the
 </div>
 <div id="eigenvector-decomposition-vs.-singular-value-decomposition" class="section level3">
 <h3><span class="header-section-number">6.5.5</span> Eigenvector decomposition vs. singular value decomposition</h3>
-<p>As said, eigenvector decomposition is only valid on square matrices. We data is normally not square. In PCA, we are interested in variation so PCA does a trick and converts our data to the square form by just taking covariance matrix. It then does eigenvector decomposition on the covariance matrix to diagonalize the covariance matrix giving us only variance.</p>
+<p>As said, eigenvector decomposition is only valid on square matrices. We data is normally not square. In PCA, we are interested in variance so PCA does a trick and converts our data to the square form by just taking covariance matrix. It then does eigenvector decomposition on the covariance matrix to diagonalize the covariance matrix giving us only variance.</p>
 <p>Calculating the covariance matrix for a large dataset is computationally difficult. We will need to calculate all possible pairwise combinations of all variables which might take a lot of time and memory. In addition, some people might not want to do PCA. They might want to decompose their matrix which is not necessarily a square matrix.</p>
 <p>People came up with a solution that can do decomposition on any matrix (necessary a square matrix). This method is called singular value decomposition or SVD. The very detail of this method is well beyond this scope of this chapter but we can quickly have a look at it.</p>
 <p>Singular value decomposition says that I can decompose any matrix <span class="math inline">\(X\)</span> to <span class="math inline">\(X=USV^T\)</span>. In this case, <span class="math inline">\(V^T\)</span> has all the eigenvectors, <span class="math inline">\(S\)</span> is all the eigenvalues and <span class="math inline">\(US\)</span> is all the PC scores. Remember, <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are both orthonormal matrices. Isn’t this cool? If we have a matrix <span class="math inline">\(X\)</span> and its eigenvectors <span class="math inline">\(V\)</span>, we can diagonalize it, exactly like we did in eigenvector decomposition. However, in PCA we are not interested in diagonalizing <span class="math inline">\(X\)</span> but we want to do it for the covariance matrix. How do we solve this?</p>

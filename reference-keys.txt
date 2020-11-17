@@ -1,7 +1,7 @@
-fig:fig-simple-variation
-fig:fig-simple-variation-reorder
-fig:fig-simple-variation-reorder-v2
-fig:fig-simple-variation-reorder-v3
+fig:fig-simple-variance
+fig:fig-simple-variance-reorder
+fig:fig-simple-variance-reorder-v2
+fig:fig-simple-variance-reorder-v3
 fig:fig-simple-cov
 fig:fig-simple-cov2
 fig:fig-simple-cov3
@@ -91,7 +91,7 @@ prerequisites
 intro
 pcamot
 summary-of-the-previous-chapter
-variation-and-covariation
+variance-and-covariance
 pcavar
 pcafri
 pcaapplications

@@ -24,7 +24,7 @@
 <meta name="author" content="Payam Emami" />
 
 
-<meta name="date" content="2020-11-13" />
+<meta name="date" content="2020-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="pcamot.html"><a href="pcamot.html"><i class="fa fa-check"></i><b>3</b> PCA (motivation)</a><ul>
 <li class="chapter" data-level="3.1" data-path="pcamot.html"><a href="pcamot.html#summary-of-the-previous-chapter"><i class="fa fa-check"></i><b>3.1</b> Summary of the previous chapter</a></li>
-<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variation-and-covariation"><i class="fa fa-check"></i><b>3.2</b> Variation and covariation</a></li>
-<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variation</a></li>
-<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (freindly definition)</a></li>
+<li class="chapter" data-level="3.2" data-path="pcamot.html"><a href="pcamot.html#variance-and-covariance"><i class="fa fa-check"></i><b>3.2</b> variance and covariance</a></li>
+<li class="chapter" data-level="3.3" data-path="pcamot.html"><a href="pcamot.html#pcavar"><i class="fa fa-check"></i><b>3.3</b> Finding the largest variance</a></li>
+<li class="chapter" data-level="3.4" data-path="pcamot.html"><a href="pcamot.html#pcafri"><i class="fa fa-check"></i><b>3.4</b> PCA (friendly definition)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="pcaapplications.html"><a href="pcaapplications.html"><i class="fa fa-check"></i><b>4</b> PCA (applications)</a><ul>
 <li class="chapter" data-level="4.1" data-path="pcaapplications.html"><a href="pcaapplications.html#summary-of-the-previous-chapter-1"><i class="fa fa-check"></i><b>4.1</b> Summary of the previous chapter</a></li>
@@ -151,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="pcaapplications.html"><a href="pcaapplications.html#scaling"><i class="fa fa-check"></i><b>4.4</b> Scaling</a></li>
 <li class="chapter" data-level="4.5" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavisdimreduct"><i class="fa fa-check"></i><b>4.5</b> Visualization of data and dimensionality reduction</a></li>
 <li class="chapter" data-level="4.6" data-path="pcaapplications.html"><a href="pcaapplications.html#pcavarselect"><i class="fa fa-check"></i><b>4.6</b> Variable selection</a></li>
-<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variation)</a></li>
+<li class="chapter" data-level="4.7" data-path="pcaapplications.html"><a href="pcaapplications.html#pcabtrm"><i class="fa fa-check"></i><b>4.7</b> Batch removing (removing variance)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="exer.html"><a href="exer.html"><i class="fa fa-check"></i><b>5</b> Exercises</a><ul>
 <li class="chapter" data-level="5.1" data-path="exer.html"><a href="exer.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> PCA (applications)</h1>
 <div id="summary-of-the-previous-chapter-1" class="section level2">
 <h2><span class="header-section-number">4.1</span> Summary of the previous chapter</h2>
-<p>We have <a href="pcamot.html#pcafri">already discussed</a> what PCA does. This method is used to create a set of new variables that are a combination of the original variables. PCA then sort these variables in descending order with respect to their variation. The total variation of all new variables is always the same as the original ones. The new variables will be always orthogonal (no covariance, no redundancy). Simply talking, PCA rotates the data and shows a particular view of the data such that the user can see where most of the variation is sitting! One can later decide where this variation is of interest or not depending on the research question. At this stage, we would like to remind you about the dataset we are using. In our data we have 23 observations (e.g. samples/patients) and 45101 variables (e.g. measurements such as genes). The observation are coming from 4 groups: group 1, group 2, group 3, group 4 (e.g. cancer sub-types). We have been coloring our points in the plot based on these groups. Finally, this experiment was run in 2 batches (in the lab!). So let’s get started by doing some PCA!</p>
+<p>We have <a href="pcamot.html#pcafri">already discussed</a> what PCA does. This method is used to create a set of new variables that are a combination of the original variables. PCA then sort these variables in descending order with respect to their variance. The total variance of all new variables is always the same as the original ones. The new variables will be always orthogonal (no covariance, no redundancy). Simply talking, PCA rotates the data and shows a particular view of the data such that the user can see where most of the variance is sitting! One can later decide where this variance is of interest or not depending on the research question. At this stage, we would like to remind you about the dataset we are using. In our data we have 23 observations (e.g. samples/patients) and 45101 variables (e.g. measurements such as genes). The observation are coming from 4 groups: group 1, group 2, group 3, group 4 (e.g. cancer sub-types). We have been coloring our points in the plot based on these groups. Finally, this experiment was run in 2 batches (in the lab!). So let’s get started by doing some PCA!</p>
 </div>
 <div id="pcar" class="section level2">
 <h2><span class="header-section-number">4.2</span> PCA in R</h2>
@@ -494,7 +494,7 @@ Figure 4.1: Boxplot of ten variables before and after centering
 Figure 4.2: Example of two variables with different scales
 </p>
 </div>
-<p>In Figure <a href="pcaapplications.html#fig:scaleExample1">4.2</a>(left panel) which one of these two variables has most of the variation? Well, you are right! Variable2 has 328.2277629 whereas Variable1 has 3.2822776. Remember what PCA shows: the angle with most of the variation. Obviously, this is going to be Variable2. There is one point and i guess you also see it in the code. These two variables are identical except that Variable2 equals to Variable1 multiply by 100. You can see that in the scatter plot in the right panel. These two variables are identical. Let’s see the effect of scaling:</p>
+<p>In Figure <a href="pcaapplications.html#fig:scaleExample1">4.2</a>(left panel) which one of these two variables has most of the variance? Well, you are right! Variable2 has 328.2277629 whereas Variable1 has 3.2822776. Remember what PCA shows: the angle with most of the variance. Obviously, this is going to be Variable2. There is one point and i guess you also see it in the code. These two variables are identical except that Variable2 equals to Variable1 multiply by 100. You can see that in the scatter plot in the right panel. These two variables are identical. Let’s see the effect of scaling:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="pcaapplications.html#cb40-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb40-2"><a href="pcaapplications.html#cb40-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb40-3"><a href="pcaapplications.html#cb40-3"></a></span>
@@ -519,7 +519,7 @@ Figure 4.2: Example of two variables with different scales
 Figure 4.3: Example of two variables which are scaled
 </p>
 </div>
-<p>Perfect! right?! Now we see that they are identical and obviously have the same variation (0.0494634). So we were fooled by scales. If we have thousands of variables and just one or two of them are coming from different scales compared to the rest, PCA would also have been fooled and showed us only those two variables! So the point is:</p>
+<p>Perfect! right?! Now we see that they are identical and obviously have the same variance (0.0494634). So we were fooled by scales. If we have thousands of variables and just one or two of them are coming from different scales compared to the rest, PCA would also have been fooled and showed us only those two variables! So the point is:</p>
 <p><strong>If you don’t know your variables are in the same scale, set <em>scale</em> to <em>TRUE</em></strong></p>
 <p>The rule of thumb is that, if you don’t know anything about your data, set both scale and center to TRUE. You will be probably safe :)</p>
 <p>Now it’s time to use PCA to do something.</p>
@@ -791,11 +791,11 @@ Figure 4.3: Example of two variables which are scaled
 <p>You can see the standard deviation of these new axes in</p>
 <pre><code>pcaResults$sdev</code></pre>
 <p>Each element of <em>pcaResults$sdev</em> corresponds to the standard deviation of the same variable in <em>pcaResults$x</em>. This means <em>pcaResults$sdev[1]</em> is the standard deviation of the first column of <em>pcaResults$x</em>. The same thing for the second one, <em>pcaResults$sdev[2]</em> is the standard deviation of the second column of <em>pcaResults$x</em>. Here we refer to each column of x as a component. So component 1 means the new variable 1 that has been created by PCA.</p>
-<p>Intuitively, as we are interested in most of the variation, we go ahead and plot the first two components of PCA.</p>
+<p>Intuitively, as we are interested in most of the variance, we go ahead and plot the first two components of PCA.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pcaapplications.html#cb46-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb46-2"><a href="pcaapplications.html#cb46-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb46-3"><a href="pcaapplications.html#cb46-3"></a></span>
-<span id="cb46-4"><a href="pcaapplications.html#cb46-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb46-4"><a href="pcaapplications.html#cb46-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb46-5"><a href="pcaapplications.html#cb46-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb46-6"><a href="pcaapplications.html#cb46-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb46-7"><a href="pcaapplications.html#cb46-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -808,12 +808,12 @@ Figure 4.3: Example of two variables which are scaled
 Figure 4.4: PCA of the data using first two components
 </p>
 </div>
-<p>Amazing. This is our PCA results. Here in Figure ’<span class="citation">@ref</span>(fig:pcaexample1), the x-axis is component 1 and the y-axis is component 2 of the PCA. We can see that the first component alone shows us 87 percent of the total variation in our dataset. This is amazing! we have had 45101 variables with a total of 3.034990810^{4} variation. Now we can see 87 percent of the variation (2.628180310^{4}) in only one variable! And look, the second component only explains 2 percent of the total variation so it’s not even that important compared to the first one. But hold on, we first need to see what this new variable actually shows us? Here the statistics do not help much, we as researchers should make sense of this component. By adding shapes, colors, etc to the figure, we can start making sense of this.</p>
+<p>Amazing. This is our PCA results. Here in Figure ’<span class="citation">@ref</span>(fig:pcaexample1), the x-axis is component 1 and the y-axis is component 2 of the PCA. We can see that the first component alone shows us 87 percent of the total variance in our dataset. This is amazing! we have had 45101 variables with a total of 3.034990810^{4} variance. Now we can see 87 percent of the variance (2.628180310^{4}) in only one variable! And look, the second component only explains 2 percent of the total variance so it’s not even that important compared to the first one. But hold on, we first need to see what this new variable actually shows us? Here the statistics do not help much, we as researchers should make sense of this component. By adding shapes, colors, etc to the figure, we can start making sense of this.</p>
 <p>Let’s add our group information first:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pcaapplications.html#cb47-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb47-2"><a href="pcaapplications.html#cb47-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb47-3"><a href="pcaapplications.html#cb47-3"></a></span>
-<span id="cb47-4"><a href="pcaapplications.html#cb47-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb47-4"><a href="pcaapplications.html#cb47-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb47-5"><a href="pcaapplications.html#cb47-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb47-6"><a href="pcaapplications.html#cb47-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb47-7"><a href="pcaapplications.html#cb47-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -829,11 +829,11 @@ Figure 4.4: PCA of the data using first two components
 Figure 4.5: PCA of the data using first two components
 </p>
 </div>
-<p>Well, OK. Perhaps not something that we actually expected. The largest variation in our data is not coming from differences between our biological groups (e.g. cancer sub-types). Our group of interest is only visible in component 2. Remember, we <a href="pcamot.html#pcamot">discussed that PCA is great for finding patterns</a>, the ones that we don’t expect, in an unbiased manner! There is something else in our data that we ignore! That is:</p>
+<p>Well, OK. Perhaps not something that we actually expected. The largest variance in our data is not coming from differences between our biological groups (e.g. cancer sub-types). Our group of interest is only visible in component 2. Remember, we <a href="pcamot.html#pcamot">discussed that PCA is great for finding patterns</a>, the ones that we don’t expect, in an unbiased manner! There is something else in our data that we ignore! That is:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="pcaapplications.html#cb48-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb48-2"><a href="pcaapplications.html#cb48-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb48-3"><a href="pcaapplications.html#cb48-3"></a></span>
-<span id="cb48-4"><a href="pcaapplications.html#cb48-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb48-4"><a href="pcaapplications.html#cb48-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb48-5"><a href="pcaapplications.html#cb48-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb48-6"><a href="pcaapplications.html#cb48-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb48-7"><a href="pcaapplications.html#cb48-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -852,11 +852,11 @@ Figure 4.5: PCA of the data using first two components
 Figure 4.6: PCA of the data using first two components (v2)
 </p>
 </div>
-<p>Exactly. We have such a large batch effect between our samples. That is our largest variation. What should we do. Well, we can ignore it go to the next components. Let’s go up to ten components:</p>
+<p>Exactly. We have such a large batch effect between our samples. That is our largest variance. What should we do. Well, we can ignore it go to the next components. Let’s go up to ten components:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="pcaapplications.html#cb49-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb49-2"><a href="pcaapplications.html#cb49-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb49-3"><a href="pcaapplications.html#cb49-3"></a></span>
-<span id="cb49-4"><a href="pcaapplications.html#cb49-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb49-4"><a href="pcaapplications.html#cb49-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb49-5"><a href="pcaapplications.html#cb49-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb49-6"><a href="pcaapplications.html#cb49-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb49-7"><a href="pcaapplications.html#cb49-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -874,7 +874,7 @@ Figure 4.7: PCA of the data using up to ten components
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="pcaapplications.html#cb50-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb50-2"><a href="pcaapplications.html#cb50-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb50-3"><a href="pcaapplications.html#cb50-3"></a></span>
-<span id="cb50-4"><a href="pcaapplications.html#cb50-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb50-4"><a href="pcaapplications.html#cb50-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb50-5"><a href="pcaapplications.html#cb50-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb50-6"><a href="pcaapplications.html#cb50-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb50-7"><a href="pcaapplications.html#cb50-7"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -895,7 +895,7 @@ Figure 4.7: PCA of the data using up to ten components
 Figure 4.8: PCA of the data 2 and 9 components
 </p>
 </div>
-<p>That is not that bad! We can see differences between groups of interest and not the batch effect. So we can conclude that there are certainly some differences between the groups but it’s much lower than our experimental factors (such as batch or others that we don’t know!). So our experiment has been successful. Please also note that, if you see the variation of interest in the first components, it’s generally a good sign (unless there is confounding somewhere) as PCA found what you wanted without knowing it, meaning that the signal has been very strong compared to noise! Now we want to move one step back and ask given the differences we see in these new variables, what can we say about the original variables (e.g. genes). Are there some genes specific responsibility for these differences that we see? Or What are the genes that are influenced by group (cancer sub-types) or even batches? This is the topic of the next section.</p>
+<p>That is not that bad! We can see differences between groups of interest and not the batch effect. So we can conclude that there are certainly some differences between the groups but it’s much lower than our experimental factors (such as batch or others that we don’t know!). So our experiment has been successful. Please also note that, if you see the variance of interest in the first components, it’s generally a good sign (unless there is confounding somewhere) as PCA found what you wanted without knowing it, meaning that the signal has been very strong compared to noise! Now we want to move one step back and ask given the differences we see in these new variables, what can we say about the original variables (e.g. genes). Are there some genes specific responsibility for these differences that we see? Or What are the genes that are influenced by group (cancer sub-types) or even batches? This is the topic of the next section.</p>
 </div>
 <div id="pcavarselect" class="section level2">
 <h2><span class="header-section-number">4.6</span> Variable selection</h2>
@@ -1011,7 +1011,7 @@ Figure 4.10: Top 5 variables per component are plotted
 </div>
 <p>We can see that, in the case of component 2, most variables show the same trend that component 2 showed us. However, This is not the case in component 9 where there are only one or maybe two variables (28492 and 44067) that showed what component 9 showed. There are several reasons for this, including:</p>
 <ul>
-<li>PCA looks where most of the variation is without knowing about the groups. We can see that there is a single observation in for example variable 14987 that is very different compared to the rest of the observation.</li>
+<li>PCA looks where most of the variance is without knowing about the groups. We can see that there is a single observation in for example variable 14987 that is very different compared to the rest of the observation.</li>
 <li>PCA components are combinations of <strong>all</strong> the variables. Simply because we chose to select the top five variables does not mean the rest of the variables are not influencing the pattern</li>
 <li>From the PCA perspective, these variables are top ones. This does not mean that they will answer our research question. That is of course up to us what to conclude!</li>
 <li>The distances between the observations in the PCA components would have been the same as the original data IF you did not remove any components. Now that we decided to remove some components, the distances are not the same.</li>
@@ -1020,12 +1020,12 @@ Figure 4.10: Top 5 variables per component are plotted
 <p>We could stop here and you are good to start using PCA. But there is one more thing to talk about. Let’s move to the last section of this chapter.</p>
 </div>
 <div id="pcabtrm" class="section level2">
-<h2><span class="header-section-number">4.7</span> Batch removing (removing variation)</h2>
-<p>Working with PCA components is nice, they are standardized, they have a specific meaning but there are situations that we want to work on the original data. However, maybe we find a variation of interest in a few PCA components and we have to keep that variation and remove the rest. Or it also can be that we found a variation that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw <a href="#pcaexample1">before</a>. Maybe we want to remove the batch effect from our data. PCA will give us a very powerful tool to do so. Let’s have another look at the previous batch effect. We also select the top two variables affected by the batch effect and plot them</p>
+<h2><span class="header-section-number">4.7</span> Batch removing (removing variance)</h2>
+<p>Working with PCA components is nice, they are standardized, they have a specific meaning but there are situations that we want to work on the original data. However, maybe we find a variance of interest in a few PCA components and we have to keep that variance and remove the rest. Or it also can be that we found a variance that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw <a href="#pcaexample1">before</a>. Maybe we want to remove the batch effect from our data. PCA will give us a very powerful tool to do so. Let’s have another look at the previous batch effect. We also select the top two variables affected by the batch effect and plot them</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="pcaapplications.html#cb54-1"></a><span class="co"># set number of figures</span></span>
 <span id="cb54-2"><a href="pcaapplications.html#cb54-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb54-3"><a href="pcaapplications.html#cb54-3"></a></span>
-<span id="cb54-4"><a href="pcaapplications.html#cb54-4"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb54-4"><a href="pcaapplications.html#cb54-4"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb54-5"><a href="pcaapplications.html#cb54-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span></span>
 <span id="cb54-6"><a href="pcaapplications.html#cb54-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb54-7"><a href="pcaapplications.html#cb54-7"></a>x.pvar &lt;-<span class="st"> </span>x.pvar <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span>
@@ -1067,7 +1067,7 @@ Figure 4.11: PCA of the data showing the batch effect in our data
 <span id="cb55-9"><a href="pcaapplications.html#cb55-9"></a></span>
 <span id="cb55-10"><a href="pcaapplications.html#cb55-10"></a><span class="co"># do another PCA</span></span>
 <span id="cb55-11"><a href="pcaapplications.html#cb55-11"></a>pcaResults_new&lt;-<span class="kw">prcomp</span>(new_data,<span class="dt">center =</span> T,<span class="dt">scale. =</span> T)</span>
-<span id="cb55-12"><a href="pcaapplications.html#cb55-12"></a><span class="co"># calculate variation explained</span></span>
+<span id="cb55-12"><a href="pcaapplications.html#cb55-12"></a><span class="co"># calculate variance explained</span></span>
 <span id="cb55-13"><a href="pcaapplications.html#cb55-13"></a>x.var &lt;-<span class="st"> </span>pcaResults_new<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
 <span id="cb55-14"><a href="pcaapplications.html#cb55-14"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
 <span id="cb55-15"><a href="pcaapplications.html#cb55-15"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
@@ -1091,7 +1091,7 @@ Figure 4.11: PCA of the data showing the batch effect in our data
 Figure 4.12: PCA of the data showing the removal of batch effect in our data
 </p>
 </div>
-<p>Isn’t this beautiful!? What we did in this plot (Figure <a href="pcaapplications.html#fig:pcabatch2">4.12</a> ) was rebuilding (called reconstruction) of our data without the variation that we are not interested in and did another PCA to check where most of the variation is in the new data (the plot on the left)! We also plotted the same variables that we plotted in Figure <a href="pcaapplications.html#fig:pcabatch1">4.11</a>. We clearly see that the batch effect has gone. We can use the very same method to remove/keep any variation or data pattern. We can also use the same method to decrease the size of images etc.</p>
+<p>Isn’t this beautiful!? What we did in this plot (Figure <a href="pcaapplications.html#fig:pcabatch2">4.12</a> ) was rebuilding (called reconstruction) of our data without the variance that we are not interested in and did another PCA to check where most of the variance is in the new data (the plot on the left)! We also plotted the same variables that we plotted in Figure <a href="pcaapplications.html#fig:pcabatch1">4.11</a>. We clearly see that the batch effect has gone. We can use the very same method to remove/keep any variance or data pattern. We can also use the same method to decrease the size of images etc.</p>
 <p>That was it for the application PCA. We are going to do some simple exercises in <a href="exer.html#exer">the next chapter</a> and then jump into <a href="pcamath.html#pcamath">the mathematical</a> details of PCA.</p>
 
 </div>
