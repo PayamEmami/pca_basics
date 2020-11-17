@@ -313,7 +313,7 @@ That is not that bad! We can see differences between groups of interest and not 
 
 In many experiments, we are not only interested in seeing whether the experiment has been successful, but we are also interested in know whether any of the measurements (variables) have been affected let's say by some kind of perturbation? Variable selection is the key to answer this question. In short, we are going to single out the variables that might be of interest for further investigation. Some examples can be performing a t-test or regression and deciding which variables are "statistically significant". PCA also gives us a tool to do so. However, it does that without a need to do statistical testing. 
 
-If we recall, in Table \@ref(tab:tabpca2), we had another element (returned by PCA) that is called *rotation*. What are these? We have been repeatedly saying that PCA creates new variables that are **combinations** of the original variable. We can think about a combination like *New variable (let's say component 1) = original variable 1 + original variable 2 + original variable 3*. However, PCA adds a little more! It adds weights to the original variables and then combines them. So the new variable is the weighted combination of the original ones. These weights **in each component** are indications of the importance or influence of a particular variable on the data pattern we see in a component. These weights can be positive or negative, but for now, the larger the absolute value, the more interesting the variable is for us. In the end please note that these weights *rotations* are also called loadings in many contexts. 
+If we recall, in Table \@ref(tab:tabpca2), we had another element (returned by PCA) that is called *rotation*. What are these? We have been repeatedly saying that PCA creates new variables that are **combinations** of the original variable. We can think about a combination like *New variable (let's say component 1) = original variable 1 + original variable 2 + original variable 3*. However, PCA adds a little more! It adds weights to the original variables and then combines them. So the new variable is the weighted combination of the original ones. These weights **in each component** are indications of the importance or influence of a particular variable on the data pattern we see in a component. These weights can be positive or negative, but for now, the larger the absolute value, the more interesting the variable is for us. In the end please note that these weights *rotations* are also called loadings in many contexts (when they are weighted by standard deviation of each component. It's often nice to work with loadings as they show how much of load (variation) the new variables have. 
 
 Having this said let's have a look at the *rotation*:
 
@@ -333,8 +333,11 @@ The way we do variable selection is, for the component of interest we sort the a
 # set number of figures
 par(mfrow=c(2,1),las=2)
 
-
+# extract rotation
 PC2_rotations<-pcaResults$rotation[order(abs(pcaResults$rotation[,2]),decreasing = T)[1:5],2]
+
+# scale rotation
+PC2_rotations*pcaResults$sdev[2]
 
 names(PC2_rotations)<-as.character(order(abs(pcaResults$rotation[,2]),decreasing = T)[1:5])
 PC2_rotations<-rev(abs(PC2_rotations))                                 
@@ -345,6 +348,8 @@ barplot(PC2_rotations,horiz=TRUE,main = "Component 2")
 
 
 PC9_rotations<-pcaResults$rotation[order(abs(pcaResults$rotation[,9]),decreasing = T)[1:5],9]
+
+PC9_rotations*pcaResults$sdev[9]
 
 names(PC9_rotations)<-as.character(order(abs(pcaResults$rotation[,9]),decreasing = T)[1:5])
 PC9_rotations<-rev(abs(PC9_rotations))   
@@ -387,6 +392,48 @@ We can see that, in the case of component 2, most variables show the same trend 
 * The distances between the observations in the PCA components would have been the same as the original data IF you did not remove any components. Now that we decided to remove some components, the distances are not the same.
 
 By now you should have a good understanding of application PCA for dimensionality reduction and visualization. We could squeeze our dataset with `r ncol(data)` variables to a few ones still showing the overall data pattern. We could also extract variables with the most influence on the data for the purpose of further investigations. 
+
+There is one more thing about variable selection. There is a nice plot called *biplot* that is used to visualize both loadings and PC scores inside one plot. 
+
+```{r pcaexamplebi7,fig.align="center",fig.cap="Top 5 variables per component are plotted using biplot",warning=FALSE,message=FALSE,fig.width=15,fig.height=10}
+par(mfrow=c(1,1))
+
+# select which components to plot
+selected_comps<-c(2,9)
+# extract sds
+lam <- pcaResults$sdev[selected_comps]
+# extract scores
+scores<-pcaResults$x
+
+plot(t(t(scores[, selected_comps])/lam),xlab=paste("PC2, var.exp:",round(x.pvar[2]),"percent"),
+     ylab=paste("PC9, var.exp:",round(x.pvar[3]),"percent"),col=factor(metadata$Covariate),
+     pch=as.numeric(factor(metadata$Batch)))
+# add legend
+legend("top", legend=c(unique(levels(factor(metadata$Covariate)))),
+       col=unique(as.numeric(factor(metadata$Covariate))), cex=0.8, pch = 1)
+
+# add legend
+legend("topleft", legend=paste("Batch",c(unique(levels(factor(metadata$Batch))))),
+       pch=unique(as.numeric(factor(metadata$Batch))), cex=0.8)
+
+for(x in unique(as.numeric(c(names(PC2_rotations),names(PC9_rotations)))))
+{
+  arrows(x0 = 0,y0 = 0,length = 0.1,
+         x1 = pcaResults$rotation[x,selected_comps[1]]*pcaResults$sdev[selected_comps[1]],y1 = pcaResults$rotation[x,selected_comps[2]]*pcaResults$sdev[selected_comps[2]],
+         lwd = 0.5)
+  
+  text(pcaResults$rotation[x,selected_comps[1]]*pcaResults$sdev[selected_comps[1]], pcaResults$rotation[x,selected_comps[2]]*pcaResults$sdev[selected_comps[2]],
+      labels = x ,adj = 2,cex = 0.5)
+  
+}
+
+ arrows(x0 = 0,y0 = 0,length = 0.1,
+         x1 = pcaResults$rotation[x,selected_comps[1]]*pcaResults$sdev[selected_comps[1]],y1 = pcaResults$rotation[x,selected_comps[2]]*pcaResults$sdev[selected_comps[2]],
+         lwd = 0.5,col = "red")
+  
+```
+
+In a biplot, the component scores are showing as points (shapes) and the loadings as arrows. The length of the arrow shows the magnitude of the influnece of that particular variable on the spread of a component. The direction of the arrows show the sign of the loadings. If two arrows are pointing to the same direction, it means that the variables associated with these arrows have positive covariance in the original dataset. If they are pointing to opposite directions, they will have negative covariance and if they are orthogonal, they might have very little covariance.  We will see later in the math section that, loadings are actually covariance or correlation between the original data and the component scores. But so far, we just take them as the measure of how they influence the spread of the data in a particular component.
 
 We could stop here and you are good to start using PCA. But there is one more thing to talk about. Let's move to the last section of this chapter.
 
