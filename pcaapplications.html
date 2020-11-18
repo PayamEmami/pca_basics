@@ -963,23 +963,23 @@ The way we do variable selection is, for the component of interest we sort the a
 <span id="cb51-5"><a href="pcaapplications.html#cb51-5"></a>PC2_rotations&lt;-pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">2</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">2</span>]</span>
 <span id="cb51-6"><a href="pcaapplications.html#cb51-6"></a></span>
 <span id="cb51-7"><a href="pcaapplications.html#cb51-7"></a><span class="co"># scale rotation</span></span>
-<span id="cb51-8"><a href="pcaapplications.html#cb51-8"></a>PC2_rotations<span class="op">*</span>pcaResults<span class="op">$</span>sdev[<span class="dv">2</span>]</span></code></pre></div>
-<pre><code>## [1] 0.8194611 0.7671498 0.7614895 0.7585365 0.7542059</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pcaapplications.html#cb53-1"></a><span class="kw">names</span>(PC2_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">2</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
-<span id="cb53-2"><a href="pcaapplications.html#cb53-2"></a>PC2_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC2_rotations))                                 </span>
-<span id="cb53-3"><a href="pcaapplications.html#cb53-3"></a><span class="kw">barplot</span>(PC2_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 2&quot;</span>)</span>
-<span id="cb53-4"><a href="pcaapplications.html#cb53-4"></a><span class="co"># add legend</span></span>
-<span id="cb53-5"><a href="pcaapplications.html#cb53-5"></a><span class="co"># set number of figures</span></span>
-<span id="cb53-6"><a href="pcaapplications.html#cb53-6"></a></span>
-<span id="cb53-7"><a href="pcaapplications.html#cb53-7"></a></span>
-<span id="cb53-8"><a href="pcaapplications.html#cb53-8"></a></span>
-<span id="cb53-9"><a href="pcaapplications.html#cb53-9"></a>PC9_rotations&lt;-pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">9</span>]</span>
-<span id="cb53-10"><a href="pcaapplications.html#cb53-10"></a></span>
-<span id="cb53-11"><a href="pcaapplications.html#cb53-11"></a>PC9_rotations<span class="op">*</span>pcaResults<span class="op">$</span>sdev[<span class="dv">9</span>]</span></code></pre></div>
-<pre><code>## [1] -0.5581859 -0.4670051 -0.4647675 -0.4573954 -0.4439287</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="pcaapplications.html#cb55-1"></a><span class="kw">names</span>(PC9_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
-<span id="cb55-2"><a href="pcaapplications.html#cb55-2"></a>PC9_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC9_rotations))   </span>
-<span id="cb55-3"><a href="pcaapplications.html#cb55-3"></a><span class="kw">barplot</span>(PC9_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 9&quot;</span>)</span></code></pre></div>
+<span id="cb51-8"><a href="pcaapplications.html#cb51-8"></a>PC2_rotations&lt;-PC2_rotations<span class="op">*</span>pcaResults<span class="op">$</span>sdev[<span class="dv">2</span>]</span>
+<span id="cb51-9"><a href="pcaapplications.html#cb51-9"></a></span>
+<span id="cb51-10"><a href="pcaapplications.html#cb51-10"></a><span class="kw">names</span>(PC2_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">2</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb51-11"><a href="pcaapplications.html#cb51-11"></a>PC2_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC2_rotations))                                 </span>
+<span id="cb51-12"><a href="pcaapplications.html#cb51-12"></a><span class="kw">barplot</span>(PC2_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 2&quot;</span>)</span>
+<span id="cb51-13"><a href="pcaapplications.html#cb51-13"></a><span class="co"># add legend</span></span>
+<span id="cb51-14"><a href="pcaapplications.html#cb51-14"></a><span class="co"># set number of figures</span></span>
+<span id="cb51-15"><a href="pcaapplications.html#cb51-15"></a></span>
+<span id="cb51-16"><a href="pcaapplications.html#cb51-16"></a></span>
+<span id="cb51-17"><a href="pcaapplications.html#cb51-17"></a></span>
+<span id="cb51-18"><a href="pcaapplications.html#cb51-18"></a>PC9_rotations&lt;-pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],<span class="dv">9</span>]</span>
+<span id="cb51-19"><a href="pcaapplications.html#cb51-19"></a></span>
+<span id="cb51-20"><a href="pcaapplications.html#cb51-20"></a>PC9_rotations&lt;-PC9_rotations<span class="op">*</span>pcaResults<span class="op">$</span>sdev[<span class="dv">9</span>]</span>
+<span id="cb51-21"><a href="pcaapplications.html#cb51-21"></a></span>
+<span id="cb51-22"><a href="pcaapplications.html#cb51-22"></a><span class="kw">names</span>(PC9_rotations)&lt;-<span class="kw">as.character</span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">9</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span>
+<span id="cb51-23"><a href="pcaapplications.html#cb51-23"></a>PC9_rotations&lt;-<span class="kw">rev</span>(<span class="kw">abs</span>(PC9_rotations))   </span>
+<span id="cb51-24"><a href="pcaapplications.html#cb51-24"></a><span class="kw">barplot</span>(PC9_rotations,<span class="dt">horiz=</span><span class="ot">TRUE</span>,<span class="dt">main =</span> <span class="st">&quot;Component 9&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcaexample6"></span>
 <img src="PCA_files/figure-html/pcaexample6-1.png" alt="Selecting top five variables for components 2 and 9" width="480" />
 <p class="caption">
@@ -988,26 +988,26 @@ Figure 4.9: Selecting top five variables for components 2 and 9
 </div>
 <p>We can see the name of the variable on the y-axis and its contribution to the x-axis. So we have 10 unique variables (the variables can sometime overlap between different components). We will have to interpret these variables together with <a href="#pcaexample5">components</a>. Because we see differences between groups 2, 3, and 4 in the second component, variables selected for this component influence the differences between the mentioned groups. The variables selected for component 9, will mostly influence the differences between group 1 and the rest. It will take some time to get used to this kind of interpretation but after a while, it will become very convenient to do variable selection using PCA. This way, we can avoid doing statistical testing, and thus avoid multiple testing problem. In addition, we can easily remove variables to avoid for example overfitting of statistical models and many other advantages.
 We can have a look at the variables we selected in isolation:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="pcaapplications.html#cb56-1"></a><span class="co"># set number of figures</span></span>
-<span id="cb56-2"><a href="pcaapplications.html#cb56-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>))</span>
-<span id="cb56-3"><a href="pcaapplications.html#cb56-3"></a></span>
-<span id="cb56-4"><a href="pcaapplications.html#cb56-4"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC2_rotations,<span class="dt">decreasing =</span> T)))</span>
-<span id="cb56-5"><a href="pcaapplications.html#cb56-5"></a>{</span>
-<span id="cb56-6"><a href="pcaapplications.html#cb56-6"></a>  <span class="co"># plot the data</span></span>
-<span id="cb56-7"><a href="pcaapplications.html#cb56-7"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
-<span id="cb56-8"><a href="pcaapplications.html#cb56-8"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
-<span id="cb56-9"><a href="pcaapplications.html#cb56-9"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
-<span id="cb56-10"><a href="pcaapplications.html#cb56-10"></a></span>
-<span id="cb56-11"><a href="pcaapplications.html#cb56-11"></a>}</span>
-<span id="cb56-12"><a href="pcaapplications.html#cb56-12"></a></span>
-<span id="cb56-13"><a href="pcaapplications.html#cb56-13"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC9_rotations,<span class="dt">decreasing =</span> T)))</span>
-<span id="cb56-14"><a href="pcaapplications.html#cb56-14"></a>{</span>
-<span id="cb56-15"><a href="pcaapplications.html#cb56-15"></a>  <span class="co"># plot the data</span></span>
-<span id="cb56-16"><a href="pcaapplications.html#cb56-16"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
-<span id="cb56-17"><a href="pcaapplications.html#cb56-17"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC9,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
-<span id="cb56-18"><a href="pcaapplications.html#cb56-18"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
-<span id="cb56-19"><a href="pcaapplications.html#cb56-19"></a></span>
-<span id="cb56-20"><a href="pcaapplications.html#cb56-20"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="pcaapplications.html#cb52-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb52-2"><a href="pcaapplications.html#cb52-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>))</span>
+<span id="cb52-3"><a href="pcaapplications.html#cb52-3"></a></span>
+<span id="cb52-4"><a href="pcaapplications.html#cb52-4"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC2_rotations,<span class="dt">decreasing =</span> T)))</span>
+<span id="cb52-5"><a href="pcaapplications.html#cb52-5"></a>{</span>
+<span id="cb52-6"><a href="pcaapplications.html#cb52-6"></a>  <span class="co"># plot the data</span></span>
+<span id="cb52-7"><a href="pcaapplications.html#cb52-7"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
+<span id="cb52-8"><a href="pcaapplications.html#cb52-8"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb52-9"><a href="pcaapplications.html#cb52-9"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
+<span id="cb52-10"><a href="pcaapplications.html#cb52-10"></a></span>
+<span id="cb52-11"><a href="pcaapplications.html#cb52-11"></a>}</span>
+<span id="cb52-12"><a href="pcaapplications.html#cb52-12"></a></span>
+<span id="cb52-13"><a href="pcaapplications.html#cb52-13"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">names</span>(<span class="kw">sort</span>(PC9_rotations,<span class="dt">decreasing =</span> T)))</span>
+<span id="cb52-14"><a href="pcaapplications.html#cb52-14"></a>{</span>
+<span id="cb52-15"><a href="pcaapplications.html#cb52-15"></a>  <span class="co"># plot the data</span></span>
+<span id="cb52-16"><a href="pcaapplications.html#cb52-16"></a>  dt&lt;-data[,<span class="kw">as.numeric</span>(x)]</span>
+<span id="cb52-17"><a href="pcaapplications.html#cb52-17"></a><span class="kw">plot</span>(<span class="dt">x=</span>dt,<span class="dt">y=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(data)),<span class="dt">axes =</span> F,<span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,<span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC9,&quot;</span>,x,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))</span>
+<span id="cb52-18"><a href="pcaapplications.html#cb52-18"></a><span class="kw">axis</span>(<span class="dv">1</span>,<span class="dt">cex=</span><span class="dv">4</span>,<span class="dt">pos =</span> <span class="kw">c</span>(<span class="fl">0.9</span>,<span class="fl">0.5</span>) )</span>
+<span id="cb52-19"><a href="pcaapplications.html#cb52-19"></a></span>
+<span id="cb52-20"><a href="pcaapplications.html#cb52-20"></a>}</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcaexample7"></span>
 <img src="PCA_files/figure-html/pcaexample7-1.png" alt="Top 5 variables per component are plotted" width="1440" />
 <p class="caption">
@@ -1023,40 +1023,40 @@ Figure 4.10: Top 5 variables per component are plotted
 </ul>
 <p>By now you should have a good understanding of application PCA for dimensionality reduction and visualization. We could squeeze our dataset with 45101 variables to a few ones still showing the overall data pattern. We could also extract variables with the most influence on the data for the purpose of further investigations.</p>
 <p>There is one more thing about variable selection. There is a nice plot called <em>biplot</em> that is used to visualize both loadings and PC scores inside one plot.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="pcaapplications.html#cb57-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb57-2"><a href="pcaapplications.html#cb57-2"></a></span>
-<span id="cb57-3"><a href="pcaapplications.html#cb57-3"></a><span class="co"># select which components to plot</span></span>
-<span id="cb57-4"><a href="pcaapplications.html#cb57-4"></a>selected_comps&lt;-<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span>)</span>
-<span id="cb57-5"><a href="pcaapplications.html#cb57-5"></a><span class="co"># extract sds</span></span>
-<span id="cb57-6"><a href="pcaapplications.html#cb57-6"></a>lam &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev[selected_comps]</span>
-<span id="cb57-7"><a href="pcaapplications.html#cb57-7"></a><span class="co"># extract scores</span></span>
-<span id="cb57-8"><a href="pcaapplications.html#cb57-8"></a>scores&lt;-pcaResults<span class="op">$</span>x</span>
-<span id="cb57-9"><a href="pcaapplications.html#cb57-9"></a></span>
-<span id="cb57-10"><a href="pcaapplications.html#cb57-10"></a><span class="kw">plot</span>(<span class="kw">t</span>(<span class="kw">t</span>(scores[, selected_comps])<span class="op">/</span>lam),<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),</span>
-<span id="cb57-11"><a href="pcaapplications.html#cb57-11"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC9, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">3</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),</span>
-<span id="cb57-12"><a href="pcaapplications.html#cb57-12"></a>     <span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
-<span id="cb57-13"><a href="pcaapplications.html#cb57-13"></a><span class="co"># add legend</span></span>
-<span id="cb57-14"><a href="pcaapplications.html#cb57-14"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
-<span id="cb57-15"><a href="pcaapplications.html#cb57-15"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
-<span id="cb57-16"><a href="pcaapplications.html#cb57-16"></a></span>
-<span id="cb57-17"><a href="pcaapplications.html#cb57-17"></a><span class="co"># add legend</span></span>
-<span id="cb57-18"><a href="pcaapplications.html#cb57-18"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
-<span id="cb57-19"><a href="pcaapplications.html#cb57-19"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
-<span id="cb57-20"><a href="pcaapplications.html#cb57-20"></a></span>
-<span id="cb57-21"><a href="pcaapplications.html#cb57-21"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">c</span>(<span class="kw">names</span>(PC2_rotations),<span class="kw">names</span>(PC9_rotations)))))</span>
-<span id="cb57-22"><a href="pcaapplications.html#cb57-22"></a>{</span>
-<span id="cb57-23"><a href="pcaapplications.html#cb57-23"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span> <span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,</span>
-<span id="cb57-24"><a href="pcaapplications.html#cb57-24"></a>         <span class="dt">x1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]],<span class="dt">y1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
-<span id="cb57-25"><a href="pcaapplications.html#cb57-25"></a>         <span class="dt">lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb57-26"><a href="pcaapplications.html#cb57-26"></a>  </span>
-<span id="cb57-27"><a href="pcaapplications.html#cb57-27"></a>  <span class="kw">text</span>(pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]], pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
-<span id="cb57-28"><a href="pcaapplications.html#cb57-28"></a>      <span class="dt">labels =</span> x ,<span class="dt">adj =</span> <span class="dv">2</span>,<span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
-<span id="cb57-29"><a href="pcaapplications.html#cb57-29"></a>  </span>
-<span id="cb57-30"><a href="pcaapplications.html#cb57-30"></a>}</span>
-<span id="cb57-31"><a href="pcaapplications.html#cb57-31"></a></span>
-<span id="cb57-32"><a href="pcaapplications.html#cb57-32"></a> <span class="kw">arrows</span>(<span class="dt">x0 =</span> <span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,</span>
-<span id="cb57-33"><a href="pcaapplications.html#cb57-33"></a>         <span class="dt">x1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]],<span class="dt">y1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
-<span id="cb57-34"><a href="pcaapplications.html#cb57-34"></a>         <span class="dt">lwd =</span> <span class="fl">0.5</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="pcaapplications.html#cb53-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb53-2"><a href="pcaapplications.html#cb53-2"></a></span>
+<span id="cb53-3"><a href="pcaapplications.html#cb53-3"></a><span class="co"># select which components to plot</span></span>
+<span id="cb53-4"><a href="pcaapplications.html#cb53-4"></a>selected_comps&lt;-<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">9</span>)</span>
+<span id="cb53-5"><a href="pcaapplications.html#cb53-5"></a><span class="co"># extract sds</span></span>
+<span id="cb53-6"><a href="pcaapplications.html#cb53-6"></a>lam &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev[selected_comps]</span>
+<span id="cb53-7"><a href="pcaapplications.html#cb53-7"></a><span class="co"># extract scores</span></span>
+<span id="cb53-8"><a href="pcaapplications.html#cb53-8"></a>scores&lt;-pcaResults<span class="op">$</span>x</span>
+<span id="cb53-9"><a href="pcaapplications.html#cb53-9"></a></span>
+<span id="cb53-10"><a href="pcaapplications.html#cb53-10"></a><span class="kw">plot</span>(<span class="kw">t</span>(<span class="kw">t</span>(scores[, selected_comps])<span class="op">/</span>lam),<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb53-11"><a href="pcaapplications.html#cb53-11"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC9, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">3</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">col=</span><span class="kw">factor</span>(metadata<span class="op">$</span>Covariate),</span>
+<span id="cb53-12"><a href="pcaapplications.html#cb53-12"></a>     <span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb53-13"><a href="pcaapplications.html#cb53-13"></a><span class="co"># add legend</span></span>
+<span id="cb53-14"><a href="pcaapplications.html#cb53-14"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate)))),</span>
+<span id="cb53-15"><a href="pcaapplications.html#cb53-15"></a>       <span class="dt">col=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Covariate))), <span class="dt">cex=</span><span class="fl">0.8</span>, <span class="dt">pch =</span> <span class="dv">1</span>)</span>
+<span id="cb53-16"><a href="pcaapplications.html#cb53-16"></a></span>
+<span id="cb53-17"><a href="pcaapplications.html#cb53-17"></a><span class="co"># add legend</span></span>
+<span id="cb53-18"><a href="pcaapplications.html#cb53-18"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
+<span id="cb53-19"><a href="pcaapplications.html#cb53-19"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb53-20"><a href="pcaapplications.html#cb53-20"></a></span>
+<span id="cb53-21"><a href="pcaapplications.html#cb53-21"></a><span class="cf">for</span>(x <span class="cf">in</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">c</span>(<span class="kw">names</span>(PC2_rotations),<span class="kw">names</span>(PC9_rotations)))))</span>
+<span id="cb53-22"><a href="pcaapplications.html#cb53-22"></a>{</span>
+<span id="cb53-23"><a href="pcaapplications.html#cb53-23"></a>  <span class="kw">arrows</span>(<span class="dt">x0 =</span> <span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,</span>
+<span id="cb53-24"><a href="pcaapplications.html#cb53-24"></a>         <span class="dt">x1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]],<span class="dt">y1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
+<span id="cb53-25"><a href="pcaapplications.html#cb53-25"></a>         <span class="dt">lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb53-26"><a href="pcaapplications.html#cb53-26"></a>  </span>
+<span id="cb53-27"><a href="pcaapplications.html#cb53-27"></a>  <span class="kw">text</span>(pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]], pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
+<span id="cb53-28"><a href="pcaapplications.html#cb53-28"></a>      <span class="dt">labels =</span> x ,<span class="dt">adj =</span> <span class="dv">2</span>,<span class="dt">cex =</span> <span class="fl">0.5</span>)</span>
+<span id="cb53-29"><a href="pcaapplications.html#cb53-29"></a>  </span>
+<span id="cb53-30"><a href="pcaapplications.html#cb53-30"></a>}</span>
+<span id="cb53-31"><a href="pcaapplications.html#cb53-31"></a></span>
+<span id="cb53-32"><a href="pcaapplications.html#cb53-32"></a> <span class="kw">arrows</span>(<span class="dt">x0 =</span> <span class="dv">0</span>,<span class="dt">y0 =</span> <span class="dv">0</span>,<span class="dt">length =</span> <span class="fl">0.1</span>,</span>
+<span id="cb53-33"><a href="pcaapplications.html#cb53-33"></a>         <span class="dt">x1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">1</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">1</span>]],<span class="dt">y1 =</span> pcaResults<span class="op">$</span>rotation[x,selected_comps[<span class="dv">2</span>]]<span class="op">*</span>pcaResults<span class="op">$</span>sdev[selected_comps[<span class="dv">2</span>]],</span>
+<span id="cb53-34"><a href="pcaapplications.html#cb53-34"></a>         <span class="dt">lwd =</span> <span class="fl">0.5</span>,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcaexamplebi7"></span>
 <img src="PCA_files/figure-html/pcaexamplebi7-1.png" alt="Top 5 variables per component are plotted using biplot" width="1440" />
 <p class="caption">
@@ -1069,33 +1069,33 @@ Figure 4.11: Top 5 variables per component are plotted using biplot
 <div id="pcabtrm" class="section level2">
 <h2><span class="header-section-number">4.7</span> Batch removing (removing variance)</h2>
 <p>Working with PCA components is nice, they are standardized, they have a specific meaning but there are situations that we want to work on the original data. However, maybe we find a variance of interest in a few PCA components and we have to keep that variance and remove the rest. Or it also can be that we found a variance that is not of interest and we want to remove it and keep the rest. The example would the batch effect that we saw <a href="#pcaexample1">before</a>. Maybe we want to remove the batch effect from our data. PCA will give us a very powerful tool to do so. Let’s have another look at the previous batch effect. We also select the top two variables affected by the batch effect and plot them</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pcaapplications.html#cb58-1"></a><span class="co"># set number of figures</span></span>
-<span id="cb58-2"><a href="pcaapplications.html#cb58-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb58-3"><a href="pcaapplications.html#cb58-3"></a></span>
-<span id="cb58-4"><a href="pcaapplications.html#cb58-4"></a><span class="co"># calculate variance explained</span></span>
-<span id="cb58-5"><a href="pcaapplications.html#cb58-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb58-6"><a href="pcaapplications.html#cb58-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
-<span id="cb58-7"><a href="pcaapplications.html#cb58-7"></a>x.pvar &lt;-<span class="st"> </span>x.pvar <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span>
-<span id="cb58-8"><a href="pcaapplications.html#cb58-8"></a><span class="co"># plot the first two components</span></span>
-<span id="cb58-9"><a href="pcaapplications.html#cb58-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">1</span>]), <span class="st">&quot;percent&quot;</span>), </span>
-<span id="cb58-10"><a href="pcaapplications.html#cb58-10"></a>    <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">2</span>]), <span class="st">&quot;percent&quot;</span>), <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
-<span id="cb58-11"><a href="pcaapplications.html#cb58-11"></a><span class="co"># plot title</span></span>
-<span id="cb58-12"><a href="pcaapplications.html#cb58-12"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect&quot;</span>)</span>
-<span id="cb58-13"><a href="pcaapplications.html#cb58-13"></a></span>
-<span id="cb58-14"><a href="pcaapplications.html#cb58-14"></a><span class="co"># add legend</span></span>
-<span id="cb58-15"><a href="pcaapplications.html#cb58-15"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend =</span> <span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>, <span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))), </span>
-<span id="cb58-16"><a href="pcaapplications.html#cb58-16"></a>    <span class="dt">pch =</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span>
-<span id="cb58-17"><a href="pcaapplications.html#cb58-17"></a></span>
-<span id="cb58-18"><a href="pcaapplications.html#cb58-18"></a><span class="co"># </span></span>
-<span id="cb58-19"><a href="pcaapplications.html#cb58-19"></a>PC1_rotations &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </span>
-<span id="cb58-20"><a href="pcaapplications.html#cb58-20"></a>    <span class="dv">1</span>]</span>
-<span id="cb58-21"><a href="pcaapplications.html#cb58-21"></a></span>
-<span id="cb58-22"><a href="pcaapplications.html#cb58-22"></a><span class="kw">names</span>(PC1_rotations) &lt;-<span class="st"> </span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span>
-<span id="cb58-23"><a href="pcaapplications.html#cb58-23"></a></span>
-<span id="cb58-24"><a href="pcaapplications.html#cb58-24"></a><span class="kw">plot</span>(data[, (<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, </span>
-<span id="cb58-25"><a href="pcaapplications.html#cb58-25"></a>    <span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]), <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, <span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]), </span>
-<span id="cb58-26"><a href="pcaapplications.html#cb58-26"></a>    <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
-<span id="cb58-27"><a href="pcaapplications.html#cb58-27"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="pcaapplications.html#cb54-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb54-2"><a href="pcaapplications.html#cb54-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb54-3"><a href="pcaapplications.html#cb54-3"></a></span>
+<span id="cb54-4"><a href="pcaapplications.html#cb54-4"></a><span class="co"># calculate variance explained</span></span>
+<span id="cb54-5"><a href="pcaapplications.html#cb54-5"></a>x.var &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>sdev<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb54-6"><a href="pcaapplications.html#cb54-6"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb54-7"><a href="pcaapplications.html#cb54-7"></a>x.pvar &lt;-<span class="st"> </span>x.pvar <span class="op">*</span><span class="st"> </span><span class="dv">100</span></span>
+<span id="cb54-8"><a href="pcaapplications.html#cb54-8"></a><span class="co"># plot the first two components</span></span>
+<span id="cb54-9"><a href="pcaapplications.html#cb54-9"></a><span class="kw">plot</span>(pcaResults<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">1</span>]), <span class="st">&quot;percent&quot;</span>), </span>
+<span id="cb54-10"><a href="pcaapplications.html#cb54-10"></a>    <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>, <span class="kw">round</span>(x.pvar[<span class="dv">2</span>]), <span class="st">&quot;percent&quot;</span>), <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb54-11"><a href="pcaapplications.html#cb54-11"></a><span class="co"># plot title</span></span>
+<span id="cb54-12"><a href="pcaapplications.html#cb54-12"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect&quot;</span>)</span>
+<span id="cb54-13"><a href="pcaapplications.html#cb54-13"></a></span>
+<span id="cb54-14"><a href="pcaapplications.html#cb54-14"></a><span class="co"># add legend</span></span>
+<span id="cb54-15"><a href="pcaapplications.html#cb54-15"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend =</span> <span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>, <span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))), </span>
+<span id="cb54-16"><a href="pcaapplications.html#cb54-16"></a>    <span class="dt">pch =</span> <span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb54-17"><a href="pcaapplications.html#cb54-17"></a></span>
+<span id="cb54-18"><a href="pcaapplications.html#cb54-18"></a><span class="co"># </span></span>
+<span id="cb54-19"><a href="pcaapplications.html#cb54-19"></a>PC1_rotations &lt;-<span class="st"> </span>pcaResults<span class="op">$</span>rotation[<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </span>
+<span id="cb54-20"><a href="pcaapplications.html#cb54-20"></a>    <span class="dv">1</span>]</span>
+<span id="cb54-21"><a href="pcaapplications.html#cb54-21"></a></span>
+<span id="cb54-22"><a href="pcaapplications.html#cb54-22"></a><span class="kw">names</span>(PC1_rotations) &lt;-<span class="st"> </span>(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span>
+<span id="cb54-23"><a href="pcaapplications.html#cb54-23"></a></span>
+<span id="cb54-24"><a href="pcaapplications.html#cb54-24"></a><span class="kw">plot</span>(data[, (<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[, <span class="dv">1</span>]), <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])], <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, </span>
+<span id="cb54-25"><a href="pcaapplications.html#cb54-25"></a>    <span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]), <span class="dt">ylab =</span> <span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>, <span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]), </span>
+<span id="cb54-26"><a href="pcaapplications.html#cb54-26"></a>    <span class="dt">pch =</span> <span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb54-27"><a href="pcaapplications.html#cb54-27"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcabatch1"></span>
 <img src="PCA_files/figure-html/pcabatch1-1.png" alt="PCA of the data showing the batch effect in our data" width="672" />
 <p class="caption">
@@ -1103,35 +1103,35 @@ Figure 4.12: PCA of the data showing the batch effect in our data
 </p>
 </div>
 <p>Wow! Look at how the variables have been affected by the batch effect. Now we do a trick (we will go through this in detail later) and ignore component one and tell PCA to rebuild our dataset without that component but including all other components.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pcaapplications.html#cb59-1"></a><span class="co"># set number of figures</span></span>
-<span id="cb59-2"><a href="pcaapplications.html#cb59-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb59-3"><a href="pcaapplications.html#cb59-3"></a></span>
-<span id="cb59-4"><a href="pcaapplications.html#cb59-4"></a><span class="co"># Reconstruct the data without the first component</span></span>
-<span id="cb59-5"><a href="pcaapplications.html#cb59-5"></a>new_data&lt;-pcaResults<span class="op">$</span>x[,<span class="op">-</span><span class="dv">1</span>]<span class="op">%*%</span><span class="kw">t</span>(pcaResults<span class="op">$</span>rotation[,<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb59-6"><a href="pcaapplications.html#cb59-6"></a></span>
-<span id="cb59-7"><a href="pcaapplications.html#cb59-7"></a><span class="co"># rescale and recenter the data</span></span>
-<span id="cb59-8"><a href="pcaapplications.html#cb59-8"></a>new_data&lt;-<span class="kw">scale</span>(new_data,<span class="dt">scale =</span> <span class="dv">1</span><span class="op">/</span>pcaResults<span class="op">$</span>scale,<span class="dt">center =</span> <span class="dv">-1</span><span class="op">*</span>pcaResults<span class="op">$</span>center)</span>
-<span id="cb59-9"><a href="pcaapplications.html#cb59-9"></a></span>
-<span id="cb59-10"><a href="pcaapplications.html#cb59-10"></a><span class="co"># do another PCA</span></span>
-<span id="cb59-11"><a href="pcaapplications.html#cb59-11"></a>pcaResults_new&lt;-<span class="kw">prcomp</span>(new_data,<span class="dt">center =</span> T,<span class="dt">scale. =</span> T)</span>
-<span id="cb59-12"><a href="pcaapplications.html#cb59-12"></a><span class="co"># calculate variance explained</span></span>
-<span id="cb59-13"><a href="pcaapplications.html#cb59-13"></a>x.var &lt;-<span class="st"> </span>pcaResults_new<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
-<span id="cb59-14"><a href="pcaapplications.html#cb59-14"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
-<span id="cb59-15"><a href="pcaapplications.html#cb59-15"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb59-16"><a href="pcaapplications.html#cb59-16"></a><span class="co"># plot the first two components</span></span>
-<span id="cb59-17"><a href="pcaapplications.html#cb59-17"></a><span class="kw">plot</span>(pcaResults_new<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
-<span id="cb59-18"><a href="pcaapplications.html#cb59-18"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
-<span id="cb59-19"><a href="pcaapplications.html#cb59-19"></a><span class="co"># plot title</span></span>
-<span id="cb59-20"><a href="pcaapplications.html#cb59-20"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect removed&quot;</span>)</span>
-<span id="cb59-21"><a href="pcaapplications.html#cb59-21"></a></span>
-<span id="cb59-22"><a href="pcaapplications.html#cb59-22"></a><span class="co"># add legend</span></span>
-<span id="cb59-23"><a href="pcaapplications.html#cb59-23"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
-<span id="cb59-24"><a href="pcaapplications.html#cb59-24"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
-<span id="cb59-25"><a href="pcaapplications.html#cb59-25"></a></span>
-<span id="cb59-26"><a href="pcaapplications.html#cb59-26"></a></span>
-<span id="cb59-27"><a href="pcaapplications.html#cb59-27"></a><span class="kw">plot</span>(new_data[,(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">1</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]),</span>
-<span id="cb59-28"><a href="pcaapplications.html#cb59-28"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
-<span id="cb59-29"><a href="pcaapplications.html#cb59-29"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="pcaapplications.html#cb55-1"></a><span class="co"># set number of figures</span></span>
+<span id="cb55-2"><a href="pcaapplications.html#cb55-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb55-3"><a href="pcaapplications.html#cb55-3"></a></span>
+<span id="cb55-4"><a href="pcaapplications.html#cb55-4"></a><span class="co"># Reconstruct the data without the first component</span></span>
+<span id="cb55-5"><a href="pcaapplications.html#cb55-5"></a>new_data&lt;-pcaResults<span class="op">$</span>x[,<span class="op">-</span><span class="dv">1</span>]<span class="op">%*%</span><span class="kw">t</span>(pcaResults<span class="op">$</span>rotation[,<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb55-6"><a href="pcaapplications.html#cb55-6"></a></span>
+<span id="cb55-7"><a href="pcaapplications.html#cb55-7"></a><span class="co"># rescale and recenter the data</span></span>
+<span id="cb55-8"><a href="pcaapplications.html#cb55-8"></a>new_data&lt;-<span class="kw">scale</span>(new_data,<span class="dt">scale =</span> <span class="dv">1</span><span class="op">/</span>pcaResults<span class="op">$</span>scale,<span class="dt">center =</span> <span class="dv">-1</span><span class="op">*</span>pcaResults<span class="op">$</span>center)</span>
+<span id="cb55-9"><a href="pcaapplications.html#cb55-9"></a></span>
+<span id="cb55-10"><a href="pcaapplications.html#cb55-10"></a><span class="co"># do another PCA</span></span>
+<span id="cb55-11"><a href="pcaapplications.html#cb55-11"></a>pcaResults_new&lt;-<span class="kw">prcomp</span>(new_data,<span class="dt">center =</span> T,<span class="dt">scale. =</span> T)</span>
+<span id="cb55-12"><a href="pcaapplications.html#cb55-12"></a><span class="co"># calculate variance explained</span></span>
+<span id="cb55-13"><a href="pcaapplications.html#cb55-13"></a>x.var &lt;-<span class="st"> </span>pcaResults_new<span class="op">$</span>sdev <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb55-14"><a href="pcaapplications.html#cb55-14"></a>x.pvar &lt;-<span class="st"> </span>x.var<span class="op">/</span><span class="kw">sum</span>(x.var)</span>
+<span id="cb55-15"><a href="pcaapplications.html#cb55-15"></a>x.pvar&lt;-x.pvar<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb55-16"><a href="pcaapplications.html#cb55-16"></a><span class="co"># plot the first two components</span></span>
+<span id="cb55-17"><a href="pcaapplications.html#cb55-17"></a><span class="kw">plot</span>(pcaResults_new<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;PC1, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">1</span>]),<span class="st">&quot;percent&quot;</span>),</span>
+<span id="cb55-18"><a href="pcaapplications.html#cb55-18"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;PC2, var.exp:&quot;</span>,<span class="kw">round</span>(x.pvar[<span class="dv">2</span>]),<span class="st">&quot;percent&quot;</span>),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb55-19"><a href="pcaapplications.html#cb55-19"></a><span class="co"># plot title</span></span>
+<span id="cb55-20"><a href="pcaapplications.html#cb55-20"></a><span class="kw">title</span>(<span class="st">&quot;PCA batch effect removed&quot;</span>)</span>
+<span id="cb55-21"><a href="pcaapplications.html#cb55-21"></a></span>
+<span id="cb55-22"><a href="pcaapplications.html#cb55-22"></a><span class="co"># add legend</span></span>
+<span id="cb55-23"><a href="pcaapplications.html#cb55-23"></a><span class="kw">legend</span>(<span class="st">&quot;top&quot;</span>, <span class="dt">legend=</span><span class="kw">paste</span>(<span class="st">&quot;Batch&quot;</span>,<span class="kw">c</span>(<span class="kw">unique</span>(<span class="kw">levels</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))))),</span>
+<span id="cb55-24"><a href="pcaapplications.html#cb55-24"></a>       <span class="dt">pch=</span><span class="kw">unique</span>(<span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch))), <span class="dt">cex=</span><span class="fl">0.8</span>)</span>
+<span id="cb55-25"><a href="pcaapplications.html#cb55-25"></a></span>
+<span id="cb55-26"><a href="pcaapplications.html#cb55-26"></a></span>
+<span id="cb55-27"><a href="pcaapplications.html#cb55-27"></a><span class="kw">plot</span>(new_data[,(<span class="kw">order</span>(<span class="kw">abs</span>(pcaResults<span class="op">$</span>rotation[,<span class="dv">1</span>]),<span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])],<span class="dt">xlab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">1</span>]),</span>
+<span id="cb55-28"><a href="pcaapplications.html#cb55-28"></a>     <span class="dt">ylab=</span><span class="kw">paste</span>(<span class="st">&quot;Variable&quot;</span>,<span class="kw">names</span>(PC1_rotations)[<span class="dv">2</span>]),<span class="dt">pch=</span><span class="kw">as.numeric</span>(<span class="kw">factor</span>(metadata<span class="op">$</span>Batch)))</span>
+<span id="cb55-29"><a href="pcaapplications.html#cb55-29"></a><span class="kw">title</span>(<span class="st">&quot;Original variables&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pcabatch2"></span>
 <img src="PCA_files/figure-html/pcabatch2-1.png" alt="PCA of the data showing the removal of batch effect in our data" width="672" />
 <p class="caption">
