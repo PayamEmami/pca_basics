@@ -1928,7 +1928,7 @@ That is
 
 $|A -\lambda \  I_n|=0$
 
-We know $A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$ and $I_n=A=\begin{vmatrix} 1&0\\0&1\end{vmatrix}$ let's put back thins:
+We know $A=\begin{vmatrix} 2&1\\7&2\end{vmatrix}$ and $I_n=\begin{vmatrix} 1&0\\0&1\end{vmatrix}$ let's put back thins:
 
 $|\begin{vmatrix} 2&1\\7&2\end{vmatrix} -\lambda \  \begin{vmatrix} 1&0\\0&1\end{vmatrix}|=0$
 
@@ -2162,7 +2162,7 @@ There are many methods for diagonalization but here we focus on the classic one 
 
 Let's say our data is sitting in matrix $X$, in which the rows are observations and the columns are variables. Our goal is to find an orthonormal matrix $P$ that when we mapped map our original data $X$ to another space $Y$ so that the covariance of $Y$ becomes diagonal (zero on all off-diagonal elements). So the goal is $Y=X \  P$ so that $Cov(Y)=diagonal \ or \ \frac{1}{n}Y^T \  Y=diagonal$. 
 
-So as said before we can calculate the covariance of the mapped data ($Y$) as $Cov(Y)= \frac{1}{n}Y \  Y^T$. We covariance of the original data (before transformation) is $Cov(X)= \frac{1}{n}X^T \  X$  We can try to rewrite this formula like this:
+So as said before we can calculate the covariance of the mapped data ($Y$) as $Cov(Y)= \frac{1}{n}Y \  Y^T$. The covariance of the original data (before transformation) is $Cov(X)= \frac{1}{n}X^T \  X$  We can try to rewrite this formula like this:
 
 
 $Cov(Y)= \frac{1}{n}Y^T \  Y$
@@ -2254,7 +2254,7 @@ var3<-18505
 # dfine data
 x<-scale(data[,c(var1,var3)],scale = F)
 # plot the data
-plot(x,xlab = "Variable 1", ylab = "Variable 2",xlim=c(-4,4),ylim=c(-4,4),axes = F)
+plot(x,xlab = "Variable 1", ylab = "Variable 2",xlim=c(-4,4),ylim=c(-4,4),axes = T)
 
 title("Original data")
 # Draw ellipses
@@ -2341,7 +2341,7 @@ $X^T=VS^TU^T$
 
 $X^TX=VS^TU^T \ USV^T$
 
-We know that if $U$ and $V$ are orthonormal, then $UU^T=U^TU=I$ and $VV^T=V^TV=1$. In addition, $S$ is diagonal so $S=S^T$ meaning that we can simplify the above equation to 
+We know that if $U$ and $V$ are orthonormal, then $UU^T=U^TU=I$ and $VV^T=V^TV=I$. In addition, $S$ is diagonal so $S=S^T$ meaning that we can simplify the above equation to 
 
 $X^TX=VS^TU^T \ USV^T=VS^2V^T$
 
