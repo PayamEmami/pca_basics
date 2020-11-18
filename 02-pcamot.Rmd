@@ -158,11 +158,9 @@ plot(projected_variables,xlab = "Variable 1", ylab = "Variable 3",xlim = c(2,15)
 abline(a = b,b = m,col="red")
 
 
-#plot(x=apply(projected_variables,1,mean),y=rep(0,nrow(data)))
-
 ```
 
-So in Figure \@ref(fig:fig-simple-line1) we have drawn an arbitrary line (left panel) and put everything on that line (right panel). It might be a bit confusing. But let's rotate that red line so it becomes horizontal exactly line x-axis. 
+So in Figure \@ref(fig:fig-simple-line1) we have drawn an arbitrary line (left panel) and put everything on that line (right panel). It might be a bit confusing. But let's rotate that red line so it becomes horizontal exactly like x-axis. 
 
 ```{r fig-simple-line2, fig.cap='Simple rotation of the projected points on the line', fig.align='center',warning=FALSE,message=FALSE,fig.width=10}
 # set number of figures in a plot
